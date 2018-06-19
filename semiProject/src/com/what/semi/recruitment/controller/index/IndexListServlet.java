@@ -42,7 +42,6 @@ public class IndexListServlet extends HttpServlet {
 		}
 		if(null != list) {
 			if(name!=null) {
-				System.out.println(name);
 				url = "views/common/mainPage.jsp";
 				request.setAttribute("list", list);
 				request.setAttribute("pi", pi);
