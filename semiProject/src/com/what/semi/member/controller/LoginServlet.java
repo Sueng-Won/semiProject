@@ -53,9 +53,7 @@ public class LoginServlet extends HttpServlet {
 			pstm = conn.prepareStatement(query);
 			pstm.executeUpdate();
 			System.out.println("INSERT 성공");
-//			RequestDispatcher view = request.getRequestDispatcher("/sp/indexList.do");
-//			request.setAttribute("name", name);
-//			view.forward(request, response);
+			response.sendRedirect("/sp/indexList.do?name="+URLEncoder.encode(name, "UTF-8"));
 		} catch (SQLException e) {
 			System.out.println("INSERT 실패");
 			response.sendRedirect("/sp/indexList.do?name="+URLEncoder.encode(name, "UTF-8"));
