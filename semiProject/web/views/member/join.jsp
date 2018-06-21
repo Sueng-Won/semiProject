@@ -115,6 +115,7 @@
 
     <!-- Page Content -->
     <div class="container"  style="margin-bottom: 350px">
+    
       <div class="row">
 		<%@include file="/views/common/nav.jsp" %>
         <!-- /.col-lg-3 -->

@@ -30,9 +30,6 @@ public class IndexListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession(false);
-		System.out.println("index"+session.getAttribute("nickname"));
-		
 		RecruitmentService rs = new RecruitmentService();
 		PageInfo pi = PageTemplate.indexPaging(request, rs);
 		

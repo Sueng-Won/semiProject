@@ -30,10 +30,10 @@
 			<table>
 				<tr>
 					<td>
-						<input type="text" name="id" placeholder="아이디" /> 
-						<input type="password" name="pwd" placeholder="비밀번호" />
+						<input type="text" class="form-control mb-1" name="id" placeholder="아이디" /> 
+						<input type="password" class="form-control mb-1" name="pwd" placeholder="비밀번호" />
 					</td>
-					<td colspan="2">
+					<td>
 						<input type="button" size="15" value="로그인" class="btn btn-dark btn-sm btn-block" onclick="login();" /> 
 						<input type="button" size="15" value="회원가입" class="btn btn-dark btn-sm btn-block" onclick="join();" />
 					</td>
