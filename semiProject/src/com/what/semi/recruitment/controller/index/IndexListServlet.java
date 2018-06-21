@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.what.semi.common.template.PageInfo;
 import com.what.semi.common.template.PageTemplate;
@@ -29,6 +30,9 @@ public class IndexListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession session = request.getSession(false);
+		System.out.println("index"+session.getAttribute("nickname"));
+		
 		RecruitmentService rs = new RecruitmentService();
 		PageInfo pi = PageTemplate.indexPaging(request, rs);
 		
@@ -37,20 +41,13 @@ public class IndexListServlet extends HttpServlet {
 		String name = null;
 		
 		//name=(String)request.getAttribute("name");
-		if(request.getParameter("name")!=null) {
+		/*if(request.getParameter("name")!=null) {
 		name=URLDecoder.decode(request.getParameter("name"), "UTF-8");
-		}
+		}*/
 		if(null != list) {
-			if(name!=null) {
 				url = "views/common/mainPage.jsp";
 				request.setAttribute("list", list);
 				request.setAttribute("pi", pi);
-				request.setAttribute("name", name);
-			}else {
-				url = "views/common/mainPage.jsp";
-				request.setAttribute("list", list);
-				request.setAttribute("pi", pi);
-			}
 		}else {
 			url = "index.jsp";
 			request.setAttribute("msg", "오류");

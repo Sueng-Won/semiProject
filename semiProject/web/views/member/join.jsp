@@ -116,9 +116,7 @@
     <!-- Page Content -->
     <div class="container"  style="margin-bottom: 350px">
       <div class="row">
-
 		<%@include file="/views/common/nav.jsp" %>
-
         <!-- /.col-lg-3 -->
         <div class="col-lg-9 mt-lg-auto">
         	<div class="row mt-4">
@@ -126,6 +124,17 @@
 			  <div class="col-lg-6">
         		<h3>회원가입</h3>
 			  <form id="joinForm" method="post" action="">
+			  <div class="btn-group mt-3">
+			    	<button type="button" id="tBtn" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+				    	<span class="caret">회원타입</span>
+					</button>
+			    	<input type="hidden" name="rTypeValue" id="rTypeValue">
+					  <ul class="dropdown-menu bg-dark" role="menu">
+					    <li><button type="button" onclick="typeSelect(this);" name="js" class="btn btn-dark btn-sm btn-block" value="js">구직자</button></li>
+					    <li><button type="button" onclick="typeSelect(this);" name="bo" class="btn btn-dark btn-sm btn-block" value="bo">업주</button></li>
+					    <li class="divider"></li>
+					  </ul>
+			    </div>
 			    <div class="input-group">
 			    
 			    	<!-- 사용자 이름 -->
@@ -161,17 +170,7 @@
 			      <input type="text" class="form-control mb-1" name="addressDetail" id="addressDetail" placeholder="상세주소"/>
 			    </div>
 			    
-			    <div class="btn-group mt-3">
-			    	<button type="button" id="tBtn" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-				    	<span class="caret">회원타입</span>
-					</button>
-			    	<input type="hidden" name="rTypeValue" id="rTypeValue">
-					  <ul class="dropdown-menu bg-dark" role="menu">
-					    <li><button type="button" onclick="typeSelect(this);" name="js" class="btn btn-dark btn-sm btn-block" value="js">구직자</button></li>
-					    <li><button type="button" onclick="typeSelect(this);" name="bo" class="btn btn-dark btn-sm btn-block" value="bo">업주</button></li>
-					    <li class="divider"></li>
-					  </ul>
-			    </div>
+			    <input type="button" class="btn btn-dark btn-sm btn-block" value="회원가입"/>
 			    
 			  </form>
 			    

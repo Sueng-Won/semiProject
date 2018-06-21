@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.what.semi.common.template.JDBCTemplate;
 
@@ -42,6 +43,10 @@ public class LoginServlet extends HttpServlet {
 		String id = request.getParameter("hd");
 		String name = request.getParameter("name");
 		
+		HttpSession session = request.getSession(false);
+		session.setAttribute("nickname", name);
+		System.out.println("login"+session.getAttribute("nickname"));
+		
 		Connection conn = null;	//DB연결된 상태(세션)을 담은 객체
 		PreparedStatement pstm = null;	//SQL문을 나타내는 객체
 	
@@ -53,10 +58,12 @@ public class LoginServlet extends HttpServlet {
 			pstm = conn.prepareStatement(query);
 			pstm.executeUpdate();
 			System.out.println("INSERT 성공");
-			response.sendRedirect("/sp/indexList.do?name="+URLEncoder.encode(name, "UTF-8"));
+			response.sendRedirect("/sp/indexList.do");
+			//response.sendRedirect("/sp/indexList.do?name="+URLEncoder.encode(name, "UTF-8"));
 		} catch (SQLException e) {
 			System.out.println("INSERT 실패");
-			response.sendRedirect("/sp/indexList.do?name="+URLEncoder.encode(name, "UTF-8"));
+			response.sendRedirect("/sp/indexList.do");
+			//response.sendRedirect("/sp/indexList.do?name="+URLEncoder.encode(name, "UTF-8"));
 			//e.printStackTrace();
 		} finally {
 			try {
