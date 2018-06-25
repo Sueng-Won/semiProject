@@ -41,13 +41,13 @@ public class MemberDao {
 		String query = "";
 		
 		try {
-			query = "SELECT KAKAO_ID FROM MEMBER WHERE KAKAO_ID = '?'";
+			query = "SELECT ID FROM MEMBER WHERE ID = '?'";
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				mv = new MemberVo();
-				mv.setKakao_id(rs.getString("kakao_id"));
+				mv.setId(rs.getString("kakao_id"));
 				System.out.println("아이디 조회됨");
 				result = 1;
 			}
