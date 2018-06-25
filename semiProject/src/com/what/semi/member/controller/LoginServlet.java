@@ -28,47 +28,10 @@ public class LoginServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		int result = 0;
 		
-<<<<<<< HEAD
-//		System.out.println(id);
-//		System.out.println(name);
-=======
-		HttpSession session = request.getSession(false);
-		session.setAttribute("nickname", name);
-		System.out.println("login"+session.getAttribute("nickname"));
-		
-		Connection conn = null;	//DB연결된 상태(세션)을 담은 객체
-		PreparedStatement pstm = null;	//SQL문을 나타내는 객체
-	
-		String query = "INSERT INTO MEMBER VALUES("+id+", NULL, NULL"
-				+ ",NULL,NULL,NULL,NULL,NULL,DEFAULT,NULL,NULL,DEFAULT,DEFAULT)";
->>>>>>> refs/heads/test
-		
-<<<<<<< HEAD
 		result = new MemberService().checkId(id);
 		
 		if(0 > result) {
 			result = new MemberService().enterUser(id);
-=======
-		conn = JDBCTemplate.getConnection();
-		try {
-			pstm = conn.prepareStatement(query);
-			pstm.executeUpdate();
-			System.out.println("INSERT 성공");
-			response.sendRedirect("/sp/indexList.do");
-			//response.sendRedirect("/sp/indexList.do?name="+URLEncoder.encode(name, "UTF-8"));
-		} catch (SQLException e) {
-			System.out.println("INSERT 실패");
-			response.sendRedirect("/sp/indexList.do");
-			//response.sendRedirect("/sp/indexList.do?name="+URLEncoder.encode(name, "UTF-8"));
-			//e.printStackTrace();
-		} finally {
-			try {
-				if(pstm!=null) {pstm.close();}
-				if(conn!=null) {conn.close();}
-			}catch(Exception e){
-				throw new RuntimeException(e.getMessage());
-			}
->>>>>>> refs/heads/test
 		}
 		HttpSession session = request.getSession();
 		
