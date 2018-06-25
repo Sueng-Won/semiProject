@@ -25,7 +25,6 @@
 	
     <link href="/sp/css/daum.css" rel="stylesheet">
     <script src="/sp/vendor/jquery/jquery.min.js"></script>
-<<<<<<< HEAD
 	<script type="text/javascript">
 		function loadLocalList() {
 			location.href = "/sp/localList.do";
@@ -42,19 +41,6 @@
 		}
 		
 	</script>
-=======
->>>>>>> refs/heads/test
-	
-<<<<<<< HEAD
-<%-- <%
-	String name = null;
-	if(request.getParameter("name")!=null){
-		name=request.getParameter("name");
-	}
-%> --%>
-=======
-	
->>>>>>> refs/heads/test
   </head>
 
   <body>
