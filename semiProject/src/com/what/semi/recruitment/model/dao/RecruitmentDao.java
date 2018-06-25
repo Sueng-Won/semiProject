@@ -120,6 +120,49 @@ public class RecruitmentDao {
 		return result;
 	}
 
+	public ArrayList<RecruitmentVo> selectByDateList(Connection con, String dateStr) {
+		ArrayList<RecruitmentVo> list = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		String query = ""; 
+		if(dateStr.equals("null")){
+			dateStr="SELECT TO_CHAR(SYSDATE,'MM/DD/RRRR') FROM SYS.DUAL";
+		}
+		try {
+			stmt=con.createStatement();
+			query = "SELECT * FROM RECRUITMENT WHERE TO_CHAR(WORK_DAY,'MM/DD/RRRR') IN ("+dateStr+")";
+			//query = "SELECT * FROM RECRUITMENT";
+			//System.out.println(query);
+			
+			rs = stmt.executeQuery(query);
+			list = new ArrayList<RecruitmentVo>();
+			RecruitmentVo temp = null;
+			while(rs.next()) {
+				temp = new RecruitmentVo();
+				temp.setRecruitment_id(rs.getString("RECRUITMENT_ID"));
+				temp.setRecruitment_name(rs.getString("recruitment_name"));
+				temp.setRecruitment_title(rs.getString("recruitment_title"));
+				temp.setAddress(rs.getString("address"));
+				temp.setBusiness_type(rs.getString("business_type"));
+				temp.setR_latitude(rs.getDouble("r_latitude"));
+				temp.setR_longitude(rs.getDouble("r_longitude"));
+				temp.setPay(rs.getInt("pay"));
+				temp.setWork_day(rs.getDate("work_day"));
+				
+				//System.out.println(temp);
+				list.add(temp);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(stmt);
+		}
+		
+		return list;
+	}
+
 	
 
 

@@ -1,7 +1,6 @@
 package com.what.semi.recruitment.controller.index;
 
 import java.io.IOException;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -34,23 +33,11 @@ public class IndexListServlet extends HttpServlet {
 		
 		ArrayList<RecruitmentVo> list = rs.loadRecruitmentList(pi.getCurrentPage(), pi.getLimit());
 		String url = "";
-		String name = null;
 		
-		//name=(String)request.getAttribute("name");
-		if(request.getParameter("name")!=null) {
-		name=URLDecoder.decode(request.getParameter("name"), "UTF-8");
-		}
 		if(null != list) {
-			if(name!=null) {
-				url = "views/common/mainPage.jsp";
-				request.setAttribute("list", list);
-				request.setAttribute("pi", pi);
-				request.setAttribute("name", name);
-			}else {
-				url = "views/common/mainPage.jsp";
-				request.setAttribute("list", list);
-				request.setAttribute("pi", pi);
-			}
+			url = "views/common/mainPage.jsp";
+			request.setAttribute("list", list);
+			request.setAttribute("pi", pi);
 		}else {
 			url = "index.jsp";
 			request.setAttribute("msg", "오류");
@@ -59,11 +46,4 @@ public class IndexListServlet extends HttpServlet {
 		view.forward(request, response);
 	}
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
-	}
-
-	
 }

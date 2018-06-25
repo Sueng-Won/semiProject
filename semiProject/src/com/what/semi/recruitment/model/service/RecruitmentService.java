@@ -44,6 +44,13 @@ public class RecruitmentService {
 		
 		return ListCount;	}
 
+	public ArrayList<RecruitmentVo> selectByDateList(String dateStr) {
+		Connection con = JDBCTemplate.getConnection();
+		ArrayList<RecruitmentVo> list = new RecruitmentDao().selectByDateList(con,dateStr);
+		JDBCTemplate.close(con);
+		return list;
+	}
+
 	
 
 

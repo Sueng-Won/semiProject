@@ -1,21 +1,18 @@
 package com.what.semi.member.controller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.what.semi.common.template.JDBCTemplate;
-
-import jdk.nashorn.internal.ir.RuntimeNode.Request;
 
 /**
  * Servlet implementation class LoginServlet
@@ -37,35 +34,41 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");
-		
-		String id = request.getParameter("hd");
-		String name = request.getParameter("name");
-		
-		Connection conn = null;	//DB연결된 상태(세션)을 담은 객체
-		PreparedStatement pstm = null;	//SQL문을 나타내는 객체
-	
-		String query = "INSERT INTO MEMBER VALUES("+id+", NULL, NULL"
-				+ ",NULL,NULL,NULL,NULL,NULL,DEFAULT,NULL,NULL,DEFAULT,DEFAULT)";
-		
-		conn = JDBCTemplate.getConnection();
-		try {
-			pstm = conn.prepareStatement(query);
-			pstm.executeUpdate();
-			System.out.println("INSERT 성공");
-			response.sendRedirect("/sp/indexList.do?name="+URLEncoder.encode(name, "UTF-8"));
-		} catch (SQLException e) {
-			System.out.println("INSERT 실패");
-			response.sendRedirect("/sp/indexList.do?name="+URLEncoder.encode(name, "UTF-8"));
-			//e.printStackTrace();
-		} finally {
-			try {
-				if(pstm!=null) {pstm.close();}
-				if(conn!=null) {conn.close();}
-			}catch(Exception e){
-				throw new RuntimeException(e.getMessage());
-			}
-		}
+	      response.setContentType("text/html;charset=utf-8");
+	      
+	      String id = request.getParameter("hd");
+	      String name = request.getParameter("name");
+	      
+	      HttpSession session = request.getSession(false);
+	      session.setAttribute("nickname", name);
+	      System.out.println("login"+session.getAttribute("nickname"));
+	      
+	      Connection conn = null;   //DB연결된 상태(세션)을 담은 객체
+	      PreparedStatement pstm = null;   //SQL문을 나타내는 객체
+	   
+	      String query = "INSERT INTO MEMBER VALUES("+id+", NULL, NULL"
+	            + ",NULL,NULL,NULL,NULL,NULL,DEFAULT,NULL,NULL,DEFAULT,DEFAULT)";
+	      
+	      conn = JDBCTemplate.getConnection();
+	      try {
+	         pstm = conn.prepareStatement(query);
+	         pstm.executeUpdate();
+	         System.out.println("INSERT 성공");
+	         response.sendRedirect("/sp/indexList.do");
+	         //response.sendRedirect("/sp/indexList.do?name="+URLEncoder.encode(name, "UTF-8"));
+	      } catch (SQLException e) {
+	         System.out.println("INSERT 실패");
+	         response.sendRedirect("/sp/indexList.do");
+	         //response.sendRedirect("/sp/indexList.do?name="+URLEncoder.encode(name, "UTF-8"));
+	         //e.printStackTrace();
+	      } finally {
+	         try {
+	            if(pstm!=null) {pstm.close();}
+	            if(conn!=null) {conn.close();}
+	         }catch(Exception e){
+	            throw new RuntimeException(e.getMessage());
+	         }
+	      }
 	}
 
 }
