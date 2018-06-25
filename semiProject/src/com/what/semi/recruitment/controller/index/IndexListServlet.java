@@ -34,6 +34,7 @@ public class IndexListServlet extends HttpServlet {
 		PageInfo pi = PageTemplate.indexPaging(request, rs);
 		
 		ArrayList<RecruitmentVo> list = rs.loadRecruitmentList(pi.getCurrentPage(), pi.getLimit());
+		
 		String url = "";
 		
 		if(null != list) {

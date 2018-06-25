@@ -19,7 +19,9 @@
 	function join() {
 		location.href = "/sp/views/member/join.jsp";
 	}
-	
+	function loadLocalList() {
+		location.href = "/sp/localList.do";
+	}
 </script>
 <div class="col-lg-3">
 	<h4 class="my-4">
@@ -42,13 +44,9 @@
 		<button type="button" class="btn btn-default btn-lg btn-block bg-dark">맞춤알바</button>
 		<!-- 지역 알바로 이동 -->
 		<button type="button" onclick="loadLocalList();"
-			class="btn btn-default btn-lg btn-block bg-dark">지역알바</button>
+			class="btn btn-lg btn-block bg-dark">지역알바</button>
 
-		<script type="text/javascript">
-			function loadLocalList() {
-				location.href = "/sp/localList.do";
-			}
-		</script>
+		
 
 		<button type="button" class="btn btn-lg btn-block btn-dark">일별알바</button>
 		<button type="button" class="btn btn-lg btn-block btn-dark">구직자정보</button>

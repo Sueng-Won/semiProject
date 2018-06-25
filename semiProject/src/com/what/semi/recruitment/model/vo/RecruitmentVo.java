@@ -20,7 +20,7 @@ public class RecruitmentVo {
 	private char gender;					//희망성별
 	private int military_service;			//병역여부
 	private String introduce;				//업체 소개
-	private String kakao_id;				//카카오 ID
+	private String m_id;				//카카오 ID
 	private int is_post;					//게시여부
 	private String name;					//업주명
 	private String phone;					//업주연락처
@@ -30,7 +30,7 @@ public class RecruitmentVo {
 	public RecruitmentVo(String recruitment_id, String recruitment_image_src, String business_type, String address,
 			String address_detail, int zipcode, double r_latitude, double r_longitude, Date work_day,
 			Date start_work_time, Date end_work_time, int pay, char gender, int military_service, String inroduce,
-			String kakao_id, int is_post, String name, String phone) {
+			String m_id, int is_post, String name, String phone) {
 		super();
 		this.recruitment_id = recruitment_id;
 		this.recruitment_image_src = recruitment_image_src;
@@ -47,7 +47,7 @@ public class RecruitmentVo {
 		this.gender = gender;
 		this.military_service = military_service;
 		this.introduce = inroduce;
-		this.kakao_id = kakao_id;
+		this.m_id = m_id;
 		this.is_post = is_post;
 		this.name = name;
 		this.phone = phone;
@@ -173,12 +173,12 @@ public class RecruitmentVo {
 		this.introduce = inroduce;
 	}
 
-	public String getKakao_id() {
-		return kakao_id;
+	public String getm_id() {
+		return m_id;
 	}
 
-	public void setKakao_id(String kakao_id) {
-		this.kakao_id = kakao_id;
+	public void setm_id(String m_id) {
+		this.m_id = m_id;
 	}
 
 	public int getIs_post() {
@@ -231,7 +231,7 @@ public class RecruitmentVo {
 				+ ", zipcode=" + zipcode + ", r_latitude=" + r_latitude + ", r_longitude=" + r_longitude + ", work_day="
 				+ work_day + ", start_work_time=" + start_work_time + ", end_work_time=" + end_work_time + ", pay="
 				+ pay + ", gender=" + gender + ", military_service=" + military_service + ", inroduce=" + introduce
-				+ ", kakao_id=" + kakao_id + ", is_post=" + is_post + ", name=" + name + ", phone=" + phone + "]";
+				+ ", m_id=" + m_id + ", is_post=" + is_post + ", name=" + name + ", phone=" + phone + "]";
 	}
 	
 	
