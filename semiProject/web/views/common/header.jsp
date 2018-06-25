@@ -4,6 +4,7 @@
 	String name = (String)session.getAttribute("name");
 	System.out.println("이름 = "+name);
 %>
+<!-- 브렌치테스트 -->
 <!DOCTYPE html>
 <html>
 <head>
