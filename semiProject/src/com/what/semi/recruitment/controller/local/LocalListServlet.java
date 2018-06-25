@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.what.semi.common.template.LocalPageInfo;
 import com.what.semi.common.template.PageInfo;
@@ -26,8 +27,18 @@ public class LocalListServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<<<<<<< HEAD
 		RecruitmentService rs = new RecruitmentService();	//DAO에 접근할 서비스 객체 생성
 		PageInfo pi = null;
+=======
+		
+		HttpSession session = request.getSession();
+		System.out.println("local"+session.getAttribute("nickname"));
+		
+		RecruitmentService rs = new RecruitmentService();
+		String keyword = null;
+		ArrayList<RecruitmentVo> list = null;
+>>>>>>> refs/heads/test
 		
 		String userId = null;								//request로부터 회원 아이디를 받아올 변수선언
 		ArrayList<Double> userSpot = null;					//DAO를 통해 받아온 유저의 위경도를 저장할 ArrayList

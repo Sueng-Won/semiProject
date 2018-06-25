@@ -114,10 +114,13 @@
 </script>
 
     <!-- Page Content -->
+<<<<<<< HEAD
     <div class="container" style="min-height: 800px;">
+=======
+    <div class="container"  style="margin-bottom: 350px">
+>>>>>>> refs/heads/test
     
       <div class="row">
-
 		<%@include file="/views/common/nav.jsp" %>
         <!-- /.col-lg-3 -->
         <div class="col-lg-9 mt-lg-auto">
@@ -128,6 +131,17 @@
         		<h3 align="center" class="text-white-50">회원가입</h3>
         		<br>
 			  <form id="joinForm" method="post" action="">
+			  <div class="btn-group mt-3">
+			    	<button type="button" id="tBtn" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+				    	<span class="caret">회원타입</span>
+					</button>
+			    	<input type="hidden" name="rTypeValue" id="rTypeValue">
+					  <ul class="dropdown-menu bg-dark" role="menu">
+					    <li><button type="button" onclick="typeSelect(this);" name="js" class="btn btn-dark btn-sm btn-block" value="js">구직자</button></li>
+					    <li><button type="button" onclick="typeSelect(this);" name="bo" class="btn btn-dark btn-sm btn-block" value="bo">업주</button></li>
+					    <li class="divider"></li>
+					  </ul>
+			    </div>
 			    <div class="input-group">
 			    
 			    	<!-- 사용자 이름 -->
@@ -163,6 +177,7 @@
 			      <input type="text" class="form-control mb-1" name="addressDetail" id="addressDetail" placeholder="상세주소"/>
 			    </div>
 			    
+<<<<<<< HEAD
 			    <div class="btn-group mt-1">
 			    	<button type="button" id="tBtn" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 				    	<span class="caret">회원타입</span>
@@ -177,6 +192,10 @@
 			    <div>
 			    	<button class="btn btn-light text-dark mt-4 mb-2" onclick="">회원가입</button>
 			    </div>
+=======
+			    <input type="button" class="btn btn-dark btn-sm btn-block" value="회원가입"/>
+			    
+>>>>>>> refs/heads/test
 			  </form>
 			    
 			  </div><!-- /.col-lg-6 -->

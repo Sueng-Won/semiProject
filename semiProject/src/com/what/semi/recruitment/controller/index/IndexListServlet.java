@@ -38,10 +38,19 @@ public class IndexListServlet extends HttpServlet {
 		
 		
 		//name=(String)request.getAttribute("name");
+<<<<<<< HEAD
 		if(request.getAttribute("name")!=null) {
 		}
+=======
+		/*if(request.getParameter("name")!=null) {
+		name=URLDecoder.decode(request.getParameter("name"), "UTF-8");
+		}*/
+>>>>>>> refs/heads/test
 		if(null != list) {
+<<<<<<< HEAD
 				HttpSession session = request.getSession();
+=======
+>>>>>>> refs/heads/test
 				url = "views/common/mainPage.jsp";
 				request.setAttribute("list", list);
 				request.setAttribute("pi", pi);
