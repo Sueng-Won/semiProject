@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.what.semi.common.template.PageInfo;
+import com.what.semi.common.template.PageTemplate;
 import com.what.semi.recruitment.model.service.RecruitmentService;
 import com.what.semi.recruitment.model.vo.RecruitmentVo;
 
@@ -34,7 +36,12 @@ public class ByDateListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String dateStr = "null";
 		//System.out.println(dateStr);
-		ArrayList<RecruitmentVo> list = new RecruitmentService().selectByDateList(dateStr);
+		
+		RecruitmentService rs = new RecruitmentService();
+
+		PageInfo pi = PageTemplate.byDatePaging(request, rs, dateStr);
+
+		ArrayList<RecruitmentVo> list = rs.selectByDateList(dateStr, pi.getCurrentPage(), pi.getLimit());
 		
 		//System.out.println(list.size());
 		
@@ -46,6 +53,7 @@ public class ByDateListServlet extends HttpServlet {
 			}
 			url="/views/byDate/searchByDate.jsp";
 			request.setAttribute("list", list);
+			request.setAttribute("pi", pi);
 			
 		}else{
 			System.out.println("null");

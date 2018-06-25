@@ -94,6 +94,7 @@ var dates = new Array();
 						var gotDate = jQuery.inArray(dateString, dates);
 						if (gotDate >= 0) {
 							// Enable date so it can be deselected. Set style to be highlighted
+							console.log(dateString);
 							return [ true, "ui-state-highlight" ];
 						}
 						// Dates not in the array are left enabled, but with no extra style

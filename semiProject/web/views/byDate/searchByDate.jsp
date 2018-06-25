@@ -7,12 +7,12 @@
  	 ArrayList<RecruitmentVo> list = 
 		(ArrayList<RecruitmentVo>)request.getAttribute("list"); 
 	
-/*	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int listCount = pi.getTotalCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();  */
+	int endPage = pi.getEndPage();  
 %>
 <%@include file="/views/common/header.jsp"%>
 <html>
@@ -66,7 +66,7 @@
           
         </div>
         <!-- /.col-lg-9 -->
-        <%--
+   
         <!--====================================	페이지선택버튼	 ==================================  -->
 	        <div class="btn-toolbar mb-1" role="toolbar">
 			  <div class="btn-group" role="group">
@@ -81,7 +81,7 @@
 					<%} %>
 					<button onclick="movePage(<%=currentPage==maxPage?maxPage:maxPage+1%>);" type="button" class="btn btn-default bg-dark text-white">></button>
 			  </div>
-			</div>  --%>
+			</div>  
 				<!--=========================================================================================-->
 			</div>
 			<!-- /.row -->
