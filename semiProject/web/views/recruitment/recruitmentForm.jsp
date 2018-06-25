@@ -5,21 +5,8 @@
 
 <script type="text/javascript">
 	function memberJoin() {
-		$("#joinForm").submit();
+		$("#writeResume").submit();
 	}
-	
-	function validate() {
-		if($("#userPwd").val() != $("#userPwd2").val()){
-			$("#passChkSpan").text("입력하신 비밀번호가 일치하지 않습니다.");
-			$("#userPwd2").focus();
-			
-			return false;
-		}
-		//다른 값들을 체크 하는 로직 추가(유효성 검사 로직 추가 영역)
-		return true;
-	}
-	
-	    
 	
 	var searchAddr;
 	
@@ -114,69 +101,150 @@
 </script>
 
     <!-- Page Content -->
-    <div class="container" style="min-height: 800px;">
-    
+    <div class="container"  style="min-height: 1000px">
       <div class="row">
+
 		<%@include file="/views/common/nav.jsp" %>
+
         <!-- /.col-lg-3 -->
         <div class="col-lg-9 mt-lg-auto">
         	<div class="row mt-4">
-        	  <div class="col-lg-3"></div>
-			  <div class="col-lg-6 bg-dark">
+        	  <div class="col-lg-2"></div>
+			  <div class="col-lg-8 bg-dark">
 			  <br><br>
-        		<h3 align="center" class="text-white-50">회원가입</h3>
+        		<h3 align="center" class="text-white-50">구인 게시물</h3>
         		<br>
-			  <form id="joinForm" method="post" action="">
-			  <div class="btn-group mt-3">
-			    	<button type="button" id="tBtn" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-				    	<span class="caret">회원타입</span>
-					</button>
-			    	<input type="hidden" name="rTypeValue" id="rTypeValue">
-					  <ul class="dropdown-menu bg-dark" role="menu">
-					    <li><button type="button" onclick="typeSelect(this);" name="js" class="btn btn-dark btn-sm btn-block" value="js">구직자</button></li>
-					    <li><button type="button" onclick="typeSelect(this);" name="bo" class="btn btn-dark btn-sm btn-block" value="bo">업주</button></li>
-					    <li class="divider"></li>
-					  </ul>
-			    </div>
-			    <div class="input-group">
+			  <form id="writeRecruitment" method="post" action="">
+			  	<div class="row">
+			  		<div class="col-3 mb-1">
+				  		<img alt="" style="max-width: 130px;" src="http://placehold.it/300x400">
+			  		</div>
+				  	<div class="col-9">
+				  	
+				    	<!-- 업체명 -->
+					    <div class="input-group" style="min-height: 33%">
+					      	<input type="text" class="form-control mb-1" name="name" placeholder="업체명"/>
+					    </div>
+					    
+				    	<!-- 업체 전화번호 -->
+					    <div class="input-group" style="min-height: 33%">
+					      	<input type="text" class="form-control mb-1" name="phone" placeholder="업체 연락처"/>
+					    </div>
+					    
+					    <!-- 업체 이메일 -->
+					    <div class="input-group" style="min-height: 33%">
+						    <input type="email" class="form-control mb-1" name="email" placeholder="email"/>
+					    </div>
+				  	</div>
+			  	</div>
 			    
-			    	<!-- 사용자 이름 -->
-			      <input type="text" class="form-control mb-1" name="name" placeholder="이름"/>
-			      
-			    </div>
-			    
-			    <div class="input-group">
-			    	<!-- 사용자 이메일 -->
-			      <input type="email" class="form-control mb-1" name="email" placeholder="email"/>
-			    </div>
-			    
-			    <div class="input-group">
-			    	<!-- 사용자 전화번호 -->
-			      <input type="text" class="form-control mb-1" name="phone" placeholder="전화번호"/>
-			      
-			    </div>
-			    
+			    <!-- 업체 주소 -->
 			    <div class="input-group">
 			    	<!-- 주소검색을 통해 입력받은 우편번호 저장 input -->
 			      <input type="hidden" name="zipcode" id="zipcode"/>
+			      
+			      	<!-- 주소를 통한 좌표값 저장 input -->
 			      <input type="hidden" name="latitude" id="latitude"/>
 			      <input type="hidden" name="longitude" id="longitude"/>
+			      
 			      	<!-- 주소 -->
-			      <input type="text" class="form-control mb-1" name="address" id="address" placeholder="주소"/>
+			      <input type="text" class="form-control mb-1 mr-1" name="address" id="address" placeholder="사업장 주소" readonly/>
 			      <span class="input-group-btn">
-			        <button class="btn btn-light text-dark ml-1" type="button" onclick="openAddressPopup();">주소 검색</button>
+			        <button class="btn btn-light text-dark" type="button" onclick="openAddressPopup();">주소 검색</button>
 			      </span>
+			      
 			    </div>
 			    
 			    <div class="input-group">
 			    	<!-- 상세주소 입력 -->
 			      <input type="text" class="form-control mb-1" name="addressDetail" id="addressDetail" placeholder="상세주소"/>
 			    </div>
-			    <input type="button" class="btn btn-dark btn-sm btn-block" value="회원가입"/>
+			    <br>
+			    <div class="row">
+			    	<div class="col-3">
+				    	<select multiple class="custom-select-lg mt-1 ml-3 btn-dark" style="min-height: 150px">
+						  <option disabled="disabled" class="text-white-50">[업종]</option>
+						  <option>사무직</option>
+						  <option>서비스</option>
+						  <option>유통/판매</option>
+						  <option>외식/음료</option>
+						  <option>고객상담</option>
+						  <option>생산/건설</option>
+						</select>
+			    	</div>
+			    	
+			    	<div class="col-3">
+				    	<select multiple class="custom-select-lg mt-1 ml-3 btn-dark" style="min-height: 150px">
+						  <option disabled="disabled" class="text-white-50">[경력]</option>
+						  <option>~1년</option>
+						  <option>1~2년</option>
+						  <option>3~5년</option>
+						  <option>5~10년</option>
+						  <option>10년 이상</option>
+						</select>
+			    	</div>
+			    	
+				    <div class="col-6">
+				    	<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
+				    		<label>근무일</label>
+							<input type="date" class="btn-dark" name="dateD"/>
+				    	</div>
+				    	<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
+				    		<label>시작시간</label>
+							<input type="time" class="btn-dark" name="dateD"/>
+				    	</div>
+				    	<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
+				    		<label>종료시간</label>
+							<input type="time" class="btn-dark" name="dateD"/>
+				    	</div>
+				    </div>
+			    </div>
+			    <br>
+			    
+			    <h4 class="text-white-50 ml-1">우대 사항</h4>
+			    <div class="row">
+				    <div class="btn-group mt-1 ml-1">
+				    	<button type="button" style="min-width: 140px" class="btn btn-lg btn-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+					    	<span id="mBtn"  class="caret">병역사항</span>
+						</button>
+						
+				    	<input type="hidden" name="mValue" id="mValue"><!-- 병역여부에 대한 값을 저장할 hidden input -->
+				    	
+						  <ul class="dropdown-menu bg-dark" role="menu">
+						    <li><button type="button" onclick="mSelect(this);" name="miltary" class="btn btn-dark btn-sm btn-block" value="y">군필</button></li>
+						    <li><button type="button" onclick="mSelect(this);" name="miltary" class="btn btn-dark btn-sm btn-block" value="n">면제</button></li>
+						    <li class="divider"></li>
+						  </ul>
+				    </div>
+				    
+				    <div class="btn-group mt-1 ml-1">
+				    	<button type="button" style="min-width: 100px" class="btn btn-lg btn-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+					    	<span class="caret" id="gBtn">성별</span>
+						</button>
+						
+				    	<input type="hidden" name="gValue" id="gValue"/><!-- 성별에 대한 값을 저장할 hidden input -->
+				    	
+						<ul class="dropdown-menu bg-dark" role="menu">
+						  <li><button type="button" onclick="gSelect(this);" name="gender" class="btn btn-dark btn-sm btn-block" value="m">남</button></li>
+						  <li><button type="button" onclick="gSelect(this);" name="gender" class="btn btn-dark btn-sm btn-block" value="f">여</button></li>
+						  <li class="divider"></li>
+						</ul>
+				    </div>
+			    </div>
+			    <br>
+			    
+			    <div>
+			    	<textarea class="col-12" rows="5" placeholder="업체 소개 및 희망 인력"></textarea>
+			    </div>
+			    
+			    <div>
+			    	<button class="btn btn-light text-dark mt-4 mb-2" onclick="">구인 등록</button>
+			    </div>
+			    
 			  </form>
 			    
 			  </div><!-- /.col-lg-6 -->
-			  <div class="col-lg-3"></div>
+			  <div class="col-lg-2"></div>
         	</div>
 		</div><!-- /.row -->
         
@@ -186,11 +254,18 @@
     </div>
     <!-- /.container -->
     <script type="text/javascript">
-	function typeSelect(obj) {
+	
+	function gSelect(obj) {
 		var text = $(obj).text();
 		var value = $(obj).val();
-		$("#tBtn").text(text);
-		$("#typeValue").val(value);
+		$("#gBtn").text(text);
+		$("#gValue").val(value);
+	}
+	function mSelect(obj) {
+		var text = $(obj).text();
+		var value = $(obj).val();
+		$("#mBtn").text(text);
+		$("#mValue").val(value);
 	}
 </script>
 <%@include file="/views/common/footer.jsp"%>

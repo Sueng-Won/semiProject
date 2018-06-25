@@ -4,14 +4,20 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.what.semi.common.template.JDBCTemplate;
+import com.what.semi.common.template.LocalPageInfo;
 import com.what.semi.recruitment.model.dao.RecruitmentDao;
 import com.what.semi.recruitment.model.vo.RecruitmentVo;
 
 public class RecruitmentService {
+<<<<<<< HEAD
 
 	public ArrayList<RecruitmentVo> loadRecruitmentList(int currentPage, int limit, String keyword) {
+=======
+	
+	public ArrayList<RecruitmentVo> loadLocalRecruitmentList(int currentPage, int limit, LocalPageInfo lpi) {
+>>>>>>> refs/heads/master
 		Connection con = JDBCTemplate.getConnection();
-		ArrayList<RecruitmentVo> list = new RecruitmentDao().loadRecruitmentList(con, currentPage, limit);
+		ArrayList<RecruitmentVo> list = new RecruitmentDao().loadLocalRecruitmentList(con, currentPage, limit, lpi);
 		JDBCTemplate.close(con);
 
 		return list;
@@ -34,15 +40,40 @@ public class RecruitmentService {
 		return ListCount;
 	}
 
-	public int selectLocalListTotalCount(String keyword) {
+	public int selectLocalListTotalCount(LocalPageInfo lpi) {
 		Connection con = JDBCTemplate.getConnection();
+<<<<<<< HEAD
 
 		int ListCount = new RecruitmentDao().selectLocalListTotalCount(con, keyword);
 
+=======
+		
+		int ListCount = new RecruitmentDao().selectLocalListTotalCount(con, lpi);
+		
+>>>>>>> refs/heads/master
 		JDBCTemplate.close(con);
-
+<<<<<<< HEAD
+=======
+		
 		return ListCount;
 	}
+>>>>>>> refs/heads/master
+
+<<<<<<< HEAD
+		return ListCount;
+	}
+=======
+	public ArrayList<Double> userSpot(String userId) {
+		Connection con = JDBCTemplate.getConnection();
+		
+		ArrayList<Double> spot = new RecruitmentDao().userSpot(con, userId);
+		
+		JDBCTemplate.close(con);
+		
+		return spot;
+	}
+	
+>>>>>>> refs/heads/master
 
 	public ArrayList<RecruitmentVo> selectByDateList(String dateStr, int currentPage, int limit) {
 		Connection con = JDBCTemplate.getConnection();

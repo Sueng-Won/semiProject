@@ -4,6 +4,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+String nickname = (String) session.getAttribute("nickname");
+
 ArrayList<RecruitmentVo> list = 
 	(ArrayList<RecruitmentVo>)request.getAttribute("list"); 
 
@@ -16,7 +18,11 @@ int endPage = pi.getEndPage();
 %>
 <%@include file="header.jsp" %>
     <!-- Page Content -->
+<<<<<<< HEAD
     <div class="container">	<!-- 내용을 담아놓을 컨테이너 -->
+=======
+    <div class="container" style="min-height: 700px">	<!-- 내용을 담아놓을 컨테이너 -->
+>>>>>>> refs/heads/master
 
       <div class="row">
 
@@ -32,6 +38,7 @@ int endPage = pi.getEndPage();
             </ol>
             <div class="carousel-inner" role="listbox">
               <div class="carousel-item active">
+<<<<<<< HEAD
                 <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
               </div>
               <div class="carousel-item">
@@ -39,6 +46,15 @@ int endPage = pi.getEndPage();
               </div>
               <div class="carousel-item">
                 <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
+=======
+                <img class="d-block img-fluid rounded mx-auto" src="http://placehold.it/900x350" alt="First slide">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block img-fluid rounded mx-auto" style="max-height: 320px" src="http://placehold.it/900x350" alt="Second slide">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block img-fluid rounded mx-auto" src="http://placehold.it/900x350" alt="Third slide">
+>>>>>>> refs/heads/master
               </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -55,6 +71,7 @@ int endPage = pi.getEndPage();
 			
 			<!--======================================	구인게시물	======================================== -->
           <div class="row">
+<<<<<<< HEAD
           <a href="views/main/searchByDate2.jsp">달력</a>
           
             <%for(RecruitmentVo rv : list) {%><!-- for문을 통해 해당 게시물들의 개수에 맞게 생성 -->
@@ -84,6 +101,36 @@ int endPage = pi.getEndPage();
 	        <div class="btn-toolbar mb-1" role="toolbar">
 			  <div class="btn-group" role="group">
 					<button onclick="movePage(<%=currentPage==1?1:currentPage-1%>);" type="button" class="btn btn-default bg-dark text-white"><</button>
+=======
+          
+            <%for(RecruitmentVo rv : list) {%><!-- for문을 통해 해당 게시물들의 개수에 맞게 생성 -->
+	            <div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4">
+	              <div class="card h-100">
+	                <a href="#"><img class="card-img-top" src="http://placehold.it/300x300" alt=""></a>
+	                <div class="card-body">
+	                  <h4 class="card-title">
+	                    <a href="#"><%=rv.getRecruitment_title() %></a><!-- 게시물 이름 -->
+	                  </h4>
+	                  <h5>시급 : <%=rv.getPay()%></h5>
+	                  <p class="card-text"><%=rv.getWork_day() %></p>
+	                </div>
+	                <div class="card-footer">
+	                  <small class="text-muted"><%=rv.getAddress() %></small>
+	                </div>
+	              </div>
+	            </div>
+	            
+			<%} %>
+          <!-- /.row -->
+          
+        </div>
+        <!-- /.col-lg-9 -->
+        
+        <!--====================================	페이지선택버튼	 ==================================  -->
+	        <div class="btn-toolbar mb-1" role="toolbar">
+			  <div class="btn-group" role="group">
+					<button onclick="movePage(<%=currentPage==1?1:currentPage-1%>);" type="button" class="btn btn-default bg-dark text-white">◀</button>
+>>>>>>> refs/heads/master
 					<%for(int i = startPage; i <= endPage; i++){ %>
 						<%if(currentPage != i){ %>
 						<button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white">1</button>
@@ -92,7 +139,11 @@ int endPage = pi.getEndPage();
 						
 						<%} %>
 					<%} %>
+<<<<<<< HEAD
 					<button onclick="movePage(<%=currentPage==maxPage?maxPage:maxPage+1%>);" type="button" class="btn btn-default bg-dark text-white">></button>
+=======
+					<button onclick="movePage(<%=currentPage==maxPage?maxPage:maxPage+1%>);" type="button" class="btn btn-default bg-dark text-white">▶</button>
+>>>>>>> refs/heads/master
 			  </div>
 			</div>
 		<!--=========================================================================================-->
