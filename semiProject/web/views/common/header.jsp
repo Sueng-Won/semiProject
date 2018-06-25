@@ -17,28 +17,19 @@
     <!-- Bootstrap core CSS -->
     <link href="/sp/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/sp/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
-<<<<<<< HEAD
-=======
    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=154d504288d7ddddd16f6867efe451af&libraries=services,clusterer,drawing"></script>
->>>>>>> refs/heads/master
 
     <!-- Custom styles for this template -->
     <link href="/sp/css/shop-homepage.css" rel="stylesheet">
-
+	
     <link href="/sp/css/daum.css" rel="stylesheet">
-<<<<<<< HEAD
      <script src="/sp/vendor/jquery/jquery.min.js"></script>
-=======
-    <script src="/sp/vendor/jquery/jquery.min.js"></script>
->>>>>>> refs/heads/master
 	<script type="text/javascript">
 		function loadLocalList() {
 			location.href = "/sp/localList.do";
 		}
-<<<<<<< HEAD
 	</script>
 	
-=======
 		
 		//추후 회원의 구인게시물/이력서를 불러올 function - 회원정보를 parameter로 설정해야함
 		function loadMyList() {
@@ -51,7 +42,6 @@
 		}
 		
 	</script>
->>>>>>> refs/heads/master
   </head>
 
   <body>
@@ -59,11 +49,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-<<<<<<< HEAD
-        <a class="navbar-brand" href="/sp/index.jsp">오늘뭐해?</a>
-=======
         <a class="navbar-brand" href="/sp/indexList.do">오늘뭐해?</a>
->>>>>>> refs/heads/master
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>

@@ -15,8 +15,7 @@ public class MemberVo {
 	private double longitude;
 	private char gender;
 	private int is_black_list;
-<<<<<<< HEAD
-=======
+
 	
 	public MemberVo(){
 		
@@ -162,5 +161,4 @@ public class MemberVo {
 
 	
 	
->>>>>>> refs/heads/master
 }

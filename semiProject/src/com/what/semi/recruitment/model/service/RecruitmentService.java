@@ -9,13 +9,8 @@ import com.what.semi.recruitment.model.dao.RecruitmentDao;
 import com.what.semi.recruitment.model.vo.RecruitmentVo;
 
 public class RecruitmentService {
-<<<<<<< HEAD
 
-	public ArrayList<RecruitmentVo> loadRecruitmentList(int currentPage, int limit, String keyword) {
-=======
-	
 	public ArrayList<RecruitmentVo> loadLocalRecruitmentList(int currentPage, int limit, LocalPageInfo lpi) {
->>>>>>> refs/heads/master
 		Connection con = JDBCTemplate.getConnection();
 		ArrayList<RecruitmentVo> list = new RecruitmentDao().loadLocalRecruitmentList(con, currentPage, limit, lpi);
 		JDBCTemplate.close(con);
@@ -42,28 +37,22 @@ public class RecruitmentService {
 
 	public int selectLocalListTotalCount(LocalPageInfo lpi) {
 		Connection con = JDBCTemplate.getConnection();
-<<<<<<< HEAD
 
-		int ListCount = new RecruitmentDao().selectLocalListTotalCount(con, keyword);
-
-=======
-		
 		int ListCount = new RecruitmentDao().selectLocalListTotalCount(con, lpi);
-		
->>>>>>> refs/heads/master
-		JDBCTemplate.close(con);
-<<<<<<< HEAD
-=======
-		
-		return ListCount;
-	}
->>>>>>> refs/heads/master
 
-<<<<<<< HEAD
+		JDBCTemplate.close(con);
+
 		return ListCount;
 	}
-=======
-	public ArrayList<Double> userSpot(String userId) {
+
+	public ArrayList<RecruitmentVo> selectByDateList(String dateStr, int currentPage, int limit) {
+		Connection con = JDBCTemplate.getConnection();
+		ArrayList<RecruitmentVo> list = new RecruitmentDao().selectByDateList(con, dateStr, currentPage, limit);
+		JDBCTemplate.close(con);
+		return list;
+	}
+
+public ArrayList<Double> userSpot(String userId) {
 		Connection con = JDBCTemplate.getConnection();
 		
 		ArrayList<Double> spot = new RecruitmentDao().userSpot(con, userId);
@@ -71,15 +60,6 @@ public class RecruitmentService {
 		JDBCTemplate.close(con);
 		
 		return spot;
-	}
-	
->>>>>>> refs/heads/master
-
-	public ArrayList<RecruitmentVo> selectByDateList(String dateStr, int currentPage, int limit) {
-		Connection con = JDBCTemplate.getConnection();
-		ArrayList<RecruitmentVo> list = new RecruitmentDao().selectByDateList(con, dateStr, currentPage, limit);
-		JDBCTemplate.close(con);
-		return list;
 	}
 
 	public int byDateListTotalCount(String dateStr) {

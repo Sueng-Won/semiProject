@@ -17,23 +17,11 @@ public class RecruitmentDao {
 		ArrayList<RecruitmentVo> list = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		String query = "";
+		String query = ""; 
 		int startRow = (currentPage - 1) * limit + 1;
 		int endRow = startRow + limit - 1;
 		try {
 			stmt = con.createStatement();
-<<<<<<< HEAD
-			query = "SELECT RECRUITMENT_ID, RECRUITMENT_IMAGE_SRC, " + "BUSINESS_TYPE, ADDRESS, ADDRESS_DETAIL, "
-					+ "ZIPCODE, WORK_DAY, R_LATITUDE, R_LONGITUDE, " + "START_WORK_TIME, END_WORK_TIME, PAY, "
-					+ "GENDER, MILITARY_SERVICE, INTRODUCE, "
-					+ "KAKAO_ID, IS_POST, NAME, RECRUITMENT_NAME, RECRUITMENT_TITLE " + "FROM (SELECT ROWNUM RNUM, P.* "
-					+ "FROM (SELECT RECRUITMENT_ID, RECRUITMENT_IMAGE_SRC, "
-					+ "BUSINESS_TYPE, R.ADDRESS, R.ADDRESS_DETAIL, " + "R.ZIPCODE, WORK_DAY, R_LATITUDE, R_LONGITUDE, "
-					+ "START_WORK_TIME, END_WORK_TIME, PAY, " + "R.GENDER, MILITARY_SERVICE, INTRODUCE, "
-					+ "R.KAKAO_ID, IS_POST, M.NAME, RECRUITMENT_NAME, RECRUITMENT_TITLE " + "FROM RECRUITMENT R "
-					+ "JOIN MEMBER M ON (M.KAKAO_ID = R.KAKAO_ID) " + "WHERE IS_POST != 0 " + "ORDER BY WORK_DAY) P) "
-					+ "WHERE RNUM BETWEEN " + startRow + " AND " + endRow;
-=======
 			query = "SELECT RECRUITMENT_ID, RECRUITMENT_IMAGE_SRC, " + 
 					"BUSINESS_TYPE, ADDRESS, ADDRESS_DETAIL, " + 
 					"ZIPCODE, WORK_DAY, R_LATITUDE, R_LONGITUDE, " + 
@@ -53,11 +41,10 @@ public class RecruitmentDao {
 					"ORDER BY WORK_DAY) P) " + 
 					"WHERE RNUM BETWEEN "+startRow+" AND "+endRow;
 			System.out.println(query);
->>>>>>> refs/heads/master
 			rs = stmt.executeQuery(query);
 			list = new ArrayList<RecruitmentVo>();
 			RecruitmentVo temp = null;
-			while (rs.next()) {
+			while(rs.next()) {
 				temp = new RecruitmentVo();
 				temp.setRecruitment_name(rs.getString("recruitment_name"));
 				temp.setRecruitment_title(rs.getString("recruitment_title"));
@@ -69,29 +56,32 @@ public class RecruitmentDao {
 				temp.setWork_day(rs.getDate("work_day"));
 				list.add(temp);
 			}
-
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(rs);
 			JDBCTemplate.close(stmt);
 		}
-
+		
 		return list;
 	}
 
 	public int selectIndexListTotalCount(Connection con) {
 		int result = -1;
-
+		
 		Statement stmt = null;
 		ResultSet rs = null;
 		String query = "";
-
+		
 		try {
 			stmt = con.createStatement();
-			query = "SELECT COUNT(*) AS LISTCOUNT " + "FROM RECRUITMENT " + "WHERE IS_POST != 0 " + "ORDER BY WORK_DAY";
+			query = "SELECT COUNT(*) AS LISTCOUNT " + 
+					"FROM RECRUITMENT " + 
+					"WHERE IS_POST != 0 " +
+					"ORDER BY WORK_DAY";
 			rs = stmt.executeQuery(query);
-			while (rs.next()) {
+			while(rs.next()) {
 				result = rs.getInt("listCount");
 			}
 		} catch (SQLException e) {
@@ -100,32 +90,21 @@ public class RecruitmentDao {
 			JDBCTemplate.close(rs);
 			JDBCTemplate.close(stmt);
 		}
-
+		
 		return result;
 	}
 
 	public int selectLocalListTotalCount(Connection con, LocalPageInfo lpi) {
 		int result = -1;
-<<<<<<< HEAD
-
-		Statement stmt = null;
-=======
 		double minLatitude = lpi.getMinLatitude();
 		double maxLatitude = lpi.getMaxLatitude();
 		double minLongitude = lpi.getMinLongitude();
 		double maxLongitude = lpi.getMaxLongitude();
 		PreparedStatement pstmt = null;
->>>>>>> refs/heads/master
 		ResultSet rs = null;
 		String query = "";
-
+		
 		try {
-<<<<<<< HEAD
-			stmt = con.createStatement();
-			query = "SELECT COUNT(*) AS LISTCOUNT " + "FROM RECRUITMENT " + "WHERE IS_POST != 0 " + "ORDER BY WORK_DAY";
-			rs = stmt.executeQuery(query);
-			while (rs.next()) {
-=======
 			query = "SELECT COUNT(*) AS LISTCOUNT " + 
 					"FROM RECRUITMENT " + 
 					"WHERE (R_LATITUDE > ? AND R_LATITUDE < ?) " + 
@@ -138,7 +117,6 @@ public class RecruitmentDao {
 			pstmt.setDouble(4, maxLongitude);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
->>>>>>> refs/heads/master
 				result = rs.getInt("listCount");
 			}
 		} catch (SQLException e) {
@@ -241,14 +219,10 @@ public class RecruitmentDao {
 			JDBCTemplate.close(rs);
 			JDBCTemplate.close(stmt);
 		}
-<<<<<<< HEAD
-
-		return result;
-=======
 		
 		return list;
->>>>>>> refs/heads/master
 	}
+
 
 	public ArrayList<RecruitmentVo> selectByDateList(Connection con, String dateStr, int currentPage, int limit) {
 		ArrayList<RecruitmentVo> list = null;

@@ -1,6 +1,7 @@
 package com.what.semi.recruitment.controller.index;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -33,24 +34,11 @@ public class IndexListServlet extends HttpServlet {
 		PageInfo pi = PageTemplate.indexPaging(request, rs);
 		
 		ArrayList<RecruitmentVo> list = rs.loadRecruitmentList(pi.getCurrentPage(), pi.getLimit());
-<<<<<<< HEAD
 		String url = "";
-=======
->>>>>>> refs/heads/master
-		
-<<<<<<< HEAD
-		if(null != list) {
-			url = "views/common/mainPage.jsp";
-			request.setAttribute("list", list);
-			request.setAttribute("pi", pi);
-=======
-		String url = "";
-		
 		if(null != list) {
 				url = "views/common/mainPage.jsp";
 				request.setAttribute("list", list);
 				request.setAttribute("pi", pi);
->>>>>>> refs/heads/master
 		}else {
 			url = "index.jsp";
 			request.setAttribute("msg", "오류");
