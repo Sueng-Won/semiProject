@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.what.semi.common.template.PageInfo;
 import com.what.semi.common.template.PageTemplate;
@@ -34,23 +35,16 @@ public class IndexListServlet extends HttpServlet {
 		
 		ArrayList<RecruitmentVo> list = rs.loadRecruitmentList(pi.getCurrentPage(), pi.getLimit());
 		String url = "";
-		String name = null;
+		
 		
 		//name=(String)request.getAttribute("name");
-		if(request.getParameter("name")!=null) {
-		name=URLDecoder.decode(request.getParameter("name"), "UTF-8");
+		if(request.getAttribute("name")!=null) {
 		}
 		if(null != list) {
-			if(name!=null) {
+				HttpSession session = request.getSession();
 				url = "views/common/mainPage.jsp";
 				request.setAttribute("list", list);
 				request.setAttribute("pi", pi);
-				request.setAttribute("name", name);
-			}else {
-				url = "views/common/mainPage.jsp";
-				request.setAttribute("list", list);
-				request.setAttribute("pi", pi);
-			}
 		}else {
 			url = "index.jsp";
 			request.setAttribute("msg", "오류");

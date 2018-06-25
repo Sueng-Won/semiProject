@@ -1,0 +1,309 @@
+#btn1{
+   position: relative;
+    display: inline-block;
+    width: 53px;
+    height: 24px;
+    line-height: 24px;
+    background: #3f4650;
+    color: #f9fafd;
+    font: bold 12px gulim,"굴림", sans-serif;
+    vertical-align: middle;
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+    cursor: pointer;
+     align-items: flex-start;
+    text-align: center;
+    }
+    
+    .nowMap {
+    height: 42px;
+    border: 1px solid #e3e9f6;
+    border-bottom: none;
+    background: #f9fafd;
+    z-index: 101;
+   }
+    
+    div{
+    padding: 0;
+      margin: 0;
+      display: block;
+    }
+    
+    .nowMap .selArea {
+    float: left;
+   }
+   
+    .selArea button.btnO {
+    position: relative;
+    background: #fff no-repeat 0 -350px;
+   }
+   
+   .selArea button {
+    width: 110px;
+    height: 23px;
+    margin: 9px 0 0 9px;
+    border: 1px solid #c4ccdf;
+    font: 12px gulim,"굴림", sans-serif;
+    color: #494949;
+    text-align: left;
+   }
+    
+    button{
+    overflow: visible;
+    padding: 0;
+    cursor: pointer;
+    align-items: flex-start;
+    box-sizing: border-box;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    -webkit-writing-mode: horizontal-tb !important;
+    -webkit-appearance: button;
+    }
+   
+   :focus {
+    outline: -webkit-focus-ring-color auto 5px;
+   }
+   
+   .nowMap .selArea button span {
+    position: absolute;
+    top: 5px;
+    left: 4px;
+    display: inline-block;
+    height: 12px;
+   }
+   
+   .nowMap .helpLayer {
+    position: absolute;
+    top: 34px;
+    left: 9px;
+    width: 482px;
+    border: 2px solid #667da9;
+    padding: 0;
+    z-index: 105;
+   }
+   
+   .hide {
+    visibility: hidden;
+    display: none !important;
+   }
+   
+   .helpLayer {
+    float: left;
+    margin: auto;
+    background: #ffffff;
+    letter-spacing: -1px;
+    text-align: left;
+   }
+   
+   .helpLayer .popCon {
+    clear: both;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: none;
+   }
+   
+   .nowMap .helpLayer .title {
+    padding: 15px 0 0 15px;
+    font: 11px dotum,"돋움", sans-serif;
+    color: #69788d;
+   }
+   
+   strong{
+    font-weight: bold;
+   }
+   
+   .nowMap .helpLayer .local {
+    overflow: hidden;
+    padding: 13px 0 8px 17px;
+   }
+   
+   .helpLayer ul{
+   list-style: none;
+   margin: 0;
+   display: block;
+   -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+   }
+   
+   .area ul{
+   list-style: none;
+   margin: 0;
+   display: block;
+   -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+   }
+   
+   .nowMap .helpLayer .local li {
+    float: left;
+    width: 50px;
+    height: 18px;
+    padding: 3px 0 3px 0;
+   }
+   
+   li {
+    list-style: none;
+    margin: 0;
+    display: list-item;
+    text-align: -webkit-match-parent;
+   }
+   
+   .nowMap .helpLayer .local li a {
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   a:-webkit-any-link {
+    cursor: pointer;
+   }
+   
+   .nowMap .helpLayer .btns {
+    height: 24px;
+    padding: 11px 0;
+    border-top: 1px solid #e8ecf7;
+    background: #fafbfd;
+    text-align: center;
+   }
+   
+   .nowMap .helpLayer .btns .btnSch {
+    position: relative;
+    display: inline-block;
+    width: 53px;
+    height: 24px;
+    margin: 0 3px;
+    line-height: 23px;
+    border: 1px solid #3f4650;
+    background: #3f4650;
+    color: #f9fafd;
+    font: bold 12px gulim,"굴림", sans-serif;
+    vertical-align: middle;
+   }
+   
+   .nowMap .helpLayer .btns .btnCan {
+    position: relative;
+    display: inline-block;
+    width: 53px;
+    height: 24px;
+    margin: 0 3px;
+    line-height: 23px;
+    border: 1px solid #a2aab3;
+    background: #fff;
+    color: #3f4650;
+    font: normal 12px gulim,"굴림", sans-serif;
+    vertical-align: middle;
+   }
+   
+   .nowMap .helpLayer .popClose {
+    width: 100px;
+    height: 50px;
+    background: no-repeat 0 -300px;
+   }
+   
+   .helpLayer .popClose {
+    width: 75px;
+    height: 23px;
+    background: no-repeat 0 -300px;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+   }
+   
+   .nowMap .helpLayer .popClose button {
+      display: inline-block;
+    width: 60px;
+    height: 25px;
+    line-height: 24px;
+    background: #3f4650;
+    color: #f9fafd;
+    font: bold 12px gulim,"굴림", sans-serif;
+    vertical-align: middle;
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+    cursor: pointer;
+     align-items: flex-start;
+    text-align: center;
+   }
+   .nowMap .selArea button.btnC {
+    position: relative;
+    background: #fff no-repeat -110px -350px;
+   }
+   
+   .nowMap .helpLayer .local li.on a {
+    font-weight: bold;
+    color: #5e77fb;
+   }
+   
+   .skip{
+    overflow: hidden;
+    position: absolute;
+    top: -5000em;
+    visibility: hidden;
+    width: 1px;
+    height: 1px;
+    line-height: 0;
+    font-size: 0;
+   }
+   
+   h3{
+   font-weight: normal;
+   padding: 0;
+    margin: 0;
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+   }
+   
+   .nowMap .helpLayer .area ul {
+    overflow: hidden;
+    padding: 10px 0 8px 17px;
+    border-top: 1px solid #dce0ea;
+   }
+   
+   .nowMap .helpLayer .area ul li {
+    float: left;
+    width: 92px;
+    height: 18px;
+    padding: 3px 0 3px 0;
+   }
+   
+   .nowMap .helpLayer .area ul li a {
+    display: inline-block;
+    height: 12px;
+    padding: 3px;
+   }
+   
+   a:link {
+    color: #494949;
+    text-decoration: none;
+   }
+   
+   .area a{
+   font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .area ul li.on a {
+    color: #fff;
+    background: #5e77fb;
+    display: inline-block;
+    height: 12px;
+    padding: 3px;
+   }
