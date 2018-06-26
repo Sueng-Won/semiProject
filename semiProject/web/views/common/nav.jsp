@@ -7,6 +7,8 @@
 #loginFrm {
 	text-align: center;
 }
+
+
 </style>
 <!-- <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script> -->
 <!-- branch test -->
@@ -21,9 +23,18 @@
 	function loadLocalList() {
 		location.href = "/sp/localList.do";
 	}
+	
+	function logout(){
+		<%
+			session.removeAttribute("id");
+		%>
+		location.href="index.jsp";
+	}
 </script>
+
 <div class="col-lg-3">
-	<h4 class="my-4">
+<br><br>
+<div class="list-group">
 	<%if(id == null){ %>
 		<form id="loginFrm" action="/sp/login.do" method="POST">
 			<table>
@@ -44,9 +55,17 @@
 			</table>
 		</form>
 		<%} else { %>
-			<%=id %>님 환영합니다 새퀴야
+		<table>
+		<tr>
+		<td>
+			<h5 class="text-center"><%=id %>님 환영합니다 새퀴야</h5>
+			<input type="button" size="15" value="로그아웃" class="btn btn-dark btn-sm btn-block" onclick="logout();" />
+		<td>
+		</tr>
+		</table>
 		<%} %>
-	</h4>
+	</div>
+	<br><br>
 	<div class="list-group">
 		<button type="button" class="btn btn-default btn-lg btn-block bg-dark">맞춤알바</button>
 		<!-- 지역 알바로 이동 -->
