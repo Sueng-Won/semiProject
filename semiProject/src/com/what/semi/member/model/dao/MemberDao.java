@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import com.what.semi.common.filter.Sha512;
 import com.what.semi.common.template.JDBCTemplate;
 import com.what.semi.member.model.vo.MemberVo;
-
+//adsf
 public class MemberDao {
 
 	public int checkId(Connection conn, String id) {
