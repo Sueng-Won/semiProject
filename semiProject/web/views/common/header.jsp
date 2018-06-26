@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%
 	String id = (String)session.getAttribute("id");
-	//System.out.println("아이디= "+id);
 %>
 <!DOCTYPE html>
 <html>
@@ -60,7 +59,6 @@
                 <span class="sr-only">(current)</span>
               </a>
             </li>
-           <%} %>
             <li class="nav-item">
               <a class="nav-link" href="/sp/views/member/manageResume.jsp">이력서/업체정보관리</a>
             </li>
@@ -71,8 +69,10 @@
               <a class="nav-link" href="#">근로내역/고용내역</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">회원탈퇴</a>
+              <a class="nav-link" href="/sp/views/member/dropMember.jsp">회원탈퇴</a>
             </li>
+            
+           <%} %>
           </ul>
         </div>
       </div>

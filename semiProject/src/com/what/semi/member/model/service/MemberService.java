@@ -9,14 +9,6 @@ import com.what.semi.member.model.vo.MemberVo;
 
 public class MemberService {
 
-	public int enterUser(String id) {
-		Connection conn = JDBCTemplate.getConnection();
-		System.out.println("service = ["+id+"]");
-		int result = new MemberDao().enterUser(conn, id);
-		JDBCTemplate.close(conn);
-		return result;
-	}
-
 	public int checkId(String id) {
 		Connection conn = JDBCTemplate.getConnection();
 		
@@ -37,6 +29,14 @@ public class MemberService {
 		Connection conn = JDBCTemplate.getConnection();
 		
 		int result = new MemberDao().logIn(conn,id,pw);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int dropMember(String id) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().drop(conn,id);
 		JDBCTemplate.close(conn);
 		return result;
 	}

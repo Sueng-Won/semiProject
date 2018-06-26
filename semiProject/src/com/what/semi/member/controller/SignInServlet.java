@@ -41,7 +41,7 @@ public class SignInServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String address = request.getParameter("address");
 		String address_detail = request.getParameter("addressDetail");
-		int zipcode = Integer.parseInt(request.getParameter("zipcode"));
+		String zipcode = request.getParameter("zipcode");
 		String member_type = request.getParameter("rTypeValue");
 		double latitude = Double.parseDouble(request.getParameter("latitude"));
 		double longitude = Double.parseDouble(request.getParameter("longitude"));
@@ -49,7 +49,7 @@ public class SignInServlet extends HttpServlet {
 		
 		MemberVo member = new MemberVo(id, pw, name, birth, phone, email, address, address_detail, zipcode, member_type, latitude, longitude, gender, 0);
 		
-		//System.out.println(member.toString());
+		System.out.println(member.toString());
 		
 		
 		int result = 0;

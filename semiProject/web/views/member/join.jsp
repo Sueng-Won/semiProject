@@ -4,7 +4,7 @@
 
 <%
 	boolean flag = Boolean.parseBoolean(request.getParameter("flag"));
-	String id = request.getParameter("id");
+	String idv = request.getParameter("id");
 %>
 
 <style>
@@ -136,7 +136,7 @@
 	}
 	
 	$(function(){
-		var id = "<%=id%>";
+		var id = "<%=idv%>";
 		var flag = <%=flag%>;
 		if(id!="null"){
 			if(!flag){

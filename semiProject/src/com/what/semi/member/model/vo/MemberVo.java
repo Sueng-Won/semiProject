@@ -9,7 +9,7 @@ public class MemberVo {
 	private String email;
 	private String address;
 	private String address_detail;
-	private int zipcode;
+	private String zipcode;
 	private String member_type;
 	private double latitude;
 	private double longitude;
@@ -26,7 +26,7 @@ public class MemberVo {
 	}
 	
 	public MemberVo(String id, String pw, String name, String birth, String phone, String email, String address,
-			String address_detail, int zipcode, String member_type, double latitude, double longitude, char gender,
+			String address_detail, String zipcode, String member_type, double latitude, double longitude, char gender,
 			int is_black_list) {
 		super();
 		this.id = id;
@@ -109,11 +109,11 @@ public class MemberVo {
 		this.address_detail = address_detail;
 	}
 
-	public int getZipcode() {
+	public String getZipcode() {
 		return zipcode;
 	}
 
-	public void setZipcode(int zipcode) {
+	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
 

@@ -12,29 +12,6 @@ import com.what.semi.member.model.vo.MemberVo;
 
 public class MemberDao {
 
-	public int enterUser(Connection conn, String id) {
-		int result = -1;
-		PreparedStatement pstmt = null;	//SQL문을 나타내는 객체
-		String query = "";
-		System.out.println("Dao = ["+id+"]");
-		try {
-			query = "INSERT INTO MEMBER VALUES( ? , NULL, NULL,"
-					+ " NULL, NULL, NULL, NULL, NULL, DEFAULT, NULL, NULL, DEFAULT, DEFAULT)";
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, id);
-			result = pstmt.executeUpdate();
-			System.out.println("INSERT 성공");
-		} catch (SQLException e) {
-			System.out.println("INSERT 실패");
-			
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(pstmt);
-		}
-		
-		return result;
-	}
-
 	public int checkId(Connection conn, String id) {
 		int result = 0;
 		PreparedStatement pstmt = null;	//SQL문을 나타내는 객체
@@ -47,7 +24,7 @@ public class MemberDao {
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				if(rs.getString("M_ID")==null) {
+				if(rs.getString("M_ID")!=null) {
 					result = 1;
 				}
 				else {
@@ -86,7 +63,7 @@ public class MemberDao {
 			pstmt.setString(6, mv.getEmail());
 			pstmt.setString(7, mv.getAddress());
 			pstmt.setString(8, mv.getAddress_detail());
-			pstmt.setInt(9, mv.getZipcode());
+			pstmt.setString(9, mv.getZipcode());
 			pstmt.setString(10, mv.getMember_type());
 			pstmt.setDouble(11, mv.getLatitude());
 			pstmt.setDouble(12, mv.getLongitude());
@@ -94,11 +71,17 @@ public class MemberDao {
 			pstmt.setInt(14, mv.getIs_black_list());
 			
 			pstmt.executeUpdate();
-			
+			conn.commit();
 			result = 1;
 			System.out.println("INSERT 성공");
 		} catch (SQLException e) {
 			System.out.println("INSERT 실패");
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				System.out.println("롤백 할 수 없습니다.");
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(conn);
@@ -127,11 +110,49 @@ public class MemberDao {
 					result = 0;
 				}
 			}
-			
+			conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				System.out.println("롤백 할 수 없습니다.");
+				e1.printStackTrace();
+			}
 		} finally {
 			JDBCTemplate.close(rs);
+		}
+		
+		return result;
+	}
+
+	public int drop(Connection conn, String id) {
+		
+		int result = 0;
+		//System.out.println("mv = "+mv.toString());
+		PreparedStatement pstmt = null;	//SQL문을 나타내는 객체
+		String query = "";
+		
+		try {
+			query = "DELETE FROM MEMBER "
+					+ "WHERE M_ID = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+			result = 1;
+			System.out.println("DELETE 성공");
+			conn.commit();
+		} catch (SQLException e) {
+			System.out.println("DELETE 실패");
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				System.out.println("롤백 할 수 없습니다.");
+				e1.printStackTrace();
+			}
+		} finally {
+			JDBCTemplate.close(conn);
 		}
 		
 		return result;

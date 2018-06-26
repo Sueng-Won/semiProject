@@ -25,10 +25,7 @@
 	}
 	
 	function logout(){
-		<%
-			session.removeAttribute("id");
-		%>
-		location.href="index.jsp";
+		location.href="/sp/views/member/logout.jsp";
 	}
 </script>
 
@@ -58,8 +55,8 @@
 		<table>
 		<tr>
 		<td>
-			<h5 class="text-center"><%=id %>님 환영합니다 새퀴야</h5>
-			<input type="button" size="15" value="로그아웃" class="btn btn-dark btn-sm btn-block" onclick="logout();" />
+			<h5 class="text-center"><%=id %>님 환영합니다</h5>
+			<button type="button" class="btn btn-dark btn-sm btn-block" onclick="logout();">로그아웃</button>
 		<td>
 		</tr>
 		</table>
