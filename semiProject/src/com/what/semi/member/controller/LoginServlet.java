@@ -1,9 +1,7 @@
 package com.what.semi.member.controller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

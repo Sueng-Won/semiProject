@@ -2,7 +2,6 @@ package com.what.semi.member.model.service;
 
 import java.sql.Connection;
 
-import com.sun.rowset.JdbcRowSetResourceBundle;
 import com.what.semi.common.template.JDBCTemplate;
 import com.what.semi.member.model.dao.MemberDao;
 import com.what.semi.member.model.vo.MemberVo;
