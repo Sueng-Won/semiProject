@@ -32,4 +32,12 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+
+	public int checkLogin(String id, String pw) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().logIn(conn,id,pw);
+		JDBCTemplate.close(conn);
+		return result;
+	}
 }

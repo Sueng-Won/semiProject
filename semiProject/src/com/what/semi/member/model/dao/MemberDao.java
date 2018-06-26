@@ -37,7 +37,6 @@ public class MemberDao {
 
 	public int checkId(Connection conn, String id) {
 		int result = 0;
-		MemberVo mv = null;
 		PreparedStatement pstmt = null;	//SQL문을 나타내는 객체
 		ResultSet rs = null;
 		String query = "";
@@ -103,6 +102,36 @@ public class MemberDao {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(conn);
+		}
+		
+		return result;
+	}
+
+	public int logIn(Connection conn, String id, String pw) {
+		int result = 0;
+		PreparedStatement pstmt = null;	//SQL문을 나타내는 객체
+		ResultSet rs = null;
+		String query = "";
+		
+		try {
+			query = "SELECT M_ID FROM MEMBER WHERE M_ID = ? AND PW = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				if(rs.getString("M_ID")!=null) {
+					result = 1;
+				}
+				else {
+					result = 0;
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
 		}
 		
 		return result;

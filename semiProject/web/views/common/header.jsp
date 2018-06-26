@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String name = (String)session.getAttribute("name");
-	System.out.println("이름 = "+name);
+	String id = (String)session.getAttribute("id");
+	//System.out.println("아이디= "+id);
 %>
 <!DOCTYPE html>
 <html>
@@ -54,7 +54,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-          <%if(name != null){ %>
+          <%if(id != null){ %>
             <li class="nav-item">
               <a class="nav-link" href="/sp/views/member/join.jsp">개인정보수정
                 <span class="sr-only">(current)</span>
