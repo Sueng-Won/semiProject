@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 			System.out.println(name);
 			System.out.println("결과가 있을경우 호출");
 			session.setAttribute("name", name);
-			response.sendRedirect("index.jsp");;
+			response.sendRedirect("index.jsp");
 			
 		}else {
 			response.sendRedirect("/sp/indexList.do?name="+URLEncoder.encode(name, "UTF-8"));

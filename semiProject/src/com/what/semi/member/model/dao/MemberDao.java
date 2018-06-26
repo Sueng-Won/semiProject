@@ -43,16 +43,19 @@ public class MemberDao {
 		String query = "";
 		
 		try {
-			query = "SELECT ID FROM MEMBER WHERE ID = '?'";
+			query = "SELECT M_ID FROM MEMBER WHERE M_ID = ?";
 			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			
 			while(rs.next()) {
-				mv = new MemberVo();
-				mv.setId(rs.getString("kakao_id"));
-				System.out.println("아이디 조회됨");
-				result = 1;
+				if(rs.getString("M_ID")==null) {
+					result = 1;
+				}
+				else {
+					result = 0;
+				}
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/views/common/header.jsp" %>
+
+<%
+	boolean flag = Boolean.parseBoolean(request.getParameter("flag"));
+	String id = request.getParameter("id");
+%>
+
 <style>
 	label{
 		color: white;
@@ -9,6 +15,7 @@
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript" src="/sp/vendor/bootstrap/datepicker/bootstrap-datepicker.js"></script>
 <link rel="stylesheet" type="text/css" href="/sp/vendor/bootstrap/datepicker/bootstrap-datepicker.css"/>
+
 
 <script type="text/javascript">
 	
@@ -121,6 +128,31 @@
 		$("#joinForm").submit();
 	}
 	
+	function checkId(){
+		var id = $("#id").val();
+		location.href="/sp/checkId.do?id="+id;
+		
+		
+	}
+	
+	$(function(){
+		var id = "<%=id%>";
+		var flag = <%=flag%>;
+		if(id!="null"){
+			if(!flag){
+				alert("중복된 아이디 입니다.");
+				$("#id").val("");
+			}
+			else{
+				alert("사용할 수 있는 아이디 입니다.");
+				$("#id").val(id);
+			}
+		}
+		else{
+			
+		}
+	})
+	
 </script>
 
     <!-- Page Content -->
@@ -164,8 +196,11 @@
 			    <div class="input-group">
 			    
 			    	<!-- 사용자 아이디 -->
-			      <input type="text" class="form-control mb-1" name="id" placeholder="아이디"/>
-			      
+			      <input type="text" class="form-control mb-1" name="id" id="id" placeholder="아이디"/>
+			      <input type="hidden" name="idHd" value=""/>
+			      <span class="input-group-btn">
+			        <button class="btn btn-light text-dark ml-1" type="button" onclick="checkId();">중복 확인</button>
+			      </span>
 			    </div>
 			    
 			    <div class="input-group">

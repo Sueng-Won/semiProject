@@ -17,6 +17,7 @@
     <!-- Bootstrap core CSS -->
     <link href="/sp/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/sp/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    
    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=154d504288d7ddddd16f6867efe451af&libraries=services,clusterer,drawing"></script>
 
     <!-- Custom styles for this template -->
