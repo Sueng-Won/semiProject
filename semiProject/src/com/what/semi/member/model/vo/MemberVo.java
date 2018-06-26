@@ -157,7 +157,15 @@ public class MemberVo {
 		this.is_black_list = is_black_list;
 	}
 
+	@Override
+	public String toString() {
+		return "MemberVo [id=" + id + ", pw=" + pw + ", name=" + name + ", birth=" + birth + ", phone=" + phone
+				+ ", email=" + email + ", address=" + address + ", address_detail=" + address_detail + ", zipcode="
+				+ zipcode + ", member_type=" + member_type + ", latitude=" + latitude + ", longitude=" + longitude
+				+ ", gender=" + gender + ", is_black_list=" + is_black_list + "]";
+	}
 
+	
 	
 	
 }

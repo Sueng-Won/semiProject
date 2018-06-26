@@ -53,11 +53,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
+          <%if(name != null){ %>
             <li class="nav-item">
               <a class="nav-link" href="/sp/views/member/join.jsp">개인정보수정
                 <span class="sr-only">(current)</span>
               </a>
             </li>
+           <%} %>
             <li class="nav-item">
               <a class="nav-link" href="/sp/views/member/manageResume.jsp">이력서/업체정보관리</a>
             </li>

@@ -1,9 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/views/common/header.jsp" %>
+<style>
+	label{
+		color: white;
+	}
+</style>
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript" src="/sp/vendor/bootstrap/datepicker/bootstrap-datepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="/sp/vendor/bootstrap/datepicker/bootstrap-datepicker.css"/>
 
 <script type="text/javascript">
+	
 	function memberJoin() {
 		$("#joinForm").submit();
 	}
@@ -109,7 +117,9 @@
 		
 	}
 	
-	
+	function signIn(){
+		$("#joinForm").submit();
+	}
 	
 </script>
 
@@ -126,18 +136,45 @@
 			  <br><br>
         		<h3 align="center" class="text-white-50">회원가입</h3>
         		<br>
-			  <form id="joinForm" method="post" action="">
+			  <form id="joinForm" method="post" action="/sp/signIn.do">
 			  <div class="btn-group mt-3">
 			    	<button type="button" id="tBtn" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 				    	<span class="caret">회원타입</span>
 					</button>
 			    	<input type="hidden" name="rTypeValue" id="rTypeValue">
 					  <ul class="dropdown-menu bg-dark" role="menu">
-					    <li><button type="button" onclick="typeSelect(this);" name="js" class="btn btn-dark btn-sm btn-block" value="js">구직자</button></li>
-					    <li><button type="button" onclick="typeSelect(this);" name="bo" class="btn btn-dark btn-sm btn-block" value="bo">업주</button></li>
+					    <li><button type="button" onclick="typeSelect(this);" name="js" class="btn btn-dark btn-sm btn-block" value="JS">구직자</button></li>
+					    <li><button type="button" onclick="typeSelect(this);" name="bo" class="btn btn-dark btn-sm btn-block" value="BO">업주</button></li>
 					    <li class="divider"></li>
 					  </ul>
+					  
+			    <div class="input-group">
+				    	<!-- 사용자 성별 -->
+				    	<div class="btn-group mb-1 btn-group-toggle" data-toggle="buttons">
+	  						<label class="btn btn-secondary active">
+	    					<input type="radio" name="gender" value="M" autocomplete="off" checked>남
+	  						</label>
+	  						<label class="btn btn-secondary">
+	    					<input type="radio" name="gender" value="F" autocomplete="off">여
+	  						</label>
+						</div>
 			    </div>
+			    </div>
+			   
+			    <div class="input-group">
+			    
+			    	<!-- 사용자 아이디 -->
+			      <input type="text" class="form-control mb-1" name="id" placeholder="아이디"/>
+			      
+			    </div>
+			    
+			    <div class="input-group">
+			    
+			    	<!-- 사용자 비밀번호 -->
+			      <input type="password" class="form-control mb-1" name="pw" placeholder="비밀번호"/>
+			      
+			    </div>
+			    
 			    <div class="input-group">
 			    
 			    	<!-- 사용자 이름 -->
@@ -149,11 +186,14 @@
 			    	<!-- 사용자 이메일 -->
 			      <input type="email" class="form-control mb-1" name="email" placeholder="email"/>
 			    </div>
+			    <div class="input-group">
+			    	<!-- 사용자 생년월일 -->
+			    	<input type="date" class="form-control mb-1" name="birth" placeholder="생년월일"/>
+			    </div>
 			    
 			    <div class="input-group">
 			    	<!-- 사용자 전화번호 -->
-			      <input type="text" class="form-control mb-1" name="phone" placeholder="전화번호"/>
-			      
+			    	<input type="text" class="form-control mb-1" name="phone" placeholder="휴대폰번호(-를 빼고 입력하세요)"/>
 			    </div>
 			    
 			    <div class="input-group">
@@ -172,7 +212,7 @@
 			    	<!-- 상세주소 입력 -->
 			      <input type="text" class="form-control mb-1" name="addressDetail" id="addressDetail" placeholder="상세주소"/>
 			    </div>
-			    <input type="button" class="btn btn-dark btn-sm btn-block" value="회원가입"/>
+			    <input type="button" class="btn btn-dark btn-sm btn-block" value="회원가입" onclick="signIn();"/>
 			  </form>
 			    
 			  </div><!-- /.col-lg-6 -->
@@ -190,7 +230,7 @@
 		var text = $(obj).text();
 		var value = $(obj).val();
 		$("#tBtn").text(text);
-		$("#typeValue").val(value);
+		$("#rTypeValue").val(value);
 	}
 </script>
 <%@include file="/views/common/footer.jsp"%>

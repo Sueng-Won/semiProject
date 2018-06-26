@@ -3,6 +3,7 @@ package com.what.semi.common.template;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.what.semi.member.model.service.MemberService;
 import com.what.semi.recruitment.model.service.RecruitmentService;
 
 
@@ -81,4 +82,5 @@ public class PageTemplate {
 		return pi;
 		
 	}
+
 }
