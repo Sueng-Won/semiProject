@@ -55,7 +55,7 @@
           <ul class="navbar-nav ml-auto">
           <%if(id != null){ %>
             <li class="nav-item">
-              <a class="nav-link" href="/sp/views/member/join.jsp">개인정보수정
+              <a class="nav-link" href="/sp/views/member/pwCheck.jsp">개인정보수정
                 <span class="sr-only">(current)</span>
               </a>
             </li>
