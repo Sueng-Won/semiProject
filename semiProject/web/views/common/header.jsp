@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String name = (String)session.getAttribute("name");
-	System.out.println("이름 = "+name);
+	String id = (String)session.getAttribute("id");
 %>
 <!DOCTYPE html>
 <html>
@@ -17,6 +16,7 @@
     <!-- Bootstrap core CSS -->
     <link href="/sp/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/sp/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    
    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=154d504288d7ddddd16f6867efe451af&libraries=services,clusterer,drawing"></script>
 
     <!-- Custom styles for this template -->
@@ -55,6 +55,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
+          <%if(id != null){ %>
             <li class="nav-item">
               <a class="nav-link" href="/sp/views/member/join.jsp">개인정보수정
                 <span class="sr-only">(current)</span>
@@ -70,8 +71,10 @@
               <a class="nav-link" href="#">근로내역/고용내역</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">회원탈퇴</a>
+              <a class="nav-link" href="/sp/views/member/dropMember.jsp">회원탈퇴</a>
             </li>
+            
+           <%} %>
           </ul>
         </div>
       </div>
