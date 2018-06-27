@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.what.semi.common.template.JDBCTemplate;
+
 import com.what.semi.common.filter.Sha512;
 import com.what.semi.member.model.service.MemberService;
 
@@ -30,11 +32,11 @@ public class LoginServlet extends HttpServlet {
 		//System.out.println("login pw = "+pw);
 		int result = 0;
 		
-		result = new MemberService().checkLogin(id,pw);
+		result = new MemberService().checkId(id);
 		
-		/*if(0 > result) {
+		if(0 > result) {
 			result = new MemberService().enterUser(id);
-		}*/
+		}
 		HttpSession session = request.getSession();
 		
 		
@@ -48,9 +50,6 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect("index.jsp");
 			//System.out.println("결과가 없을경우 호출");
 		}
-
-		
-		
 	}
 
 }
