@@ -41,7 +41,7 @@ public class RecruitmentDao {
 					"WHERE IS_POST != 0 " + 
 					"ORDER BY WORK_DAY) P) " + 
 					"WHERE RNUM BETWEEN "+startRow+" AND "+endRow;
-			System.out.println(query);
+			//System.out.println(query);
 			rs = stmt.executeQuery(query);
 			list = new ArrayList<RecruitmentVo>();
 			RecruitmentVo temp = null;

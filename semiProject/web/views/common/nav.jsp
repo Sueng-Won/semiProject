@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-    
 <style>
 .btn {
 	color: white;
@@ -8,6 +7,8 @@
 #loginFrm {
 	text-align: center;
 }
+
+
 </style>
 <!-- <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script> -->
 <!-- branch test -->
@@ -22,24 +23,46 @@
 	function loadLocalList() {
 		location.href = "/sp/localList.do";
 	}
+	
+	function logout(){
+		location.href="/sp/views/member/logout.jsp";
+	}
 </script>
+
 <div class="col-lg-3">
-	<h4 class="my-4">
+<br><br>
+<div class="list-group">
+	<%if(id == null){ %>
 		<form id="loginFrm" action="/sp/login.do" method="POST">
 			<table>
+				
 				<tr>
 					<td>
 						<input type="text" class="form-control mb-1" name="id" placeholder="아이디" /> 
-						<input type="password" class="form-control mb-1" name="pwd" placeholder="비밀번호" />
+						<input type="password" class="form-control mb-1" name="pw" placeholder="비밀번호" />
 					</td>
 					<td>
 						<input type="button" size="15" value="로그인" class="btn btn-dark btn-sm btn-block" onclick="login();" /> 
 						<input type="button" size="15" value="회원가입" class="btn btn-dark btn-sm btn-block" onclick="join();" />
 					</td>
 				</tr>
+				
+					
+				
 			</table>
 		</form>
-	</h4>
+		<%} else { %>
+		<table>
+		<tr>
+		<td>
+			<h5 class="text-center"><%=id %>님 환영합니다</h5>
+			<button type="button" class="btn btn-dark btn-sm btn-block" onclick="logout();">로그아웃</button>
+		<td>
+		</tr>
+		</table>
+		<%} %>
+	</div>
+	<br><br>
 	<div class="list-group">
 		<button type="button" class="btn btn-default btn-lg btn-block bg-dark">맞춤알바</button>
 		<!-- 지역 알바로 이동 -->
