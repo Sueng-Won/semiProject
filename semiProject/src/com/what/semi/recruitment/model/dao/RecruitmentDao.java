@@ -300,8 +300,8 @@ public class RecruitmentDao {
 			pstmt.setDate(7, rec.getWork_day());
 			pstmt.setDouble(8, rec.getR_latitude());
 			pstmt.setDouble(9, rec.getR_longitude());
-			pstmt.setDate(10,rec.getStart_work_time());
-			pstmt.setDate(11,rec.getEnd_work_time());
+			pstmt.setString(10,rec.getStart_work_time());
+			pstmt.setString(11,rec.getEnd_work_time());
 			pstmt.setInt(12, rec.getPay());
 			pstmt.setString(13,String.valueOf(rec.getGender()));
 			pstmt.setInt(14, rec.getMilitary_service());
