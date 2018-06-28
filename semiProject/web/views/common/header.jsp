@@ -23,12 +23,11 @@
     <link href="/sp/css/shop-homepage.css" rel="stylesheet">
 	
     <link href="/sp/css/daum.css" rel="stylesheet">
-     <script src="/sp/vendor/jquery/jquery.min.js"></script>
+    <script src="/sp/vendor/jquery/jquery.min.js"></script>
 	<script type="text/javascript">
 		function loadLocalList() {
 			location.href = "/sp/localList.do";
 		}
-	
 		
 		//추후 회원의 구인게시물/이력서를 불러올 function - 회원정보를 parameter로 설정해야함
 		function loadMyList() {
@@ -39,10 +38,7 @@
 		function updateMyInfo() {
 			location.href = "/sp/views/recruitment/recruitmentForm.jsp"
 		}
-		//Q&A 게시판
-	      function qnaNew(){
-	          window.open("/sp/views/qna/qnaNew.jsp","_blank","width=600, height=700, left=auto,top=auto");
-	       };
+		
 	</script>
   </head>
 
@@ -67,7 +63,7 @@
               <a class="nav-link" href="/sp/views/member/manageResume.jsp">이력서/업체정보관리</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link btn" style="text-align: left;" onclick="qnaNew();">Q&A</a>
+              <a class="nav-link" href="/sp/views/qna/myQna.jsp">Q&A</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">근로내역/고용내역</a>

@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <style>
 .btn {
@@ -8,6 +7,8 @@
 #loginFrm {
 	text-align: center;
 }
+
+
 </style>
 <!-- <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script> -->
 <!-- branch test -->
@@ -15,27 +16,26 @@
 	function login() {
 		$("#loginFrm").submit();
 	}
-
+	
 	function join() {
 		location.href = "/sp/views/member/join.jsp";
 	}
 	function loadLocalList() {
 		location.href = "/sp/localList.do";
 	}
-	function searchByDateList() {
-		location.href = "/sp/byDateList.do";
-	}
 	
 	function logout(){
 		location.href="/sp/views/member/logout.jsp";
 	}
 </script>
+
 <div class="col-lg-3">
 <br><br>
 <div class="list-group">
 	<%if(id == null){ %>
 		<form id="loginFrm" action="/sp/login.do" method="POST">
 			<table>
+				
 				<tr>
 					<td>
 						<input type="text" class="form-control mb-1" name="id" placeholder="아이디" /> 
@@ -46,6 +46,9 @@
 						<input type="button" size="15" value="회원가입" class="btn btn-dark btn-sm btn-block" onclick="join();" />
 					</td>
 				</tr>
+				
+					
+				
 			</table>
 		</form>
 		<%} else { %>
@@ -66,10 +69,9 @@
 		<button type="button" onclick="loadLocalList();"
 			class="btn btn-lg btn-block bg-dark">지역알바</button>
 
+		
 
-
-		<button type="button" onclick="searchByDateList();"
-			class="btn btn-lg btn-block btn-dark">일별알바</button>
+		<button type="button" class="btn btn-lg btn-block btn-dark">일별알바</button>
 		<button type="button" class="btn btn-lg btn-block btn-dark">구직자정보</button>
 	</div>
 </div>

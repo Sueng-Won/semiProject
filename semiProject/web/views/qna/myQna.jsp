@@ -4,7 +4,6 @@
 
 <html>
 <head>
-   
 <meta charset="UTF-8">
 <title>나의 문의내역</title>
    <link href="/sp/css/shop-homepage.css" rel="stylesheet">

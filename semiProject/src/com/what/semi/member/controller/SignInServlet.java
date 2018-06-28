@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.what.semi.common.template.PageInfo;
+import com.what.semi.common.template.PageTemplate;
 import com.what.semi.member.model.service.MemberService;
 import com.what.semi.member.model.vo.MemberVo;
 
