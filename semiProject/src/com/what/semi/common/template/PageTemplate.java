@@ -1,11 +1,8 @@
 package com.what.semi.common.template;
 
 import javax.servlet.http.HttpServletRequest;
-<<<<<<< HEAD
-=======
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
->>>>>>> refs/heads/jaejun
 
 import com.what.semi.recruitment.model.service.RecruitmentService;
 
