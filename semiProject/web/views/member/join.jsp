@@ -6,7 +6,7 @@
 	boolean flag = Boolean.parseBoolean(request.getParameter("flag"));
 	String idv = request.getParameter("id");
 %>
-
+<!-- master brench 생성 -->
 <style>
 	label{
 		color: white;
@@ -20,7 +20,18 @@
 <script type="text/javascript">
 	
 	function memberJoin() {
-		$("#joinForm").submit();
+		var okFlag = false;
+		if($("#id").val() == ""){
+	        alert("아이디 입력바람");
+	        $("#id").focus();
+	        return false;
+	      }
+		else{
+			okFlag = true;
+		}
+		if(okFlag){
+			$("#joinForm").submit();
+		}
 	}
 	
 	function validate() {
