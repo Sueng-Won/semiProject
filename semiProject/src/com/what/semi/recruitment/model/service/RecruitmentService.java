@@ -71,5 +71,14 @@ public ArrayList<Double> userSpot(String userId) {
 
 		return ListCount;
 	}
+	public int writeRecruitment(RecruitmentVo rec) {
+		Connection con = JDBCTemplate.getConnection();
 
+		int result = new RecruitmentDao().insertRecruitment(con, rec);
+
+		JDBCTemplate.close(con);
+
+		return result;
+	}
+	
 }
