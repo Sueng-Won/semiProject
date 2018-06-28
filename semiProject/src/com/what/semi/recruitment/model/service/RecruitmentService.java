@@ -72,9 +72,5 @@ public class RecruitmentService {
 
 		return result;
 	}
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> branch 'master' of https://github.com/Sueng-Won/semiProject.git
 }

@@ -39,18 +39,10 @@
 		function updateMyInfo() {
 			location.href = "/sp/views/recruitment/recruitmentForm.jsp"
 		}
-<<<<<<< HEAD
 		//Q&A 게시판
 	      function qnaNew(){
 	          window.open("/sp/views/qna/qnaNew.jsp","_blank","width=600, height=700, left=auto,top=auto");
 	       };
-=======
-		
-		//Q&A 게시판
-		function qnaNew(){
-    		window.open("/sp/views/qna/qnaNew.jsp","_blank","width=600, height=700, left=auto,top=auto");
-    	};
->>>>>>> branch 'master' of https://github.com/Sueng-Won/semiProject.git
 	</script>
   </head>
 
