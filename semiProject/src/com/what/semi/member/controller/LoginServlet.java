@@ -33,10 +33,7 @@ public class LoginServlet extends HttpServlet {
 		int result = 0;
 		
 		result = new MemberService().checkId(id);
-		
-/*		if(0 > result) {
-			result = new MemberService().enterUser(id);
-		}*/
+
 		HttpSession session = request.getSession();
 		
 		
