@@ -86,15 +86,17 @@ public class WriteRecruitmentServlet extends HttpServlet {
 		case "10년 이상":career=10; break;
 		}*/
 		java.sql.Date workdate=null;
+		java.sql.Date starttime=null;
+		java.sql.Date endtime=null;
 		
 		try {
 			workdate = new java.sql.Date(((Date)df.parse(mRequest.getParameter("workdate"))).getTime());
+			starttime = new java.sql.Date(((Date)df.parse(mRequest.getParameter("starttime"))).getTime());
+			endtime = new java.sql.Date(((Date)df.parse(mRequest.getParameter("endtime"))).getTime());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String starttime=mRequest.getParameter("starttime");
-		String endtime=mRequest.getParameter("endtime");
 		int pay = Integer.parseInt(mRequest.getParameter("pay"));
 		int m=-1;
 		String mValue = mRequest.getParameter("mValue");
