@@ -39,11 +39,10 @@
 		function updateMyInfo() {
 			location.href = "/sp/views/recruitment/recruitmentForm.jsp"
 		}
-		
 		//Q&A 게시판
-		function qnaNew(){
-    		window.open("/sp/views/qna/qnaNew.jsp","_blank","width=600, height=700, left=auto,top=auto");
-    	};
+	      function qnaNew(){
+	          window.open("/sp/views/qna/qnaNew.jsp","_blank","width=600, height=700, left=auto,top=auto");
+	       };
 	</script>
   </head>
 
