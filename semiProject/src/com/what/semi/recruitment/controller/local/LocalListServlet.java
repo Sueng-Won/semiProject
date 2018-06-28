@@ -28,14 +28,11 @@ public class LocalListServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		RecruitmentService rs = new RecruitmentService();	//DAO에 접근할 서비스 객체 생성
 		PageInfo pi = null;
 		
 		String userId = null;								//request로부터 회원 아이디를 받아올 변수선언
 		ArrayList<Double> userSpot = null;					//DAO를 통해 받아온 유저의 위경도를 저장할 ArrayList
-		double userRatitude = 0;					//파싱한 위도를 저장할 변수 선언
-		double userLogitude = 0;					//파싱한 경도를 저장할 변수 선언
 		
 		int mapLevel = 4;
 		

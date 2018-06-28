@@ -38,7 +38,10 @@
 		function updateMyInfo() {
 			location.href = "/sp/views/recruitment/recruitmentForm.jsp"
 		}
-		
+		//Q&A 게시판
+	      function qnaNew(){
+	          window.open("/sp/views/qna/qnaNew.jsp","_blank","width=600, height=700, left=auto,top=auto");
+	       };
 	</script>
   </head>
 
@@ -63,7 +66,7 @@
               <a class="nav-link" href="/sp/views/member/manageResume.jsp">이력서/업체정보관리</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/sp/views/qna/qnaList.jsp">Q&A</a>
+              <a class="nav-link btn" style="text-align: left;" onclick="qnaNew();">Q&A</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">근로내역/고용내역</a>
