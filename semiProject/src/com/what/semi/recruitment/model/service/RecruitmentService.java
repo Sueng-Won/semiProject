@@ -3,6 +3,8 @@ package com.what.semi.recruitment.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import com.what.semi.common.template.JDBCTemplate;
 import com.what.semi.common.template.LocalPageInfo;
 import com.what.semi.recruitment.model.dao.RecruitmentDao;
@@ -45,6 +47,7 @@ public class RecruitmentService {
 		return ListCount;
 	}
 
+<<<<<<< HEAD
 	public ArrayList<RecruitmentVo> selectByDateList(String dateStr, int currentPage, int limit) {
 		Connection con = JDBCTemplate.getConnection();
 		ArrayList<RecruitmentVo> list = new RecruitmentDao().selectByDateList(con, dateStr, currentPage, limit);
@@ -53,15 +56,18 @@ public class RecruitmentService {
 	}
 
 public ArrayList<Double> userSpot(String userId) {
+=======
+	public String getDefaultResume(String id) {
+>>>>>>> refs/heads/jaejun
 		Connection con = JDBCTemplate.getConnection();
 		
-		ArrayList<Double> spot = new RecruitmentDao().userSpot(con, userId);
+		String resume = new RecruitmentDao().getDefaultResume(con, id);
 		
 		JDBCTemplate.close(con);
-		
-		return spot;
+		return resume;
 	}
 
+<<<<<<< HEAD
 	public int byDateListTotalCount(String dateStr) {
 		Connection con = JDBCTemplate.getConnection();
 
@@ -81,4 +87,7 @@ public ArrayList<Double> userSpot(String userId) {
 		return result;
 	}
 	
+=======
+
+>>>>>>> refs/heads/jaejun
 }

@@ -1,6 +1,11 @@
 package com.what.semi.common.template;
 
 import javax.servlet.http.HttpServletRequest;
+<<<<<<< HEAD
+=======
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+>>>>>>> refs/heads/jaejun
 
 import com.what.semi.recruitment.model.service.RecruitmentService;
 
@@ -79,6 +84,7 @@ public class PageTemplate {
 		PageInfo pi = new PageInfo(currentPage, limit, maxPage, startPage, endPage, listCount);		
 		return pi;
 		
+<<<<<<< HEAD
 	}
 	
 	public static PageInfo byDatePaging(HttpServletRequest request,RecruitmentService rs,String dateStr) {
@@ -115,4 +121,11 @@ public class PageTemplate {
 		return pi;
 		
 	}
+=======
+	}
+
+
+	
+
+>>>>>>> refs/heads/jaejun
 }
