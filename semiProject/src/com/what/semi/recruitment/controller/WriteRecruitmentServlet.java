@@ -105,7 +105,7 @@ public class WriteRecruitmentServlet extends HttpServlet {
 		switch(mValue){
 		case "y":m=1; break;
 		case "n":m=0; break;
-		case "x":m=-1; break;
+		case "x":m=2; break;
 		}
 		char gValue =mRequest.getParameter("gValue").charAt(0);
 		String title = mRequest.getParameter("title");
