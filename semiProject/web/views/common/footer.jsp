@@ -9,7 +9,7 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-   <!--  <script src="/sp/vendor/jquery/jquery.min.js"></script> -->
+    
     <script src="/sp/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   </body>

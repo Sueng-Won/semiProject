@@ -1,6 +1,7 @@
 package com.what.semi.recruitment.controller.index;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.what.semi.common.template.PageInfo;
 import com.what.semi.common.template.PageTemplate;
@@ -32,7 +34,9 @@ public class IndexListServlet extends HttpServlet {
 		PageInfo pi = PageTemplate.indexPaging(request, rs);
 		
 		ArrayList<RecruitmentVo> list = rs.loadRecruitmentList(pi.getCurrentPage(), pi.getLimit());
+		
 		String url = "";
+		
 		if(null != list) {
 				url = "views/common/mainPage.jsp";
 				request.setAttribute("list", list);
@@ -45,4 +49,11 @@ public class IndexListServlet extends HttpServlet {
 		view.forward(request, response);
 	}
 
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		super.doPost(req, resp);
+	}
+
+	
 }

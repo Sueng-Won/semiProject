@@ -7,12 +7,10 @@ public class RecruitmentVo {
 	private String recruitment_image_src;	//업체이미지
 	private String recruitment_title;		//게시물 이름
 	private String recruitment_name;		//업체명
-	private String recruitment_phone;		//업체연락처
-	private String recruitment_email;		//업체이메일
 	private String business_type;			//업종
 	private String address;					//주소
 	private String address_detail;			//상세주소
-	private String zipcode;					//우편번호
+	private int zipcode;					//우편번호
 	private double r_latitude;				//위도
 	private double r_longitude;				//경도
 	private Date work_day;					//근무일
@@ -26,23 +24,16 @@ public class RecruitmentVo {
 	private int is_post;					//게시여부
 	private String name;					//업주명
 	private String phone;					//업주연락처
-	
-	
 	public RecruitmentVo() {
 	}
 
-	public RecruitmentVo(String recruitment_id, String recruitment_image_src, String recruitment_title,
-			String recruitment_name, String recruitment_phone, String recruitment_email, String business_type,
-			String address, String address_detail, String zipcode, double r_latitude, double r_longitude, Date work_day,
-			Date start_work_time, Date end_work_time, int pay, char gender, int military_service, String introduce,
+	public RecruitmentVo(String recruitment_id, String recruitment_image_src, String business_type, String address,
+			String address_detail, int zipcode, double r_latitude, double r_longitude, Date work_day,
+			Date start_work_time, Date end_work_time, int pay, char gender, int military_service, String inroduce,
 			String m_id, int is_post, String name, String phone) {
 		super();
 		this.recruitment_id = recruitment_id;
 		this.recruitment_image_src = recruitment_image_src;
-		this.recruitment_title = recruitment_title;
-		this.recruitment_name = recruitment_name;
-		this.recruitment_phone = recruitment_phone;
-		this.recruitment_email = recruitment_email;
 		this.business_type = business_type;
 		this.address = address;
 		this.address_detail = address_detail;
@@ -55,7 +46,7 @@ public class RecruitmentVo {
 		this.pay = pay;
 		this.gender = gender;
 		this.military_service = military_service;
-		this.introduce = introduce;
+		this.introduce = inroduce;
 		this.m_id = m_id;
 		this.is_post = is_post;
 		this.name = name;
@@ -102,6 +93,13 @@ public class RecruitmentVo {
 		this.address_detail = address_detail;
 	}
 
+	public int getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(int zipcode) {
+		this.zipcode = zipcode;
+	}
 
 	public double getR_latitude() {
 		return r_latitude;
@@ -127,35 +125,21 @@ public class RecruitmentVo {
 		this.work_day = work_day;
 	}
 
-
-
 	public Date getStart_work_time() {
 		return start_work_time;
 	}
-
-
-
 
 	public void setStart_work_time(Date start_work_time) {
 		this.start_work_time = start_work_time;
 	}
 
-
-
-
 	public Date getEnd_work_time() {
 		return end_work_time;
 	}
 
-
-
-
 	public void setEnd_work_time(Date end_work_time) {
 		this.end_work_time = end_work_time;
 	}
-
-
-
 
 	public int getPay() {
 		return pay;
@@ -181,6 +165,21 @@ public class RecruitmentVo {
 		this.military_service = military_service;
 	}
 
+	public String getInroduce() {
+		return introduce;
+	}
+
+	public void setInroduce(String inroduce) {
+		this.introduce = inroduce;
+	}
+
+	public String getm_id() {
+		return m_id;
+	}
+
+	public void setm_id(String m_id) {
+		this.m_id = m_id;
+	}
 
 	public int getIs_post() {
 		return is_post;
@@ -224,69 +223,19 @@ public class RecruitmentVo {
 		this.recruitment_name = recruitment_name;
 	}
 
-
-	public String getRecruitment_phone() {
-		return recruitment_phone;
-	}
-
-
-	public void setRecruitment_phone(String recruitment_phone) {
-		this.recruitment_phone = recruitment_phone;
-	}
-
-
-	public String getRecruitment_email() {
-		return recruitment_email;
-	}
-
-
-	public void setRecruitment_email(String recruitment_email) {
-		this.recruitment_email = recruitment_email;
-	}
-
-
-	public String getZipcode() {
-		return zipcode;
-	}
-
-
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
-	}
-
-
-	public String getIntroduce() {
-		return introduce;
-	}
-
-
-	public void setIntroduce(String introduce) {
-		this.introduce = introduce;
-	}
-
-
-	public String getM_id() {
-		return m_id;
-	}
-
-
-	public void setM_id(String m_id) {
-		this.m_id = m_id;
-	}
-
-
 	@Override
 	public String toString() {
 		return "RecruitmentVo [recruitment_id=" + recruitment_id + ", recruitment_image_src=" + recruitment_image_src
 				+ ", recruitment_title=" + recruitment_title + ", recruitment_name=" + recruitment_name
-				+ ", recruitment_phone=" + recruitment_phone + ", recruitment_email=" + recruitment_email
 				+ ", business_type=" + business_type + ", address=" + address + ", address_detail=" + address_detail
 				+ ", zipcode=" + zipcode + ", r_latitude=" + r_latitude + ", r_longitude=" + r_longitude + ", work_day="
 				+ work_day + ", start_work_time=" + start_work_time + ", end_work_time=" + end_work_time + ", pay="
-				+ pay + ", gender=" + gender + ", military_service=" + military_service + ", introduce=" + introduce
+				+ pay + ", gender=" + gender + ", military_service=" + military_service + ", inroduce=" + introduce
 				+ ", m_id=" + m_id + ", is_post=" + is_post + ", name=" + name + ", phone=" + phone + "]";
 	}
-
+	
+	
+	
 	
 	
 }

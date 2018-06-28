@@ -15,7 +15,6 @@ public class MemberVo {
 	private double longitude;
 	private char gender;
 	private int is_black_list;
-
 	
 	public MemberVo(){
 		
