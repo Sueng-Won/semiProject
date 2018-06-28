@@ -3,6 +3,8 @@ package com.what.semi.recruitment.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import com.what.semi.common.template.JDBCTemplate;
 import com.what.semi.common.template.LocalPageInfo;
 import com.what.semi.recruitment.model.dao.RecruitmentDao;
@@ -46,17 +48,14 @@ public class RecruitmentService {
 		return ListCount;
 	}
 
-	public ArrayList<Double> userSpot(String userId) {
+	public String getDefaultResume(String id) {
 		Connection con = JDBCTemplate.getConnection();
 		
-		ArrayList<Double> spot = new RecruitmentDao().userSpot(con, userId);
+		String resume = new RecruitmentDao().getDefaultResume(con, id);
 		
 		JDBCTemplate.close(con);
-		
-		return spot;
+		return resume;
 	}
-	
-
 
 
 }

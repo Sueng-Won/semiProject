@@ -130,34 +130,6 @@ public class RecruitmentDao {
 		return result;
 	}
 
-	public ArrayList<Double> userSpot(Connection con, String userId) {
-		ArrayList<Double> spot = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String query;
-		
-		query = "SELECT R_LATITUDE, R_LONGITUDE " + 
-				"FROM RECRUITMENT R " + 
-				"JOIN MEMBER M ON (R.M_ID = M.M_ID) " + 
-				"WHERE R.M_ID = '?'";
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, userId);
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				spot = new ArrayList<Double>();
-				spot.add(rs.getDouble("r_latitude"));
-				spot.add(rs.getDouble("r_longitude"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rs);
-			JDBCTemplate.close(pstmt);
-		}
-		
-		return spot;
-	}
 
 	public ArrayList<RecruitmentVo> loadLocalRecruitmentList(Connection con, int currentPage, int limit,
 			LocalPageInfo lpi) {
@@ -223,6 +195,7 @@ public class RecruitmentDao {
 		
 		return list;
 	}
+
 
 	
 
