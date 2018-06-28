@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/views/common/header.jsp" %>
-
+<!-- 병합이 하고싶어요 -->
 <%
 	boolean flag = Boolean.parseBoolean(request.getParameter("flag"));
 	String idv = request.getParameter("id");
 %>
-
+<!-- master brench 생성 -->
 <style>
 	label{
 		color: white;
@@ -20,13 +20,25 @@
 <script type="text/javascript">
 	
 	function memberJoin() {
-		$("#joinForm").submit();
+		var okFlag = false;
+		console.log($("#id").val());
+		if($("#id").val() == ""){
+	        alert("아이디 입력바람");
+	        $("#id").focus();
+	        return false;
+	      }
+		else{
+			okFlag = true;
+		}
+		if(okFlag){
+			//$("#joinForm").submit();
+		}
 	}
 	
 	function validate() {
-		if($("#userPwd").val() != $("#userPwd2").val()){
-			$("#passChkSpan").text("입력하신 비밀번호가 일치하지 않습니다.");
-			$("#userPwd2").focus();
+		if($("#pw").val() != $("#pw2").val()){
+			alert("입력하신 비밀번호가 일치하지 않습니다.");
+			$("#pw2").focus();
 			
 			return false;
 		}
@@ -207,6 +219,15 @@
 			    
 			    	<!-- 사용자 비밀번호 -->
 			      <input type="password" class="form-control mb-1" name="pw" placeholder="비밀번호"/>
+			      
+			      
+			    </div>
+			    
+			    <div class="input-group">
+			    
+			    	<!-- 사용자 비밀번호 -->
+			      <input type="password" class="form-control mb-1" name="pw" placeholder="비밀번호"/>
+			      
 			      
 			    </div>
 			    
