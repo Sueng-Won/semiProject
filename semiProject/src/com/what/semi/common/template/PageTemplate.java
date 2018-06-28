@@ -84,7 +84,6 @@ public class PageTemplate {
 		PageInfo pi = new PageInfo(currentPage, limit, maxPage, startPage, endPage, listCount);		
 		return pi;
 		
-<<<<<<< HEAD
 	}
 	
 	public static PageInfo byDatePaging(HttpServletRequest request,RecruitmentService rs,String dateStr) {
@@ -121,11 +120,4 @@ public class PageTemplate {
 		return pi;
 		
 	}
-=======
-	}
-
-
-	
-
->>>>>>> refs/heads/jaejun
 }
