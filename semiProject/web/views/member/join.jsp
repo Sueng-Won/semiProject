@@ -21,6 +21,7 @@
 	
 	function memberJoin() {
 		var okFlag = false;
+		console.log($("#id").val());
 		if($("#id").val() == ""){
 	        alert("아이디 입력바람");
 	        $("#id").focus();
@@ -30,14 +31,14 @@
 			okFlag = true;
 		}
 		if(okFlag){
-			$("#joinForm").submit();
+			//$("#joinForm").submit();
 		}
 	}
 	
 	function validate() {
-		if($("#userPwd").val() != $("#userPwd2").val()){
-			$("#passChkSpan").text("입력하신 비밀번호가 일치하지 않습니다.");
-			$("#userPwd2").focus();
+		if($("#pw").val() != $("#pw2").val()){
+			alert("입력하신 비밀번호가 일치하지 않습니다.");
+			$("#pw2").focus();
 			
 			return false;
 		}
@@ -218,6 +219,15 @@
 			    
 			    	<!-- 사용자 비밀번호 -->
 			      <input type="password" class="form-control mb-1" name="pw" placeholder="비밀번호"/>
+			      
+			      
+			    </div>
+			    
+			    <div class="input-group">
+			    
+			    	<!-- 사용자 비밀번호 -->
+			      <input type="password" class="form-control mb-1" name="pw" placeholder="비밀번호"/>
+			      
 			      
 			    </div>
 			    
