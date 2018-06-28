@@ -455,7 +455,7 @@
                        <a href=""><%=rv.getRecruitment_name() %></a><!-- 게시물 이름 -->
                      </h4>
                      <h5>시급 : <%=rv.getPay()%></h5>
-                     <p class="card-text"><%=rv.getRecruitment_title() %></p>
+                     <p class="card-text"><%=rv.getWork_day() %></p>
                    </div>
                    <div class="card-footer">
                      <small class="text-muted"><%=rv.getAddress() %></small>

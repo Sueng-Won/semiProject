@@ -64,7 +64,7 @@ int endPage = pi.getEndPage();
 	                <a href="#"><img class="card-img-top" src="http://placehold.it/300x300" alt=""></a>
 	                <div class="card-body">
 	                  <h4 class="card-title">
-	                    <a href="#"><%=rv.getRecruitment_title() %></a><!-- 게시물 이름 -->
+	                    <a href="#"><%=rv.getRecruitment_name() %></a><!-- 게시물 이름 -->
 	                  </h4>
 	                  <h5>시급 : <%=rv.getPay()%></h5>
 	                  <p class="card-text"><%=rv.getWork_day() %></p>
