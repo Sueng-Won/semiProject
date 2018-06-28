@@ -47,7 +47,6 @@ public class RecruitmentService {
 		return ListCount;
 	}
 
-<<<<<<< HEAD
 	public ArrayList<RecruitmentVo> selectByDateList(String dateStr, int currentPage, int limit) {
 		Connection con = JDBCTemplate.getConnection();
 		ArrayList<RecruitmentVo> list = new RecruitmentDao().selectByDateList(con, dateStr, currentPage, limit);
@@ -55,19 +54,6 @@ public class RecruitmentService {
 		return list;
 	}
 
-public ArrayList<Double> userSpot(String userId) {
-=======
-	public String getDefaultResume(String id) {
->>>>>>> refs/heads/jaejun
-		Connection con = JDBCTemplate.getConnection();
-		
-		String resume = new RecruitmentDao().getDefaultResume(con, id);
-		
-		JDBCTemplate.close(con);
-		return resume;
-	}
-
-<<<<<<< HEAD
 	public int byDateListTotalCount(String dateStr) {
 		Connection con = JDBCTemplate.getConnection();
 
@@ -86,8 +72,5 @@ public ArrayList<Double> userSpot(String userId) {
 
 		return result;
 	}
-	
-=======
 
->>>>>>> refs/heads/jaejun
 }

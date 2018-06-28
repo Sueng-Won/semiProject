@@ -28,7 +28,6 @@
 		function loadLocalList() {
 			location.href = "/sp/localList.do";
 		}
-	</script>
 	
 		
 		//추후 회원의 구인게시물/이력서를 불러올 function - 회원정보를 parameter로 설정해야함
@@ -40,18 +39,10 @@
 		function updateMyInfo() {
 			location.href = "/sp/views/recruitment/recruitmentForm.jsp"
 		}
-<<<<<<< HEAD
-		
-		//Q&A 게시판
-		function qnaNew(){
-    		window.open("/sp/views/qna/qnaNew.jsp","_blank","width=600, height=700, left=auto,top=auto");
-    	};
-=======
 		//Q&A 게시판
 	      function qnaNew(){
 	          window.open("/sp/views/qna/qnaNew.jsp","_blank","width=600, height=700, left=auto,top=auto");
 	       };
->>>>>>> refs/heads/jaejun
 	</script>
   </head>
 
