@@ -34,9 +34,9 @@ public class LoginServlet extends HttpServlet {
 		
 		result = new MemberService().checkId(id);
 		
-		if(0 > result) {
+/*		if(0 > result) {
 			result = new MemberService().enterUser(id);
-		}
+		}*/
 		HttpSession session = request.getSession();
 		
 		
