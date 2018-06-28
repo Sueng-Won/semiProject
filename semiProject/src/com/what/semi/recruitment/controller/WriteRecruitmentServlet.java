@@ -2,6 +2,7 @@ package com.what.semi.recruitment.controller;
 
 import java.io.IOException;
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,9 +23,6 @@ import com.what.semi.recruitment.RecruitmentRenamePolicy;
 import com.what.semi.recruitment.model.service.RecruitmentService;
 import com.what.semi.recruitment.model.vo.RecruitmentVo;
 
-/**
- * Servlet implementation class WriteRecruitmentServlet
- */
 @WebServlet("/writeRecruitment.do")
 public class WriteRecruitmentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

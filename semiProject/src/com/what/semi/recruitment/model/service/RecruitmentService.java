@@ -53,15 +53,8 @@ public class RecruitmentService {
 		JDBCTemplate.close(con);
 		return list;
 	}
-
-	public String getDefaultResume(String id) {
-		Connection con = JDBCTemplate.getConnection();
-		
-		String resume = new RecruitmentDao().getDefaultResume(con, id);
-		
-		JDBCTemplate.close(con);
-		return resume;
-	}
+	
+	
 
 	public int byDateListTotalCount(String dateStr) {
 		Connection con = JDBCTemplate.getConnection();
@@ -72,6 +65,7 @@ public class RecruitmentService {
 
 		return ListCount;
 	}
+	
 	public int writeRecruitment(RecruitmentVo rec) {
 		Connection con = JDBCTemplate.getConnection();
 
@@ -81,5 +75,8 @@ public class RecruitmentService {
 
 		return result;
 	}
+	
+	
+	
 	
 }

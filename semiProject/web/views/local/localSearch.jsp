@@ -600,8 +600,6 @@
                 +"&centerLongitude="+center.getLng()
                 +"&mapLevel="+map.getLevel();
 
-          map_area_move_view('');
-          
       }
    //지역 직접선택 열고 닫기
    function map_area_move_view(view_stat) {

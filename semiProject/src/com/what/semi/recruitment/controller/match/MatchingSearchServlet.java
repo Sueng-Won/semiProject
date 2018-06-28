@@ -38,10 +38,10 @@ public class MatchingSearchServlet extends HttpServlet {
 				
 			}else {		//이력서를 선택하지 않은 경우
 				id = (String) session.getAttribute("id");
-				resumeNames = rs.getResumeNames();
+				resumeNames = rs.getResumeNames(id);
 				resume = rs.getDefaultResume(id);
-				list = rs.loadMatchingSearchList(id);
 				pi = PageTemplate.machingSearchPaging(request,session, rs);
+				list = rs.loadMatchingSearchList(id);
 				
 			}
 			

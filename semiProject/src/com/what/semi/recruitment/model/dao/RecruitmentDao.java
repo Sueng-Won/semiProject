@@ -321,4 +321,6 @@ public class RecruitmentDao {
 		return result;
 	}
 
+	
+
 }
