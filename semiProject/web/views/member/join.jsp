@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/views/common/header.jsp" %>
-
+<!-- 병합이 하고싶어요 -->
 <%
 	boolean flag = Boolean.parseBoolean(request.getParameter("flag"));
 	String idv = request.getParameter("id");
