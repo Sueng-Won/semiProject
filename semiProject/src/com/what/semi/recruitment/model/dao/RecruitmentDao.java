@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import com.what.semi.common.template.JDBCTemplate;
 import com.what.semi.common.template.LocalPageInfo;
 import com.what.semi.recruitment.model.vo.RecruitmentVo;
+import com.what.semi.resume.model.vo.MyResumeVo;
 
 public class RecruitmentDao {
 
@@ -318,6 +319,39 @@ public class RecruitmentDao {
 		} finally {
 			JDBCTemplate.close(pstmt);
 		}
+		return result;
+	}
+
+	public int selectMachingListTotalCount(Connection con, MyResumeVo myResumeVo) {
+		int result = -1;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "";
+		
+		try {
+			query = "SELECT COUNT(*) AS LISTCOUNT " + 
+					"FROM RECRUITMENT " + 
+					"WHERE IS_POST != 0 " + 
+					"AND BUSINESS_TYPE = ? " + 
+					"AND WORK_DAY = ? " + 
+					"AND GENDER = ? " + 
+					"AND MILITARY_SERVICE = ? " + 
+					"ORDER BY WORK_DAY";
+			
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, myResumeVo.getBusiness_type());
+			rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				result = rs.getInt("listCount");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(stmt);
+		}
+		
 		return result;
 	}
 

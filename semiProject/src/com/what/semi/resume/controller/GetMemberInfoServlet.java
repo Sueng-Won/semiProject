@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.what.semi.member.model.service.MemberService;
 import com.what.semi.member.model.vo.MemberVo;
 import com.what.semi.resume.model.service.MyResumeService;
+import com.what.semi.resume.model.vo.MyResumeVo;
 
 @WebServlet("/getMemberInfo.do")
 public class GetMemberInfoServlet extends HttpServlet {
@@ -26,11 +27,11 @@ public class GetMemberInfoServlet extends HttpServlet {
 		//유저 아이디를 이용해서 member테이블에 저장된 값을 가져오는 서블릿
 				String userId = request.getParameter("userId");
 				
-				MemberVo member = new MyResumeService().selectMemberInfo(userId);
+				MyResumeVo member = new MyResumeService().selectMemberInfo(userId);
 				
 				String url="";
 				if(null!=member){
-					url="/sp/views/resume/resumeForm.jsp";
+					url="/views/resume/resumeForm.jsp";
 					request.setAttribute("member", member);
 				}else{
 					url="/sp";

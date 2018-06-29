@@ -73,7 +73,7 @@ int endPage = pi.getEndPage();
         </div>
       <!-- /.row -->
     </div>
-    </div>
+	</div>
     <!-- /.container -->
 <script type="text/javascript">
 	function movePage(pageNum) {

@@ -132,26 +132,32 @@ public class MyResumeDao {
 		return result;
 	}
 
-	public MemberVo selectMemberInfo(String userId, Connection con) {
+	public MyResumeVo selectMemberInfo(String userId, Connection con) {
 		PreparedStatement pstmt = null;
-		MemberVo member = null;
+		MyResumeVo member = null;
 		ResultSet rs = null;
 		String query =null;
 		
 		
 		try {
-			query = "SELECT NAME, PHONE, EMAIL, ADDRESS, GENDER, IS_BLACK_LIST  FROM MEMBER WHERE M_ID=?";
+			query = "SELECT PROFILE_IMAGE_SRC,ACHIEVEMENT,DISABILITY, MILTARY_SERVICE, CAREER, BUSINESS_TYPE, WORKABLE_DAYS,NAME,BIRTH,PHONE,EMAIL,ADDRESS FROM RESUME R JOIN MEMBER M ON(R.M_ID=M.M_ID) WHERE R.M_ID=?";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, userId);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
-				member = new MemberVo();
+				member = new MyResumeVo();
+				member.setProfile_image_src(rs.getString("profile_image_src"));
+				member.setAchievement(rs.getString("achievement"));
+				member.setDisability(rs.getInt("disability"));
+				member.setMiltary_service(rs.getInt("miltary_service"));
+				member.setCareer(rs.getInt("career"));
+				member.setBusiness_type(rs.getString("business_type"));
+				member.setWorkable_days(rs.getDate("workable_days"));
 				member.setName(rs.getString("name"));
 				member.setPhone(rs.getString("phone"));
 				member.setEmail(rs.getString("email"));
-				member.setGender(rs.getString("gender").charAt(0));
-				member.setIs_black_list(rs.getInt("is_black_list"));
+				member.setAddress(rs.getString("address"));
 			}
 			
 		} catch (SQLException e) {

@@ -15,6 +15,8 @@ import com.what.semi.common.template.PageInfo;
 import com.what.semi.common.template.PageTemplate;
 import com.what.semi.recruitment.model.service.RecruitmentService;
 import com.what.semi.recruitment.model.vo.RecruitmentVo;
+import com.what.semi.resume.model.service.MyResumeService;
+import com.what.semi.resume.model.vo.MyResumeVo;
 
 @WebServlet("/matchingSearch.do")
 public class MatchingSearchServlet extends HttpServlet {
@@ -25,31 +27,45 @@ public class MatchingSearchServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<RecruitmentVo> list = null;
-		PageInfo pi = null;
-		RecruitmentService rs = new RecruitmentService();
-		HttpSession session = request.getSession();
-		String id = null;
-		String resume = null;
-		ArrayList<String> resumeNames = null;
-		if(null != session.getAttribute("id")) {			//로그인한 상태
+		ArrayList<RecruitmentVo> list = null;				//사용자의 이력서에 기반해 조회한 게시물들을 저장할 List 선언
+		PageInfo pi = null;									//페이징 처리를 위한 객체 선언
+		
+		MyResumeService mrs = new MyResumeService();		//이력서에 기재한 조건을 조회해올 service 선언
+		RecruitmentService rs = new RecruitmentService();	//게시물 조회에 이용할 service 선언
+		
+		HttpSession session = request.getSession();			//세션 선언
+		String id = null;									//세션으로부터 조회한 id를 저장할 변수 선언
+		
+		ArrayList<String> resumeNames = null;				//회원의 이력서title명을 저장할 List 선언
+		ArrayList<MyResumeVo> resume = null;				//해당 회원의 이력서를 조회해올 List 선언
+		
+		id = (String) session.getAttribute("id");
+		resume = mrs.selectMyInfo(id);
+		
+		if(null != resume) {
 			
-			if(null != request.getParameter("resume")) {	//이력서를 선택한 경우
+			resumeNames = new ArrayList<String>();
+			
+			for(MyResumeVo names : resume) {
+				resumeNames.add(names.getIntroduce_title());
+			}
+			
+			if(null != request.getParameter("resumeName")) {
 				
-			}else {		//이력서를 선택하지 않은 경우
-				id = (String) session.getAttribute("id");
-				resumeNames = rs.getResumeNames(id);
-				resume = rs.getDefaultResume(id);
-				pi = PageTemplate.machingSearchPaging(request,session, rs);
-				list = rs.loadMatchingSearchList(id);
+				
+				
+			}else {
+				
+				pi = PageTemplate.machingSearchPaging(request, rs, resume.get(0));
+				list = rs.loadMatchingSearchList(pi.getCurrentPage(), pi.getLimit(), resume.get(0));
 				
 			}
 			
-		} else {
-			pi = PageTemplate.indexPaging(request, rs);
 			
-			list = rs.loadRecruitmentList(pi.getCurrentPage(), pi.getLimit());
 		}
+		
+		
+			
 		
 		String url = "";
 		

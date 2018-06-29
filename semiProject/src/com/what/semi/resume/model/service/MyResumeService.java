@@ -65,10 +65,10 @@ public class MyResumeService {
 		return result;
 	}
 
-	public MemberVo selectMemberInfo(String userId) {
+	public MyResumeVo selectMemberInfo(String userId) {
 		Connection con = JDBCTemplate.getConnection();
 		
-		MemberVo member = new MyResumeDao().selectMemberInfo(userId, con);
+		MyResumeVo member = new MyResumeDao().selectMemberInfo(userId, con);
 		
 		JDBCTemplate.close(con);
 		

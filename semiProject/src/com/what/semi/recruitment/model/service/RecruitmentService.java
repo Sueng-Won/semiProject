@@ -9,6 +9,7 @@ import com.what.semi.common.template.JDBCTemplate;
 import com.what.semi.common.template.LocalPageInfo;
 import com.what.semi.recruitment.model.dao.RecruitmentDao;
 import com.what.semi.recruitment.model.vo.RecruitmentVo;
+import com.what.semi.resume.model.vo.MyResumeVo;
 
 public class RecruitmentService {
 
@@ -75,6 +76,27 @@ public class RecruitmentService {
 
 		return result;
 	}
+
+	public int selectMachingListTotalCount(MyResumeVo myResumeVo) {
+		Connection con = JDBCTemplate.getConnection();
+
+		int ListCount = new RecruitmentDao().selectMachingListTotalCount(con, myResumeVo);
+
+		JDBCTemplate.close(con);
+
+		return ListCount;
+	}
+
+	public ArrayList<RecruitmentVo> loadMatchingSearchList(int currentPage, int limit, ArrayList<MyResumeVo> resume) {
+		Connection con = JDBCTemplate.getConnection();
+		
+		ArrayList<RecruitmentVo> list = new RecruitmentDao().loadMatchingSearchList(con, currentPage, limit, resume);
+		
+		JDBCTemplate.close(con);
+
+		return list;
+	}
+	
 	
 	
 	
