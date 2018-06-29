@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.what.semi.common.template.JDBCTemplate;
-
 import com.what.semi.common.filter.Sha512;
 import com.what.semi.member.model.service.MemberService;
 
@@ -26,29 +24,20 @@ public class LoginServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		String id = request.getParameter("id");
-		//String pw = request.getParameter("pw");
 		String pw = Sha512.getSha512(request.getParameter("pw"));
-		//System.out.println("login id = "+id);
-		//System.out.println("login pw = "+pw);
 		int result = 0;
 		
-		result = new MemberService().checkId(id);
-		
-		if(0 > result) {
-			result = new MemberService().enterUser(id);
-		}
+		result = new MemberService().checkLogin(id, pw);
+
 		HttpSession session = request.getSession();
 		
 		
 		if(result>0) {
-			//System.out.println(id);
-			//System.out.println("결과가 있을경우 호출");
 			session.setAttribute("id", id);
 			response.sendRedirect("index.jsp");
 			
 		}else {
 			response.sendRedirect("index.jsp");
-			//System.out.println("결과가 없을경우 호출");
 		}
 	}
 

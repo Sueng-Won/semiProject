@@ -156,4 +156,125 @@ public class MemberDao {
 		
 		return result;
 	}
+
+
+
+	public int checkPw(Connection conn,String id , String pw) {
+		int result = 0;
+		PreparedStatement pstmt = null;	//SQL문을 나타내는 객체
+		ResultSet rs = null;
+		String query = "";
+		
+		try {
+			query = "SELECT PW FROM MEMBER WHERE M_ID = ? AND PW = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				if(rs.getString("PW")!=null) {
+					result = 1;
+				}
+				else {
+					result = 0;
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+
+	public MemberVo getMember(Connection conn, String id) {
+		MemberVo member = new MemberVo();
+		
+		PreparedStatement pstmt = null;	//SQL문을 나타내는 객체
+		ResultSet rs = null;
+		String query = "";
+		
+		try {
+			query = "SELECT * FROM MEMBER WHERE M_ID = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				if(rs.getString("M_ID")!=null) {
+					member.setName(rs.getString("NAME"));
+					member.setEmail(rs.getString("EMAIL"));
+					member.setPhone(rs.getString("PHONE"));
+					member.setZipcode(rs.getString("ZIPCODE"));
+					member.setLatitude(rs.getDouble("LATITUDE"));
+					member.setLongitude(rs.getDouble("LONGITUDE"));
+					member.setAddress(rs.getString("ADDRESS"));
+					member.setAddress_detail(rs.getString("ADDRESS_DETAIL"));
+					member.setMember_type(rs.getString("MEMBER_TYPE"));
+				}
+				else {
+					member = null;
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return member;
+	}
+
+
+
+	public int updateMember(Connection conn, MemberVo m) {
+		int result = 0;
+		PreparedStatement pstmt = null;	//SQL문을 나타내는 객체
+		String query = "";
+		
+		try {
+			query = "UPDATE MEMBER SET NAME = ?, "
+					+ "EMAIL = ?, "
+					+ "PHONE = ?, "
+					+ "ADDRESS = ?, "
+					+ "ADDRESS_DETAIL = ?, "
+					+ "ZIPCODE = ?, "
+					+ "LATITUDE = ?, "
+					+ "LONGITUDE = ?, "
+					+ "MEMBER_TYPE = ? "
+					+ "WHERE M_ID = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, m.getName());
+			pstmt.setString(2, m.getEmail());
+			pstmt.setString(3, m.getPhone());
+			pstmt.setString(4, m.getAddress());
+			pstmt.setString(5, m.getAddress_detail());
+			pstmt.setString(6, m.getZipcode());
+			pstmt.setDouble(7, m.getLatitude());
+			pstmt.setDouble(8, m.getLongitude());
+			pstmt.setString(9, m.getMember_type());
+			pstmt.setString(10, m.getId());
+			pstmt.executeUpdate();
+			result = 1;
+			System.out.println("UPDATE 성공");
+			conn.commit();
+		} catch (SQLException e) {
+			System.out.println("UPDATE 실패");
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				System.out.println("롤백 할 수 없습니다.");
+				e1.printStackTrace();
+			}
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		
+		return result;
+	}
 }

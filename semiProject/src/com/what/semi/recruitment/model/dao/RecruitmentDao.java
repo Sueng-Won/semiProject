@@ -129,34 +129,6 @@ public class RecruitmentDao {
 		return result;
 	}
 
-	public ArrayList<Double> userSpot(Connection con, String userId) {
-		ArrayList<Double> spot = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String query;
-		
-		query = "SELECT R_LATITUDE, R_LONGITUDE " + 
-				"FROM RECRUITMENT R " + 
-				"JOIN MEMBER M ON (R.M_ID = M.M_ID) " + 
-				"WHERE R.M_ID = '?'";
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, userId);
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				spot = new ArrayList<Double>();
-				spot.add(rs.getDouble("r_latitude"));
-				spot.add(rs.getDouble("r_longitude"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rs);
-			JDBCTemplate.close(pstmt);
-		}
-		
-		return spot;
-	}
 
 	public ArrayList<RecruitmentVo> loadLocalRecruitmentList(Connection con, int currentPage, int limit,
 			LocalPageInfo lpi) {
@@ -305,6 +277,47 @@ public class RecruitmentDao {
 			JDBCTemplate.close(stmt);
 		}
 
+		return result;
+	}
+	
+	public int insertRecruitment(Connection con, RecruitmentVo rec) {
+		int result = -1;
+
+		PreparedStatement pstmt = null;
+
+		String query = "INSERT INTO RECRUITMENT VALUES (SEQ_RECRUITMENT.NEXTVAL" + ",?, ?,?, ?, ?,"
+				+ "?,TO_DATE(?,'RRRR-MM-DD'), ?, ?, TO_DATE(?,'HH24-MI')," + "TO_DATE(?,'HH24-MI'),?,"
+				+ "?,?,?, ?, 1,?,?,?)";
+		try {
+			pstmt = con.prepareStatement(query);
+
+			pstmt.setString(1,rec.getRecruitment_image_src());
+			pstmt.setString(2,rec.getRecruitment_name());
+			pstmt.setString(3,rec.getRecruitment_title());
+			pstmt.setString(4,rec.getBusiness_type());
+			pstmt.setString(5,rec.getAddress());
+			pstmt.setString(6,rec.getAddress_detail());
+			pstmt.setDate(7, rec.getWork_day());
+			pstmt.setDouble(8, rec.getR_latitude());
+			pstmt.setDouble(9, rec.getR_longitude());
+			pstmt.setString(10,rec.getStart_work_time());
+			pstmt.setString(11,rec.getEnd_work_time());
+			pstmt.setInt(12, rec.getPay());
+			pstmt.setString(13,String.valueOf(rec.getGender()));
+			pstmt.setInt(14, rec.getMilitary_service());
+			pstmt.setString(15,rec.getIntroduce());
+			pstmt.setString(16,rec.getM_id());
+			pstmt.setString(17,rec.getRecruitment_phone());
+			pstmt.setString(18,rec.getRecruitment_email());
+			pstmt.setString(19,rec.getZipcode());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
 

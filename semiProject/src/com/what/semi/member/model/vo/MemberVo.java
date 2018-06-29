@@ -26,6 +26,19 @@ public class MemberVo {
 		this.pw = pw;
 	}
 	
+	public MemberVo(String id, String name, String email, String phone, String zipcode, String member_type, double latitude, double longitude, String address, String addressDetail) {
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+		this.zipcode = zipcode;
+		this.member_type = member_type;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.address = address;
+		this.address_detail = addressDetail;
+	}
+	
 	public MemberVo(String id, String pw, String name, String birth, String phone, String email, String address,
 			String address_detail, String zipcode, String member_type, double latitude, double longitude, char gender,
 			int is_black_list) {

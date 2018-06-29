@@ -1,6 +1,8 @@
 package com.what.semi.common.template;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.what.semi.recruitment.model.service.RecruitmentService;
 

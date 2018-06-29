@@ -13,7 +13,19 @@
 <!-- branch test -->
 <script>
 	function login() {
-		$("#loginFrm").submit();
+		var id = $("#id").val();
+		var pw = $("#pw").val();
+		if(pw==""){
+			if(id=""){
+				alert("아이디를 입력하세요");
+			}
+			else{
+				alert("경호야 귀찮다고 비밀번호 안치고 그러면 안돼");
+			}
+		}
+		else{
+			$("#loginFrm").submit();			
+		}
 	}
 
 	function join() {
@@ -38,8 +50,8 @@
 			<table>
 				<tr>
 					<td>
-						<input type="text" class="form-control mb-1" name="id" placeholder="아이디" /> 
-						<input type="password" class="form-control mb-1" name="pw" placeholder="비밀번호" />
+						<input type="text" class="form-control mb-1" id="id" name="id" placeholder="아이디" /> 
+						<input type="password" class="form-control mb-1" id="pw" name="pw" placeholder="비밀번호" />
 					</td>
 					<td>
 						<input type="button" size="15" value="로그인" class="btn btn-dark btn-sm btn-block" onclick="login();" /> 

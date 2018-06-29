@@ -1,53 +1,20 @@
+<%@page import="com.what.semi.member.model.vo.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/views/common/header.jsp" %>
-<!-- 병합이 하고싶어요 -->
+
 <%
-	boolean flag = Boolean.parseBoolean(request.getParameter("flag"));
-	String idv = request.getParameter("id");
+	MemberVo member = (MemberVo)request.getAttribute("member");
+	String lower = member.getMember_type().toLowerCase();
 %>
-<!-- master brench 생성 -->
+
 <style>
 	label{
 		color: white;
 	}
 </style>
-<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript" src="/sp/vendor/bootstrap/datepicker/bootstrap-datepicker.js"></script>
-<link rel="stylesheet" type="text/css" href="/sp/vendor/bootstrap/datepicker/bootstrap-datepicker.css"/>
-
 
 <script type="text/javascript">
-	
-	function memberJoin() {
-		var okFlag = false;
-		console.log($("#id").val());
-		if($("#id").val() == ""){
-	        alert("아이디 입력바람");
-	        $("#id").focus();
-	        return false;
-	      }
-		else{
-			okFlag = true;
-		}
-		if(okFlag){
-			//$("#joinForm").submit();
-		}
-	}
-	
-	function validate() {
-		if($("#pw").val() != $("#pw2").val()){
-			alert("입력하신 비밀번호가 일치하지 않습니다.");
-			$("#pw2").focus();
-			
-			return false;
-		}
-		//다른 값들을 체크 하는 로직 추가(유효성 검사 로직 추가 영역)
-		return true;
-	}
-	
-	    
-	
 	var searchAddr;
 	
 	function openAddressPopup() {
@@ -136,34 +103,13 @@
 		
 	}
 	
-	function signIn(){
-		$("#joinForm").submit();
+	function update(){
+		$("#updateFrm").submit();
 	}
 	
-	function checkId(){
-		var id = $("#id").val();
-		location.href="/sp/checkId.do?id="+id;
-		
-		
+	function updatePw(){
+		location.href = "/sp/views/member/updatePw.jsp";
 	}
-	
-	$(function(){
-		var id = "<%=idv%>";
-		var flag = <%=flag%>;
-		if(id!="null"){
-			if(!flag){
-				alert("중복된 아이디 입니다.");
-				$("#id").val("");
-			}
-			else{
-				alert("사용할 수 있는 아이디 입니다.");
-				$("#id").val(id);
-			}
-		}
-		else{
-			
-		}
-	});
 	
 </script>
 
@@ -178,97 +124,56 @@
         	  <div class="col-lg-3"></div>
 			  <div class="col-lg-6 bg-dark">
 			  <br><br>
-        		<h3 align="center" class="text-white-50">회원가입</h3>
+        		<h3 align="center" class="text-white-50">회원정보수정</h3>
         		<br>
-			  <form id="joinForm" method="post" action="/sp/signIn.do">
+			  <form id="updateFrm" method="post" action="/sp/updateMember.do">
 			  <div class="btn-group mt-3">
 			    	<button type="button" id="tBtn" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 				    	<span class="caret">회원타입</span>
 					</button>
 			    	<input type="hidden" name="rTypeValue" id="rTypeValue">
 					  <ul class="dropdown-menu bg-dark" role="menu">
-					    <li><button type="button" onclick="typeSelect(this);" name="js" class="btn btn-dark btn-sm btn-block" value="JS">구직자</button></li>
-					    <li><button type="button" onclick="typeSelect(this);" name="bo" class="btn btn-dark btn-sm btn-block" value="BO">업주</button></li>
+					    <li><button type="button" onclick="typeSelect(this);" id="JS" name="js" class="btn btn-dark btn-sm btn-block" value="JS">구직자</button></li>
+					    <li><button type="button" onclick="typeSelect(this);" id="BO" name="bo" class="btn btn-dark btn-sm btn-block" value="BO">업주</button></li>
 					    <li class="divider"></li>
 					  </ul>
-					  
-			    <div class="input-group">
-				    	<!-- 사용자 성별 -->
-				    	<div class="btn-group mb-1 btn-group-toggle" data-toggle="buttons">
-	  						<label class="btn btn-secondary active">
-	    					<input type="radio" name="gender" value="M" autocomplete="off" checked>남
-	  						</label>
-	  						<label class="btn btn-secondary">
-	    					<input type="radio" name="gender" value="F" autocomplete="off">여
-	  						</label>
-						</div>
 			    </div>
-			    </div>
-			   
-			    <div class="input-group">
-			    
-			    	<!-- 사용자 아이디 -->
-			      <input type="text" class="form-control mb-1" name="id" id="id" placeholder="아이디"/>
-			      <input type="hidden" name="idHd" value=""/>
-			      <span class="input-group-btn">
-			        <button class="btn btn-light text-dark ml-1" type="button" onclick="checkId();">중복 확인</button>
-			      </span>
-			    </div>
-			    
-			    <div class="input-group">
-			    
-			    	<!-- 사용자 비밀번호 -->
-			      <input type="password" class="form-control mb-1" name="pw" placeholder="비밀번호"/>
-			      
-			      
-			    </div>
-			    
-			    <div class="input-group">
-			    
-			    	<!-- 사용자 비밀번호 -->
-			      <input type="password" class="form-control mb-1" name="pw" placeholder="비밀번호"/>
-			      
-			      
-			    </div>
-			    
 			    <div class="input-group">
 			    
 			    	<!-- 사용자 이름 -->
-			      <input type="text" class="form-control mb-1" name="name" placeholder="이름"/>
+			      <input type="text" class="form-control mb-1" name="name" placeholder="이름" value="<%=member.getName()%>"/>
 			      
 			    </div>
 			    
 			    <div class="input-group">
 			    	<!-- 사용자 이메일 -->
-			      <input type="email" class="form-control mb-1" name="email" placeholder="email"/>
-			    </div>
-			    <div class="input-group">
-			    	<!-- 사용자 생년월일 -->
-			    	<input type="date" class="form-control mb-1" name="birth" placeholder="생년월일"/>
+			      <input type="email" class="form-control mb-1" name="email" placeholder="email" value="<%=member.getEmail()%>"/>
 			    </div>
 			    
 			    <div class="input-group">
 			    	<!-- 사용자 전화번호 -->
-			    	<input type="text" class="form-control mb-1" name="phone" placeholder="휴대폰번호(-를 빼고 입력하세요)"/>
+			    	<input type="text" class="form-control mb-1" name="phone" placeholder="휴대폰번호(-를 빼고 입력하세요)" value="<%=member.getPhone()%>"/>
 			    </div>
 			    
 			    <div class="input-group">
 			    	<!-- 주소검색을 통해 입력받은 우편번호 저장 input -->
-			      <input type="hidden" name="zipcode" id="zipcode"/>
-			      <input type="hidden" name="latitude" id="latitude"/>
-			      <input type="hidden" name="longitude" id="longitude"/>
+			      <input type="hidden" name="zipcode" id="zipcode" value="<%=member.getZipcode()%>"/>
+			      <input type="hidden" name="latitude" id="latitude" value="<%=member.getLatitude()%>"/>
+			      <input type="hidden" name="longitude" id="longitude" value="<%=member.getLongitude()%>"/>
 			      	<!-- 주소 -->
-			      <input type="text" class="form-control mb-1" name="address" id="address" placeholder="주소"/>
+			      <input type="text" class="form-control mb-1" name="address" id="address" placeholder="주소" value="<%=member.getAddress()%>"/>
 			      <span class="input-group-btn">
-			        <button class="btn btn-light text-dark ml-1" type="button" onclick="openAddressPopup();">주소 검색</button>
+			        <button class="btn btn-light text-dark ml-1" type="button" onclick="openAddressPopup(); ">주소 검색</button>
 			      </span>
 			    </div>
 			    
 			    <div class="input-group">
 			    	<!-- 상세주소 입력 -->
-			      <input type="text" class="form-control mb-1" name="addressDetail" id="addressDetail" placeholder="상세주소"/>
+			      <input type="text" class="form-control mb-1" name="addressDetail" id="addressDetail" placeholder="상세주소" value="<%=member.getAddress_detail()%>"/>
 			    </div>
-			    <input type="button" class="btn btn-dark btn-sm btn-block" value="회원가입" onclick="signIn();"/>
+			    <input type="button" class="btn btn-dark btn-sm btn-block" value="회원정보수정" onclick="update();"/>
+			    <input type="button" class="btn btn-dark btn-sm btn-block" value="비밀번호변경" onclick="updatePw();"/>
+			    <br>
 			  </form>
 			    
 			  </div><!-- /.col-lg-6 -->
@@ -288,5 +193,8 @@
 		$("#tBtn").text(text);
 		$("#rTypeValue").val(value);
 	}
+	$(function(){
+		typeSelect($("#<%=member.getMember_type()%>"));
+	});
 </script>
 <%@include file="/views/common/footer.jsp"%>

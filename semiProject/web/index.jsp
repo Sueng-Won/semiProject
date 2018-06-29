@@ -6,11 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>index</title>
-<<<<<<< HEAD
+
 <script src="/sp/vendor/jquery/jquery.min.js"></script>
-=======
-<script type="text/javascript" src="/sp/vendor/jquery/jquery.min.js"></script>
->>>>>>> refs/heads/master
+
 <script type="text/javascript">
 	$(function() {
 		location.href = "/sp/indexList.do";

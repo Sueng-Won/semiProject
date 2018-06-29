@@ -13,7 +13,7 @@
       <div class="row">
 		<%@include file="/views/common/nav.jsp" %>
         <!-- /.col-lg-3 -->
-        <div class="col-lg-9 mt-lg-auto">
+        <div class="col-lg-9 mx-auto">
         	<div class="row mt-4">
         	  <div class="col-lg-3"></div>
 			  <div class="col-lg-6 bg-dark">
