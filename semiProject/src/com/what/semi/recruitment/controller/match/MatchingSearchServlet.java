@@ -86,12 +86,10 @@ public class MatchingSearchServlet extends HttpServlet {
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 			if(0 < resume.size()) {
-				request.setAttribute("resumeNames", resumeNames);
+				request.setAttribute("resume", resume);
 			}
 		}else {
 			url = "index.jsp";
-			request.setAttribute("list", list);
-			request.setAttribute("pi", pi);
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher(url);

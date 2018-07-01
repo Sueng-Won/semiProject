@@ -325,7 +325,11 @@ public class RecruitmentDao {
 
 	public int selectMachingListTotalCount(Connection con, MyResumeVo myResumeVo) {
 		int result = -1;
-		
+		String businessType = myResumeVo.getBusiness_type();
+		Date workableDay = myResumeVo.getWorkable_days();
+		String gender = String.valueOf(myResumeVo.getGender());
+		int miltaryService = myResumeVo.getMiltary_service();
+		System.out.println(businessType+" / "+workableDay+" / "+gender+" / "+miltaryService);
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String query = "";
@@ -333,20 +337,19 @@ public class RecruitmentDao {
 		try {
 			query = "SELECT COUNT(*) AS LISTCOUNT " + 
 					"FROM RECRUITMENT " + 
-					"WHERE IS_POST != 0 " + 
+					"WHERE (IS_POST != 0 " + 
 					"AND BUSINESS_TYPE = ? " + 
 					"AND WORK_DAY = ? " + 
 					"AND GENDER = ? " + 
-					"AND MILITARY_SERVICE = ? " + 
+					"AND MILITARY_SERVICE = ?)" + 
 					"ORDER BY WORK_DAY";
 			
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, myResumeVo.getBusiness_type());
-			pstmt.setDate(2, myResumeVo.getWorkable_days());
-			pstmt.setString(3, String.valueOf(myResumeVo.getGender()));
-			pstmt.setInt(4, myResumeVo.getMiltary_service());
-			
-			rs = pstmt.executeQuery(query);
+			pstmt.setString(1, businessType);
+			pstmt.setDate(2, workableDay);
+			pstmt.setString(3, gender);
+			pstmt.setInt(4, miltaryService);
+			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				result = rs.getInt("listCount");
 			}
@@ -362,6 +365,10 @@ public class RecruitmentDao {
 
 	public ArrayList<RecruitmentVo> loadMatchingSearchList(Connection con, int currentPage, int limit,
 			MyResumeVo myResumeVo) {
+		String businessType = myResumeVo.getBusiness_type();
+		Date workableDay = myResumeVo.getWorkable_days();
+		String gender = String.valueOf(myResumeVo.getGender());
+		int miltaryService = myResumeVo.getMiltary_service();
 		ArrayList<RecruitmentVo> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -384,19 +391,19 @@ public class RecruitmentDao {
 					"R.M_ID, IS_POST, M.NAME, RECRUITMENT_NAME, RECRUITMENT_TITLE " + 
 					"FROM RECRUITMENT R " + 
 					"JOIN MEMBER M ON (M.M_ID = R.M_ID) " + 
-					"WHERE IS_POST != 0 " +
+					"WHERE (IS_POST != 0 " +
 					"AND BUSINESS_TYPE = ? " + 
 					"AND WORK_DAY = ? " + 
-					"AND GENDER = ? " + 
-					"AND MILITARY_SERVICE = ? " + 
+					"AND R.GENDER = ? " + 
+					"AND MILITARY_SERVICE = ? )" + 
 					"ORDER BY WORK_DAY) P) " + 
 					"WHERE RNUM BETWEEN ? AND ?";
 			//System.out.println(query);
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, myResumeVo.getBusiness_type());
-			pstmt.setDate(2, (Date) myResumeVo.getWorkable_days());
-			pstmt.setString(3, String.valueOf(myResumeVo.getGender()));
-			pstmt.setInt(4, myResumeVo.getMiltary_service());
+			pstmt.setString(1, businessType);
+			pstmt.setDate(2, workableDay);
+			pstmt.setString(3, gender);
+			pstmt.setInt(4, miltaryService);
 			pstmt.setInt(5, startRow);
 			pstmt.setInt(6, endRow);
 			rs = pstmt.executeQuery();
