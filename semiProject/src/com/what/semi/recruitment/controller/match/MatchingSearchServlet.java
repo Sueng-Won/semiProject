@@ -36,32 +36,44 @@ public class MatchingSearchServlet extends HttpServlet {
 		HttpSession session = request.getSession();			//세션 선언
 		String id = null;									//세션으로부터 조회한 id를 저장할 변수 선언
 		
+		
 		ArrayList<String> resumeNames = null;				//회원의 이력서title명을 저장할 List 선언
 		ArrayList<MyResumeVo> resume = null;				//해당 회원의 이력서를 조회해올 List 선언
 		
 		id = (String) session.getAttribute("id");
-		resume = mrs.selectMyInfo(id);
+		resume = mrs.selectMyInfo(id);		//회원 아이디를 기반으로 이력서를 조회
 		
-		if(null != resume) {
-			
+		if(0 < resume.size()) {				//작성한 이력서가 있을 경우 실행
+			System.out.println("이력서가 있을경우 실행");
 			resumeNames = new ArrayList<String>();
 			
-			for(MyResumeVo names : resume) {
+			for(MyResumeVo names : resume) {	//이력서를 기반으로 해당 이력서들의 title을 List형식으로 저장(view로 전달할 객체)
 				resumeNames.add(names.getIntroduce_title());
+				System.out.println(names.getIntroduce_title());
 			}
 			
-			if(null != request.getParameter("resumeName")) {
+			if(null != request.getParameter("resumeId")) {	//페이지 상에서 선택한 이력서가 있을 경우 실행될 로직
+				
+				for(MyResumeVo mr : resume) {			//이력서목록에서 view에서 받아온 이력서 명과 동일한 이력서을 바탕으로 게시물을 저장
+					if(Integer.parseInt(request.getParameter("resumeId")) == mr.getResume_id()) {
+						pi = PageTemplate.machingSearchPaging(request, rs, mr);						
+						list = rs.loadMatchingSearchList(pi.getCurrentPage(), pi.getLimit(), mr);
+					}
+				}
 				
 				
-				
-			}else {
-				
-				pi = PageTemplate.machingSearchPaging(request, rs, resume.get(0));
+			}else {				//최초 접속시 default로 view에 전달할 로직 
+				System.out.println("이력서가 있으면서 최초 접속일 경우 실행");
+				System.out.println(resume.get(0).toString());
+				pi = PageTemplate.machingSearchPaging(request, rs, resume.get(0));						
 				list = rs.loadMatchingSearchList(pi.getCurrentPage(), pi.getLimit(), resume.get(0));
-				
 			}
 			
 			
+		}else {				//작성한 이력서가 없을경우 실행(인덱스와 검색조건 동일)
+			System.out.println("이력서가 없을경우 실행");
+			pi = PageTemplate.indexPaging(request, rs);
+			list = rs.loadRecruitmentList(pi.getCurrentPage(), pi.getLimit());
 		}
 		
 		
@@ -70,13 +82,18 @@ public class MatchingSearchServlet extends HttpServlet {
 		String url = "";
 		
 		if(null != list) {
-				url = "views/matchingSearch/matchingSearchPage.jsp";
-				request.setAttribute("list", list);
-				request.setAttribute("pi", pi);
+			url = "views/matchingSearch/matchingSearchPage.jsp";
+			request.setAttribute("list", list);
+			request.setAttribute("pi", pi);
+			if(0 < resume.size()) {
+				request.setAttribute("resumeNames", resumeNames);
+			}
 		}else {
 			url = "index.jsp";
-			request.setAttribute("msg", "오류");
+			request.setAttribute("list", list);
+			request.setAttribute("pi", pi);
 		}
+		
 		RequestDispatcher view = request.getRequestDispatcher(url);
 		view.forward(request, response);
 	}

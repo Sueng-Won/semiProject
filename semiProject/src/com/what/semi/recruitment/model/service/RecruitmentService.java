@@ -87,10 +87,10 @@ public class RecruitmentService {
 		return ListCount;
 	}
 
-	public ArrayList<RecruitmentVo> loadMatchingSearchList(int currentPage, int limit, ArrayList<MyResumeVo> resume) {
+	public ArrayList<RecruitmentVo> loadMatchingSearchList(int currentPage, int limit, MyResumeVo myResumeVo) {
 		Connection con = JDBCTemplate.getConnection();
 		
-		ArrayList<RecruitmentVo> list = new RecruitmentDao().loadMatchingSearchList(con, currentPage, limit, resume);
+		ArrayList<RecruitmentVo> list = new RecruitmentDao().loadMatchingSearchList(con, currentPage, limit, myResumeVo);
 		
 		JDBCTemplate.close(con);
 

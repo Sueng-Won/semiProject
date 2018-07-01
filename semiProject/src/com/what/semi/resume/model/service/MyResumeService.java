@@ -15,7 +15,7 @@ public class MyResumeService {
 		//이력서 목록 조회하기
 		Connection con = JDBCTemplate.getConnection();
 		
-		
+		System.out.println("selectMyInfo실행");
 		ArrayList<MyResumeVo> userType =  new MyResumeDao().selectMyInfo(con, id);
 		
 		JDBCTemplate.close(con);

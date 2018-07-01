@@ -6,7 +6,7 @@
     
 <%
 
-ArrayList<RecruitmentVo> list = 
+/* ArrayList<RecruitmentVo> list = 
 	(ArrayList<RecruitmentVo>)request.getAttribute("list"); 
 
 PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -14,7 +14,7 @@ int listCount = pi.getTotalCount();
 int currentPage = pi.getCurrentPage();
 int maxPage = pi.getMaxPage();
 int startPage = pi.getStartPage();
-int endPage = pi.getEndPage();
+int endPage = pi.getEndPage(); */
 %>
 
 <%@include file="/views/common/header.jsp" %>
@@ -55,8 +55,8 @@ int endPage = pi.getEndPage();
         <!-- /.col-lg-9 -->
         
         <!--====================================	페이지선택버튼	 ==================================  -->
-	        <%-- <div class="btn-toolbar mb-1" role="toolbar">
-			  <div class="btn-group" role="group">
+	        <div class="btn-toolbar mb-1" role="toolbar">
+			  <%-- <div class="btn-group" role="group">
 					<button onclick="movePage(<%=currentPage==1?1:currentPage-1%>);" type="button" class="btn btn-default bg-dark text-white">◀</button>
 					<%for(int i = startPage; i <= endPage; i++){ %>
 						<%if(currentPage != i){ %>
@@ -67,8 +67,8 @@ int endPage = pi.getEndPage();
 						<%} %>
 					<%} %>
 					<button onclick="movePage(<%=currentPage==maxPage?maxPage:maxPage+1%>);" type="button" class="btn btn-default bg-dark text-white">▶</button>
-			  </div>
-			</div> --%>
+			  </div> --%>
+			</div>
 		<!--=========================================================================================-->
         </div>
       <!-- /.row -->
@@ -77,7 +77,7 @@ int endPage = pi.getEndPage();
     <!-- /.container -->
 <script type="text/javascript">
 	function movePage(pageNum) {
-		location.href = "/sp/indexList.do?currentPage="+pageNum;
+		location.href = "/sp/matchingSearch.do?currentPage="+pageNum;
 	}
 </script>
 <%@include file="/views/common/footer.jsp"%>

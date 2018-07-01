@@ -1,6 +1,6 @@
 package com.what.semi.resume.model.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class MyResumeVo {
 	private String id;
@@ -21,7 +21,7 @@ public class MyResumeVo {
 	private String phone;
 	private String email;
 	private String address;
-
+	private char gender;
 	public MyResumeVo() {
 
 	}
@@ -194,10 +194,26 @@ public class MyResumeVo {
 	public void setIs_post(int is_post) {
 		this.is_post = is_post;
 	}
+	
+	
+	public char getGender() {
+		return gender;
+	}
+
+	public void setGender(char gender) {
+		this.gender = gender;
+	}
 
 	@Override
 	public String toString() {
-		return "MyInfoTypeVo [id=" + id + ", introduce_title=" + introduce_title + ", is_post=" + is_post + "]";
+		return "MyResumeVo [id=" + id + ", resume_id=" + resume_id + ", introduce_title=" + introduce_title
+				+ ", is_post=" + is_post + ", member_type=" + member_type + ", pri_resume=" + pri_resume
+				+ ", profile_image_src=" + profile_image_src + ", achievement=" + achievement + ", disability="
+				+ disability + ", miltary_service=" + miltary_service + ", career=" + career + ", business_type="
+				+ business_type + ", workable_days=" + workable_days + ", name=" + name + ", birth=" + birth
+				+ ", phone=" + phone + ", email=" + email + ", address=" + address + ", gender=" + gender + "]";
 	}
+
+	
 
 }

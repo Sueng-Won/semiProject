@@ -1,6 +1,5 @@
 package com.what.semi.resume.model.dao;
 
-import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.what.semi.common.template.JDBCTemplate;
-import com.what.semi.member.model.vo.MemberVo;
 import com.what.semi.resume.model.vo.MyResumeVo;
 
 public class MyResumeDao {
@@ -20,15 +18,16 @@ public class MyResumeDao {
 		ArrayList<MyResumeVo> userType = null;
 		
 		try {
-			query = "SELECT PRI_RESUME, RESUME_ID, INTRODUCE_TITLE, IS_POST, MEMBER_TYPE FROM RESUME R JOIN MEMBER M ON (R.M_ID = M.M_ID) WHERE M.M_ID=?";
+			query = "SELECT PRI_RESUME, RESUME_ID, INTRODUCE_TITLE, IS_POST, MEMBER_TYPE, MILTARY_SERVICE, BUSINESS_TYPE, WORKABLE_DAYS, GENDER FROM RESUME R JOIN MEMBER M ON (R.M_ID = M.M_ID) WHERE M.M_ID = ?";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			
+			System.out.println(id);
 			userType = new ArrayList<MyResumeVo>();
 			MyResumeVo temp = null;
 			
 			while(rs.next()){
+				System.out.println("리스트생성");
 				temp = new MyResumeVo();
 				temp.setId(id);
 				temp.setResume_id(rs.getInt("resume_id"));
@@ -36,6 +35,10 @@ public class MyResumeDao {
 				temp.setIs_post(rs.getInt("is_post"));
 				temp.setMember_type(rs.getString("member_type"));
 				temp.setPri_resume(rs.getString("pri_resume").charAt(0));
+				temp.setMiltary_service(rs.getInt("miltary_service"));
+				temp.setBusiness_type(rs.getString("business_type"));
+				temp.setWorkable_days(rs.getDate("workable_days"));
+				temp.setGender(rs.getString("gender").charAt(0));
 				userType.add(temp);
 			}
 		} catch (SQLException e) {
