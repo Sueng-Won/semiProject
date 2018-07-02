@@ -67,7 +67,7 @@ public class WriteRecruitmentServlet extends HttpServlet {
 		// 4.전송 값을 변수에 저장
 		//객체 2 -> 게시판에 추가할 객체, attachment 추가할 객체(list)
 		
-		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		
 		String name = mRequest.getParameter("name");
 		String phone = mRequest.getParameter("phone");
