@@ -92,7 +92,7 @@ public class WriteRecruitmentServlet extends HttpServlet {
 		java.sql.Date workdate=null;
 		
 		try {
-			workdate = new java.sql.Date(((Date)df.parse(mRequest.getParameter("workdate"))).getTime());
+			workdate = new java.sql.Date(((java.util.Date)df.parse(mRequest.getParameter("workdate"))).getTime());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
