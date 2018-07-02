@@ -14,30 +14,7 @@ int endPage = pi.getEndPage(); */
 <head>
     <%@include file="adminHeader.jsp" %>
 <script type="text/javascript">
-	$(function() {
-		$("#searchMember").on("click", function() {
-			var reportValue = $("#reportValue").val();
-			var mTypeValue = $("#mTypeValue").val();
-			var mName = $("#mName").val();
-			
-			$.ajax({
-				url : "/sp/blackList.do",
-				type : "post",
-				data : {reportValue : reportValue,
-					mTypeValue : mTypeValue,
-					mName : mName},
-				success : function(data) {
-					for(var key in data){
-						var member = data[key];
-						
-					}
-				},
-				error : function(e) {
-					console.log("error", e);
-				}
-			});
-		});
-	});
+	
 		function mType(obj) {
 			var text = $(obj).text();
 			var value = $(obj).val();
@@ -61,7 +38,7 @@ int endPage = pi.getEndPage(); */
     		<%@include file="adminNav.jsp" %>
     		
     		<div class="col-lg-9 mt-4">
-    			<form method="post">
+    			<form method="post" action="/sp/blackList.do">
     			<div class="row mb-4">
     			
     				<div class="btn-group col-2">
@@ -70,9 +47,9 @@ int endPage = pi.getEndPage(); */
 						</button>
 					    <input type="hidden" name="reportValue" id="reportValue">
 						<ul class="dropdown-menu bg-dark" role="menu">
-							<li><button type="button" onclick="isReport(this);" name="N" class="btn btn-dark btn-sm btn-block" value="N">신고무관</button></li>
-							<li><button type="button" onclick="isReport(this);" name="O" class="btn btn-dark btn-sm btn-block" value="O">신고 O</button></li>
-							<li><button type="button" onclick="isReport(this);" name="X" class="btn btn-dark btn-sm btn-block" value="X">신고 X</button></li>
+							<li><button type="button" onclick="isReport(this);" name="isReport" class="btn btn-dark btn-sm btn-block" value="N">회원 전체</button></li>
+							<li><button type="button" onclick="isReport(this);" name="isReport" class="btn btn-dark btn-sm btn-block" value="O">신고 회원</button></li>
+							<li><button type="button" onclick="isReport(this);" name="isReport" class="btn btn-dark btn-sm btn-block" value="X">미신고 회원</button></li>
 							<li class="divider"></li>
 						</ul>
 					</div>
@@ -83,15 +60,15 @@ int endPage = pi.getEndPage(); */
 						</button>
 					    <input type="hidden" name="mTypeValue" id="mTypeValue">
 						<ul class="dropdown-menu bg-dark" role="menu">
-							<li><button type="button" onclick="mType(this);" name="no" class="btn btn-dark btn-sm btn-block" value="no">회원전체</button></li>
-							<li><button type="button" onclick="mType(this);" name="js" class="btn btn-dark btn-sm btn-block" value="js">구직자</button></li>
-							<li><button type="button" onclick="mType(this);" name="bo" class="btn btn-dark btn-sm btn-block" value="bo">업주</button></li>
+							<li><button type="button" onclick="mType(this);" name="memberType" class="btn btn-dark btn-sm btn-block" value="NO">회원 전체</button></li>
+							<li><button type="button" onclick="mType(this);" name="memberType" class="btn btn-dark btn-sm btn-block" value="JS">구직 회원</button></li>
+							<li><button type="button" onclick="mType(this);" name="memberType" class="btn btn-dark btn-sm btn-block" value="BO">업체 회원</button></li>
 						</ul>
 					</div>
 					<div class="input-group col-4">
-					<input type="text" class="form-control mb-1" name="mName" id="mName" placeholder="회원명 입력"/>
+					<input type="text" class="form-control mb-1" name="keyword" id="keyword" placeholder="회원명 입력"/>
 				      <span class="input-group-btn">
-				        <button class="btn btn-dark ml-1" type="button" id="searchMember">검색</button>
+				        <input class="btn btn-dark ml-1" type="submit" id="searchMember" value="검색">
 				      </span>
 					</div>
     			</div>

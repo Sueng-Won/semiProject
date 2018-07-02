@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.what.semi.blackList.model.service.BlackListService;
+import com.what.semi.blackList.model.vo.ConditionVo;
 import com.what.semi.recruitment.model.service.RecruitmentService;
 import com.what.semi.resume.model.vo.MyResumeVo;
 
@@ -156,4 +158,42 @@ public class PageTemplate {
 		PageInfo pi = new PageInfo(currentPage, limit, maxPage, startPage, endPage, listCount);		
 		return pi;
 	}
+
+	public static PageInfo blackListPaging(HttpServletRequest request, BlackListService bls, ConditionVo condition) {
+		//페이징 처리 변수
+		int currentPage = 1;	//현재 페이지의 번호(default=1)
+		int limitPage = 10;		//한 페이지에 출력할 페이지 개수
+		int maxPage;		//가장 마지막 페이지
+		int startPage;		//시작 페이지
+		int endPage;		//마지막 페이지 변수
+		
+		int limit = 12;			//한 페이지에 출력할 글의 개수(default=12)
+		int listCount;
+		
+		
+		//게시글의 총 갯수
+		listCount = bls.selectBlackListTotalCount(condition);			//검색조건을 통해 받아온 DB상의 데이터 수를 리턴받음
+		System.out.println("listCount/"+listCount);
+		
+		if(null != request.getParameter("currentPage")) {		//만약 페이지를 이동했을경우는 해당 페이지를 기준으로 잡아줌
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		//130 -> 13
+		maxPage = (int)((double)listCount / limit + 0.95);
+		//현재 페이지 번호
+		//12 - 10
+		startPage = (int)(currentPage / limitPage * limitPage) + 1;
+		//11~20 -> 134 -> 14
+		endPage = startPage + limitPage - 1;
+		if(maxPage < endPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(currentPage, limit, maxPage, startPage, endPage, listCount);		
+		return pi;
+	}
+
+	
+
 }

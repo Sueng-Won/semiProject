@@ -1,58 +1,70 @@
 package com.what.semi.blackList.model.vo;
 
+import java.util.ArrayList;
+
 public class BlackListVo {
-	private int b_no;			//블랙리스트 고유 넘버
-	private int count;			//신고 횟수
-	private String reason;		//신고 사유(카테고리제공)
-	private String kakao_id;	//카카오 아이디
+	
+	private ArrayList<ReportVo> report;		//신고 사유와 해당 사유에 대한 신고횟수
+	private String m_id;					//아이디
+	private String m_type;					//회원타입
+	private String m_name;					//회원명
+	private int totalCount;					//총 신고횟수
 	
 	public BlackListVo() {
 	}
 
-	public BlackListVo(int b_no, int count, String reason, String kakao_id) {
+	public BlackListVo(String m_id, String m_type, String m_name, int totalCount) {
 		super();
-		this.b_no = b_no;
-		this.count = count;
-		this.reason = reason;
-		this.kakao_id = kakao_id;
+		this.m_id = m_id;
+		this.m_type = m_type;
+		this.m_name = m_name;
+		this.totalCount = totalCount;
 	}
 
-	public int getB_no() {
-		return b_no;
+	public ArrayList<ReportVo> getReport() {
+		return report;
 	}
 
-	public void setB_no(int b_no) {
-		this.b_no = b_no;
+	public void setReport(ArrayList<ReportVo> report) {
+		this.report = report;
 	}
 
-	public int getCount() {
-		return count;
+	public String getM_id() {
+		return m_id;
 	}
 
-	public void setCount(int count) {
-		this.count = count;
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
 	}
 
-	public String getReason() {
-		return reason;
+	public String getM_type() {
+		return m_type;
 	}
 
-	public void setReason(String reason) {
-		this.reason = reason;
+	public void setM_type(String m_type) {
+		this.m_type = m_type;
 	}
 
-	public String getKakao_id() {
-		return kakao_id;
+	public String getM_name() {
+		return m_name;
 	}
 
-	public void setKakao_id(String kakao_id) {
-		this.kakao_id = kakao_id;
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
+	}
+
+	public int getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
 	}
 
 	@Override
 	public String toString() {
-		return "BlackListVo [b_no=" + b_no + ", count=" + count + ", reason=" + reason + ", kakao_id=" + kakao_id + "]";
+		return "BlackListVo [report=" + report + ", m_id=" + m_id + ", m_type=" + m_type + ", m_name=" + m_name
+				+ ", totalCount=" + totalCount + "]";
 	}
-	
-	
+
 }
