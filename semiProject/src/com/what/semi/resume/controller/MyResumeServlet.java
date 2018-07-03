@@ -24,7 +24,7 @@ public class MyResumeServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// 나의 이력서 불러오기 
+		
 			HttpSession session = request.getSession(false);
 		
 			String id = (String)session.getAttribute("id");
@@ -39,7 +39,6 @@ public class MyResumeServlet extends HttpServlet {
 			request.setAttribute("userType", userType);
 		}else{
 			url = "views/member/logout.jsp";
-			response.sendRedirect(url);
 		}
 		RequestDispatcher view = request.getRequestDispatcher(url);
 		view.forward(request, response);
