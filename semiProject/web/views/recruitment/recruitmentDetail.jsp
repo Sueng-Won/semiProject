@@ -8,100 +8,71 @@
 		$("#writeRecruitment").submit();
 	}
 
-	var searchAddr;
-
-	function openAddressPopup() {
-		var themeObj = {
-			bgColor : "#162525", //바탕 배경색
-			searchBgColor : "#162525", //검색창 배경색
-			contentBgColor : "#162525", //본문 배경색(검색결과,결과없음,첫화면,검색서제스트)
-			pageBgColor : "#162525", //페이지 배경색
-			textColor : "#FFFFFF", //기본 글자색
-			queryTextColor : "#FFFFFF", //검색창 글자색
-			//postcodeTextColor: "", //우편번호 글자색
-			//emphTextColor: "", //강조 글자색
-			outlineColor : "#444444" //테두리
-		};
-		new daum.Postcode(
-				{
-					theme : themeObj,
-					oncomplete : function(data) {
-						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-						// 각 주소의 노출 규칙에 따라 주소를 조합한다.
-						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-						var fullAddr = ''; // 최종 주소 변수
-						var extraAddr = ''; // 조합형 주소 변수
-
-						// 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-						if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-							fullAddr = data.roadAddress;
-
-						} else { // 사용자가 지번 주소를 선택했을 경우(J)
-							fullAddr = data.jibunAddress;
-						}
-
-						// 사용자가 선택한 주소가 도로명 타입일때 조합한다.
-						if (data.userSelectedType === 'R') {
-							//법정동명이 있을 경우 추가한다.
-							if (data.bname !== '') {
-								extraAddr += data.bname;
-							}
-							// 건물명이 있을 경우 추가한다.
-							if (data.buildingName !== '') {
-								extraAddr += (extraAddr !== '' ? ', '
-										+ data.buildingName : data.buildingName);
-							}
-							// 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-							fullAddr += (extraAddr !== '' ? ' (' + extraAddr
-									+ ')' : '');
-						}
-
-						// 우편번호와 주소 정보를 해당 필드에 넣는다.
-						$("#zipcode").val(data.zonecode);//5자리 새우편번호 사용
-						$("#address").val(fullAddr);
-
-						// 커서를 상세주소 필드로 이동한다.
-						$("#addressDetail").focus();
-						searchAddr = fullAddr;
-					},
-					onclose : function(state) {
-						//state는 우편번호 찾기 화면이 어떻게 닫혔는지에 대한 상태 변수 이며, 상세 설명은 아래 목록에서 확인하실 수 있습니다.
-						if (state === 'FORCE_CLOSE') {
-							//사용자가 브라우저 닫기 버튼을 통해 팝업창을 닫았을 경우, 실행될 코드를 작성하는 부분입니다.
-
-						} else if (state === 'COMPLETE_CLOSE') {
-							//사용자가 검색결과를 선택하여 팝업창이 닫혔을 경우, 실행될 코드를 작성하는 부분입니다.
-							//oncomplete 콜백 함수가 실행 완료된 후에 실행됩니다.
-							console.log('검색 종료', searchAddr);
-							// 주소-좌표 변환 객체를 생성합니다
-							var geocoder = new daum.maps.services.Geocoder();
-
-							// 주소로 좌표를 검색합니다
-							geocoder.addressSearch(searchAddr, function(result,
-									status) {
-
-								// 정상적으로 검색이 완료됐으면 
-								if (status === daum.maps.services.Status.OK) {
-									$("#latitude").val(result[0].y);
-									$("#longitude").val(result[0].x);
-
-									var coords = new daum.maps.LatLng(
-											result[0].y, result[0].x);
-									console.log(coords);
-
-									// 결과값으로 받은 위치를 마커로 표시합니다
-
-								}
-							});
-						}
-					}
-
-				}).open();
-
-	}
+	$(function() {
+		var count = $("#ta").text().length;
+		if (count > 510) {
+			var minus = count - 510;
+			var mod = (minus / 85) + 1;
+			var he = (mod * 25) + 150;
+			$("#ta").css("height", he + "px");
+		}
+		console.log($("#ta").height());
+	});
 </script>
+<style>
+.line {
+	width: 800px;
+	margin-bottom: 20px;
+	margin-left: 60px;
+	float: center;
+}
 
+.title_line {
+	width: 800px;
+	margin-bottom: 20px;
+	float: center;
+}
+
+.title_space {
+	width: 800px;
+	height: 30px;
+	border-top: 2px #5D5D5D solid;
+}
+
+.space {
+	width: 800px;
+	height: 30px;
+	border-top: 1px #cccccc solid;
+}
+
+.title_image {
+	width: 220px;
+	float: left;
+}
+
+.sub_image {
+	width: 170px;
+	float: left;
+	margin-top: 20px;
+}
+
+table {
+	margin-top: 10px;
+}
+
+td {
+	padding-right: 10px;
+}
+
+tr {
+	height: 30px;
+}
+
+#ta {
+	width: 680px;
+	height: 150px;
+}
+</style>
 <!-- Page Content -->
 <div class="container" style="min-height: 1000px">
 	<div class="row">
@@ -110,17 +81,97 @@
 
 		<!-- /.col-lg-3 -->
 		<div class="col-lg-9 mt-lg-auto">
-			<div class="row mt-4">
-				<div class="col-lg-2"></div>
-				<div class="col-lg-8 bg-dark">
-					<br> <br>
-					<h3 align="center" class="text-white-50">구인 게시물 상세 페이지</h3>
-					<br>
-					
-
+			<div class="row mt-4" style="margin-left: 50px;">
+				<div class="title_line">
+					<div>업체명</div>
+					<div>
+						<h1>구인 게시글 제목</h1>
+					</div>
 				</div>
-				<!-- /.col-lg-6 -->
-				<div class="col-lg-2"></div>
+				<div class="title_space"></div>
+				<div class="line">
+					<div class="title_image">
+						<div>
+							<img src="/sp/images/building.jpeg">
+						</div>
+					</div>
+					<div class="sub_image">
+						<div>
+							<img src="/sp/images/calendar2.jpeg">
+						</div>
+						<div>08 / 01</div>
+					</div>
+					<div class="sub_image">
+						<div>
+							<img src="/sp/images/pay2.jpeg">
+						</div>
+						<div>100,000원</div>
+					</div>
+					<div class="sub_image">
+						<div>
+							<img src="/sp/images/time2.jpeg">
+						</div>
+						<div>9:00~21:00</div>
+					</div>
+				</div>
+				<div class="space"></div>
+				<div class="line">
+					<div style="float: left;">
+						<b>모집조건</b>
+						<table>
+							<tr>
+								<td>모집분야</td>
+								<td>배달업무</td>
+							</tr>
+							<tr>
+								<td>희망성별</td>
+								<td>무관</td>
+							</tr>
+							<tr>
+								<td>희망경력</td>
+								<td>무관</td>
+							</tr>
+							<tr>
+								<td>희망학력</td>
+								<td>무관</td>
+							</tr>
+							<tr>
+								<td>희망나이</td>
+								<td>22~60</td>
+							</tr>
+							<tr>
+								<td>병역우대</td>
+								<td>무관</td>
+							</tr>
+						</table>
+					</div>
+					<div style="float: right; margin-right: 50px;">
+						<b>채용자정보</b>
+						<table>
+							<tr>
+								<td>채용자</td>
+								<td>알*몬</td>
+							</tr>
+							<tr>
+								<td>연락처</td>
+								<td>로그인 후 확인 가능합니다.</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="space"></div>
+				<div class="line">
+					<div id="ta">상세내용</div>
+				</div>
+				<div class="space"></div>
+				<div class="line">지도</div>
+				<div class="space"></div>
+				<div class="line">
+					<div align="center">
+						<button onclick="writeRec();"
+							class="btn btn-default bg-dark text-white">지원하기</button>
+					</div>
+			</div>
 			</div>
 		</div>
 		<!-- /.row -->
@@ -130,7 +181,5 @@
 	<!-- /.row -->
 </div>
 <!-- /.container -->
-<script type="text/javascript">
-	
-</script>
+
 <%@include file="/views/common/footer.jsp"%>
