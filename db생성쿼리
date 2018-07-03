@@ -176,3 +176,4 @@ ALTER TABLE RESUME
        ADD  ( FOREIGN KEY (M_ID)
                              REFERENCES MEMBER ) ;
                              
+CREATE SEQUENCE SEQ_RECRUITMENT;
