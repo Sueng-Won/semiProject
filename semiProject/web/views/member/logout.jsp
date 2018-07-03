@@ -10,16 +10,13 @@
 		setTimeout("location.href='/sp/index.jsp'",2000);
 	})
 </script>
-<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript" src="/sp/vendor/bootstrap/datepicker/bootstrap-datepicker.js"></script>
-<link rel="stylesheet" type="text/css" href="/sp/vendor/bootstrap/datepicker/bootstrap-datepicker.css"/>
     <!-- Page Content -->
     <div class="container" style="min-height: 800px;">
     
       <div class="row">
 		<%@include file="/views/common/nav.jsp" %>
         <!-- /.col-lg-3 -->
-        <div class="col-lg-9 mt-lg-auto">
+        <div class="col-lg-9 mt-lg-10">
         	<div class="row mt-4">
         	  <div class="col-lg-3"></div>
 			  <div class="col-lg-6 bg-dark">

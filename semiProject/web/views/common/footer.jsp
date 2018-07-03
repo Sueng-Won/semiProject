@@ -9,9 +9,11 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    
+   <!--  <script src="/sp/vendor/jquery/jquery.min.js"></script> -->
     <script src="/sp/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   </body>
 
 </html>
+
+<!-- 브렌치생성코드 -->

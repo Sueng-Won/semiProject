@@ -1,9 +1,7 @@
 package com.what.semi.member.controller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,34 +24,22 @@ public class LoginServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		String id = request.getParameter("id");
-		//String pw = request.getParameter("pw");
 		String pw = Sha512.getSha512(request.getParameter("pw"));
-		//System.out.println("login id = "+id);
-		//System.out.println("login pw = "+pw);
 		int result = 0;
 		
-		result = new MemberService().checkLogin(id,pw);
-		
-		/*if(0 > result) {
-			result = new MemberService().enterUser(id);
-		}*/
+		result = new MemberService().checkLogin(id, pw);
+
 		HttpSession session = request.getSession();
 		
 		
 		if(result>0) {
-			//System.out.println(id);
-			//System.out.println("결과가 있을경우 호출");
 			session.setAttribute("id", id);
 			System.out.println(id);
 			response.sendRedirect("index.jsp");
 			
 		}else {
 			response.sendRedirect("index.jsp");
-			//System.out.println("결과가 없을경우 호출");
 		}
-
-		
-		
 	}
 
 }
