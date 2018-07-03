@@ -76,11 +76,6 @@ public class RecruitmentService {
 		Connection con = JDBCTemplate.getConnection();
 
 		int result = new RecruitmentDao().insertRecruitment(con, rec);
-		if(result!=0){
-			JDBCTemplate.commit(con);
-		}else{
-			JDBCTemplate.rollback(con);
-		}
 
 		JDBCTemplate.close(con);
 
@@ -90,14 +85,14 @@ public class RecruitmentService {
 	public int myRecListTotalCount(String id) {
 		Connection con = JDBCTemplate.getConnection();
 
-		int ListCount = new RecruitmentDao().selectMyListTotalCount(con, id);
+		int result = new RecruitmentDao().selectMyListTotalCount(con, id);
 
 		JDBCTemplate.close(con);
 
-		return ListCount;
+		return result;
 	}
 
-	public ArrayList<RecruitmentVo> loadMyRecList(int currentPage, int limit,String id) {
+	public ArrayList<RecruitmentVo> loadMyRecList(int currentPage, int limit, String id) {
 		Connection con = JDBCTemplate.getConnection();
 		ArrayList<RecruitmentVo> list = new RecruitmentDao().selectMyRecList(con, id, currentPage, limit);
 		JDBCTemplate.close(con);

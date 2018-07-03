@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.what.semi.member.model.service.MemberService;
+import com.what.semi.member.model.vo.MemberVo;
 import com.what.semi.recruitment.model.service.RecruitmentService;
 import com.what.semi.recruitment.model.vo.RecruitmentVo;
 
@@ -40,6 +42,7 @@ public class RecruitmentDetailServlet extends HttpServlet {
 		System.out.println(currentPage);
 		
 		RecruitmentVo rec = new RecruitmentService().selectRecruitment(recId);
+		MemberVo writer = new MemberService().getMemberInfo(rec.getM_id());
 	
 		String url = "";
 		if(null != rec){
@@ -47,6 +50,7 @@ public class RecruitmentDetailServlet extends HttpServlet {
 			System.out.println(rec.toString());
 			request.setAttribute("rec", rec);
 			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("writer", writer);
 		}else{
 			/*url = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "게시글 상세조회에 실패하였습니다.");*/

@@ -8,8 +8,7 @@
 	(ArrayList<RecruitmentVo>)request.getAttribute("list"); 
    
    
-   java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("MM / dd");
-
+   /* java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("MM / dd"); */
 PageInfo pi = (PageInfo)request.getAttribute("pi");
 int listCount = pi.getTotalCount();
 int currentPage = pi.getCurrentPage();
@@ -22,12 +21,8 @@ int endPage = pi.getEndPage();
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 
 <script type="text/javascript">
-	function updateRecruit(){
+	function writeRec(){
 		location.href = "/sp/views/recruitment/recruitmentForm.jsp";
-	}
-	
-	function updateResume() {
-		location.href = "/sp/views/resume/memberResume.jsp";
 	}
 	
 	function recruitmentDetail(i){
@@ -85,14 +80,15 @@ width:350px;
 			<table class="list-table">
 			<tbody>
 			<tr>
-			<th><div class="table-td">게시여부</div></th><th><div class="table-td">날짜</div></th><th><div class="td-title">기업명/글제목</div></th><th><div class="table-td-location">지역</div></th><th><div class="table-td">급여</div></th>
+			<th><div class="table-td">게시여부</div></th><th><div class="table-td">근무형태</div></th><th><div class="td-title">기업명/글제목</div></th><th><div class="table-td-location">지역</div></th><th><div class="table-td">급여</div></th>
 			</tr>
 			<%for(int i =0; i<list.size();i++) {
 				String[] locationArr = list.get(i).getAddress().split(" ");
 				String location = locationArr[0]+" "+locationArr[1];
 			%>
 			<tr onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);">
-			<td class="table-td"><%if(list.get(i).getIs_post()==0){ %>기간만료<%}else{ %>게시중<%} %></td><td class="table-td"><%=df.format(list.get(i).getWork_day()) %></td><td class="td-title"><b><%=list.get(i).getRecruitment_name() %></b><br><%=list.get(i).getRecruitment_title() %></td><td class="table-td-location"><%=location%></td><th class="table-td"><%=list.get(i).getPay() %>원</td>
+			<td class="table-td"><%if(list.get(i).getIs_post()==0){ %>기간만료<%}else{ %>게시중<%} %></td><%-- <td class="table-td"><%=df.format(list.get(i).getWork_day()) %></td> --%><td class="table-td"><%=list.get(i).getBusiness_type() %></td>
+			<td class="td-title"><b><%=list.get(i).getRecruitment_name() %></b><br><%=list.get(i).getRecruitment_title() %></td><td class="table-td-location"><%=location%></td><th class="table-td"><%=list.get(i).getPay() %>원</td>
 			</tr>
 			<%} %>
 			</tbody>
@@ -112,7 +108,9 @@ width:350px;
 					<%} %>
 					<button onclick="movePage(<%=currentPage==maxPage?maxPage:maxPage+1%>);" type="button" class="btn btn-default bg-dark text-white">></button>
 			  </div>
+			  
 			</div>  
+			  <div align="right" style="width:700px;"><button onclick="writeRec();" class="btn btn-default bg-dark text-white" >구인글 작성하기</button></div>
 				<!--=========================================================================================-->
 			
 		</div>
