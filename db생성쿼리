@@ -1,8 +1,10 @@
  -- 관리자 계정 --
 
-CREATE USER jsp IDENTIFIED BY jsp;
+CREATE USER jsp IDENTIFIED BY semi;
 
-GRANT CONNECT, RESOURCE, CREATE VIEW, CREATE SEQUENCE TO jsp;
+GRANT CONNECT, RESOURCE, CREATE VIEW, CREATE SEQUENCE TO semi;
+
+--시퀀스 생성 권한
 
 ------------------------------------------------------------------
 DROP TABLE BLACKLIST;
