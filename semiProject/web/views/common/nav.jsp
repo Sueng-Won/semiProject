@@ -58,6 +58,13 @@
 						<input type="button" size="15" value="회원가입" class="btn btn-dark btn-sm btn-block" onclick="join();" />
 					</td>
 				</tr>
+				<tr>
+						<td colspan="2">
+						<a href="/sp/searchId.do">아이디 찾기</a>
+						/
+						<a href="#">비밀번호 찾기</a>
+						</td>
+				</tr>
 			</table>
 		</form>
 		<%} else { %>
