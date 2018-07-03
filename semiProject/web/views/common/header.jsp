@@ -64,7 +64,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/sp/views/member/manageResume.jsp">이력서/업체정보관리</a>
+              <a class="nav-link" href="/sp/myRecruitmentList.do">이력서/업체정보관리</a>
             </li>
             <li class="nav-item">
               <a class="nav-link btn" style="text-align: left;" onclick="qnaNew();">Q&A</a>
