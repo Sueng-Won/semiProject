@@ -23,7 +23,7 @@ public class MyResumeVo {
 	private String address;
 	private String introduce;
 	private String workTime;
-	
+	private String gender;
 	public String getWorkTime() {
 		return workTime;
 	}
@@ -212,10 +212,27 @@ public class MyResumeVo {
 	public void setIs_post(int is_post) {
 		this.is_post = is_post;
 	}
+	
+	
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
 	@Override
 	public String toString() {
-		return "MyInfoTypeVo [id=" + id + ", introduce_title=" + introduce_title + ", is_post=" + is_post + "]";
+		return "MyResumeVo [id=" + id + ", resume_id=" + resume_id + ", introduce_title=" + introduce_title
+				+ ", is_post=" + is_post + ", member_type=" + member_type + ", pri_resume=" + pri_resume
+				+ ", profile_image_src=" + profile_image_src + ", achievement=" + achievement + ", disability="
+				+ disability + ", miltary_service=" + miltary_service + ", career=" + career + ", business_type="
+				+ business_type + ", workable_days=" + workable_days + ", name=" + name + ", birth=" + birth
+				+ ", phone=" + phone + ", email=" + email + ", address=" + address + ", introduce=" + introduce
+				+ ", workTime=" + workTime + ", gender=" + gender + "]";
 	}
+
+	
 
 }

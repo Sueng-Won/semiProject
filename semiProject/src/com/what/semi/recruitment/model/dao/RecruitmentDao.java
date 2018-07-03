@@ -323,7 +323,6 @@ public class RecruitmentDao {
 		return result;
 	}
 
-<<<<<<< HEAD
 	public int selectMachingListTotalCount(Connection con, MyResumeVo myResumeVo) {
 		int result = -1;
 		String businessType = myResumeVo.getBusiness_type();
@@ -368,7 +367,7 @@ public class RecruitmentDao {
 			MyResumeVo myResumeVo) {
 		String businessType = myResumeVo.getBusiness_type();
 		Date workableDay = myResumeVo.getWorkable_days();
-		String gender = String.valueOf(myResumeVo.getGender());
+		String gender = myResumeVo.getGender();
 		int miltaryService = myResumeVo.getMiltary_service();
 		ArrayList<RecruitmentVo> list = null;
 		PreparedStatement pstmt = null;
@@ -434,7 +433,6 @@ public class RecruitmentDao {
 	}
 
 	
-=======
 	public int selectMyListTotalCount(Connection con, String id) {
 		int result = -1;
 
@@ -561,6 +559,5 @@ public class RecruitmentDao {
 
 		return rec;
 	}
->>>>>>> refs/heads/master
 
 }

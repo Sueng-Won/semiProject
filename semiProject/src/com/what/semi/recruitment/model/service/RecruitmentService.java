@@ -82,7 +82,6 @@ public class RecruitmentService {
 		return result;
 	}
 
-<<<<<<< HEAD
 	public int selectMachingListTotalCount(MyResumeVo myResumeVo) {
 		Connection con = JDBCTemplate.getConnection();
 
@@ -106,7 +105,6 @@ public class RecruitmentService {
 	
 	
 	
-=======
 	public int myRecListTotalCount(String id) {
 		Connection con = JDBCTemplate.getConnection();
 
@@ -130,6 +128,5 @@ public class RecruitmentService {
 		JDBCTemplate.close(con);
 		return rec;
 	}
->>>>>>> refs/heads/master
 	
 }
