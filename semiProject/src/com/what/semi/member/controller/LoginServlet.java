@@ -44,6 +44,7 @@ public class LoginServlet extends HttpServlet {
 			//System.out.println(id);
 			//System.out.println("결과가 있을경우 호출");
 			session.setAttribute("id", id);
+			System.out.println(id);
 			response.sendRedirect("index.jsp");
 			
 		}else {

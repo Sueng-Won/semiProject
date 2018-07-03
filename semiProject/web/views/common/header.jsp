@@ -60,7 +60,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/sp/views/member/manageResume.jsp">이력서/업체정보관리</a>
+              <a class="nav-link" href="/sp/getResume.do">이력서/업체정보관리</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/sp/views/qna/qnaList.jsp">Q&A</a>

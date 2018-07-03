@@ -12,8 +12,8 @@
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 
 <script type="text/javascript">
-	function writeResume() {
-		$("#writeResume").submit();
+	function modifyResume() {
+		$("#modifyResume").submit();
 	}
 </script>
     <!-- Page Content -->
@@ -30,11 +30,16 @@
 			  <br><br>
         		<h3 align="center" class="text-white-50">이력서</h3>
         		<br>
-			  <form id="writeResume" method="post" action="/sp/writeResume.do" enctype="multipart/form-data">
+			  <form id="modifyResume" method="post" action="/sp/modifyResume.do" enctype="multipart/form-data">
 			  	<div class="row">
 			  		<div class="col-3 mb-1">
+			  		<%if(null!=member.getProfile_image_src()){ %>
+				  		<img alt="" height="140px" width="120px" src="/sp/profile_photo/<%=member.getProfile_image_src() %>" id="userPhoto">
+						<input type="file" id="userPhotoInput" name="userPhoto"  onchange="printImage(this);"/> 
+						<%}else{ %>
 						<img alt="" height="140px" width="120px" src="http://placehold.it/300x400" id="userPhoto">
 						<input type="file" id="userPhotoInput" name="userPhoto"  onchange="printImage(this);"/> 
+						<%} %>
 			  		</div>
 				  	<div class="col-9">
 				    	<!-- 사용자 이름 -->
@@ -137,7 +142,6 @@
 				    		<label>근무 가능 일</label>
 							<input type="date" class="btn-dark" name="dateD"/>
 				    	</div>
-		
 				    </div>
 			    </div>
 			    
@@ -172,7 +176,8 @@
 			    </div>
 			    
 			    <div>
-			    	<input type="submit" class="btn btn-light text-dark mt-4 mb-2" onclick="writeResume();"/>
+			    	<input type="hidden" name="resume_id" value=<%=member.getResume_id()%>>
+			    	<input type="submit" class="btn btn-light text-dark mt-4 mb-2" onclick="modifyResume();"/>
 			    </div>
 			    
 			  </form>
