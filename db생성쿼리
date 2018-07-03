@@ -70,7 +70,6 @@ ALTER TABLE MEMBER
 
 CREATE TABLE QNA (
        Q_NO                 NUMBER NOT NULL,
-       TITLE                VARCHAR2(500) NULL,
        CONTENT              VARCHAR2(4000) NULL,
        CATEGORY             VARCHAR2(100) NULL,
        REPORTING_DATE       DATE NULL,
