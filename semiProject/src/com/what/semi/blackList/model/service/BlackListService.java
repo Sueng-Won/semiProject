@@ -35,4 +35,36 @@ public class BlackListService {
 		return list;
 	}
 
+	public void updateBlackList(String b_id) {
+		Connection con = JDBCTemplate.getConnection();
+		int result = -1;
+		result = new BlackListDao().updateBlackList(con, b_id);
+		
+		if(result >= 0) {
+			JDBCTemplate.commit(con);
+			System.out.println(b_id+" <- 블랙리스트 등록 성공");
+		}else {
+			JDBCTemplate.rollback(con);
+			System.out.println(b_id+" <- 블랙리스트 등록 실패");
+		}
+		
+		JDBCTemplate.close(con);
+	}
+
+	public void deleteBlackList(String b_id) {
+		Connection con = JDBCTemplate.getConnection();
+		int result = -1;
+		result = new BlackListDao().deleteBlackList(con, b_id);
+		
+		if(result >= 0) {
+			JDBCTemplate.commit(con);
+			System.out.println(b_id+" <- 블랙리스트 삭제 성공");
+		}else {
+			JDBCTemplate.rollback(con);
+			System.out.println(b_id+" <- 블랙리스트 삭제 실패");
+		}
+		
+		JDBCTemplate.close(con);
+	}
+
 }

@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 		if(result>0) {
 			session.setAttribute("id", id);
 			if("admin".equals(id)) {
-				response.sendRedirect("/sp/views/admin/manageMember.jsp");
+				response.sendRedirect("views/admin/adminMain.jsp");
 			}else {
 				response.sendRedirect("index.jsp");
 			}

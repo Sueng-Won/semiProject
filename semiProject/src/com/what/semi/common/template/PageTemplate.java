@@ -175,7 +175,7 @@ public class PageTemplate {
 		listCount = bls.selectBlackListTotalCount(condition);			//검색조건을 통해 받아온 DB상의 데이터 수를 리턴받음
 		System.out.println("listCount/"+listCount);
 		
-		if(null != request.getParameter("currentPage")) {		//만약 페이지를 이동했을경우는 해당 페이지를 기준으로 잡아줌
+		if(null != request.getParameter("currentPage") && !"".equals(request.getParameter("currentPage"))) {		//만약 페이지를 이동했을경우는 해당 페이지를 기준으로 잡아줌
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		

@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="/sp/indexList.do">오늘뭐해?</a>
-        <p class="text-right">관리자 페이지</p>
+        <a class="navbar-brand" href="/sp/blackList.do">오늘뭐해?</a>
+        <p class="text-right text-white">관리자 페이지</p>
       </div>
     </nav>
 	      <div class="col-lg-3">

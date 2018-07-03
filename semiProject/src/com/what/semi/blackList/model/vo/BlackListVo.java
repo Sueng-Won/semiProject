@@ -9,16 +9,16 @@ public class BlackListVo {
 	private String m_type;					//회원타입
 	private String m_name;					//회원명
 	private int totalCount;					//총 신고횟수
-	
+	private int is_black_list;				//블랙 리스트 등록 여부
 	public BlackListVo() {
 	}
 
-	public BlackListVo(String m_id, String m_type, String m_name, int totalCount) {
-		super();
+	public BlackListVo(String m_id, String m_type, String m_name, int totalCount, int is_black_list) {
 		this.m_id = m_id;
 		this.m_type = m_type;
 		this.m_name = m_name;
 		this.totalCount = totalCount;
+		this.is_black_list = is_black_list;
 	}
 
 	public ArrayList<ReportVo> getReport() {
@@ -61,10 +61,20 @@ public class BlackListVo {
 		this.totalCount = totalCount;
 	}
 
+	
+	public int getIs_black_list() {
+		return is_black_list;
+	}
+
+	public void setIs_black_list(int is_black_list) {
+		this.is_black_list = is_black_list;
+	}
+
 	@Override
 	public String toString() {
 		return "BlackListVo [report=" + report + ", m_id=" + m_id + ", m_type=" + m_type + ", m_name=" + m_name
-				+ ", totalCount=" + totalCount + "]";
+				+ ", totalCount=" + totalCount + ", is_black_list=" + is_black_list + "]";
 	}
+
 
 }

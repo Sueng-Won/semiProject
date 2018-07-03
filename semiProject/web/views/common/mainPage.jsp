@@ -60,7 +60,7 @@ int endPage = pi.getEndPage();
           
             <%for(RecruitmentVo rv : list) {%><!-- for문을 통해 해당 게시물들의 개수에 맞게 생성 -->
 	            <div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4">
-	              <div class="card h-100">
+	              <div class="card">
 	                <a href="#"><img class="card-img-top" src="http://placehold.it/300x300" alt=""></a>
 	                <div class="card-body">
 	                  <h4 class="card-title">
@@ -87,9 +87,9 @@ int endPage = pi.getEndPage();
 					<button onclick="movePage(<%=currentPage==1?1:currentPage-1%>);" type="button" class="btn btn-default bg-dark text-white">◀</button>
 					<%for(int i = startPage; i <= endPage; i++){ %>
 						<%if(currentPage != i){ %>
-						<button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white">1</button>
+						<button onclick="movePage(<%=i %>);" type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
 						<%}else{ %>
-						<button type="button" class="btn btn-default bg-dark text-white">1</button>
+						<button type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
 						
 						<%} %>
 					<%} %>

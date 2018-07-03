@@ -18,6 +18,9 @@ public class BlackListDao {
 		
 		String isReport = condition.getIsReport();			//신고 유무를 저장할 변수 선언
 		String memberType = condition.getMemberType();		//회원 타입을 저장할 변수 선언
+		if("NO".equals(memberType)) {
+			memberType = "";
+		}
 		String keyword = condition.getKeyword();			//검색할 회원명을 저장할 변수 선언
 		
 		PreparedStatement pstmt = null;
@@ -68,6 +71,9 @@ public class BlackListDao {
 		
 		String isReport = condition.getIsReport();			//신고 유무를 저장할 변수 선언
 		String memberType = condition.getMemberType();		//회원 타입을 저장할 변수 선언
+		if("NO".equals(memberType)) {
+			memberType = "";
+		}
 		String keyword = condition.getKeyword();			//검색할 회원명을 저장할 변수 선언
 		
 		PreparedStatement pstmt = null;
@@ -76,9 +82,9 @@ public class BlackListDao {
 		
 		
 		try {
-			query = "SELECT M_ID, MEMBER_TYPE, NAME, TOTALCOUNT " + 
+			query = "SELECT M_ID, MEMBER_TYPE, NAME, IS_BLACK_LIST, TOTALCOUNT " + 
 					"FROM(SELECT ROWNUM RNUM, P.* " + 
-					"FROM (SELECT M.M_ID, M.MEMBER_TYPE, M.NAME, " + 
+					"FROM (SELECT M.M_ID, M.MEMBER_TYPE, M.NAME, M.IS_BLACK_LIST," + 
 					"NVL((SELECT SUM(COUNT) FROM BLACKLIST B WHERE M.M_ID = B.M_ID),0) AS TOTALCOUNT " + 
 					"FROM MEMBER M " + 
 					"WHERE MEMBER_TYPE LIKE '%'|| ? || '%' " + 
@@ -109,7 +115,8 @@ public class BlackListDao {
 				temp = new BlackListVo(rs.getString("m_id"), 
 						rs.getString("member_type"), 
 						rs.getString("name"), 
-						rs.getInt("totalcount"));
+						rs.getInt("totalcount"),
+						rs.getInt("is_black_list"));
 				list.add(temp);
 			}
 		} catch (SQLException e) {
@@ -152,6 +159,42 @@ public class BlackListDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return list;
+	}
+
+	public int updateBlackList(Connection con, String b_id) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = "";
+		
+		try {
+			query = "UPDATE MEMBER SET IS_BLACK_LIST = 1 WHERE M_ID = ? ";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, b_id);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteBlackList(Connection con, String b_id) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = "";
+		
+		try {
+			query = "UPDATE MEMBER SET IS_BLACK_LIST = 0 WHERE M_ID = ? ";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, b_id);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 
 }
