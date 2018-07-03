@@ -16,8 +16,8 @@ public class RecruitmentVo {
 	private double r_latitude;				//위도
 	private double r_longitude;				//경도
 	private Date work_day;					//근무일
-	private Date start_work_time;			//근무시작시간
-	private Date end_work_time;				//근무종료시간
+	private String start_work_time;			//근무시작시간
+	private String end_work_time;				//근무종료시간
 	private int pay;						//급여
 	private char gender;					//희망성별
 	private int military_service;			//병역여부
@@ -31,10 +31,11 @@ public class RecruitmentVo {
 	public RecruitmentVo() {
 	}
 
+
 	public RecruitmentVo(String recruitment_id, String recruitment_image_src, String recruitment_title,
 			String recruitment_name, String recruitment_phone, String recruitment_email, String business_type,
 			String address, String address_detail, String zipcode, double r_latitude, double r_longitude, Date work_day,
-			Date start_work_time, Date end_work_time, int pay, char gender, int military_service, String introduce,
+			String start_work_time, String end_work_time, int pay, char gender, int military_service, String introduce,
 			String m_id, int is_post, String name, String phone) {
 		super();
 		this.recruitment_id = recruitment_id;
@@ -62,163 +63,41 @@ public class RecruitmentVo {
 		this.phone = phone;
 	}
 
+
 	public String getRecruitment_id() {
 		return recruitment_id;
 	}
+
 
 	public void setRecruitment_id(String recruitment_id) {
 		this.recruitment_id = recruitment_id;
 	}
 
+
 	public String getRecruitment_image_src() {
 		return recruitment_image_src;
 	}
+
 
 	public void setRecruitment_image_src(String recruitment_image_src) {
 		this.recruitment_image_src = recruitment_image_src;
 	}
 
-	public String getBusiness_type() {
-		return business_type;
-	}
-
-	public void setBusiness_type(String business_type) {
-		this.business_type = business_type;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getAddress_detail() {
-		return address_detail;
-	}
-
-	public void setAddress_detail(String address_detail) {
-		this.address_detail = address_detail;
-	}
-
-
-	public double getR_latitude() {
-		return r_latitude;
-	}
-
-	public void setR_latitude(double r_latitude) {
-		this.r_latitude = r_latitude;
-	}
-
-	public double getR_longitude() {
-		return r_longitude;
-	}
-
-	public void setR_longitude(double r_longitude) {
-		this.r_longitude = r_longitude;
-	}
-
-	public Date getWork_day() {
-		return work_day;
-	}
-
-	public void setWork_day(Date work_day) {
-		this.work_day = work_day;
-	}
-
-
-
-	public Date getStart_work_time() {
-		return start_work_time;
-	}
-
-
-
-
-	public void setStart_work_time(Date start_work_time) {
-		this.start_work_time = start_work_time;
-	}
-
-
-
-
-	public Date getEnd_work_time() {
-		return end_work_time;
-	}
-
-
-
-
-	public void setEnd_work_time(Date end_work_time) {
-		this.end_work_time = end_work_time;
-	}
-
-
-
-
-	public int getPay() {
-		return pay;
-	}
-
-	public void setPay(int pay) {
-		this.pay = pay;
-	}
-
-	public char getGender() {
-		return gender;
-	}
-
-	public void setGender(char gender) {
-		this.gender = gender;
-	}
-
-	public int getMilitary_service() {
-		return military_service;
-	}
-
-	public void setMilitary_service(int military_service) {
-		this.military_service = military_service;
-	}
-
-
-	public int getIs_post() {
-		return is_post;
-	}
-
-	public void setIs_post(int is_post) {
-		this.is_post = is_post;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	
-	
 
 	public String getRecruitment_title() {
 		return recruitment_title;
 	}
 
+
 	public void setRecruitment_title(String recruitment_title) {
 		this.recruitment_title = recruitment_title;
 	}
 
+
 	public String getRecruitment_name() {
 		return recruitment_name;
 	}
+
 
 	public void setRecruitment_name(String recruitment_name) {
 		this.recruitment_name = recruitment_name;
@@ -245,6 +124,36 @@ public class RecruitmentVo {
 	}
 
 
+	public String getBusiness_type() {
+		return business_type;
+	}
+
+
+	public void setBusiness_type(String business_type) {
+		this.business_type = business_type;
+	}
+
+
+	public String getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+
+	public String getAddress_detail() {
+		return address_detail;
+	}
+
+
+	public void setAddress_detail(String address_detail) {
+		this.address_detail = address_detail;
+	}
+
+
 	public String getZipcode() {
 		return zipcode;
 	}
@@ -252,6 +161,86 @@ public class RecruitmentVo {
 
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
+	}
+
+
+	public double getR_latitude() {
+		return r_latitude;
+	}
+
+
+	public void setR_latitude(double r_latitude) {
+		this.r_latitude = r_latitude;
+	}
+
+
+	public double getR_longitude() {
+		return r_longitude;
+	}
+
+
+	public void setR_longitude(double r_longitude) {
+		this.r_longitude = r_longitude;
+	}
+
+
+	public Date getWork_day() {
+		return work_day;
+	}
+
+
+	public void setWork_day(Date work_day) {
+		this.work_day = work_day;
+	}
+
+
+	public String getStart_work_time() {
+		return start_work_time;
+	}
+
+
+	public void setStart_work_time(String start_work_time) {
+		this.start_work_time = start_work_time;
+	}
+
+
+	public String getEnd_work_time() {
+		return end_work_time;
+	}
+
+
+	public void setEnd_work_time(String end_work_time) {
+		this.end_work_time = end_work_time;
+	}
+
+
+	public int getPay() {
+		return pay;
+	}
+
+
+	public void setPay(int pay) {
+		this.pay = pay;
+	}
+
+
+	public char getGender() {
+		return gender;
+	}
+
+
+	public void setGender(char gender) {
+		this.gender = gender;
+	}
+
+
+	public int getMilitary_service() {
+		return military_service;
+	}
+
+
+	public void setMilitary_service(int military_service) {
+		this.military_service = military_service;
 	}
 
 
@@ -275,6 +264,36 @@ public class RecruitmentVo {
 	}
 
 
+	public int getIs_post() {
+		return is_post;
+	}
+
+
+	public void setIs_post(int is_post) {
+		this.is_post = is_post;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public String getPhone() {
+		return phone;
+	}
+
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+
 	@Override
 	public String toString() {
 		return "RecruitmentVo [recruitment_id=" + recruitment_id + ", recruitment_image_src=" + recruitment_image_src
@@ -287,6 +306,4 @@ public class RecruitmentVo {
 				+ ", m_id=" + m_id + ", is_post=" + is_post + ", name=" + name + ", phone=" + phone + "]";
 	}
 
-	
-	
 }

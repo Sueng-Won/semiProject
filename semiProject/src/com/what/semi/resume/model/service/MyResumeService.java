@@ -15,7 +15,7 @@ public class MyResumeService {
 		//이력서 목록 조회하기
 		Connection con = JDBCTemplate.getConnection();
 		
-		System.out.println("selectMyInfo실행");
+		
 		ArrayList<MyResumeVo> userType =  new MyResumeDao().selectMyInfo(con, id);
 		
 		JDBCTemplate.close(con);
@@ -74,6 +74,65 @@ public class MyResumeService {
 		
 		
 		return member;
+	}
+
+	public int insertResume(MyResumeVo resume) {
+		Connection con = JDBCTemplate.getConnection();
+		
+		int result = new MyResumeDao().insertResume(resume, con);
+		
+		if(0<result){
+			JDBCTemplate.commit(con);
+		}else{
+			JDBCTemplate.rollback(con);
+		}
+		JDBCTemplate.close(con);
+		
+		return result;
+	}
+
+	public MyResumeVo selectMyResume(String userId, int resume_id) {
+		
+		//저장된 이력서의 정보 가져오기
+		
+		Connection con = JDBCTemplate.getConnection();
+		
+		MyResumeVo member = new MyResumeDao().selectMyResume(con, userId, resume_id);
+		
+		
+		JDBCTemplate.close(con);
+		
+		return member;
+	}
+
+	public int updateResume(MyResumeVo resume) {
+		//여럭서 업데이트
+		Connection con = JDBCTemplate.getConnection();
+		
+		int result = new MyResumeDao().updateResume(resume, con);
+		
+		if(0<result){
+			JDBCTemplate.commit(con);
+		}else{
+			JDBCTemplate.rollback(con);
+		}
+			JDBCTemplate.close(con);
+		return result;
+	}
+
+	public int deleteResume(String userId, String resume_id) {
+		Connection con = JDBCTemplate.getConnection();
+		
+		int result = new MyResumeDao().deleteResume(userId, resume_id, con);
+		
+		if(0<result){
+			JDBCTemplate.commit(con);
+		}else{
+			JDBCTemplate.rollback(con);
+		}
+			JDBCTemplate.close(con);
+		
+		return result;
 	}
 
 }
