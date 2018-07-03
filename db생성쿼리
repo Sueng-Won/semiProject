@@ -1,0 +1,178 @@
+ -- 관리자 계정 --
+
+CREATE USER jsp IDENTIFIED BY jsp;
+
+GRANT CONNECT, RESOURCE, CREATE VIEW, CREATE SEQUENCE TO jsp;
+
+------------------------------------------------------------------
+DROP TABLE BLACKLIST;
+DROP TABLE CONTRACT;
+DROP TABLE QNA;
+DROP TABLE RESUME;
+drop table RECRUITMENT CASCADE CONSTRAINTS;
+drop table MEMBER CASCADE CONSTRAINTS;
+
+
+
+CREATE TABLE BLACKLIST (
+       B_NO                 NUMBER NOT NULL,
+       COUNT                NUMBER NULL,
+       REASON               VARCHAR2(1000) NULL,
+       M_ID             VARCHAR2(30) NOT NULL
+);
+
+
+ALTER TABLE BLACKLIST
+       ADD  ( PRIMARY KEY (B_NO, M_ID) ) ;
+
+
+CREATE TABLE CONTRACT (
+       C_NO                 NUMBER NOT NULL,
+       STATE                NUMBER NULL
+                                   CHECK (STATE BETWEEN 0 AND 2),
+       C_DATE               DATE NULL,
+       START_WORK_TIME      DATE NULL,
+       END_WORK_TIME        DATE NULL,
+       RECRUITMENT_ID       VARCHAR2(30) NOT NULL,
+       M_ID             VARCHAR2(30) NOT NULL,
+       RESUME_ID            VARCHAR2(30) NOT NULL
+);
+
+
+ALTER TABLE CONTRACT
+       ADD  ( PRIMARY KEY (C_NO) ) ;
+
+
+CREATE TABLE MEMBER (
+       M_ID             VARCHAR2(30) NOT NULL,
+	PW             VARCHAR2(100) NOT NULL,
+       NAME                 VARCHAR2(30) NULL,
+       BIRTH                VARCHAR2(50) NULL,
+       PHONE                VARCHAR2(20) NULL,
+       EMAIL                VARCHAR2(30) NULL,
+       ADDRESS              VARCHAR2(200) NULL,
+       ADDRESS_DETAIL       VARCHAR2(200) NULL,
+       ZIPCODE              NUMBER NULL,
+       MEMBER_TYPE          VARCHAR2(30) DEFAULT 'AM'
+                                   CHECK (MEMBER_TYPE IN ('AM','JS','BO')),
+       LATITUDE             NUMBER NULL,
+       LONGITUDE            NUMBER NULL,
+       GENDER               CHAR(1) DEFAULT 'M'
+                                   CHECK (GENDER IN ('M','F')),
+       IS_BLACK_LIST        NUMBER DEFAULT 0
+                                   CHECK (IS_BLACK_LIST IN (0,1))
+);
+
+
+ALTER TABLE MEMBER
+       ADD  ( PRIMARY KEY (M_ID) ) ;
+
+
+CREATE TABLE QNA (
+       Q_NO                 NUMBER NOT NULL,
+       TITLE                VARCHAR2(500) NULL,
+       CONTENT              VARCHAR2(4000) NULL,
+       CATEGORY             VARCHAR2(100) NULL,
+       REPORTING_DATE       DATE NULL,
+       IS_CHECKED           NUMBER DEFAULT 0
+                                   CHECK (IS_CHECKED IN (1,0)),
+       M_ID             VARCHAR2(30) NOT NULL
+);
+
+
+ALTER TABLE QNA
+       ADD  ( PRIMARY KEY (Q_NO) ) ;
+
+
+CREATE TABLE RECRUITMENT (
+       RECRUITMENT_ID       VARCHAR2(30) NOT NULL,
+       RECRUITMENT_IMAGE_SRC VARCHAR2(200) NULL,
+       RECRUITMENT_NAME     VARCHAR2(30) NOT NULL,
+       RECRUITMENT_PHONE VARCHAR2(20 BYTE) NULL,
+       RECRUITMENT_EMAIL VARCHAR2(30 BYTE) NULL,
+       ADDRESS              VARCHAR2(200) NULL,
+       ADDRESS_DETAIL       VARCHAR2(200) NULL,
+       ZIPCODE              VARCHAR2(30) NULL,
+       R_LATITUDE           NUMBER NULL,
+       R_LONGITUDE          NUMBER NULL,
+        BUSINESS_TYPE        VARCHAR2(30) NULL,
+        CAREER               NUMBER DEFAULT 0
+                                   CHECK (CAREER IN (1,0)),
+       WORK_DAY             DATE NULL,
+       START_WORK_TIME      DATE NULL,
+       END_WORK_TIME        DATE NULL,
+       PAY                  NUMBER NULL,
+       GENDER               CHAR(1) DEFAULT 'N'
+                                   CHECK (GENDER IN ('M','F','N')),
+       MILITARY_SERVICE     NUMBER DEFAULT 0
+                                   CHECK (MILITARY_SERVICE IN (1,0)),   
+       ACHIEVEMENT          VARCHAR2(30) NULL,
+       
+       RECRUITMENT_TITLE    VARCHAR2(200) NOT NULL,
+       INTRODUCE            VARCHAR2(4000) NULL,
+       M_ID             VARCHAR2(30) NOT NULL,
+       IS_POST              NUMBER DEFAULT 0
+                                   CHECK (IS_POST IN (1,0))
+);
+
+
+ALTER TABLE RECRUITMENT
+       ADD  ( PRIMARY KEY (RECRUITMENT_ID) ) ;
+
+
+CREATE TABLE RESUME (
+       RESUME_ID            VARCHAR2(30) NOT NULL,
+       PROFILE_IMAGE_SRC    VARCHAR2(200) NULL,
+       ACHIEVEMENT          VARCHAR2(30) NULL,
+       DISABILITY           NUMBER DEFAULT 0
+                                   CHECK (DISABILITY IN (0,1)),
+       MILTARY_SERVICE      NUMBER DEFAULT 0
+                                   CHECK (MILTARY_SERVICE IN (1,0)),
+       CAREER               NUMBER DEFAULT 0
+                                   CHECK (CAREER IN (1,0)),
+       BUSINESS_TYPE        VARCHAR2(30) NULL,
+       WORKABLE_DAYS        DATE NULL,
+       IS_POST              NUMBER DEFAULT 0
+                                   CHECK (IS_POST IN (1,0)),
+       M_ID             VARCHAR2(30) NOT NULL,
+       INTRODUCE            VARCHAR2(4000) NULL
+);
+
+
+ALTER TABLE RESUME
+       ADD  ( PRIMARY KEY (RESUME_ID) ) ;
+
+
+ALTER TABLE BLACKLIST
+       ADD  ( FOREIGN KEY (M_ID)
+                             REFERENCES MEMBER ) ;
+
+
+ALTER TABLE CONTRACT
+       ADD  ( FOREIGN KEY (RESUME_ID)
+                             REFERENCES RESUME ) ;
+
+
+ALTER TABLE CONTRACT
+       ADD  ( FOREIGN KEY (RECRUITMENT_ID)
+                             REFERENCES RECRUITMENT ) ;
+
+ALTER TABLE CONTRACT
+    ADD (FOREIGN KEY (M_ID)
+        REFERENCES MEMBER);
+
+
+ALTER TABLE QNA
+       ADD  ( FOREIGN KEY (M_ID)
+                             REFERENCES MEMBER ) ;
+
+
+ALTER TABLE RECRUITMENT
+       ADD  ( FOREIGN KEY (M_ID)
+                             REFERENCES MEMBER ) ;
+
+
+ALTER TABLE RESUME
+       ADD  ( FOREIGN KEY (M_ID)
+                             REFERENCES MEMBER ) ;
+                             
