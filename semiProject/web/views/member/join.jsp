@@ -23,6 +23,13 @@
 
 	var id = "<%=idv%>";
 	var gettedTBtn = "<%=tBtn%>";
+	var convertedTBtn;
+	if(gettedTBtn == "구직자"){
+		convertedTBtn = "JS";
+	}
+	if(gettedTBtn == "업주"){
+		convertedTBtn = "BO";
+	}
 	var gettedGender = "<%=gender%>";
 	var flag = <%=flag%>;
 	var searchAddr;
@@ -232,7 +239,7 @@
 				alert("중복된 아이디 입니다.");
 				$("#iid").val("");
 				$("#tBtn").text(gettedTBtn);
-				$("#rTypeValue").val(gettedTBtn);
+				$("#rTypeValue").val(convertedTBtn);
 				$("#"+gettedGender).prop("checked", true);
 				$("#"+gettedGender+"Label").attr("class","btn btn-secondary active");
 			}
@@ -240,7 +247,7 @@
 				alert("사용할 수 있는 아이디 입니다.");
 				$("#iid").val(id);
 				$("#tBtn").text(gettedTBtn);
-				$("#rTypeValue").val(gettedTBtn);
+				$("#rTypeValue").val(convertedTBtn);
 				$("#"+gettedGender).prop("checked", true);
 				$("#"+gettedGender+"Label").attr("class","btn btn-secondary active");
 			}
