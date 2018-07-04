@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class QnaVo {
 	private int q_no;
-	private String title;
 	private String content;
 	private String category;
 	private Date reporting_date;
@@ -14,11 +13,10 @@ public class QnaVo {
 	public QnaVo() {
 	}
 
-	public QnaVo(int q_no, String title, String content, String category, Date reporting_date, int is_checked,
+	public QnaVo(int q_no, String content, String category, Date reporting_date, int is_checked,
 			String m_id) {
 		super();
 		this.q_no = q_no;
-		this.title = title;
 		this.content = content;
 		this.category = category;
 		this.reporting_date = reporting_date;
@@ -32,14 +30,6 @@ public class QnaVo {
 
 	public void setQ_no(int q_no) {
 		this.q_no = q_no;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public String getContent() {
@@ -84,7 +74,7 @@ public class QnaVo {
 
 	@Override
 	public String toString() {
-		return "QnaVo [q_no=" + q_no + ", title=" + title + ", content=" + content + ", category=" + category
+		return "QnaVo [q_no=" + q_no + ", content=" + content + ", category=" + category
 				+ ", reporting_date=" + reporting_date + ", is_checked=" + is_checked + ", m_id=" + m_id + "]";
 	}
 }

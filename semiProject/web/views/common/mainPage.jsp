@@ -5,10 +5,8 @@
     pageEncoding="UTF-8"%>
 <%
 String nickname = (String) session.getAttribute("nickname");
-
 ArrayList<RecruitmentVo> list = 
 	(ArrayList<RecruitmentVo>)request.getAttribute("list"); 
-
 PageInfo pi = (PageInfo)request.getAttribute("pi");
 int listCount = pi.getTotalCount();
 int currentPage = pi.getCurrentPage();
@@ -16,6 +14,16 @@ int maxPage = pi.getMaxPage();
 int startPage = pi.getStartPage();
 int endPage = pi.getEndPage();
 %>
+<script>
+function recDetail(i){
+	location.href="/sp/recruitmentDetail.do?recId="+i+"&currentPage="+<%=currentPage%>;
+}
+</script>
+<style>
+.card_he{
+height:400px;
+}
+</style>
 <%@include file="header.jsp" %>
     <!-- Page Content -->
     <div class="container" style="min-height: 700px">	<!-- 내용을 담아놓을 컨테이너 -->
@@ -58,19 +66,19 @@ int endPage = pi.getEndPage();
 			<!--======================================	구인게시물	======================================== -->
           <div class="row">
           
-            <%for(RecruitmentVo rv : list) {%><!-- for문을 통해 해당 게시물들의 개수에 맞게 생성 -->
+            <%for(int i =0; i<list.size();i++)  {%><!-- for문을 통해 해당 게시물들의 개수에 맞게 생성 -->
 	            <div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4">
-	              <div class="card">
+	              <div class="card card_he"  onclick="recDetail(<%=list.get(i).getRecruitment_id()%>);">
 	                <a href="#"><img class="card-img-top" src="http://placehold.it/300x300" alt=""></a>
 	                <div class="card-body">
 	                  <h4 class="card-title">
-	                    <a href="#"><%=rv.getRecruitment_name() %></a><!-- 게시물 이름 -->
+	                    <div><%=list.get(i).getRecruitment_title() %></div><!-- 게시물 이름 -->
 	                  </h4>
-	                  <h5>시급 : <%=rv.getPay()%></h5>
-	                  <p class="card-text"><%=rv.getWork_day() %></p>
+	                  <h5>시급 : <%=list.get(i).getPay()%></h5>
+	                  <p class="card-text"><%=list.get(i).getWork_day() %></p>
 	                </div>
 	                <div class="card-footer">
-	                  <small class="text-muted"><%=rv.getAddress() %></small>
+	                  <small class="text-muted"><%=list.get(i).getAddress() %></small>
 	                </div>
 	              </div>
 	            </div>
@@ -87,9 +95,9 @@ int endPage = pi.getEndPage();
 					<button onclick="movePage(<%=currentPage==1?1:currentPage-1%>);" type="button" class="btn btn-default bg-dark text-white">◀</button>
 					<%for(int i = startPage; i <= endPage; i++){ %>
 						<%if(currentPage != i){ %>
-						<button onclick="movePage(<%=i %>);" type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
+						<button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white">1</button>
 						<%}else{ %>
-						<button type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
+						<button type="button" class="btn btn-default bg-dark text-white">1</button>
 						
 						<%} %>
 					<%} %>

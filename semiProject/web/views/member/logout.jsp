@@ -7,13 +7,13 @@
 		<%
 			session.invalidate();
 		%>
-		setTimeout("location.href='/sp/index.jsp'",2000);
+		setTimeout("location.href='/sp/index.jsp'");
 	})
 </script>
     <!-- Page Content -->
     <div class="container" style="min-height: 800px;">
     
-      <div class="row">
+      <%-- <div class="row">
 		<%@include file="/views/common/nav.jsp" %>
         <!-- /.col-lg-3 -->
         <div class="col-lg-9 mt-lg-10">
@@ -30,7 +30,7 @@
 		</div><!-- /.row -->
         
         
-      </div>
+      </div> --%>
       <!-- /.row -->
     </div>
     <!-- /.container -->

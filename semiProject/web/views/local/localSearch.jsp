@@ -24,7 +24,7 @@
 <%@include file="/views/common/header.jsp" %>
     <!-- Page Content -->
 <style>
-       #btn1{
+   #btn1{
    position: relative;
     display: inline-block;
     width: 53px;
@@ -336,7 +336,8 @@
     padding: 3px;
    }
 </style>
-    
+    <!-- 화면 상단 아이콘 이미지 -->
+   <link rel="shortcut icon" href="/sp/images/icon.png">
     <div class="container" style="min-height: 800px">
       <div class="row">
       <%@include file="/views/common/nav.jsp" %>
@@ -348,7 +349,8 @@
         
         <input type="hidden" name="map_gu" id="map_gu" value="I010">
           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-             <div class="nowMap">
+           <div class="nowMap">
+           
             <div class="selArea">
             <button type="button" class="btnO" id="btn_map_area" onclick="map_area_move_view('')">
                <span>지역 직접선택</span>
@@ -411,7 +413,6 @@
                <div id="dev_map_areagu_box" class="area"></div>
                <div id="dev_map_areadong_box" class="dong"></div>
                
-               
                <div class="btns" id="gi_area_S_form" style="display:none;">
                   <button type="button" class="btnSch" onclick="localList();">
                      <span>검색</span>
@@ -420,18 +421,18 @@
                      <span>취소</span>
                   </button>
                </div>
+               
             </div>
-            
             <!-- 지역 직접선택 왼쪽 상단 닫기 버튼 -->
             <p class="popClose">
                <button class="btn btn-dark btn-sm btn-block ml-2" type="button" onclick="javascript:map_area_move_view('0');">
                   <span>닫기</span>
                </button>
             </p>
-            
          </div>
+         
          </div>
-          </div>
+      </div>
           
         <!-- 지도 하단 검색 버튼 -->
       <div class="carousel-inner" role="listbox">
@@ -455,7 +456,7 @@
                        <a href=""><%=rv.getRecruitment_name() %></a><!-- 게시물 이름 -->
                      </h4>
                      <h5>시급 : <%=rv.getPay()%></h5>
-                     <p class="card-text"><%=rv.getWork_day() %></p>
+                     <p class="card-text"><%=rv.getRecruitment_title() %></p>
                    </div>
                    <div class="card-footer">
                      <small class="text-muted"><%=rv.getAddress() %></small>
@@ -472,9 +473,9 @@
                <button onclick="movePage(<%=currentPage==1?1:currentPage-1%>);" type="button" class="btn btn-default bg-dark text-white">◀</button>
                <%for(int i = startPage; i <= endPage; i++){ %>
                   <%if(currentPage != i){ %>
-                  <button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
+                  <button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white">1</button>
                   <%}else{ %>
-                  <button type="button" class="btn btn-default bg-dark text-white disabled"><%=i %></button>
+                  <button type="button" class="btn btn-default bg-dark text-white disabled">1</button>
                   
                   <%} %>
                <%} %>
@@ -487,8 +488,6 @@
       </div>
       <!-- /.row -->
     
-      
-
     </div>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=154d504288d7ddddd16f6867efe451af&libraries=services,clusterer,drawing"></script>
    <script type="text/javascript">
@@ -545,7 +544,6 @@
        
        // 마커 이미지를 생성합니다    
        var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize); 
-       
       
        // 마커를 생성합니다
        var marker = new daum.maps.Marker({
@@ -599,8 +597,8 @@
                 +"&centerLatitude="+center.getLat()
                 +"&centerLongitude="+center.getLng()
                 +"&mapLevel="+map.getLevel();
-
-      }
+   }
+   
    //지역 직접선택 열고 닫기
    function map_area_move_view(view_stat) {
       if(view_stat == "1"){   //open
@@ -655,9 +653,8 @@
    function map_move(){
       var moveLatLon = new daum.maps.LatLng(gi_loc_lat, gi_loc_lng);
       map.setCenter(moveLatLon);
-      
-      
    } 
+   
    </script>
     <!-- /.container -->
 <%@include file="/views/common/footer.jsp"%>

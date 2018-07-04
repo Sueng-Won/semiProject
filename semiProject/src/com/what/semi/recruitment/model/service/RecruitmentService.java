@@ -54,8 +54,15 @@ public class RecruitmentService {
 		JDBCTemplate.close(con);
 		return list;
 	}
-	
-	
+
+	public String getDefaultResume(String id) {
+		Connection con = JDBCTemplate.getConnection();
+		
+		String resume = new RecruitmentDao().getDefaultResume(con, id);
+		
+		JDBCTemplate.close(con);
+		return resume;
+	}
 
 	public int byDateListTotalCount(String dateStr) {
 		Connection con = JDBCTemplate.getConnection();
@@ -66,7 +73,6 @@ public class RecruitmentService {
 
 		return ListCount;
 	}
-	
 	public int writeRecruitment(RecruitmentVo rec) {
 		Connection con = JDBCTemplate.getConnection();
 
@@ -77,6 +83,30 @@ public class RecruitmentService {
 		return result;
 	}
 
+	public int myRecListTotalCount(String id) {
+		Connection con = JDBCTemplate.getConnection();
+
+		int result = new RecruitmentDao().selectMyListTotalCount(con, id);
+
+		JDBCTemplate.close(con);
+
+		return result;
+	}
+
+	public ArrayList<RecruitmentVo> loadMyRecList(int currentPage, int limit, String id) {
+		Connection con = JDBCTemplate.getConnection();
+		ArrayList<RecruitmentVo> list = new RecruitmentDao().selectMyRecList(con, id, currentPage, limit);
+		JDBCTemplate.close(con);
+		return list;
+	}
+
+	public RecruitmentVo selectRecruitment(String recId) {
+		Connection con = JDBCTemplate.getConnection();
+		RecruitmentVo rec = new RecruitmentDao().selectRecruitment(con, recId);
+		JDBCTemplate.close(con);
+		return rec;
+	}
+	
 	public int selectMachingListTotalCount(MyResumeVo myResumeVo) {
 		Connection con = JDBCTemplate.getConnection();
 
@@ -96,9 +126,4 @@ public class RecruitmentService {
 
 		return list;
 	}
-	
-	
-	
-	
-	
 }
