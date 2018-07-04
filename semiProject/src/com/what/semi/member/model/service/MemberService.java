@@ -63,4 +63,12 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+
+	public String searchId(String email) {
+Connection conn = JDBCTemplate.getConnection();
+		
+		String resultId = new MemberDao().searchId(conn,email);
+		JDBCTemplate.close(conn);
+		return resultId;
+	}
 }

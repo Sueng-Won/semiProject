@@ -1,13 +1,15 @@
 package com.what.semi.member.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.what.semi.common.GmailSend;
+import com.what.semi.member.model.service.MemberService;
 
 /**
  * Servlet implementation class SearchIdServlet
@@ -28,9 +30,25 @@ public class SearchIdServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String email = request.getParameter("email");
+		String resultId = new MemberService().searchId(email);
+		String url = "/views/member/searchId.jsp";
+		
+		if(resultId == null) {
+			System.out.println("아이디 찾기 실패");
+			RequestDispatcher view = request.getRequestDispatcher(url);
+			request.setAttribute("activatedFlag", "true");
+			view.forward(request, response);
+		} else {
+			System.out.println("아이디 찾기 성공");
+			System.out.println("servlet id : "+resultId);
+			RequestDispatcher view = request.getRequestDispatcher(url);
+			request.setAttribute("resultId", resultId);
+			request.setAttribute("activatedFlag", "true");
+			request.setAttribute("searchFlag", "true");
+			view.forward(request, response);
+		}
 	}
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		GmailSend.GmailSetTxt("yuventius125@icloud.com","테스트용 메일","이 메일은 테스트용 메일입니다.");
-	}
+
 }

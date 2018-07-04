@@ -182,7 +182,7 @@
 			okFlag = true;
 		}
 		
-		if($("#rTypeValue").val()!=""){
+		if($("#address").val()==""){
 			alert("주소 검색 버튼을 눌러 주소를 입력해주세요.");
 			okFlag = false;
 			return false;
@@ -192,6 +192,22 @@
 		
 		if($("#addressDetail").val()==""){
 			alert("상세주소를 입력해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		if($("#rTypeValue").val()==""){
+			alert("회원구분을 선택해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		if($("#gender").val()==""){
+			alert("성별을 선택해주세요.");
 			okFlag = false;
 			return false;
 		}else{
@@ -223,6 +239,10 @@
 			else{
 				alert("사용할 수 있는 아이디 입니다.");
 				$("#iid").val(id);
+				$("#tBtn").text(gettedTBtn);
+				$("#rTypeValue").val(gettedTBtn);
+				$("#"+gettedGender).prop("checked", true);
+				$("#"+gettedGender+"Label").attr("class","btn btn-secondary active");
 			}
 		}
 		else{
