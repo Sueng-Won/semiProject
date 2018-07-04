@@ -69,7 +69,7 @@
               <a class="nav-link" href="/sp/getResume.do">이력서관리</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">근로내역</a>
+              <a class="nav-link" href="/sp/myWorkedList.do">근로내역</a>
             </li>
             <%} %>
             <%if(member_type.equals("BO")){ %>

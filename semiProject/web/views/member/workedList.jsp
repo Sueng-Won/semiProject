@@ -126,11 +126,7 @@
 						</td>
 						<td>
 							<button type="button" class="btn btn-default btn-xs btn-info"
-								onclick="modifyRec(<%=list.get(i).getRecruitment_id()%>);">수정</button>
-						</td>
-						<td>
-							<button type="button" class="btn btn-default btn-xs btn-info"
-								onclick="deleteRec(<%=list.get(i).getRecruitment_id()%>);">삭제</button>
+								onclick="modifyRec(<%=list.get(i).getRecruitment_id()%>);">상세보기</button>
 						</td>
 					</tr>
 					<%

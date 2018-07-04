@@ -497,7 +497,6 @@ public class RecruitmentDao {
 				rec.setPhone(rs.getString("phone"));
 				rec.setIs_post(rs.getInt("is_post"));
 
-				System.out.println(rec);
 			}
 
 		} catch (SQLException e) {
@@ -617,6 +616,53 @@ public class RecruitmentDao {
 		}
 		
 		return list;
+	}
+
+	public int updateRecruitment(Connection con, RecruitmentVo rec) {
+		int result = -1;
+
+		PreparedStatement pstmt = null;
+
+		String query = "UPDATE RECRUITMENT SET" + " Recruitment_image_src=?,Recruitment_name=?,Recruitment_phone=?,Recruitment_email=?,"
+		+"Address=?,Address_detail=?,Zipcode=?,R_latitude=?,R_longitude=?,"
+		+"Business_type=?,Career=?,Work_day=TO_DATE(?,'RRRR-MM-DD'),Start_work_time=TO_DATE(?,'HH24-MI'),End_work_time=TO_DATE(?,'HH24-MI'),"
+		+"Pay=?,Gender=?,Military_service=?,Achievement=?,Recruitment_title=?,"
+		+"Introduce=?,M_id=? where recruitment_id=?";
+		try {
+			pstmt = con.prepareStatement(query);
+
+			pstmt.setString(1,rec.getRecruitment_image_src());
+			pstmt.setString(2,rec.getRecruitment_name());
+			pstmt.setString(3,rec.getRecruitment_phone());
+			pstmt.setString(4,rec.getRecruitment_email());
+			pstmt.setString(5,rec.getAddress());
+			pstmt.setString(6,rec.getAddress_detail());
+			pstmt.setString(7,rec.getZipcode());
+			pstmt.setDouble(8, rec.getR_latitude());
+			pstmt.setDouble(9, rec.getR_longitude());
+			pstmt.setString(10,rec.getBusiness_type());
+			pstmt.setInt(11, rec.getCareer());
+			pstmt.setDate(12, rec.getWork_day());
+			pstmt.setString(13,rec.getStart_work_time());
+			pstmt.setString(14,rec.getEnd_work_time());
+			pstmt.setInt(15, rec.getPay());
+			pstmt.setString(16,String.valueOf(rec.getGender()));
+			pstmt.setInt(17, rec.getMilitary_service());
+			pstmt.setString(18, rec.getAchievement());
+			pstmt.setString(19,rec.getRecruitment_title());
+			pstmt.setString(20,rec.getIntroduce());
+			pstmt.setString(21,rec.getM_id());
+			pstmt.setString(22,rec.getRecruitment_id());
+			
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 
 }

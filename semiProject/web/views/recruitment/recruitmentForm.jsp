@@ -77,7 +77,7 @@
 									var coords = new daum.maps.LatLng(
 											result[0].y, result[0].x);
 									console.log(coords);
-									
+
 									console.log($("#latitude").val());
 									// 결과값으로 받은 위치를 마커로 표시합니다
 								}
@@ -254,6 +254,8 @@
 								<input type="hidden" name="achievement" id="achievementValue" />
 
 								<ul class="dropdown-menu bg-dark" role="menu">
+									<li><button type="button" onclick="acSelect(this);"
+											class="btn btn-dark btn-sm btn-block" value="무관">무관</button></li>
 									<li><button type="button" onclick="acSelect(this);"
 											class="btn btn-dark btn-sm btn-block" value="초졸">초졸</button></li>
 									<li><button type="button" onclick="acSelect(this);"
