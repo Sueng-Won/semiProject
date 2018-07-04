@@ -43,6 +43,7 @@ public class RecruitmentDetailServlet extends HttpServlet {
 		
 		RecruitmentVo rec = new RecruitmentService().selectRecruitment(recId);
 		MemberVo writer = new MemberService().getMemberInfo(rec.getM_id());
+		System.out.println(writer.toString());
 	
 		String url = "";
 		if(null != rec){
