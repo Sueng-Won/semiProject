@@ -237,21 +237,38 @@ public class RecruitmentDao {
 
 			rs = stmt.executeQuery(query);
 			list = new ArrayList<RecruitmentVo>();
-			RecruitmentVo temp = null;
+			RecruitmentVo rec = null;
 			while (rs.next()) {
-				temp = new RecruitmentVo();
-				temp.setRecruitment_id(rs.getString("RECRUITMENT_ID"));
-				temp.setRecruitment_name(rs.getString("recruitment_name"));
-				temp.setRecruitment_title(rs.getString("recruitment_title"));
-				temp.setAddress(rs.getString("address"));
-				temp.setBusiness_type(rs.getString("business_type"));
-				temp.setR_latitude(rs.getDouble("r_latitude"));
-				temp.setR_longitude(rs.getDouble("r_longitude"));
-				temp.setPay(rs.getInt("pay"));
-				temp.setWork_day(rs.getDate("work_day"));
+				rec = new RecruitmentVo();
+				rec = new RecruitmentVo();
+				rec.setRecruitment_id(rs.getString("RECRUITMENT_ID"));
+				rec.setRecruitment_image_src(rs.getString("RECRUITMENT_IMAGE_SRC"));
+				rec.setRecruitment_name(rs.getString("recruitment_name"));
+				rec.setRecruitment_title(rs.getString("recruitment_title"));
+				rec.setAddress(rs.getString("address"));
+				rec.setAddress_detail(rs.getString("address_detail"));
+				rec.setBusiness_type(rs.getString("business_type"));
+				rec.setR_latitude(rs.getDouble("r_latitude"));
+				rec.setR_longitude(rs.getDouble("r_longitude"));
+				rec.setPay(rs.getInt("pay"));
+				rec.setWork_day(rs.getDate("work_day"));
+				rec.setStart_work_time(rs.getString("start_time"));
+				rec.setEnd_work_time(rs.getString("end_time"));
+				rec.setGender(rs.getString("gender").charAt(0));
+				rec.setMilitary_service(rs.getInt("military_service"));
+				rec.setIntroduce(rs.getString("introduce"));
+				rec.setM_id(rs.getString("m_id"));
+				rec.setRecruitment_phone(rs.getString("RECRUITMENT_PHONE"));
+				rec.setRecruitment_email(rs.getString("RECRUITMENT_email"));
+				rec.setZipcode(rs.getString("zipcode"));
+				rec.setAchievement(rs.getString("achievement"));
+				rec.setCareer(rs.getInt("career"));
+				rec.setName(rs.getString("name"));
+				rec.setPhone(rs.getString("phone"));
+				rec.setIs_post(rs.getInt("is_post"));
 
 				// System.out.println(temp);
-				list.add(temp);
+				list.add(rec);
 			}
 
 		} catch (SQLException e) {
@@ -388,22 +405,38 @@ public class RecruitmentDao {
 
 			rs = stmt.executeQuery(query);
 			list = new ArrayList<RecruitmentVo>();
-			RecruitmentVo temp = null;
+			RecruitmentVo rec = null;
 			while (rs.next()) {
-				temp = new RecruitmentVo();
-				temp.setRecruitment_id(rs.getString("RECRUITMENT_ID"));
-				temp.setRecruitment_name(rs.getString("recruitment_name"));
-				temp.setRecruitment_title(rs.getString("recruitment_title"));
-				temp.setAddress(rs.getString("address"));
-				temp.setBusiness_type(rs.getString("business_type"));
-				temp.setR_latitude(rs.getDouble("r_latitude"));
-				temp.setR_longitude(rs.getDouble("r_longitude"));
-				temp.setPay(rs.getInt("pay"));
-				temp.setWork_day(rs.getDate("work_day"));
-				temp.setIs_post(rs.getInt("is_post"));
+				rec = new RecruitmentVo();
+				rec = new RecruitmentVo();
+				rec.setRecruitment_id(rs.getString("RECRUITMENT_ID"));
+				rec.setRecruitment_image_src(rs.getString("RECRUITMENT_IMAGE_SRC"));
+				rec.setRecruitment_name(rs.getString("recruitment_name"));
+				rec.setRecruitment_title(rs.getString("recruitment_title"));
+				rec.setAddress(rs.getString("address"));
+				rec.setAddress_detail(rs.getString("address_detail"));
+				rec.setBusiness_type(rs.getString("business_type"));
+				rec.setR_latitude(rs.getDouble("r_latitude"));
+				rec.setR_longitude(rs.getDouble("r_longitude"));
+				rec.setPay(rs.getInt("pay"));
+				rec.setWork_day(rs.getDate("work_day"));
+				rec.setStart_work_time(rs.getString("start_time"));
+				rec.setEnd_work_time(rs.getString("end_time"));
+				rec.setGender(rs.getString("gender").charAt(0));
+				rec.setMilitary_service(rs.getInt("military_service"));
+				rec.setIntroduce(rs.getString("introduce"));
+				rec.setM_id(rs.getString("m_id"));
+				rec.setRecruitment_phone(rs.getString("RECRUITMENT_PHONE"));
+				rec.setRecruitment_email(rs.getString("RECRUITMENT_email"));
+				rec.setZipcode(rs.getString("zipcode"));
+				rec.setAchievement(rs.getString("achievement"));
+				rec.setCareer(rs.getInt("career"));
+				rec.setName(rs.getString("name"));
+				rec.setPhone(rs.getString("phone"));
+				rec.setIs_post(rs.getInt("is_post"));
 
 				// System.out.println(temp);
-				list.add(temp);
+				list.add(rec);
 			}
 
 		} catch (SQLException e) {

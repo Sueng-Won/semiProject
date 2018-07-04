@@ -22,8 +22,16 @@
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 
 <script type="text/javascript">
-	function apply() {
-		location.href = "";
+	function applyBtn() {
+		if(<%=userTypeFlag%>){
+			$('div.modal').modal();			
+		}else{
+			alert("등록된 이력서가 없습니다!!");
+		}
+	}
+	
+	function apply(){
+		$("#postNum").submit();
 	}
 
 	$(function() {
@@ -35,13 +43,6 @@
 			$("#ta").css("height", he + "px");
 		}
 		
-		$("#popbutton").click(function() {
-			if(<%=userTypeFlag%>){
-				$('div.modal').modal();			
-			}else{
-				alert("등록된 이력서가 없습니다!!");
-			}
-		})
 	});
 </script>
 <style>
@@ -246,7 +247,7 @@ tr {
 						if (!(writer.getId().equals(id))) {
 					%>
 					<div align="center">
-						<button onclick="apply();"
+						<button onclick="applyBtn();"
 							class="btn btn-default bg-dark text-white">지원하기</button>
 					</div>
 					<%
@@ -279,7 +280,7 @@ tr {
 			</div>
 			<!-- body -->
 			<div class="modal-body">
-				<form id="postNum" method="get" action="/sp/modifyState.do">
+				<form id="postNum" method="get" action="/sp/apply.do">
 					<input type="hidden" name="userId" value="<%=id%>" />
 					<div class="radio">
 						<%
@@ -308,7 +309,7 @@ tr {
 				</form>
 				<hr>
 				<button type="button" class="btn btn-success"
-					onclick="updateState();">수정</button>
+					onclick="apply();">수정</button>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
 			</div>
 		</div>
