@@ -9,6 +9,7 @@ import com.what.semi.common.template.JDBCTemplate;
 import com.what.semi.common.template.LocalPageInfo;
 import com.what.semi.recruitment.model.dao.RecruitmentDao;
 import com.what.semi.recruitment.model.vo.RecruitmentVo;
+import com.what.semi.resume.model.vo.MyResumeVo;
 
 public class RecruitmentService {
 
@@ -53,15 +54,8 @@ public class RecruitmentService {
 		JDBCTemplate.close(con);
 		return list;
 	}
-
-	public String getDefaultResume(String id) {
-		Connection con = JDBCTemplate.getConnection();
-		
-		String resume = new RecruitmentDao().getDefaultResume(con, id);
-		
-		JDBCTemplate.close(con);
-		return resume;
-	}
+	
+	
 
 	public int byDateListTotalCount(String dateStr) {
 		Connection con = JDBCTemplate.getConnection();
@@ -72,6 +66,7 @@ public class RecruitmentService {
 
 		return ListCount;
 	}
+	
 	public int writeRecruitment(RecruitmentVo rec) {
 		Connection con = JDBCTemplate.getConnection();
 
@@ -82,28 +77,36 @@ public class RecruitmentService {
 		return result;
 	}
 
-	public int myRecListTotalCount(String id) {
+	public int selectMachingListTotalCount(MyResumeVo myResumeVo) {
 		Connection con = JDBCTemplate.getConnection();
 
+<<<<<<< HEAD
 		int result = new RecruitmentDao().selectMyListTotalCount(con, id);
+=======
+		int ListCount = new RecruitmentDao().selectMachingListTotalCount(con, myResumeVo);
+>>>>>>> refs/heads/jaejun
 
 		JDBCTemplate.close(con);
 
 		return result;
 	}
 
+<<<<<<< HEAD
 	public ArrayList<RecruitmentVo> loadMyRecList(int currentPage, int limit, String id) {
+=======
+	public ArrayList<RecruitmentVo> loadMatchingSearchList(int currentPage, int limit, MyResumeVo myResumeVo) {
+>>>>>>> refs/heads/jaejun
 		Connection con = JDBCTemplate.getConnection();
-		ArrayList<RecruitmentVo> list = new RecruitmentDao().selectMyRecList(con, id, currentPage, limit);
+		
+		ArrayList<RecruitmentVo> list = new RecruitmentDao().loadMatchingSearchList(con, currentPage, limit, myResumeVo);
+		
 		JDBCTemplate.close(con);
+
 		return list;
 	}
-
-	public RecruitmentVo selectRecruitment(String recId) {
-		Connection con = JDBCTemplate.getConnection();
-		RecruitmentVo rec = new RecruitmentDao().selectRecruitment(con, recId);
-		JDBCTemplate.close(con);
-		return rec;
-	}
+	
+	
+	
+	
 	
 }

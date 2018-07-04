@@ -455,7 +455,7 @@
                        <a href=""><%=rv.getRecruitment_name() %></a><!-- 게시물 이름 -->
                      </h4>
                      <h5>시급 : <%=rv.getPay()%></h5>
-                     <p class="card-text"><%=rv.getRecruitment_title() %></p>
+                     <p class="card-text"><%=rv.getWork_day() %></p>
                    </div>
                    <div class="card-footer">
                      <small class="text-muted"><%=rv.getAddress() %></small>
@@ -472,9 +472,9 @@
                <button onclick="movePage(<%=currentPage==1?1:currentPage-1%>);" type="button" class="btn btn-default bg-dark text-white">◀</button>
                <%for(int i = startPage; i <= endPage; i++){ %>
                   <%if(currentPage != i){ %>
-                  <button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white">1</button>
+                  <button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
                   <%}else{ %>
-                  <button type="button" class="btn btn-default bg-dark text-white disabled">1</button>
+                  <button type="button" class="btn btn-default bg-dark text-white disabled"><%=i %></button>
                   
                   <%} %>
                <%} %>
@@ -600,8 +600,6 @@
                 +"&centerLongitude="+center.getLng()
                 +"&mapLevel="+map.getLevel();
 
-          map_area_move_view('');
-          
       }
    //지역 직접선택 열고 닫기
    function map_area_move_view(view_stat) {

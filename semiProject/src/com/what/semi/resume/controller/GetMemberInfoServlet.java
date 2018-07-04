@@ -24,7 +24,7 @@ public class GetMemberInfoServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-			//유저 아이디를 이용해서 member테이블에 저장된 값을 가져오는 서블릿
+		//유저 아이디를 이용해서 member테이블에 저장된 값을 가져오는 서블릿
 				String userId = request.getParameter("userId");
 				
 				MyResumeVo member = new MyResumeService().selectMemberInfo(userId);

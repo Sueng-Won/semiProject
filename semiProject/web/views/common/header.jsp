@@ -23,12 +23,12 @@
     <link href="/sp/css/shop-homepage.css" rel="stylesheet">
 	
     <link href="/sp/css/daum.css" rel="stylesheet">
-    <script src="/sp/vendor/jquery/jquery.min.js"></script>
+     <script src="/sp/vendor/jquery/jquery.min.js"></script>
 	<script type="text/javascript">
 		function loadLocalList() {
 			location.href = "/sp/localList.do";
 		}
-		
+	
 		
 		//추후 회원의 구인게시물/이력서를 불러올 function - 회원정보를 parameter로 설정해야함
 		function loadMyList() {
@@ -64,10 +64,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/sp/getResume.do">이력서/업체정보관리</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/sp/myRecruitmentList.do">이력서/업체정보관리</a>
+              <a class="nav-link" href="/sp/views/member/manageResume.jsp">이력서/업체정보관리</a>
             </li>
             <li class="nav-item">
               <a class="nav-link btn" style="text-align: left;" onclick="qnaNew();">Q&A</a>

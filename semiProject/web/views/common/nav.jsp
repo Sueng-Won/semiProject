@@ -31,6 +31,11 @@
 	function join() {
 		location.href = "/sp/views/member/join.jsp";
 	}
+	
+	function loadMachingList(){
+		location.href="/sp/matchingSearch.do";
+	}
+	
 	function loadLocalList() {
 		location.href = "/sp/localList.do";
 	}
@@ -58,13 +63,6 @@
 						<input type="button" size="15" value="회원가입" class="btn btn-dark btn-sm btn-block" onclick="join();" />
 					</td>
 				</tr>
-				<tr>
-						<td colspan="2">
-						<a href="/sp/searchId.do">아이디 찾기</a>
-						/
-						<a href="#">비밀번호 찾기</a>
-						</td>
-				</tr>
 			</table>
 		</form>
 		<%} else { %>
@@ -80,7 +78,8 @@
 	</div>
 	<br><br>
 	<div class="list-group">
-		<button type="button" class="btn btn-default btn-lg btn-block bg-dark">맞춤알바</button>
+		<button type="button" onclick="loadMachingList();"
+			class="btn btn-default btn-lg btn-block bg-dark">맞춤알바</button>
 		<!-- 지역 알바로 이동 -->
 		<button type="button" onclick="loadLocalList();"
 			class="btn btn-lg btn-block bg-dark">지역알바</button>

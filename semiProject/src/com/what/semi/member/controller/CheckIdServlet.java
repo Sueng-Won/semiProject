@@ -1,8 +1,6 @@
 package com.what.semi.member.controller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,17 +29,15 @@ public class CheckIdServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
-		String tBtn = request.getParameter("tBtn");
-		String gender = request.getParameter("gender");
 		int result = new MemberService().checkId(id);
 		
 		if(result>0) {
 			System.out.println("아이디 있음");
-			response.sendRedirect("views/member/join.jsp?flag=false&id="+id+"&tBtn="+URLEncoder.encode(tBtn, "UTF-8")+"&gender="+gender);
+			response.sendRedirect("views/member/join.jsp?flag=false&id="+id);
 		}
 		else {
 			System.out.println("아이디 없음");
-			response.sendRedirect("views/member/join.jsp?flag=true&id="+id+"&tBtn="+URLEncoder.encode(tBtn, "UTF-8")+"&gender="+gender);
+			response.sendRedirect("views/member/join.jsp?flag=true&id="+id);
 		}
 	}
 

@@ -5,8 +5,10 @@
     pageEncoding="UTF-8"%>
 <%
 String nickname = (String) session.getAttribute("nickname");
+
 ArrayList<RecruitmentVo> list = 
 	(ArrayList<RecruitmentVo>)request.getAttribute("list"); 
+
 PageInfo pi = (PageInfo)request.getAttribute("pi");
 int listCount = pi.getTotalCount();
 int currentPage = pi.getCurrentPage();
@@ -95,9 +97,9 @@ height:400px;
 					<button onclick="movePage(<%=currentPage==1?1:currentPage-1%>);" type="button" class="btn btn-default bg-dark text-white">◀</button>
 					<%for(int i = startPage; i <= endPage; i++){ %>
 						<%if(currentPage != i){ %>
-						<button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white">1</button>
+						<button onclick="movePage(<%=i %>);" type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
 						<%}else{ %>
-						<button type="button" class="btn btn-default bg-dark text-white">1</button>
+						<button type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
 						
 						<%} %>
 					<%} %>

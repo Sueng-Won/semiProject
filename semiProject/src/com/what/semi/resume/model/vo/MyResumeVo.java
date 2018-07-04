@@ -15,31 +15,13 @@ public class MyResumeVo {
 	private int miltary_service;
 	private int career;
 	private String business_type;
-	private java.sql.Date workable_days;
+	private Date workable_days;
 	private String name;
 	private String birth;
 	private String phone;
 	private String email;
 	private String address;
-	private String introduce;
-	private String workTime;
-	
-	public String getWorkTime() {
-		return workTime;
-	}
-
-	public void setWorkTime(String workTime) {
-		this.workTime = workTime;
-	}
-
-	public String getIntroduce() {
-		return introduce;
-	}
-
-	public void setIntroduce(String introduce) {
-		this.introduce = introduce;
-	}
-
+	private char gender;
 	public MyResumeVo() {
 
 	}
@@ -212,10 +194,26 @@ public class MyResumeVo {
 	public void setIs_post(int is_post) {
 		this.is_post = is_post;
 	}
+	
+	
+	public char getGender() {
+		return gender;
+	}
+
+	public void setGender(char gender) {
+		this.gender = gender;
+	}
 
 	@Override
 	public String toString() {
-		return "MyInfoTypeVo [id=" + id + ", introduce_title=" + introduce_title + ", is_post=" + is_post + "]";
+		return "MyResumeVo [id=" + id + ", resume_id=" + resume_id + ", introduce_title=" + introduce_title
+				+ ", is_post=" + is_post + ", member_type=" + member_type + ", pri_resume=" + pri_resume
+				+ ", profile_image_src=" + profile_image_src + ", achievement=" + achievement + ", disability="
+				+ disability + ", miltary_service=" + miltary_service + ", career=" + career + ", business_type="
+				+ business_type + ", workable_days=" + workable_days + ", name=" + name + ", birth=" + birth
+				+ ", phone=" + phone + ", email=" + email + ", address=" + address + ", gender=" + gender + "]";
 	}
+
+	
 
 }
