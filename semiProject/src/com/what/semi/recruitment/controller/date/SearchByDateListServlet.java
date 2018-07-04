@@ -38,15 +38,12 @@ public class SearchByDateListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String dateStr = request.getParameter("dateStr");
-		// System.out.println(dateStr);
 		RecruitmentService rs = new RecruitmentService();
 
 		PageInfo pi = PageTemplate.byDatePaging(request, rs, dateStr);
 
 		ArrayList<RecruitmentVo> list = rs.selectByDateList(dateStr, pi.getCurrentPage(), pi.getLimit());
 
-		GmailSend gs = new GmailSend();
-		// gs.GmailSet("yul2514@naver.com",dateStr,dateStr);
 
 		RequestDispatcher view = null;
 		String url = "";

@@ -100,9 +100,9 @@ width:350px;
 					<button onclick="movePage(<%=currentPage==1?1:currentPage-1%>);" type="button" class="btn btn-default bg-dark text-white"><</button>
 					<%for(int i = startPage; i <= endPage; i++){ %>
 						<%if(currentPage != i){ %>
-						<button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white">1</button>
+						<button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
 						<%}else{ %>
-						<button type="button" class="btn btn-default bg-dark text-white">1</button>
+						<button type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
 						
 						<%} %>
 					<%} %>
