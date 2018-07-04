@@ -1,6 +1,7 @@
-package com.what.semi.recruitment;
+package com.what.semi.recruitment.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +15,8 @@ import com.what.semi.member.model.service.MemberService;
 import com.what.semi.member.model.vo.MemberVo;
 import com.what.semi.recruitment.model.service.RecruitmentService;
 import com.what.semi.recruitment.model.vo.RecruitmentVo;
+import com.what.semi.resume.model.service.MyResumeService;
+import com.what.semi.resume.model.vo.MyResumeVo;
 
 /**
  * Servlet implementation class RecruitmentDetailServlet
@@ -43,7 +46,8 @@ public class RecruitmentDetailServlet extends HttpServlet {
 		
 		RecruitmentVo rec = new RecruitmentService().selectRecruitment(recId);
 		MemberVo writer = new MemberService().getMemberInfo(rec.getM_id());
-		System.out.println(writer.toString());
+		ArrayList<MyResumeVo> myResumes = new MyResumeService().selectMyInfo(m_id);
+		System.out.println(myResumes.size());
 	
 		String url = "";
 		if(null != rec){
@@ -52,6 +56,7 @@ public class RecruitmentDetailServlet extends HttpServlet {
 			request.setAttribute("rec", rec);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("writer", writer);
+			request.setAttribute("myResumes", myResumes);
 		}else{
 			/*url = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "게시글 상세조회에 실패하였습니다.");*/

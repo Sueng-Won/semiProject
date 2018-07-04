@@ -147,7 +147,7 @@ public class WriteRecruitmentServlet extends HttpServlet {
 		
 		String url="";
 		if(0<result){
-			response.sendRedirect("/sp/views/member/manageRecruitment.jsp");
+			response.sendRedirect("/sp/myRecruitmentList.do");
 		}else{
 			/*url="views/common/errorPage.jsp";
 			request.setAttribute("msg", "사진 게시판 게시글 작성 실패");
