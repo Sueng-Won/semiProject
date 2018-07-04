@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import com.what.semi.blackList.model.service.BlackListService;
 import com.what.semi.blackList.model.vo.ConditionVo;
+import com.what.semi.qna.model.service.QnaService;
 import com.what.semi.recruitment.model.service.RecruitmentService;
 import com.what.semi.resume.model.vo.MyResumeVo;
 
