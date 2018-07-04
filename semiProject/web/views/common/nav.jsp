@@ -31,6 +31,11 @@
 	function join() {
 		location.href = "/sp/views/member/join.jsp";
 	}
+	
+	function loadMachingList(){
+		location.href="/sp/matchingSearch.do";
+	}
+	
 	function loadLocalList() {
 		location.href = "/sp/localList.do";
 	}
@@ -80,7 +85,8 @@
 	</div>
 	<br><br>
 	<div class="list-group">
-		<button type="button" class="btn btn-default btn-lg btn-block bg-dark">맞춤알바</button>
+		<button type="button" onclick="loadMachingList();"
+			class="btn btn-default btn-lg btn-block bg-dark">맞춤알바</button>
 		<!-- 지역 알바로 이동 -->
 		<button type="button" onclick="loadLocalList();"
 			class="btn btn-lg btn-block bg-dark">지역알바</button>

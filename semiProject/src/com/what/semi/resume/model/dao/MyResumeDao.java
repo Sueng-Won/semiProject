@@ -20,7 +20,7 @@ public class MyResumeDao {
 		ArrayList<MyResumeVo> userType = null;
 		
 		try {
-			query = "SELECT PRI_RESUME, RESUME_ID, INTRODUCE_TITLE, IS_POST, MEMBER_TYPE FROM RESUME R JOIN MEMBER M ON (R.M_ID = M.M_ID) WHERE M.M_ID=? AND MEMBER_TYPE='JS' ";
+			query = "SELECT PRI_RESUME, RESUME_ID, INTRODUCE_TITLE, IS_POST, MEMBER_TYPE, MILTARY_SERVICE, BUSINESS_TYPE, WORKABLE_DAYS, GENDER FROM RESUME R JOIN MEMBER M ON (R.M_ID = M.M_ID) WHERE M.M_ID=? AND MEMBER_TYPE='JS' ";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -36,6 +36,10 @@ public class MyResumeDao {
 				temp.setIs_post(rs.getInt("is_post"));
 				temp.setMember_type(rs.getString("member_type"));
 				temp.setPri_resume(rs.getString("pri_resume").charAt(0));
+				temp.setMiltary_service(rs.getInt("miltary_service"));
+				temp.setBusiness_type(rs.getString("business_type"));
+				temp.setWorkable_days(rs.getDate("workable_days"));
+				temp.setGender(rs.getString("gender").charAt(0));
 				userType.add(temp);
 			}
 		} catch (SQLException e) {
