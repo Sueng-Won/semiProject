@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.what.semi.common.filter.Sha512;
 import com.what.semi.member.model.service.MemberService;
+import com.what.semi.member.model.vo.MemberVo;
 
 @WebServlet("/login.do")
 public class LoginServlet extends HttpServlet {
@@ -28,12 +29,14 @@ public class LoginServlet extends HttpServlet {
 		int result = 0;
 		
 		result = new MemberService().checkLogin(id, pw);
+		MemberVo user = new MemberService().getMemberInfo(id);
 
 		HttpSession session = request.getSession();
 		
 		
 		if(result>0) {
 			session.setAttribute("id", id);
+			session.setAttribute("user", user);
 			System.out.println(id);
 			if("admin".equals(id)) {
 				response.sendRedirect("views/admin/adminMain.jsp");
