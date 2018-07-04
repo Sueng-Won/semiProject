@@ -1,4 +1,4 @@
-package com.what.semi.admin.blackList.model.vo;
+package com.what.semi.blackList.model.vo;
 
 import java.sql.Date;
 

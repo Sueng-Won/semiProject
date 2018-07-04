@@ -1,12 +1,12 @@
-package com.what.semi.admin.blackList.model.service;
+package com.what.semi.blackList.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.what.semi.admin.blackList.model.dao.BlackListDao;
-import com.what.semi.admin.blackList.model.vo.BlackListVo;
-import com.what.semi.admin.blackList.model.vo.ConditionVo;
-import com.what.semi.admin.blackList.model.vo.ReportVo;
+import com.what.semi.blackList.model.dao.BlackListDao;
+import com.what.semi.blackList.model.vo.BlackListVo;
+import com.what.semi.blackList.model.vo.ConditionVo;
+import com.what.semi.blackList.model.vo.ReportVo;
 import com.what.semi.common.template.JDBCTemplate;
 
 public class BlackListService {

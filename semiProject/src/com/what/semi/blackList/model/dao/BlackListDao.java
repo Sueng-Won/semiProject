@@ -1,4 +1,4 @@
-package com.what.semi.admin.blackList.model.dao;
+package com.what.semi.blackList.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.what.semi.admin.blackList.model.vo.BlackListVo;
-import com.what.semi.admin.blackList.model.vo.ConditionVo;
-import com.what.semi.admin.blackList.model.vo.ReportVo;
+import com.what.semi.blackList.model.vo.BlackListVo;
+import com.what.semi.blackList.model.vo.ConditionVo;
+import com.what.semi.blackList.model.vo.ReportVo;
 import com.what.semi.common.template.JDBCTemplate;
 
 public class BlackListDao {

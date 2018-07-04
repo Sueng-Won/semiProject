@@ -1,4 +1,4 @@
-package com.what.semi.admin.blackList.controller;
+package com.what.semi.blackList.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.what.semi.admin.blackList.model.service.BlackListService;
-import com.what.semi.admin.blackList.model.vo.BlackListVo;
-import com.what.semi.admin.blackList.model.vo.ConditionVo;
+import com.what.semi.blackList.model.service.BlackListService;
+import com.what.semi.blackList.model.vo.BlackListVo;
+import com.what.semi.blackList.model.vo.ConditionVo;
 import com.what.semi.common.template.PageInfo;
 import com.what.semi.common.template.PageTemplate;
 
