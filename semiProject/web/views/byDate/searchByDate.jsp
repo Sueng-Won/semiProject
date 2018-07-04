@@ -46,6 +46,7 @@ margin-top:50px;
 				<!--==================================   광고      ==================================================  -->
 				<div id="calendar" class="calendar">
 					<div id="datepicker" align="center"></div>
+					<div style="width:20px;"></div>
 					<div align="right" style="margin-right:140px">
 						<button onclick="searchByDate();"
 							class="btn btn-default bg-dark text-white">검색</button>
