@@ -35,6 +35,8 @@ public class CheckIdServlet extends HttpServlet {
 		String gender = request.getParameter("gender");
 		int result = new MemberService().checkId(id);
 		
+		String convertTBtn;
+		
 		if(tBtn.equals("BO")){
 			tBtn="업주";
 		}else{
