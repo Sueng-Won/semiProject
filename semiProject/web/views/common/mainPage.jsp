@@ -120,11 +120,11 @@ function recDetail(i){
 						if (currentPage != i) {
 					%>
 					<button onclick="movePage();" type="button"
-						class="btn btn-default bg-dark text-white">1</button>
+						class="btn btn-default bg-dark text-white"><%=i %></button>
 					<%
 						} else {
 					%>
-					<button type="button" class="btn btn-default bg-dark text-white">1</button>
+					<button type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
 
 					<%
 						}
