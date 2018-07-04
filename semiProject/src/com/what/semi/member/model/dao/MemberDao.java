@@ -277,4 +277,35 @@ public class MemberDao {
 		
 		return result;
 	}
+
+
+
+	public String searchId(Connection conn, String email) {
+		String resultId = null;
+		PreparedStatement pstmt = null;	//SQL문을 나타내는 객체
+		ResultSet rs = null;
+		String query = "";
+		
+		try {
+			query = "SELECT M_ID FROM MEMBER WHERE EMAIL = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				if(rs.getString("M_ID")!=null) {
+					resultId = rs.getString("M_ID");
+				}
+				else {
+					resultId = null;
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return resultId;
+	}
 }
