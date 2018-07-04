@@ -33,16 +33,17 @@ public class SearchIdServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String email = request.getParameter("email");
 		String resultId = new MemberService().searchId(email);
+		String url = "/views/member/searchId.jsp";
 		
 		if(resultId == null) {
 			System.out.println("아이디 찾기 실패");
-			RequestDispatcher view = request.getRequestDispatcher("/views/member/searchId.jsp");
+			RequestDispatcher view = request.getRequestDispatcher(url);
 			request.setAttribute("activatedFlag", "true");
 			view.forward(request, response);
 		} else {
 			System.out.println("아이디 찾기 성공");
 			System.out.println("servlet id : "+resultId);
-			RequestDispatcher view = request.getRequestDispatcher("/views/member/searchId.jsp");
+			RequestDispatcher view = request.getRequestDispatcher(url);
 			request.setAttribute("resultId", resultId);
 			request.setAttribute("activatedFlag", "true");
 			request.setAttribute("searchFlag", "true");
