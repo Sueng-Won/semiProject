@@ -1,7 +1,6 @@
 package com.what.semi.recruitment.model.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 import com.what.semi.common.template.JDBCTemplate;
 import com.what.semi.common.template.LocalPageInfo;
 import com.what.semi.recruitment.model.vo.RecruitmentVo;
-import com.what.semi.resume.model.vo.MyResumeVo;
 
 public class RecruitmentDao {
 
@@ -304,7 +302,6 @@ public class RecruitmentDao {
 			pstmt.setString(7,rec.getZipcode());
 			pstmt.setDouble(8, rec.getR_latitude());
 			pstmt.setDouble(9, rec.getR_longitude());
-<<<<<<< HEAD
 			pstmt.setString(10,rec.getBusiness_type());
 			pstmt.setInt(11, rec.getCareer());
 			pstmt.setDate(12, rec.getWork_day());
@@ -318,18 +315,6 @@ public class RecruitmentDao {
 			pstmt.setString(20,rec.getIntroduce());
 			pstmt.setString(21,rec.getM_id());
 			
-=======
-			pstmt.setDate(10,rec.getStart_work_time());
-			pstmt.setDate(11,rec.getEnd_work_time());
-			pstmt.setInt(12, rec.getPay());
-			pstmt.setString(13,String.valueOf(rec.getGender()));
-			pstmt.setInt(14, rec.getMilitary_service());
-			pstmt.setString(15,rec.getIntroduce());
-			pstmt.setString(16,rec.getM_id());
-			pstmt.setString(17,rec.getRecruitment_phone());
-			pstmt.setString(18,rec.getRecruitment_email());
-			pstmt.setString(19,rec.getZipcode());
->>>>>>> refs/heads/jaejun
 
 			result = pstmt.executeUpdate();
 
@@ -341,94 +326,59 @@ public class RecruitmentDao {
 		return result;
 	}
 
-	public int selectMachingListTotalCount(Connection con, MyResumeVo myResumeVo) {
+	public int selectMyListTotalCount(Connection con, String id) {
 		int result = -1;
-		String businessType = myResumeVo.getBusiness_type();
-		Date workableDay = myResumeVo.getWorkable_days();
-		String gender = String.valueOf(myResumeVo.getGender());
-		int miltaryService = myResumeVo.getMiltary_service();
-		System.out.println(businessType+" / "+workableDay+" / "+gender+" / "+miltaryService);
-		PreparedStatement pstmt = null;
+
+		Statement stmt = null;
 		ResultSet rs = null;
 		String query = "";
-		
 		try {
-			query = "SELECT COUNT(*) AS LISTCOUNT " + 
-					"FROM RECRUITMENT " + 
-					"WHERE (IS_POST != 0 " + 
-					"AND BUSINESS_TYPE = ? " + 
-					"AND WORK_DAY = ? " + 
-					"AND GENDER = ? " + 
-					"AND MILITARY_SERVICE = ?)" + 
-					"ORDER BY WORK_DAY";
-			
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, businessType);
-			pstmt.setDate(2, workableDay);
-			pstmt.setString(3, gender);
-			pstmt.setInt(4, miltaryService);
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
+			stmt = con.createStatement();
+			query = "SELECT COUNT(*) AS LISTCOUNT " + "FROM RECRUITMENT "
+					+ "WHERE IS_POST != 0 AND M_id='"+id+"'"
+					+ "ORDER BY WORK_DAY";
+			rs = stmt.executeQuery(query);
+			while (rs.next()) {
 				result = rs.getInt("listCount");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(rs);
-			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(stmt);
 		}
-		
+
 		return result;
 	}
 
-	public ArrayList<RecruitmentVo> loadMatchingSearchList(Connection con, int currentPage, int limit,
-			MyResumeVo myResumeVo) {
-		String businessType = myResumeVo.getBusiness_type();
-		Date workableDay = myResumeVo.getWorkable_days();
-		String gender = String.valueOf(myResumeVo.getGender());
-		int miltaryService = myResumeVo.getMiltary_service();
+	public ArrayList<RecruitmentVo> selectMyRecList(Connection con, String id, int currentPage, int limit) {
 		ArrayList<RecruitmentVo> list = null;
-		PreparedStatement pstmt = null;
+		Statement stmt = null;
 		ResultSet rs = null;
-		String query = ""; 
+		String query = "";
 		int startRow = (currentPage - 1) * limit + 1;
 		int endRow = startRow + limit - 1;
 		try {
-			query = "SELECT RECRUITMENT_ID, RECRUITMENT_IMAGE_SRC, " + 
-					"BUSINESS_TYPE, ADDRESS, ADDRESS_DETAIL, " + 
-					"ZIPCODE, WORK_DAY, R_LATITUDE, R_LONGITUDE, " + 
-					"START_WORK_TIME, END_WORK_TIME, PAY, " + 
-					"GENDER, MILITARY_SERVICE, INTRODUCE, " + 
-					"M_ID, IS_POST, NAME, RECRUITMENT_NAME, RECRUITMENT_TITLE " + 
-					"FROM (SELECT ROWNUM RNUM, P.* " + 
-					"FROM (SELECT RECRUITMENT_ID, RECRUITMENT_IMAGE_SRC, " + 
-					"BUSINESS_TYPE, R.ADDRESS, R.ADDRESS_DETAIL, " + 
-					"R.ZIPCODE, WORK_DAY, R_LATITUDE, R_LONGITUDE, " + 
-					"START_WORK_TIME, END_WORK_TIME, PAY, " + 
-					"R.GENDER, MILITARY_SERVICE, INTRODUCE, " + 
-					"R.M_ID, IS_POST, M.NAME, RECRUITMENT_NAME, RECRUITMENT_TITLE " + 
-					"FROM RECRUITMENT R " + 
-					"JOIN MEMBER M ON (M.M_ID = R.M_ID) " + 
-					"WHERE (IS_POST != 0 " +
-					"AND BUSINESS_TYPE = ? " + 
-					"AND WORK_DAY = ? " + 
-					"AND R.GENDER = ? " + 
-					"AND MILITARY_SERVICE = ? )" + 
-					"ORDER BY WORK_DAY) P) " + 
-					"WHERE RNUM BETWEEN ? AND ?";
-			//System.out.println(query);
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, businessType);
-			pstmt.setDate(2, workableDay);
-			pstmt.setString(3, gender);
-			pstmt.setInt(4, miltaryService);
-			pstmt.setInt(5, startRow);
-			pstmt.setInt(6, endRow);
-			rs = pstmt.executeQuery();
+			stmt = con.createStatement();
+			query = "SELECT RECRUITMENT_ID, RECRUITMENT_IMAGE_SRC, " + "BUSINESS_TYPE, ADDRESS, ADDRESS_DETAIL, "
+					+ "ZIPCODE, WORK_DAY, R_LATITUDE, R_LONGITUDE, " + "START_WORK_TIME, END_WORK_TIME, PAY, "
+					+ "GENDER, MILITARY_SERVICE, INTRODUCE, "
+					+ "M_ID, IS_POST, NAME, RECRUITMENT_NAME, RECRUITMENT_TITLE " + "FROM (SELECT ROWNUM RNUM, P.* "
+					+ "FROM (SELECT RECRUITMENT_ID, RECRUITMENT_IMAGE_SRC, "
+					+ "BUSINESS_TYPE, R.ADDRESS, R.ADDRESS_DETAIL, " + "R.ZIPCODE, WORK_DAY, R_LATITUDE, R_LONGITUDE, "
+					+ "START_WORK_TIME, END_WORK_TIME, PAY, " + "R.GENDER, MILITARY_SERVICE, INTRODUCE, "
+					+ "R.M_ID, IS_POST, M.NAME, RECRUITMENT_NAME, RECRUITMENT_TITLE " + "FROM RECRUITMENT R "
+					+ "JOIN MEMBER M ON (M.M_ID = R.M_ID) "
+					+ "WHERE R.M_ID='" + id + "'"
+					+ "ORDER BY WORK_DAY) P) " + "WHERE RNUM BETWEEN " + startRow + " AND " + endRow;
+			// query = "SELECT * FROM RECRUITMENT";
+
+			rs = stmt.executeQuery(query);
 			list = new ArrayList<RecruitmentVo>();
 			RecruitmentVo temp = null;
-			while(rs.next()) {
+			while (rs.next()) {
 				temp = new RecruitmentVo();
+				temp.setRecruitment_id(rs.getString("RECRUITMENT_ID"));
 				temp.setRecruitment_name(rs.getString("recruitment_name"));
 				temp.setRecruitment_title(rs.getString("recruitment_title"));
 				temp.setAddress(rs.getString("address"));
@@ -437,20 +387,22 @@ public class RecruitmentDao {
 				temp.setR_longitude(rs.getDouble("r_longitude"));
 				temp.setPay(rs.getInt("pay"));
 				temp.setWork_day(rs.getDate("work_day"));
+				temp.setIs_post(rs.getInt("is_post"));
+
+				// System.out.println(temp);
 				list.add(temp);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(rs);
-			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(stmt);
 		}
-		
+
 		return list;
 	}
 
-<<<<<<< HEAD
 	public RecruitmentVo selectRecruitment(Connection con, String recId) {
 		RecruitmentVo rec = null;
 		Statement stmt = null;
@@ -504,8 +456,5 @@ public class RecruitmentDao {
 
 		return rec;
 	}
-=======
-	
->>>>>>> refs/heads/jaejun
 
 }

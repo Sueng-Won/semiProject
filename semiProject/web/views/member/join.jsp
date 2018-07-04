@@ -5,6 +5,8 @@
 <%
 	boolean flag = Boolean.parseBoolean(request.getParameter("flag"));
 	String idv = request.getParameter("id");
+	String tBtn = request.getParameter("tBtn");
+	String gender = request.getParameter("gender");
 %>
 <!-- master brench 생성 -->
 <style>
@@ -18,36 +20,11 @@
 
 
 <script type="text/javascript">
-	
-	function memberJoin() {
-		var okFlag = false;
-		console.log($("#id").val());
-		if($("#id").val() == ""){
-	        alert("아이디 입력바람");
-	        $("#id").focus();
-	        return false;
-	      }
-		else{
-			okFlag = true;
-		}
-		if(okFlag){
-			//$("#joinForm").submit();
-		}
-	}
-	
-	function validate() {
-		if($("#pw").val() != $("#pw2").val()){
-			alert("입력하신 비밀번호가 일치하지 않습니다.");
-			$("#pw2").focus();
-			
-			return false;
-		}
-		//다른 값들을 체크 하는 로직 추가(유효성 검사 로직 추가 영역)
-		return true;
-	}
-	
-	    
-	
+
+	var id = "<%=idv%>";
+	var gettedTBtn = "<%=tBtn%>";
+	var gettedGender = "<%=gender%>";
+	var flag = <%=flag%>;
 	var searchAddr;
 	
 	function openAddressPopup() {
@@ -137,27 +114,115 @@
 	}
 	
 	function signIn(){
-		$("#joinForm").submit();
+		var okFlag = false;
+		
+		if($("#iid").val() == ""){
+	        alert("아이디를 입력해주세요.");
+	        $("#iid").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if(!flag){
+			alert("아이디를 중복체크 해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		if($("#ipw").val()==""||$("#ipw2").val()==""){
+			alert("비밀번호를 입력해주세요.");
+			$("#ipw").focus();
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		if($("#ipw").val() != $("#ipw2").val()){
+			alert("기존 비밀번호와 일치하지 않습니다.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		if($("#name").val()==""){
+			alert("이름을 입력해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		if($("#email").val()==""){
+			alert("이메일을 입력해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		if($("#birth").val()==""){
+			alert("생일을 입력해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		if($("#phone").val()==""){
+			alert("휴대폰번호를 입력해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		if($("#rTypeValue").val()!=""){
+			alert("주소 검색 버튼을 눌러 주소를 입력해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		if($("#addressDetail").val()==""){
+			alert("상세주소를 입력해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		if(okFlag){
+			$("#joinForm").submit();
+		}
 	}
 	
 	function checkId(){
-		var id = $("#id").val();
-		location.href="/sp/checkId.do?id="+id;
-		
-		
+		var id = $("#iid").val();
+		var tBtn = $("#tBtn").text();
+		var gender = $('input[name="gender"]:checked').val();
+		location.href="/sp/checkId.do?id="+id+"&tBtn="+tBtn+"&gender="+gender;
 	}
 	
 	$(function(){
-		var id = "<%=idv%>";
-		var flag = <%=flag%>;
 		if(id!="null"){
 			if(!flag){
 				alert("중복된 아이디 입니다.");
-				$("#id").val("");
+				$("#iid").val("");
+				$("#tBtn").text(gettedTBtn);
+				$("#rTypeValue").val(gettedTBtn);
+				$("#"+gettedGender).prop("checked", true);
+				$("#"+gettedGender+"Label").attr("class","btn btn-secondary active");
 			}
 			else{
 				alert("사용할 수 있는 아이디 입니다.");
-				$("#id").val(id);
+				$("#iid").val(id);
 			}
 		}
 		else{
@@ -187,19 +252,19 @@
 					</button>
 			    	<input type="hidden" name="rTypeValue" id="rTypeValue">
 					  <ul class="dropdown-menu bg-dark" role="menu">
-					    <li><button type="button" onclick="typeSelect(this);" name="js" class="btn btn-dark btn-sm btn-block" value="JS">구직자</button></li>
-					    <li><button type="button" onclick="typeSelect(this);" name="bo" class="btn btn-dark btn-sm btn-block" value="BO">업주</button></li>
+					    <li><button type="button" onclick="typeSelect(this);" id="JS" name="js" class="btn btn-dark btn-sm btn-block" value="JS">구직자</button></li>
+					    <li><button type="button" onclick="typeSelect(this);" id="BO" name="bo" class="btn btn-dark btn-sm btn-block" value="BO">업주</button></li>
 					    <li class="divider"></li>
 					  </ul>
 					  
 			    <div class="input-group">
 				    	<!-- 사용자 성별 -->
 				    	<div class="btn-group mb-1 btn-group-toggle" data-toggle="buttons">
-	  						<label class="btn btn-secondary active">
-	    					<input type="radio" name="gender" value="M" autocomplete="off" checked>남
+	  						<label class="btn btn-secondary" id="MLabel">
+	    					<input type="radio" id="M" name="gender" value="M" autocomplete="off">남
 	  						</label>
-	  						<label class="btn btn-secondary">
-	    					<input type="radio" name="gender" value="F" autocomplete="off">여
+	  						<label class="btn btn-secondary" id="FLabel">
+	    					<input type="radio" id="F" name="gender" value="F" autocomplete="off">여
 	  						</label>
 						</div>
 			    </div>
@@ -208,8 +273,7 @@
 			    <div class="input-group">
 			    
 			    	<!-- 사용자 아이디 -->
-			      <input type="text" class="form-control mb-1" name="id" id="id" placeholder="아이디"/>
-			      <input type="hidden" name="idHd" value=""/>
+			      <input type="text" class="form-control mb-1" name="id" id="iid" placeholder="아이디"/>
 			      <span class="input-group-btn">
 			        <button class="btn btn-light text-dark ml-1" type="button" onclick="checkId();">중복 확인</button>
 			      </span>
@@ -218,7 +282,7 @@
 			    <div class="input-group">
 			    
 			    	<!-- 사용자 비밀번호 -->
-			      <input type="password" class="form-control mb-1" name="pw" placeholder="비밀번호"/>
+			      <input type="password" class="form-control mb-1" name="pw" id="ipw" placeholder="비밀번호"/>
 			      
 			      
 			    </div>
@@ -226,7 +290,7 @@
 			    <div class="input-group">
 			    
 			    	<!-- 사용자 비밀번호 -->
-			      <input type="password" class="form-control mb-1" name="pw" placeholder="비밀번호"/>
+			      <input type="password" class="form-control mb-1" name="pw" id="ipw2" placeholder="비밀번호확인"/>
 			      
 			      
 			    </div>
@@ -234,22 +298,22 @@
 			    <div class="input-group">
 			    
 			    	<!-- 사용자 이름 -->
-			      <input type="text" class="form-control mb-1" name="name" placeholder="이름"/>
+			      <input type="text" class="form-control mb-1" id="name" name="name" placeholder="이름"/>
 			      
 			    </div>
 			    
 			    <div class="input-group">
 			    	<!-- 사용자 이메일 -->
-			      <input type="email" class="form-control mb-1" name="email" placeholder="email"/>
+			      <input type="email" class="form-control mb-1" id="email" name="email" placeholder="email"/>
 			    </div>
 			    <div class="input-group">
 			    	<!-- 사용자 생년월일 -->
-			    	<input type="date" class="form-control mb-1" name="birth" placeholder="생년월일"/>
+			    	<input type="date" class="form-control mb-1" id="birth" name="birth" placeholder="생년월일"/>
 			    </div>
 			    
 			    <div class="input-group">
 			    	<!-- 사용자 전화번호 -->
-			    	<input type="text" class="form-control mb-1" name="phone" placeholder="휴대폰번호(-를 빼고 입력하세요)"/>
+			    	<input type="text" class="form-control mb-1" id="phone" name="phone" placeholder="휴대폰번호(-를 빼고 입력하세요)"/>
 			    </div>
 			    
 			    <div class="input-group">
@@ -258,7 +322,7 @@
 			      <input type="hidden" name="latitude" id="latitude"/>
 			      <input type="hidden" name="longitude" id="longitude"/>
 			      	<!-- 주소 -->
-			      <input type="text" class="form-control mb-1" name="address" id="address" placeholder="주소"/>
+			      <input type="text" class="form-control mb-1" name="address" id="address" placeholder="주소" readonly/>
 			      <span class="input-group-btn">
 			        <button class="btn btn-light text-dark ml-1" type="button" onclick="openAddressPopup();">주소 검색</button>
 			      </span>

@@ -18,7 +18,7 @@
     <script src="/sp/vendor/jquery/jquery.min.js"></script>
 	<script type="text/javascript">
 		function manageMember() {
-			location.href = "/sp/blackList.do";
+			location.href = "/sp/views/admin/manageMember.jsp";
 		}
 		
 	</script>
