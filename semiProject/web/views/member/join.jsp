@@ -182,7 +182,7 @@
 			okFlag = true;
 		}
 		
-		if($("#rTypeValue").val()!=""){
+		if($("#rTypeValue").val()==""){
 			alert("주소 검색 버튼을 눌러 주소를 입력해주세요.");
 			okFlag = false;
 			return false;

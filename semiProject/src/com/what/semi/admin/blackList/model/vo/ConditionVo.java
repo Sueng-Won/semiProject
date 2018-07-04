@@ -1,4 +1,4 @@
-package com.what.semi.blackList.model.vo;
+package com.what.semi.admin.blackList.model.vo;
 
 public class ConditionVo {
 	String isReport;

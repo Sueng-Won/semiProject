@@ -4,8 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.what.semi.blackList.model.service.BlackListService;
-import com.what.semi.blackList.model.vo.ConditionVo;
+import com.what.semi.admin.blackList.model.service.BlackListService;
+import com.what.semi.admin.blackList.model.vo.ConditionVo;
 import com.what.semi.qna.model.service.QnaService;
 import com.what.semi.recruitment.model.service.RecruitmentService;
 import com.what.semi.resume.model.vo.MyResumeVo;

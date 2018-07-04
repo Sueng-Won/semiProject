@@ -25,7 +25,7 @@
 
 <body>
 	<!-- Page Content -->
-	<div class="container">
+	<div class="container" style="min-height: 800px">
 		<!-- 내용을 담아놓을 컨테이너 -->
 
 		<div class="row">
@@ -42,7 +42,7 @@
 
 
 				<!--======================================	구인게시물	======================================== -->
-		 	  <div class="row">
+		 	  <div class="row" style="min-height: 500px">
           
             <%for(RecruitmentVo rv : list) {%><!-- for문을 통해 해당 게시물들의 개수에 맞게 생성 -->
 	            <div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4">

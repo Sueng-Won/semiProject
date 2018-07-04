@@ -94,7 +94,7 @@ String keyword = condition.getKeyword();
     			</form>
     			
     			
-			<div class="list-group" id="blackList" >
+			<div class="list-group" id="blackList" style="min-height: 500px">
 		     <%if(0 < list.size() && !"null".equals(list)){ %>
 		     	<%for(BlackListVo bv : list){ %>
 			     <div class="list-group-item">
