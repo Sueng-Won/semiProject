@@ -26,17 +26,21 @@ public class LoginServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		String id = request.getParameter("id");
 		String pw = Sha512.getSha512(request.getParameter("pw"));
+		MemberVo mv = new MemberService().getMemberInfo(id);
+
 		int result = 0;
 		
 		result = new MemberService().checkLogin(id, pw);
-		MemberVo user = new MemberService().getMemberInfo(id);
 
 		HttpSession session = request.getSession();
 		
 		
 		if(result>0) {
 			session.setAttribute("id", id);
-			session.setAttribute("user", user);
+			session.setAttribute("member_type", mv.getMember_type());
+			session.setAttribute("email", mv.getEmail());
+	        session.setAttribute("phone", mv.getPhone());
+
 			System.out.println(id);
 			if("admin".equals(id)) {
 				response.sendRedirect("views/admin/adminMain.jsp");
