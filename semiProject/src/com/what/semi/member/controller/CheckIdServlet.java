@@ -35,6 +35,12 @@ public class CheckIdServlet extends HttpServlet {
 		String gender = request.getParameter("gender");
 		int result = new MemberService().checkId(id);
 		
+		if(tBtn.equals("BO")){
+			tBtn="업주";
+		}else{
+			tBtn="구직자";
+		}
+		
 		if(result>0) {
 			System.out.println("아이디 있음");
 			response.sendRedirect("views/member/join.jsp?flag=false&id="+id+"&tBtn="+URLEncoder.encode(tBtn, "UTF-8")+"&gender="+gender);

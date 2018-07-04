@@ -205,6 +205,7 @@ public class MemberDao {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				if(rs.getString("M_ID")!=null) {
+					member.setId(rs.getString("M_ID"));
 					member.setName(rs.getString("NAME"));
 					member.setEmail(rs.getString("EMAIL"));
 					member.setPhone(rs.getString("PHONE"));

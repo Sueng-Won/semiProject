@@ -221,7 +221,7 @@
 	
 	function checkId(){
 		var id = $("#iid").val();
-		var tBtn = $("#tBtn").text();
+		var tBtn = $("#tBtn").val();
 		var gender = $('input[name="gender"]:checked').val();
 		location.href="/sp/checkId.do?id="+id+"&tBtn="+tBtn+"&gender="+gender;
 	}
@@ -370,6 +370,7 @@
 		var text = $(obj).text();
 		var value = $(obj).val();
 		$("#tBtn").text(text);
+		$("#tBtn").val(value);
 		$("#rTypeValue").val(value);
 	}
 </script>

@@ -37,7 +37,7 @@ CREATE TABLE CONTRACT (
        END_WORK_TIME        DATE NULL,
        RECRUITMENT_ID       VARCHAR2(30) NOT NULL,
        M_ID             VARCHAR2(30) NOT NULL,
-       RESUME_ID            VARCHAR2(30) NOT NULL
+       RESUME_ID            NUMBER NOT NULL
 );
 
 
