@@ -5,11 +5,6 @@
 	boolean searchFlag = Boolean.parseBoolean(request.getParameter("searchFlag"));
 	boolean activatedFlag = Boolean.parseBoolean(request.getParameter("activatedFlag"));
 	String resultId = request.getParameter("resultId");
-	
-	System.out.println(resultId);
-	System.out.println(searchFlag);
-	System.out.println(activatedFlag);
-	
 %>
 <script type="text/javascript">
 		function searchId(){
