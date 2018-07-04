@@ -3,6 +3,7 @@ package com.what.semi.member.controller;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,17 +38,18 @@ public class SearchIdServlet extends HttpServlet {
 		
 		if(resultId == null) {
 			System.out.println("아이디 찾기 실패");
-			RequestDispatcher view = request.getRequestDispatcher(url);
+			/*RequestDispatcher view = request.getRequestDispatcher(url);
 			request.setAttribute("activatedFlag", "true");
-			view.forward(request, response);
+			view.forward(request, response);*/
+			response.sendRedirect("views/member/searchId.jsp?activatedFlag=true");
 		} else {
 			System.out.println("아이디 찾기 성공");
-			System.out.println("servlet id : "+resultId);
-			RequestDispatcher view = request.getRequestDispatcher(url);
+			/*RequestDispatcher view = getServletContext().getRequestDispatcher(url);
 			request.setAttribute("resultId", resultId);
 			request.setAttribute("activatedFlag", "true");
 			request.setAttribute("searchFlag", "true");
-			view.forward(request, response);
+			view.forward(request, response);*/
+			response.sendRedirect("views/member/searchId.jsp?activatedFlag=true&searchFlag=true&resultId="+resultId);
 		}
 	}
 

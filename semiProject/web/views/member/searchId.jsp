@@ -31,7 +31,11 @@
 								<input type="button" onclick="searchId();" value="아이디 찾기"/>
 								</form>
 							<%} else { %>
-								아이디 : <%=resultId%>입니다.
+								<%if(searchFlag){ %>
+									<h3 align="center" class="text-white">아이디 : <%=resultId%>입니다.</h3>
+								<%}else{ %>
+									<h3 align="center" class="text-white">등록되지 않은 이메일입니다.</h3>
+								<%} %>
 							<%} %>
 						</div>
 					</div>
