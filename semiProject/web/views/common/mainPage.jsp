@@ -80,7 +80,7 @@ function recDetail(i){
 					<div class="card card_he"
 						onclick="recDetail(<%=list.get(i).getRecruitment_id()%>);">
 						<img src="<%if (list.get(i).getRecruitment_image_src() == null) {%>/sp/images/building.jpeg<%} else {%>/sp/images/recruitmentImg/<%=list.get(i).getRecruitment_image_src()%><%}%>"
-							width="300px" height="300px">
+							width="180px" height="180px">
 						<div class="card-body">
 							<h4 class="card-title">
 								<div><%=list.get(i).getRecruitment_title()%></div>
