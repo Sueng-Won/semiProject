@@ -108,4 +108,113 @@ public class QnaDao {
 			}
 		return result;
 	}
+
+	public int membersQnaCount(Connection con, QnaVo qv) {
+		int result = 0;
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;	//SQL문을 나타내는 객체
+		String query = "";
+		
+			query = "SELECT COUNT(*) AS LISTCOUNT "
+					+ "FROM QNA ";
+			
+			if(null != qv.getM_id()) {
+				query += "WHERE M_ID = ?";
+			}
+			
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, qv.getM_id());
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					result = rs.getInt("listcount");
+				}
+				
+				System.out.println("admin count 성공 -> "+result);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				JDBCTemplate.close(pstmt);
+			}
+		return result;
+	}
+
+	public ArrayList<QnaVo> selectMembersQna(Connection con, PageInfo pi, QnaVo qv) {
+		ArrayList<QnaVo> result = new ArrayList<QnaVo>();
+		int currentPage = pi.getCurrentPage();
+		int limit = pi.getLimit();
+		String m_id = qv.getM_id();
+		String category = qv.getCategory();
+		int is_checked = qv.getIs_checked();
+		
+		PreparedStatement pstmt = null;	//SQL문을 나타내는 객체
+		ResultSet rs = null;
+		String query = "SELECT * FROM " + 
+				"(SELECT ROWNUM RNUM, P.* " + 
+				"SELECT Q_NO, CONTENT, CATEGORY, REPORTING_DATE, Q.M_ID, IS_CHECKED, M.NAME, M.MEMBER_TYPE " + 
+				"FROM QNA Q " + 
+				"JOIN MEMBER M ON (M.M_ID = Q.M_ID)" + 
+				"WHERE CATEGORY LIKE '%' || ? || '%'" + 
+				"AND IS_CHECKED = ? ";
+		
+		if(null != qv.getM_id()) {
+			query += "WHERE Q.M_ID = ? ";
+		}
+		
+		query += "ORDER BY REPORTING_DATE) P) " + 
+				"WHERE RNUM BETWEEN ? AND ? ";	
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, category);
+			pstmt.setInt(2, is_checked);
+			pstmt.setString(3, m_id);
+			pstmt.setInt(4, currentPage);
+			pstmt.setInt(5, limit);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				qv = new QnaVo();
+				qv.setQ_no(rs.getInt("q_no"));
+				qv.setContent(rs.getString("content"));
+				qv.setCategory(rs.getString("category"));
+				qv.setReporting_date(rs.getDate("reporting_date"));
+				qv.setName(rs.getString("name"));
+				qv.setMember_type(rs.getString("member_type"));
+				qv.setM_id(m_id);
+				result.add(qv);	
+			}
+			System.out.println("admin select 성공");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateAnswer(Connection con, String answer, int q_no) {
+		int result = 0;
+		PreparedStatement pstmt = null;	//SQL문을 나타내는 객체
+		String query = "";
+		
+			query = "UPDATE QNA SET ANSWER = ?, IS_CHECKED = 1 WHERE Q_NO = ?";
+			
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, answer);
+				pstmt.setInt(2, q_no);
+				
+				result = pstmt.executeUpdate();
+				
+				System.out.println("qna update 성공");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				JDBCTemplate.close(pstmt);
+			}
+		return result;
+	}
 }

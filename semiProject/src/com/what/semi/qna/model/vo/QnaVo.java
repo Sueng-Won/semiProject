@@ -9,6 +9,8 @@ public class QnaVo {
 	private Date reporting_date;
 	private int is_checked;
 	private String m_id;
+	private String name;
+	private String member_type;
 	
 	public QnaVo() {
 	}
@@ -71,10 +73,30 @@ public class QnaVo {
 	public void setM_id(String m_id) {
 		this.m_id = m_id;
 	}
+	
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getMember_type() {
+		return member_type;
+	}
+
+	public void setMember_type(String member_type) {
+		this.member_type = member_type;
+	}
 
 	@Override
 	public String toString() {
-		return "QnaVo [q_no=" + q_no + ", content=" + content + ", category=" + category
-				+ ", reporting_date=" + reporting_date + ", is_checked=" + is_checked + ", m_id=" + m_id + "]";
+		return "QnaVo [q_no=" + q_no + ", content=" + content + ", category=" + category + ", reporting_date="
+				+ reporting_date + ", is_checked=" + is_checked + ", m_id=" + m_id + ", name=" + name + ", member_type="
+				+ member_type + "]";
 	}
+
+	
 }
