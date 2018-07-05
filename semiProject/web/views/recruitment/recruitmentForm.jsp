@@ -7,9 +7,7 @@
 	function writeRecruitment() {
 		$("#writeRecruitment").submit();
 	}
-
 	var searchAddr;
-
 	function openAddressPopup() {
 		var themeObj = {
 			bgColor : "#162525", //바탕 배경색
@@ -27,20 +25,16 @@
 					theme : themeObj,
 					oncomplete : function(data) {
 						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
 						// 각 주소의 노출 규칙에 따라 주소를 조합한다.
 						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 						var fullAddr = ''; // 최종 주소 변수
 						var extraAddr = ''; // 조합형 주소 변수
-
 						// 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
 						if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
 							fullAddr = data.roadAddress;
-
 						} else { // 사용자가 지번 주소를 선택했을 경우(J)
 							fullAddr = data.jibunAddress;
 						}
-
 						// 사용자가 선택한 주소가 도로명 타입일때 조합한다.
 						if (data.userSelectedType === 'R') {
 							//법정동명이 있을 경우 추가한다.
@@ -56,11 +50,9 @@
 							fullAddr += (extraAddr !== '' ? ' (' + extraAddr
 									+ ')' : '');
 						}
-
 						// 우편번호와 주소 정보를 해당 필드에 넣는다.
 						$("#zipcode").val(data.zonecode);//5자리 새우편번호 사용
 						$("#address").val(fullAddr);
-
 						// 커서를 상세주소 필드로 이동한다.
 						$("#addressDetail").focus();
 						searchAddr = fullAddr;
@@ -69,36 +61,30 @@
 						//state는 우편번호 찾기 화면이 어떻게 닫혔는지에 대한 상태 변수 이며, 상세 설명은 아래 목록에서 확인하실 수 있습니다.
 						if (state === 'FORCE_CLOSE') {
 							//사용자가 브라우저 닫기 버튼을 통해 팝업창을 닫았을 경우, 실행될 코드를 작성하는 부분입니다.
-
 						} else if (state === 'COMPLETE_CLOSE') {
 							//사용자가 검색결과를 선택하여 팝업창이 닫혔을 경우, 실행될 코드를 작성하는 부분입니다.
 							//oncomplete 콜백 함수가 실행 완료된 후에 실행됩니다.
 							console.log('검색 종료', searchAddr);
 							// 주소-좌표 변환 객체를 생성합니다
 							var geocoder = new daum.maps.services.Geocoder();
-
 							// 주소로 좌표를 검색합니다
 							geocoder.addressSearch(searchAddr, function(result,
 									status) {
-
 								// 정상적으로 검색이 완료됐으면 
 								if (status === daum.maps.services.Status.OK) {
 									$("#latitude").val(result[0].y);
 									$("#longitude").val(result[0].x);
-
 									var coords = new daum.maps.LatLng(
 											result[0].y, result[0].x);
 									console.log(coords);
 
+									console.log($("#latitude").val());
 									// 결과값으로 받은 위치를 마커로 표시합니다
-
 								}
 							});
 						}
 					}
-
 				}).open();
-
 	}
 </script>
 
@@ -171,8 +157,7 @@
 						</div>
 						<br>
 						<div class="row">
-							<div class="col-1"></div>
-							<div class="col-4">
+							<div class="col-3">
 								<select multiple class="custom-select-lg mt-1 ml-3 btn-dark"
 									style="min-height: 150px" name="business_type">
 									<option disabled="disabled" class="text-white-50">[업종]</option>
@@ -182,6 +167,15 @@
 									<option>외식/음료</option>
 									<option>고객상담</option>
 									<option>생산/건설</option>
+								</select>
+							</div>
+							<div class="col-2">
+								<select name="career" multiple
+									class="custom-select-lg mt-1 ml-3 btn-dark"
+									style="min-height: 150px">
+									<option disabled="disabled" class="text-white-50">[경력]</option>
+									<option value="1">있음</option>
+									<option value="0">없음</option>
 								</select>
 							</div>
 
@@ -224,9 +218,6 @@
 											value="y">군필</button></li>
 									<li><button type="button" onclick="mSelect(this);"
 											name="miltary" class="btn btn-dark btn-sm btn-block"
-											value="n">면제</button></li>
-									<li><button type="button" onclick="mSelect(this);"
-											name="miltary" class="btn btn-dark btn-sm btn-block"
 											value="x">무관</button></li>
 									<li class="divider"></li>
 								</ul>
@@ -252,6 +243,31 @@
 									<li class="divider"></li>
 								</ul>
 							</div>
+
+							<div class="btn-group mt-1 ml-3">
+								<button type="button" style="min-width: 130px"
+									class="btn btn-lg btn-dark dropdown-toggle"
+									data-toggle="dropdown" aria-expanded="false">
+									<span class="caret" id="acBtn">학력</span>
+								</button>
+
+								<input type="hidden" name="achievement" id="achievementValue" />
+
+								<ul class="dropdown-menu bg-dark" role="menu">
+									<li><button type="button" onclick="acSelect(this);"
+											class="btn btn-dark btn-sm btn-block" value="무관">무관</button></li>
+									<li><button type="button" onclick="acSelect(this);"
+											class="btn btn-dark btn-sm btn-block" value="초졸">초졸</button></li>
+									<li><button type="button" onclick="acSelect(this);"
+											class="btn btn-dark btn-sm btn-block" value="중졸">중졸</button></li>
+									<li><button type="button" onclick="acSelect(this);"
+											class="btn btn-dark btn-sm btn-block" value="고졸">고졸</button></li>
+									<li><button type="button" onclick="acSelect(this);"
+											class="btn btn-dark btn-sm btn-block" value="대졸">대졸</button></li>
+									<li class="divider"></li>
+								</ul>
+
+							</div>
 						</div>
 						<br>
 
@@ -262,7 +278,8 @@
 						</div>
 						<div>
 
-							<textarea class="col-12" rows="5" placeholder="업체 소개 및 희망 인력" name="introduce"></textarea>
+							<textarea class="col-12" rows="5" placeholder="업체 소개 및 희망 인력"
+								name="introduce"></textarea>
 						</div>
 
 						<div id="fileArea">
@@ -290,6 +307,12 @@
 </div>
 <!-- /.container -->
 <script type="text/javascript">
+	function acSelect(obj) {
+		var text = $(obj).text();
+		var value = $(obj).val();
+		$("#acBtn").text(text);
+		$("#achievementValue").val(value);
+	}
 	function gSelect(obj) {
 		var text = $(obj).text();
 		var value = $(obj).val();
@@ -302,14 +325,12 @@
 		$("#mBtn").text(text);
 		$("#mValue").val(value);
 	}
-
 	$(function() {
 		$("#fileArea").hide();
 		$("#titleImage").click(function() {
 			$("#recImg").click();
 		});
 	})
-
 	function printImage(obj) {
 		var reader = new FileReader();
 		reader.onload = function(e) {
@@ -317,7 +338,6 @@
 			$("#titleImg").attr("src", e.target.result);
 		}
 		reader.readAsDataURL(obj.files[0]);
-
 	}
 </script>
 <%@include file="/views/common/footer.jsp"%>

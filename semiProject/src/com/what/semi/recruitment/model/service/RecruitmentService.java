@@ -9,6 +9,7 @@ import com.what.semi.common.template.JDBCTemplate;
 import com.what.semi.common.template.LocalPageInfo;
 import com.what.semi.recruitment.model.dao.RecruitmentDao;
 import com.what.semi.recruitment.model.vo.RecruitmentVo;
+import com.what.semi.resume.model.vo.MyResumeVo;
 
 public class RecruitmentService {
 
@@ -56,9 +57,9 @@ public class RecruitmentService {
 
 	public String getDefaultResume(String id) {
 		Connection con = JDBCTemplate.getConnection();
-		
+
 		String resume = new RecruitmentDao().getDefaultResume(con, id);
-		
+
 		JDBCTemplate.close(con);
 		return resume;
 	}
@@ -72,16 +73,16 @@ public class RecruitmentService {
 
 		return ListCount;
 	}
+
 	public int writeRecruitment(RecruitmentVo rec) {
 		Connection con = JDBCTemplate.getConnection();
 
 		int result = new RecruitmentDao().insertRecruitment(con, rec);
-		if(result!=0){
+		if (result != 0) {
 			JDBCTemplate.commit(con);
-		}else{
+		} else {
 			JDBCTemplate.rollback(con);
 		}
-
 		JDBCTemplate.close(con);
 
 		return result;
@@ -90,14 +91,14 @@ public class RecruitmentService {
 	public int myRecListTotalCount(String id) {
 		Connection con = JDBCTemplate.getConnection();
 
-		int ListCount = new RecruitmentDao().selectMyListTotalCount(con, id);
+		int result = new RecruitmentDao().selectMyListTotalCount(con, id);
 
 		JDBCTemplate.close(con);
 
-		return ListCount;
+		return result;
 	}
 
-	public ArrayList<RecruitmentVo> loadMyRecList(int currentPage, int limit,String id) {
+	public ArrayList<RecruitmentVo> loadMyRecList(int currentPage, int limit, String id) {
 		Connection con = JDBCTemplate.getConnection();
 		ArrayList<RecruitmentVo> list = new RecruitmentDao().selectMyRecList(con, id, currentPage, limit);
 		JDBCTemplate.close(con);
@@ -110,5 +111,39 @@ public class RecruitmentService {
 		JDBCTemplate.close(con);
 		return rec;
 	}
-	
+
+	public int selectMachingListTotalCount(MyResumeVo myResumeVo) {
+		Connection con = JDBCTemplate.getConnection();
+
+		int ListCount = new RecruitmentDao().selectMachingListTotalCount(con, myResumeVo);
+
+		JDBCTemplate.close(con);
+
+		return ListCount;
+	}
+
+	public ArrayList<RecruitmentVo> loadMatchingSearchList(int currentPage, int limit, MyResumeVo myResumeVo) {
+		Connection con = JDBCTemplate.getConnection();
+
+		ArrayList<RecruitmentVo> list = new RecruitmentDao().loadMatchingSearchList(con, currentPage, limit,
+				myResumeVo);
+
+		JDBCTemplate.close(con);
+
+		return list;
+	}
+
+	public int updateRecruitment(RecruitmentVo rec) {
+		Connection con = JDBCTemplate.getConnection();
+
+		int result = new RecruitmentDao().updateRecruitment(con, rec);
+		if (result != 0) {
+			JDBCTemplate.commit(con);
+		} else {
+			JDBCTemplate.rollback(con);
+		}
+		JDBCTemplate.close(con);
+
+		return result;
+	}
 }

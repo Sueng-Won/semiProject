@@ -62,7 +62,7 @@ public class WriteRecruitmentServlet extends HttpServlet {
 		//System.out.println(root);
 		String path = root + "images/recruitmentImg";
 
-		MultipartRequest mRequest = new MultipartRequest(request, path, maxSize, "utf-8");
+		MultipartRequest mRequest = new MultipartRequest(request, path, maxSize, "utf-8",new RecruitmentRenamePolicy());
 
 		// 4.전송 값을 변수에 저장
 		//객체 2 -> 게시판에 추가할 객체, attachment 추가할 객체(list)
@@ -73,6 +73,7 @@ public class WriteRecruitmentServlet extends HttpServlet {
 		String phone = mRequest.getParameter("phone");
 		String email = mRequest.getParameter("email");
 		String zipcode = mRequest.getParameter("zipcode");
+		System.out.println(mRequest.getParameter("latitude"));
 		double latitude = Double.parseDouble(mRequest.getParameter("latitude"));
 		double longitude = Double.parseDouble(mRequest.getParameter("longitude"));
 		String address = mRequest.getParameter("address");
@@ -104,13 +105,14 @@ public class WriteRecruitmentServlet extends HttpServlet {
 		String mValue = mRequest.getParameter("mValue");
 		switch(mValue){
 		case "y":m=1; break;
-		case "n":m=0; break;
-		case "x":m=2; break;
+		case "x":m=0; break;
 		}
 		char gValue =mRequest.getParameter("gValue").charAt(0);
 		String title = mRequest.getParameter("title");
 		String introduce = mRequest.getParameter("introduce");
 		String recImg = mRequest.getFilesystemName("recImg");
+		String achievement = mRequest.getParameter("achievement");
+		int career = Integer.parseInt(mRequest.getParameter("career"));
 		
 		RecruitmentVo rec = new RecruitmentVo();
 		
@@ -133,6 +135,8 @@ public class WriteRecruitmentServlet extends HttpServlet {
 		rec.setIntroduce(introduce);
 		rec.setRecruitment_image_src(recImg);
 		rec.setM_id(id);
+		rec.setAchievement(achievement);
+		rec.setCareer(career);
 		
 		//System.out.println(recImg);
 		System.out.println(rec);
@@ -143,7 +147,7 @@ public class WriteRecruitmentServlet extends HttpServlet {
 		
 		String url="";
 		if(0<result){
-			response.sendRedirect("/sp/views/member/manageResume.jsp");
+			response.sendRedirect("/sp/myRecruitmentList.do");
 		}else{
 			/*url="views/common/errorPage.jsp";
 			request.setAttribute("msg", "사진 게시판 게시글 작성 실패");

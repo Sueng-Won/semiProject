@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 	String id = (String)session.getAttribute("id");
+	String member_type = (String)session.getAttribute("member_type");
 %>
 <!DOCTYPE html>
 <html>
@@ -63,18 +64,35 @@
                 <span class="sr-only">(current)</span>
               </a>
             </li>
+            <%if(member_type.equals("JS")){ %>
             <li class="nav-item">
-              <a class="nav-link" href="/sp/getResume.do">이력서/업체정보관리</a>
+              <a class="nav-link" href="/sp/getResume.do">이력서관리</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/sp/myRecruitmentList.do">이력서/업체정보관리</a>
+              <a class="nav-link" href="/sp/myWorkedList.do">근로내역</a>
             </li>
+            <%} %>
+            <%if(member_type.equals("BO")){ %>
+            <li class="nav-item">
+              <a class="nav-link" href="/sp/myRecruitmentList.do">업체정보관리</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">고용내역</a>
+            </li>
+            <%} %>
             <li class="nav-item">
               <a class="nav-link btn" style="text-align: left;" onclick="qnaNew();">Q&A</a>
             </li>
+            <%-- <%if(member_type == "JS"){ %>
             <li class="nav-item">
-              <a class="nav-link" href="#">근로내역/고용내역</a>
+              <a class="nav-link" href="#">근로내역</a>
             </li>
+            <%} %>
+            <%if(member_type == "BO"){ %>
+            <li class="nav-item">
+              <a class="nav-link" href="#">고용내역</a>
+            </li>
+            <%} %> --%>
             <li class="nav-item">
               <a class="nav-link" href="/sp/views/member/dropMember.jsp">회원탈퇴</a>
             </li>

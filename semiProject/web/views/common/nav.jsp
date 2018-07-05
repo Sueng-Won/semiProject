@@ -31,6 +31,11 @@
 	function join() {
 		location.href = "/sp/views/member/join.jsp";
 	}
+	
+	function loadMachingList(){
+		location.href="/sp/matchingSearch.do";
+	}
+	
 	function loadLocalList() {
 		location.href = "/sp/localList.do";
 	}
@@ -60,9 +65,9 @@
 				</tr>
 				<tr>
 						<td colspan="2">
-						<a href="/sp/searchId.do">아이디 찾기</a>
+						<a href="/sp/views/member/searchId.jsp">아이디 찾기</a>
 						/
-						<a href="#">비밀번호 찾기</a>
+						<a href="/sp/views/member/searchPw.jsp">비밀번호 찾기</a>
 						</td>
 				</tr>
 			</table>
@@ -71,7 +76,15 @@
 		<table>
 		<tr>
 		<td>
-			<h5 class="text-center"><%=id %>님 환영합니다</h5>
+			<h5 class="text-center">
+			<%if(member_type.equals("JS")){ %>
+			[구직자]
+			<%}else if(member_type.equals("BO")){ %>
+			[업주]
+			<%}else{ %>
+			[관리자]
+			<%} %>
+			<%=id %>님 환영합니다</h5>
 			<button type="button" class="btn btn-dark btn-sm btn-block" onclick="logout();">로그아웃</button>
 		<td>
 		</tr>
@@ -80,7 +93,8 @@
 	</div>
 	<br><br>
 	<div class="list-group">
-		<button type="button" class="btn btn-default btn-lg btn-block bg-dark">맞춤알바</button>
+		<button type="button" onclick="loadMachingList();"
+			class="btn btn-default btn-lg btn-block bg-dark">맞춤알바</button>
 		<!-- 지역 알바로 이동 -->
 		<button type="button" onclick="loadLocalList();"
 			class="btn btn-lg btn-block bg-dark">지역알바</button>
