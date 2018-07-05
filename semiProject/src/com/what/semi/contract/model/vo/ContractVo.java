@@ -10,14 +10,17 @@ public class ContractVo {
 	private String end_work_time; // 근무종료시간
 	private String recruitment_id; // 업주게시물 ID
 	private int resume_id; // 이력서 ID
-	private String m_id; // 카카오아이디
+	private String bo_id; // 카카오아이디
+	private String js_id; // 카카오아이디
 
 	public ContractVo() {
 		// TODO Auto-generated constructor stub
 	}
 
+
+
 	public ContractVo(int c_no, int state, Date contract_date, String start_work_time, String end_work_time,
-			String recruitment_id, int resume_id, String m_id) {
+			String recruitment_id, int resume_id, String bo_id, String js_id) {
 		super();
 		this.c_no = c_no;
 		this.state = state;
@@ -26,8 +29,11 @@ public class ContractVo {
 		this.end_work_time = end_work_time;
 		this.recruitment_id = recruitment_id;
 		this.resume_id = resume_id;
-		this.m_id = m_id;
+		this.bo_id = bo_id;
+		this.js_id = js_id;
 	}
+
+
 
 	public int getC_no() {
 		return c_no;
@@ -85,19 +91,35 @@ public class ContractVo {
 		this.resume_id = resume_id;
 	}
 
-	public String getM_id() {
-		return m_id;
+
+	public String getBo_id() {
+		return bo_id;
 	}
 
-	public void setM_id(String m_id) {
-		this.m_id = m_id;
+
+
+	public void setBo_id(String bo_id) {
+		this.bo_id = bo_id;
 	}
+
+
+
+	public String getJs_id() {
+		return js_id;
+	}
+
+
+
+	public void setJs_id(String js_id) {
+		this.js_id = js_id;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "ContractVo [c_no=" + c_no + ", state=" + state + ", contract_date=" + contract_date
 				+ ", start_work_time=" + start_work_time + ", end_work_time=" + end_work_time + ", recruitment_id="
-				+ recruitment_id + ", resume_id=" + resume_id + ", m_id=" + m_id + "]";
+				+ recruitment_id + ", resume_id=" + resume_id + ", bo_id=" + bo_id + ", js_id=" + js_id + "]";
 	}
-
 }

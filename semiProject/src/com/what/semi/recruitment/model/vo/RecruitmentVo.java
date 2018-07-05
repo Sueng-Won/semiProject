@@ -26,6 +26,7 @@ public class RecruitmentVo {
 	private String introduce;				//업체 소개
 	private String m_id;				//카카오 ID
 	private int is_post;					//게시여부
+	private int delflag;					//삭제여부
 	private String name;					//업주명
 	private String phone;					//업주연락처
 	
@@ -318,21 +319,26 @@ public class RecruitmentVo {
 	public void setCareer(int career) {
 		this.career = career;
 	}
+	
+	public int getDelflag() {
+		return delflag;
+	}
 
-
+	public void setDelflag(int delflag) {
+		this.delflag = delflag;
+	}
 
 	@Override
 	public String toString() {
 		return "RecruitmentVo [recruitment_id=" + recruitment_id + ", recruitment_image_src=" + recruitment_image_src
-				+ ", recruitment_title=" + recruitment_title + ", recruitment_name=" + recruitment_name
-				+ ", recruitment_phone=" + recruitment_phone + ", recruitment_email=" + recruitment_email
-				+ ", business_type=" + business_type + ", address=" + address + ", address_detail=" + address_detail
-				+ ", zipcode=" + zipcode + ", r_latitude=" + r_latitude + ", r_longitude=" + r_longitude + ", work_day="
-				+ work_day + ", start_work_time=" + start_work_time + ", end_work_time=" + end_work_time + ", pay="
-				+ pay + ", gender=" + gender + ", military_service=" + military_service + ", achievement=" + achievement
-				+ ", career=" + career + ", introduce=" + introduce + ", m_id=" + m_id + ", is_post=" + is_post
-				+ ", name=" + name + ", phone=" + phone + "]";
+				+ ", recruitment_name=" + recruitment_name + ", recruitment_phone=" + recruitment_phone
+				+ ", recruitment_email=" + recruitment_email + ", address=" + address + ", address_detail="
+				+ address_detail + ", zipcode=" + zipcode + ", r_latitude=" + r_latitude + ", r_longitude="
+				+ r_longitude + ", business_type=" + business_type + ", career=" + career + ", work_day=" + work_day
+				+ ", start_work_time=" + start_work_time + ", end_work_time=" + end_work_time + ", pay=" + pay
+				+ ", gender=" + gender + ", military_service=" + military_service + ", achievement=" + achievement
+				+ ", recruitment_title=" + recruitment_title + ", introduce=" + introduce + ", m_id=" + m_id
+				+ ", is_post=" + is_post + ", delflag=" + delflag + ", name=" + name + ", phone=" + phone + "]";
 	}
-
 
 }
