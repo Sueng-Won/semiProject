@@ -124,6 +124,8 @@ public class RecruitmentDao {
 					"FROM RECRUITMENT " + 
 					"WHERE (R_LATITUDE > ? AND R_LATITUDE < ?) " + 
 					"AND (R_LONGITUDE > ? AND R_LONGITUDE < ?) "+
+					"AND IS_POST != 0 " +
+					"AND DELFLAG != 0 " +
 					"ORDER BY WORK_DAY";
 			pstmt = con.prepareStatement(query);
 			pstmt.setDouble(1, minLatitude);

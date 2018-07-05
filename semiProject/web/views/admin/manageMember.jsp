@@ -40,7 +40,23 @@ String keyword = condition.getKeyword();
 			$("#rBtn").text(text);
 			$("#reportValue").val(value);
 		}
-
+		
+		function movePage(pageNum) {
+			$("#currentPage").val(pageNum);
+			$("#blackListForm").submit();
+		}
+		
+		function updateBList(userId) {
+			console.log(userId);
+			$("#blackListId").val(userId);
+			$("#blackListForm").submit();
+		}
+		
+		function deleteBList(userId) {
+			console.log(userId);
+			$("#deleteblackId").val(userId);
+			$("#blackListForm").submit();
+		}
 </script>
   </head>
   <body>
@@ -51,10 +67,11 @@ String keyword = condition.getKeyword();
     		<%@include file="adminNav.jsp" %>
     		
     		<div class="col-lg-9 mt-4">
+    			<h2 align="center" class="mb-3">사용자 관리</h2>
     			<form id="blackListForm" method="post" action="/sp/blackList.do">
     			<div class="row mb-4">
-    			
-    				<div class="btn-group col-2">
+    				
+    				<div class="btn-group col-md-2 col-xs-3 col-12 mb-1">
 					    <button type="button" id="rBtn" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 					    <%="".equals(isReport)?"신고유무": ("O".equals(isReport)?"신고 회원":("X".equals(isReport)?"미신고 회원":"회원 전체")) %>
 						    <span class="caret"></span>
@@ -68,7 +85,7 @@ String keyword = condition.getKeyword();
 						</ul>
 					</div>
     			
-					<div class="btn-group col-2">
+					<div class="btn-group col-md-5 col-xs-4 col-12 mb-1">
 					    <button type="button" id="mBtn" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 					    <%="".equals(memberType)?"회원 타입": ("BO".equals(memberType)?"업체 회원":("JS".equals(memberType)?"구직 회원":"회원 전체")) %>
 						    <span class="caret"></span>
@@ -80,8 +97,8 @@ String keyword = condition.getKeyword();
 							<li><button type="button" onclick="mType(this);" name="memberType" class="btn btn-dark btn-sm btn-block" value="BO">업체 회원</button></li>
 						</ul>
 					</div>
-					<div class="input-group col-4">
-					<input type="text" class="form-control mb-1" name="keyword" id="keyword" value="<%=keyword %>" placeholder="회원명 입력"/>
+					<div class="input-group col-md-5 col-xs-5 col-12 mb-1">
+					<input type="text" class="form-control mb-1" name="keyword" id="keyword" value="<%=keyword %>" placeholder="회원명/아이디 입력"/>
 				      <span class="input-group-btn">
 				        <input class="btn btn-dark ml-1" type="submit" id="searchMember" value="검색">
 				      </span>
@@ -94,12 +111,12 @@ String keyword = condition.getKeyword();
     			</form>
     			
     			
-			<div class="list-group" id="blackList" >
+			<div class="list-group" id="blackList" style="min-height: 500px">
 		     <%if(0 < list.size() && !"null".equals(list)){ %>
 		     	<%for(BlackListVo bv : list){ %>
 			     <div class="list-group-item">
 			     	<div class="row">
-			     		<div class="col-3"><%=bv.getM_name() %></div>
+			     		<div class="col-3"><%=bv.getM_name() %>(<%=bv.getM_id() %>)</div>
 			     		<div class="col-3"><%=bv.getM_type().equals("JS")?"구직자":"업주" %></div>
 			     		<div class="col-3">신고 <%=bv.getTotalCount() %>회</div>
 			     		
@@ -153,25 +170,6 @@ String keyword = condition.getKeyword();
         </div>
     	</div>
     </div>
-	<script type="text/javascript">
-		function movePage(pageNum) {
-			$("#currentPage").val(pageNum);
-			$("#blackListForm").submit();
-		}
-		
-		function updateBList(userId) {
-			console.log(userId);
-			$("#blackListId").val(userId);
-			$("#blackListForm").submit();
-		}
-		
-		function deleteBList(userId) {
-			console.log(userId);
-			$("#deleteblackId").val(userId);
-			$("#blackListForm").submit();
-		}
-		
-	</script>
     <%@include file="adminFooter.jsp" %>
   </body>
 </html>
