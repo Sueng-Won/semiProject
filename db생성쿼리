@@ -116,7 +116,7 @@ CREATE TABLE RECRUITMENT (
        IS_POST              NUMBER DEFAULT 1
                                    CHECK (IS_POST IN (1,0)),
 	DELFLAG              NUMBER DEFAULT 0
-                                   CHECK (IS_POST IN (1,0))
+                                   CHECK (DELFLAG IN (1,0))
 );
 
 
@@ -152,7 +152,7 @@ CREATE TABLE RESUME (
        PRI_RESUME CHAR(2) DEFAULT 'N' CHECK (PRI_RESUME ='Y' OR PRI_RESUME='N'),
        WORK_TIME VARCHAR2(30) NOT NULL,
        DELFLAG              NUMBER DEFAULT 0
-                                   CHECK (IS_POST IN (1,0))
+                                   CHECK (DELFLAG IN (1,0))
 );
 
 
