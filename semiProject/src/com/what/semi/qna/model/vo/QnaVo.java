@@ -6,6 +6,7 @@ public class QnaVo {
 	private int q_no;
 	private String content;
 	private String category;
+	private String answer;
 	private Date reporting_date;
 	private int is_checked;
 	private String m_id;
@@ -89,6 +90,16 @@ public class QnaVo {
 
 	public void setMember_type(String member_type) {
 		this.member_type = member_type;
+	}
+
+	
+	
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
 	}
 
 	@Override

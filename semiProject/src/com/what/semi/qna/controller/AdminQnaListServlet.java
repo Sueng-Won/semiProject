@@ -33,8 +33,6 @@ public class AdminQnaListServlet extends HttpServlet {
       int is_checked = 0;               //view에서 받아온 값을 저장할 변수 선언
       String keyword = "";
       
-      String answer;
-      int q_no;
       
       //==============전송된 값이 있을 경우 해당 데이터를 변수에 저장===============
       if(null != request.getParameter("category")) {
@@ -52,14 +50,6 @@ public class AdminQnaListServlet extends HttpServlet {
       qv.setIs_checked(is_checked);
       qv.setM_id(keyword);
       
-      //=============답변을 올렸을때 수행될 로직============================
-      if(null != request.getParameter("answer") && null != request.getParameter("q_no")) {
-         answer = request.getParameter("answer");
-         q_no = Integer.parseInt(request.getParameter("q_no"));
-         qs.updateAnswer(answer, q_no);
-      }
-      
-      //==========================================================
       
       
       pi = PageTemplate.membersQnaPage(request, qs, qv);
@@ -71,7 +61,6 @@ public class AdminQnaListServlet extends HttpServlet {
       
       String url= "";
       if(list != null) {
-    	 
          request.setAttribute("list", list);
          request.setAttribute("pi", pi);
          url = "views/admin/manageQna.jsp";

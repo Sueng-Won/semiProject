@@ -20,7 +20,7 @@ public class QnaDao {
 		String query = "";
 		
 			query = "INSERT INTO QNA "
-					+ "VALUES(QNA_seq.NEXTVAL,?,?,SYSDATE,DEFAULT,?)";
+					+ "VALUES(QNA_seq.NEXTVAL,?,DEFAULT,?,SYSDATE,DEFAULT,?)";
 			
 			try {
 				pstmt = con.prepareStatement(query);
@@ -49,7 +49,7 @@ public class QnaDao {
 		ResultSet rs = null;
 		String query = "SELECT * FROM " + 
 				"(SELECT ROWNUM RNUM, P.* " + 
-				"FROM(SELECT Q_NO, CONTENT, CATEGORY, REPORTING_DATE, M_ID " + 
+				"FROM(SELECT Q_NO, CONTENT, ANSWER, CATEGORY, REPORTING_DATE, M_ID " + 
 				"FROM QNA " + 
 				"WHERE M_ID = ? " + 
 				"ORDER BY REPORTING_DATE) P) " + 
@@ -66,6 +66,7 @@ public class QnaDao {
 				temp = new QnaVo();
 				temp.setQ_no(rs.getInt("q_no"));
 				temp.setContent(rs.getString("content"));
+				temp.setAnswer(rs.getString("answer"));
 				temp.setCategory(rs.getString("category"));
 				temp.setReporting_date(rs.getDate("reporting_date"));
 				temp.setM_id(id);
@@ -168,7 +169,7 @@ public class QnaDao {
 		ResultSet rs = null;
 		String query = "SELECT * FROM " + 
 				"(SELECT ROWNUM RNUM, P.* " + 
-				"FROM(SELECT Q_NO, CONTENT, CATEGORY, REPORTING_DATE, Q.M_ID, IS_CHECKED, M.NAME, M.MEMBER_TYPE " + 
+				"FROM(SELECT Q_NO, CONTENT, ANSWER, CATEGORY, REPORTING_DATE, Q.M_ID, IS_CHECKED, M.NAME, M.MEMBER_TYPE " + 
 				"FROM QNA Q " + 
 				"JOIN MEMBER M ON (M.M_ID = Q.M_ID) " + 
 				"WHERE CATEGORY LIKE '%' || ? || '%' " + 
@@ -200,6 +201,7 @@ public class QnaDao {
 				qv = new QnaVo();
 				qv.setQ_no(rs.getInt("q_no"));
 				qv.setContent(rs.getString("content"));
+				qv.setAnswer(rs.getString("answer"));
 				qv.setCategory(rs.getString("category"));
 				qv.setReporting_date(rs.getDate("reporting_date"));
 				qv.setName(rs.getString("name"));

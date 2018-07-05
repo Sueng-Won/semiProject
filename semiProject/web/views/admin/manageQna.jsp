@@ -284,6 +284,11 @@ dl {
     function movePage(pageNum){
        location.href = "/sp/qna.do?currentPage=" + pageNum;
     }
+    
+      //Q&A 게시판
+    function answer(q_no){
+          window.open("/sp/answerQna.do?q_no="+q_no,"_blank","width=600, height=700, left=auto,top=auto");
+    }; 
    </script>
 </head>
 <body>
@@ -307,14 +312,14 @@ dl {
              
              <div class="top2" style="-webkit-margin-before: -1.5em;">
                      <select name="category" id="category" class="slt sltL" style="width:180px;" >
-			               <option value="">대분류 선택</option>
-			               <option value="회원정보">회원정보</option>
-			               <option value="이력서관리">이력서관리</option>
-			               <option value="구직활동관리">구직활동관리</option>
-			               <option value="공고등록관리">공고등록관리</option>
-			               <option value="유료서비스">유료서비스</option>
-			               <option value="오류/의견">오류/의견</option>
-			               <option value="기타">기타</option>
+                        <option value="">대분류 선택</option>
+                        <option value="회원정보">회원정보</option>
+                        <option value="이력서관리">이력서관리</option>
+                        <option value="구직활동관리">구직활동관리</option>
+                        <option value="공고등록관리">공고등록관리</option>
+                        <option value="유료서비스">유료서비스</option>
+                        <option value="오류/의견">오류/의견</option>
+                        <option value="기타">기타</option>
                      </select>
                      
                      <select name="is_checked" id="is_checked" class="slt sltL ml-5" style="width:180px;">
@@ -392,7 +397,8 @@ dl {
                         <dl>
                         <dt style="-webkit-margin-before: 1em;"><span>Q.</span>답변좀요</dt>
                         </dl>
-                        <input class="btn btn-dark ml-1" type="submit" id="" value="답변달기" style="">
+                        <hr>
+                        <button class="btn btn-dark ml-1" id="" onclick="answer(<%=qv.getQ_no()%>);">답변달기</button>
                      </td>
                      
                   </tr>
