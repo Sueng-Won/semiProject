@@ -169,7 +169,7 @@ public class MyResumeDao {
 		String query = null;
 		
 		try {
-			query = "INSERT INTO RESUME VALUES(RESUME_ID_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, DEFAULT, ?, ?, ?, DEFAULT, ?)";
+			query = "INSERT INTO RESUME VALUES(RESUME_ID_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, DEFAULT, ?, ?, ?, DEFAULT, ?, DEFAULT)";
 			pstmt = con.prepareStatement(query);
 			
 			
