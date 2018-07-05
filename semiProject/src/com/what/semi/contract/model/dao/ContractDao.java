@@ -24,9 +24,9 @@ public class ContractDao {
 		try {
 			stmt = con.createStatement();
 			query = "SELECT C_NO,STATE,C_DATE,START_WORK_TIME,END_WORK_TIME,RECRUITMENT_ID,BO_ID,JS_ID,RESUME_ID "
-					+ "FROM CONTRACT where JS_ID=" + id
+					+ "FROM CONTRACT where JS_ID='" + id+"' "
 					+"order by c_DATE";
-			// System.out.println(query);
+			//System.out.println(query);
 			rs = stmt.executeQuery(query);
 			list = new ArrayList<ContractVo>();
 			ContractVo cont = null;
@@ -41,7 +41,7 @@ public class ContractDao {
 				cont.setBo_id(rs.getString("bo_id"));
 				cont.setJs_id(rs.getString("js_id"));
 				cont.setResume_id(rs.getInt("resume_id"));
-
+				
 				list.add(cont);
 			}
 

@@ -2,9 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@page import="com.what.semi.common.template.PageInfo"%>
 <%@page import="com.what.semi.contract.model.vo.ContractVo"%>
+<%@page import="com.what.semi.recruitment.model.vo.RecruitmentVo"%>
 <%@page import="java.util.ArrayList"%>
 <%
-	ArrayList<ContractVo> list = (ArrayList<ContractVo>) request.getAttribute("myConList");
+	ArrayList<ContractVo> myConList = (ArrayList<ContractVo>) request.getAttribute("myConList");
+	ArrayList<RecruitmentVo> conRecList = (ArrayList<RecruitmentVo>) request.getAttribute("conRecList");
 
 	java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("MM / dd");
 	/* PageInfo pi = (PageInfo) request.getAttribute("pi");
@@ -19,18 +21,17 @@
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 
 <script type="text/javascript">
-	function writeRec(){
+	function writeRec() {
 		location.href = "/sp/views/recruitment/recruitmentForm.jsp";
 	}
 
-	function modifyRec(i){
-		location.href = "/sp/updateRecForm.do?recId="+i;
-	}
-	
-	function deleteRec(i){
-		location.href = "/sp/deleteRecruitment.do?recId="+i;
+	function modifyRec(i) {
+		location.href = "/sp/updateRecForm.do?recId=" + i;
 	}
 
+	function deleteRec(i) {
+		location.href = "/sp/deleteRecruitment.do?recId=" + i;
+	}
 </script>
 <style>
 .btn-link {
@@ -86,35 +87,63 @@
 			
 			</div> -->
 
-			<table class="list-table">
-				<tbody>
-					<tr>
-						
-						<th><div class="table-td">계약일</div></th>
-						<th><div class="td-title">기업명</div></th>
-						<th><div class="table-td">계약상태</div></th>
-						<td style="width:20px;">
-						</td>
-			
-					</tr>
+			<table class="list-table" id="myConTable">
+				<tr>
+					<th><div class='table-td'>계약일</div></th>
+					<th><div class='td-title'>기업명</div></th>
+					<th><div class='table-td'>계약상태</div></th>
+					<td style='width: 20px;'></td>
+				</tr>
+				<%
+					for (int i = 0; i < myConList.size(); i++) {
+				%>
+				<tr>
+					<td class="table-td"><%=myConList.get(i).getContract_date()%></td>
 					<%
-						for (int i = 0; i < list.size(); i++) {
+						for (int j = 0; j < conRecList.size(); j++) {
+								if (myConList.get(i).getRecruitment_id().equals(conRecList.get(j).getRecruitment_id())) {
 					%>
-					<tr id="conId" name="conId" value="<%=list.get(i).getRecruitment_id()%>">
-						<td class="table-td"><%=df.format(list.get(i).getContract_date())%></td>
-						<%-- <td class="table-td"><%=df.format(list.get(i).getWork_day()) %></td> --%>
-						<td class="td-title"><b></b></td>
-						<th class="table-td"><%if(list.get(i).getState()==0){%>요청중<%}else if(list.get(i).getState()==1){ %>진행중<%}else{ %>완료<%} %>
-						</td>
-						<td>
-							<button type="button" class="btn btn-default btn-xs btn-info"
-								onclick="modifyRec(<%=list.get(i).getRecruitment_id()%>);">상세보기</button>
-						</td>
-					</tr>
+					<td class="td-title"><b><%=conRecList.get(j).getRecruitment_name()%></b></td>
 					<%
 						}
+							}
 					%>
-				</tbody>
+					<td class="table-td">
+						<%
+							if (myConList.get(i).getState() == 0) {
+						%>요청중<%
+							} else if (myConList.get(i).getState() == 1) {
+						%>진행중<%
+							} else {
+						%>완료<%
+							}
+						%>
+					</td>
+					<td>
+						<button type="button" class="btn btn-default btn-xs btn-info"
+							data-toggle="collapse"
+							data-target="#conDetails<%=myConList.get(i).getC_no()%>">상세보기</button>
+
+					</td>
+				</tr>
+				<div id="conDetails<%=myConList.get(i).getC_no()%>"
+					class="panel-collapse collapse in" role="tabpanel"
+					aria-labelledby="headingOne">
+			Anim pariatur cliche
+					reprehenderit, enim eiusmod high life accusamus terry richardson ad
+					squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
+					brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
+					moon tempor, sunt aliqua put a bird on it squid single-origin
+					coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
+					helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+					proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
+					craft beer farm-to-table, raw denim aesthetic synth nesciunt you
+					probably haven't heard of them accusamus labore sustainable VHS.
+				
+				</div>
+				<%
+					}
+				%>
 			</table>
 
 			<!--====================================	페이지선택버튼	 ==================================  -->
@@ -147,8 +176,8 @@
 				</div>
 
 			</div> --%>
-			
-			
+
+
 			<div align="right">
 				<button onclick="writeRec();"
 					class="btn btn-default bg-dark text-white">구인글 작성하기</button>
