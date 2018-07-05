@@ -119,17 +119,24 @@ public class QnaDao {
 		
 			query = "SELECT COUNT(*) AS LISTCOUNT "
 					+ "FROM QNA Q "
-					+ "JOIN MEMBER M ON (Q.M_ID = M.M_ID) ";
+					+ "JOIN MEMBER M ON (Q.M_ID = M.M_ID) "
+					+ "WHERE CATEGORY LIKE '%' || ? || '%' "
+					+ "AND IS_CHECKED = ? ";
 			
 			if(null != qv.getM_id()) {
-				query += "WHERE Q.M_ID LIKE '%' || ? || '%' OR M.NAME LIKE '%' || ? || '%'";
+				query += "AND (Q.M_ID LIKE '%' || ? || '%' OR M.NAME LIKE '%' || ? || '%')";
 			}
 			
+			query += "ORDER BY REPORTING_DATE ";
 			try {
 				pstmt = con.prepareStatement(query);
+				
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, qv.getCategory());
+				pstmt.setInt(2, qv.getIs_checked());
 				if(null != qv.getM_id()) {
-					pstmt.setString(1, qv.getM_id());
-					pstmt.setString(2, qv.getM_id());
+					pstmt.setString(3, qv.getM_id());
+					pstmt.setString(4, qv.getM_id());
 				}
 				
 				rs = pstmt.executeQuery();

@@ -366,7 +366,7 @@ tr {
        		 num = 1;
        		 } 
     		 
-             if(target.options[target.selectedIndex].value == 0){
+             if(target.options[target.selectedIndex].value == "대분류 선택"){
             	 alert("문의 유형을 선택하셔야 합니다.");
              }else if($('#Contents').val()==0){
             	 alert("문의 내용을 입력하셔야 합니다.");
@@ -418,14 +418,14 @@ tr {
             </th>
             <td>
                <select name="slt" id="slt" class="slt sltL" title="대분류 선택" style="width:180px;">
-               <option value="0">대분류 선택</option>
-               <option value="1">회원정보</option>
-               <option value="2">이력서관리</option>
-               <option value="3">구직활동관리</option>
-               <option value="4">공고등록관리</option>
-               <option value="5">유료서비스</option>
-               <option value="6">오류/의견</option>
-               <option value="7">기타</option>
+               <option value="대분류 선택">대분류 선택</option>
+               <option value="회원정보">회원정보</option>
+               <option value="이력서관리">이력서관리</option>
+               <option value="구직활동관리">구직활동관리</option>
+               <option value="공고등록관리">공고등록관리</option>
+               <option value="유료서비스">유료서비스</option>
+               <option value="오류/의견">오류/의견</option>
+               <option value="기타">기타</option>
                </select>
             </td>
          </tr>
