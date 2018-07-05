@@ -67,7 +67,7 @@
 						<td colspan="2">
 						<a href="/sp/views/member/searchId.jsp">아이디 찾기</a>
 						/
-						<a href="#">비밀번호 찾기</a>
+						<a href="/sp/views/member/searchPw.jsp">비밀번호 찾기</a>
 						</td>
 				</tr>
 			</table>

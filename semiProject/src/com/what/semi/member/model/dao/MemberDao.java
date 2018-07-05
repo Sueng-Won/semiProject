@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import com.what.semi.common.filter.Sha512;
 import com.what.semi.common.template.JDBCTemplate;
+import com.what.semi.common.template.RandomStringGenerator;
 import com.what.semi.member.model.vo.MemberVo;
 //adsf
 public class MemberDao {
@@ -308,5 +309,64 @@ public class MemberDao {
 		}
 		
 		return resultId;
+	}
+
+
+
+	public String searchPw(Connection conn, String id, String email) {
+		String result = null;
+		PreparedStatement pstmt = null;	//SQL문을 나타내는 객체
+		ResultSet rs = null;
+		String query = "";
+		
+		try {
+			query = "SELECT PW FROM MEMBER WHERE M_ID = ? AND EMAIL = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.setString(2, email);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				if(rs.getString("PW")!=null) {
+					result = new RandomStringGenerator().gen();
+					updatePw(conn,id,result);
+					System.out.println("비밀번호 생성 및 업데이트 완료");
+				}
+				else {
+					result = null;
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public boolean updatePw(Connection conn, String id, String pw) {
+		boolean result = false;
+		PreparedStatement pstmt = null;	//SQL문을 나타내는 객체
+		ResultSet rs = null;
+		String query = "";
+		
+		try {
+			query = "UPDATE MEMBER SET PW = ?"
+					+ "WHERE M_ID = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, Sha512.getSha512(pw));
+			pstmt.setString(2, id);
+			rs = pstmt.executeQuery();
+			System.out.println("PW UPDATE 성공");
+			result = true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
 	}
 }
