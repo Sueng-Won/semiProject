@@ -76,7 +76,15 @@
 		<table>
 		<tr>
 		<td>
-			<h5 class="text-center"><%=id %>님 환영합니다</h5>
+			<h5 class="text-center">
+			<%if(member_type.equals("JS")){ %>
+			[구직자]
+			<%}else if(member_type.equals("BO")){ %>
+			[업주]
+			<%}else{ %>
+			[관리자]
+			<%} %>
+			<%=id %>님 환영합니다</h5>
 			<button type="button" class="btn btn-dark btn-sm btn-block" onclick="logout();">로그아웃</button>
 		<td>
 		</tr>

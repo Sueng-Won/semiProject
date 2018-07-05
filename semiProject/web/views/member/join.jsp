@@ -123,6 +123,8 @@
 	function signIn(){
 		var okFlag = false;
 		
+		//아이디 유효성 검사
+		
 		if($("#iid").val() == ""){
 	        alert("아이디를 입력해주세요.");
 	        $("#iid").focus();
@@ -139,6 +141,37 @@
 		}else{
 			okFlag = true;
 		}
+		
+		var id = $("#iid").val();
+		var numId = id.search(/[0-9]/g);
+		var engId = id.search(/[a-z]/ig);
+		var speId = id.search(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi);
+		
+		if(id.length < 6 || id.length > 15){
+			alert("아이디는 6자리 ~ 15자리 이내로 입력해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		if(speId >= 0){
+			alert("아이디는 특수문자를 사용할 수 없습니다.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag - true;
+		}
+		
+		if(numId < 0 || engId < 0){
+			alert("아이디는 영문,숫자를 혼합하여 입력해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		//비밀번호 유효성 검사
 		
 		if($("#ipw").val()==""||$("#ipw2").val()==""){
 			alert("비밀번호를 입력해주세요.");
@@ -157,6 +190,37 @@
 			okFlag = true;
 		}
 		
+		var pw = $("#ipw").val();
+		var numPw = pw.search(/[0-9]/g);
+		var engPw = pw.search(/[a-z]/ig);
+		var spePw = pw.search(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi);
+
+		if(pw.length < 8 || pw.length > 20){
+			alert("비밀번호는 8자리 ~ 20자리 이내로 입력해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+
+		if(pw.search(/₩s/) != -1){
+			alert("비밀번호는 공백없이 입력해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		} 
+		 
+		if(numPw < 0 || engPw < 0 || spePw < 0 ){
+			alert("비밀번호는 영문,숫자,특수문자를 혼합하여 입력해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		//이름 유효성 검사
+		
 		if($("#name").val()==""){
 			alert("이름을 입력해주세요.");
 			okFlag = false;
@@ -164,6 +228,16 @@
 		}else{
 			okFlag = true;
 		}
+		
+		if($("#name").val().length < 2){
+			alert("이름은 2자리 이상 입력해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		//이메일 유효성 검사
 		
 		if($("#email").val()==""){
 			alert("이메일을 입력해주세요.");
@@ -173,6 +247,19 @@
 			okFlag = true;
 		}
 		
+		var email = $("#email").val();
+		var speEmail = email.search(/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i);
+		
+		if(speEmail<0){
+			alert("잘못된 이메일 형식입니다.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		//생일 유효성 검사
+		
 		if($("#birth").val()==""){
 			alert("생일을 입력해주세요.");
 			okFlag = false;
@@ -180,6 +267,19 @@
 		}else{
 			okFlag = true;
 		}
+		var birth = $("#birth").val();
+		var year = Number(birth.substr(0,4));
+	    var today = new Date(); // 날자 변수 선언
+	    var yearNow = today.getFullYear();
+	    var adultYear = yearNow-20;
+	 
+	 
+	    if (year < 1900 || year > adultYear){
+	         alert("년도를 확인하세요. "+adultYear+"년생 이전 출생자만 등록 가능합니다.");
+	         return false;
+	    }
+		
+		//휴대폰번호 유효성 검사
 		
 		if($("#phone").val()==""){
 			alert("휴대폰번호를 입력해주세요.");
@@ -188,6 +288,18 @@
 		}else{
 			okFlag = true;
 		}
+		var phone = $("#phone").val();
+		var spePhone = phone.search(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi);
+		
+		if(spePhone>=0){
+			alert("휴대폰번호에 특수문자는 사용할 수 없습니다.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		//주소 유효성 검사
 		
 		if($("#address").val()==""){
 			alert("주소 검색 버튼을 눌러 주소를 입력해주세요.");
@@ -197,6 +309,8 @@
 			okFlag = true;
 		}
 		
+		//상세주소 유효성 검사
+		
 		if($("#addressDetail").val()==""){
 			alert("상세주소를 입력해주세요.");
 			okFlag = false;
@@ -205,6 +319,8 @@
 			okFlag = true;
 		}
 		
+		//회원 타입 유효성 검사
+		
 		if($("#rTypeValue").val()==""){
 			alert("회원구분을 선택해주세요.");
 			okFlag = false;
@@ -212,6 +328,8 @@
 		}else{
 			okFlag = true;
 		}
+		
+		//성별 유효성 검사
 		
 		if($("#gender").val()==""){
 			alert("성별을 선택해주세요.");
@@ -230,6 +348,29 @@
 		var id = $("#iid").val();
 		var tBtn = $("#tBtn").val();
 		var gender = $('input[name="gender"]:checked').val();
+		
+		var numId = id.search(/[0-9]/g);
+		var engId = id.search(/[a-z]/ig);
+		var speId = id.search(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi);
+		
+		if(id.length < 6 || id.length > 15){
+			alert("아이디는 6자리 ~ 15자리 이내로 입력해주세요.");
+			okFlag = false;
+			return false;
+		}
+		
+		if(speId >= 0){
+			alert("아이디는 특수문자를 사용할 수 없습니다.");
+			okFlag = false;
+			return false;
+		}
+		
+		if(numId < 0 || engId < 0){
+			alert("아이디는 영문,숫자를 혼합하여 입력해주세요.");
+			okFlag = false;
+			return false;
+		}
+		
 		location.href="/sp/checkId.do?id="+id+"&tBtn="+tBtn+"&gender="+gender;
 	}
 	
@@ -265,10 +406,10 @@
       <div class="row">
 		<%@include file="/views/common/nav.jsp" %>
         <!-- /.col-lg-3 -->
-        <div class="col-lg-9 mt-lg-auto">
+        <div class="col-lg-6 mt-lg-auto">
         	<div class="row mt-4">
         	  <div class="col-lg-3"></div>
-			  <div class="col-lg-6 bg-dark">
+			  <div class="col-lg-9 bg-dark">
 			  <br><br>
         		<h3 align="center" class="text-white-50">회원가입</h3>
         		<br>
@@ -300,7 +441,7 @@
 			    <div class="input-group">
 			    
 			    	<!-- 사용자 아이디 -->
-			      <input type="text" class="form-control mb-1" name="id" id="iid" placeholder="아이디"/>
+			      <input type="text" class="form-control mb-1" name="id" id="iid" placeholder="아이디(6~15자리 영문,숫자)"/>
 			      <span class="input-group-btn">
 			        <button class="btn btn-light text-dark ml-1" type="button" onclick="checkId();">중복 확인</button>
 			      </span>
@@ -309,7 +450,7 @@
 			    <div class="input-group">
 			    
 			    	<!-- 사용자 비밀번호 -->
-			      <input type="password" class="form-control mb-1" name="pw" id="ipw" placeholder="비밀번호"/>
+			      <input type="password" class="form-control mb-1" name="pw" id="ipw" placeholder="비밀번호(6~20자리 영문,숫자,기호)"/>
 			      
 			      
 			    </div>
@@ -325,7 +466,7 @@
 			    <div class="input-group">
 			    
 			    	<!-- 사용자 이름 -->
-			      <input type="text" class="form-control mb-1" id="name" name="name" placeholder="이름"/>
+			      <input type="text" class="form-control mb-1" id="name" name="name" placeholder="이름(2글자 이상)"/>
 			      
 			    </div>
 			    
