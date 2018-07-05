@@ -108,7 +108,7 @@ public class PageTemplate {
 		
 		
 		//130 -> 13
-		maxPage = (int)((double)listCount / limit + 0.9);
+		maxPage = (int)((double)listCount / limit + 0.95);
 		//현재 페이지 번호
 		//12 - 10
 		startPage = (int)(currentPage / limitPage * limitPage) + 1;

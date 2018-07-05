@@ -1,12 +1,8 @@
 package com.what.semi.recruitment.controller;
 
 import java.io.IOException;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,25 +20,24 @@ import com.what.semi.recruitment.model.service.RecruitmentService;
 import com.what.semi.recruitment.model.vo.RecruitmentVo;
 
 /**
- * Servlet implementation class WriteRecruitmentServlet
+ * Servlet implementation class UpdateRecruitmentServlet
  */
-@WebServlet("/writeRecruitment.do")
-public class WriteRecruitmentServlet extends HttpServlet {
+@WebServlet("/updateRecruitment.do")
+public class UpdateRecruitmentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WriteRecruitmentServlet() {
+    public UpdateRecruitmentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		
@@ -69,6 +64,7 @@ public class WriteRecruitmentServlet extends HttpServlet {
 		
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		
+		String recId = mRequest.getParameter("recId");
 		String name = mRequest.getParameter("name");
 		String phone = mRequest.getParameter("phone");
 		String email = mRequest.getParameter("email");
@@ -116,6 +112,7 @@ public class WriteRecruitmentServlet extends HttpServlet {
 		
 		RecruitmentVo rec = new RecruitmentVo();
 		
+		rec.setRecruitment_id(recId);
 		rec.setRecruitment_name(name);
 		rec.setRecruitment_phone(phone);
 		rec.setRecruitment_email(email);
@@ -143,10 +140,12 @@ public class WriteRecruitmentServlet extends HttpServlet {
 		
 		
 		
-		int result = new RecruitmentService().writeRecruitment(rec);
+		int result = new RecruitmentService().updateRecruitment(rec);
+		RecruitmentVo temp = new RecruitmentService().selectRecruitment(recId);
 		
 		String url="";
 		if(0<result){
+			System.out.println(temp.toString());
 			response.sendRedirect("/sp/myRecruitmentList.do");
 		}else{
 			/*url="views/common/errorPage.jsp";

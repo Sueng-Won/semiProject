@@ -23,6 +23,13 @@
 
 	var id = "<%=idv%>";
 	var gettedTBtn = "<%=tBtn%>";
+	var convertedTBtn;
+	if(gettedTBtn == "구직자"){
+		convertedTBtn = "JS";
+	}
+	if(gettedTBtn == "업주"){
+		convertedTBtn = "BO";
+	}
 	var gettedGender = "<%=gender%>";
 	var flag = <%=flag%>;
 	var searchAddr;
@@ -182,7 +189,7 @@
 			okFlag = true;
 		}
 		
-		if($("#rTypeValue").val()!=""){
+		if($("#address").val()==""){
 			alert("주소 검색 버튼을 눌러 주소를 입력해주세요.");
 			okFlag = false;
 			return false;
@@ -198,6 +205,22 @@
 			okFlag = true;
 		}
 		
+		if($("#rTypeValue").val()==""){
+			alert("회원구분을 선택해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		if($("#gender").val()==""){
+			alert("성별을 선택해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
 		if(okFlag){
 			$("#joinForm").submit();
 		}
@@ -205,7 +228,7 @@
 	
 	function checkId(){
 		var id = $("#iid").val();
-		var tBtn = $("#tBtn").text();
+		var tBtn = $("#tBtn").val();
 		var gender = $('input[name="gender"]:checked').val();
 		location.href="/sp/checkId.do?id="+id+"&tBtn="+tBtn+"&gender="+gender;
 	}
@@ -216,13 +239,17 @@
 				alert("중복된 아이디 입니다.");
 				$("#iid").val("");
 				$("#tBtn").text(gettedTBtn);
-				$("#rTypeValue").val(gettedTBtn);
+				$("#rTypeValue").val(convertedTBtn);
 				$("#"+gettedGender).prop("checked", true);
 				$("#"+gettedGender+"Label").attr("class","btn btn-secondary active");
 			}
 			else{
 				alert("사용할 수 있는 아이디 입니다.");
 				$("#iid").val(id);
+				$("#tBtn").text(gettedTBtn);
+				$("#rTypeValue").val(convertedTBtn);
+				$("#"+gettedGender).prop("checked", true);
+				$("#"+gettedGender+"Label").attr("class","btn btn-secondary active");
 			}
 		}
 		else{
@@ -350,6 +377,7 @@
 		var text = $(obj).text();
 		var value = $(obj).val();
 		$("#tBtn").text(text);
+		$("#tBtn").val(value);
 		$("#rTypeValue").val(value);
 	}
 </script>

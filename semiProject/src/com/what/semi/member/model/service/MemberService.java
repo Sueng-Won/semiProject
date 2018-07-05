@@ -63,4 +63,28 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+
+	public String searchId(String email) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String resultId = new MemberDao().searchId(conn,email);
+		JDBCTemplate.close(conn);
+		return resultId;
+	}
+
+	public String searchPw(String id, String email) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String result = new MemberDao().searchPw(conn,id,email);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public boolean updatePw(String id,String pw) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		boolean result = new MemberDao().updatePw(conn,id,pw);
+		JDBCTemplate.close(conn);
+		return result;
+	}
 }

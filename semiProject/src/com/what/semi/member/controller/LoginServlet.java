@@ -37,6 +37,7 @@ public class LoginServlet extends HttpServlet {
 		
 		if(result>0) {
 			session.setAttribute("id", id);
+			session.setAttribute("member_type", mv.getMember_type());
 			session.setAttribute("email", mv.getEmail());
 	        session.setAttribute("phone", mv.getPhone());
 
