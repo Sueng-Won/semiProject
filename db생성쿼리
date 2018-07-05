@@ -74,6 +74,7 @@ ALTER TABLE MEMBER
 CREATE TABLE QNA (
        Q_NO                 NUMBER NOT NULL,
        CONTENT              VARCHAR2(4000) NULL,
+       ANSWER              VARCHAR2(4000) NULL,
        CATEGORY             VARCHAR2(100) NULL,
        REPORTING_DATE       DATE NULL,
        IS_CHECKED           NUMBER DEFAULT 0
