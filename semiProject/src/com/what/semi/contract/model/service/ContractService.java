@@ -8,10 +8,10 @@ import com.what.semi.contract.model.dao.ContractDao;
 import com.what.semi.contract.model.vo.ContractVo;
 
 public class ContractService {
-	public ArrayList<ContractVo> selectMyWorkedList(int resume_id) {
+	public ArrayList<ContractVo> selectMyWorkedList(String id) {
 		Connection con = JDBCTemplate.getConnection();
 
-		ArrayList<ContractVo> list = new ContractDao().selectMyWorkedList(con,resume_id);
+		ArrayList<ContractVo> list = new ContractDao().selectMyWorkedList(con,id);
 
 		JDBCTemplate.close(con);
 

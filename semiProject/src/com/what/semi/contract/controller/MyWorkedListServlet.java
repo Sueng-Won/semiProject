@@ -3,6 +3,7 @@ package com.what.semi.contract.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,8 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import com.what.semi.contract.model.service.ContractService;
 import com.what.semi.contract.model.vo.ContractVo;
-import com.what.semi.resume.model.service.MyResumeService;
-import com.what.semi.resume.model.vo.MyResumeVo;
 
 /**
  * Servlet implementation class MyWorkedListServlet
@@ -39,17 +38,21 @@ public class MyWorkedListServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 
-		ArrayList<MyResumeVo> resumeList = new MyResumeService().selectMyInfo(id);
-		System.out.println("이력서리스트"+resumeList.size());
-
-		ArrayList<ContractVo> myConList = new ArrayList<ContractVo>();
-		ArrayList<ContractVo> temp = null;
-		for (int i = 0; i < resumeList.size(); i++) {
-			temp = new ContractService().selectMyWorkedList(resumeList.get(i).getResume_id());
-			System.out.println(resumeList.get(i).getResume_id() + " / " + temp.size());
-			myConList.addAll(myConList.size(), temp);
-			System.out.println(myConList.size());
+		ArrayList<ContractVo> myConList = new ContractService().selectMyWorkedList(id);
+		
+		RequestDispatcher view = null;
+		String url="";
+		if(myConList!=null){
+			url="/views/member/workedList.jsp";
+			request.setAttribute("list", myConList);
+			//request.setAttribute("pi", pi);
+			
+		}else{
+			System.out.println("근로내역오류");
 		}
+		view=request.getRequestDispatcher(url);
+		view.forward(request, response);
+		
 	}
 
 }

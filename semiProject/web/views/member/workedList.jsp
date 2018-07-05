@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.what.semi.common.template.PageInfo"%>
-<%@page import="com.what.semi.recruitment.model.vo.RecruitmentVo"%>
+<%@page import="com.what.semi.contract.model.vo.ContractVo"%>
 <%@page import="java.util.ArrayList"%>
 <%
-	ArrayList<RecruitmentVo> list = (ArrayList<RecruitmentVo>) request.getAttribute("list");
+	ArrayList<ContractVo> list = (ArrayList<ContractVo>) request.getAttribute("myConList");
 
-	/* java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("MM / dd"); */
-	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("MM / dd");
+	/* PageInfo pi = (PageInfo) request.getAttribute("pi");
 	int listCount = pi.getTotalCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
+	int endPage = pi.getEndPage(); */
 %>
 
 <%@include file="/views/common/header.jsp"%>
@@ -22,11 +22,7 @@
 	function writeRec(){
 		location.href = "/sp/views/recruitment/recruitmentForm.jsp";
 	}
-	
-	function recruitmentDetail(i){
-		location.href="/sp/recruitmentDetail.do?recId="+i+"&currentPage="+<%=currentPage%>;
-	}
-		
+
 	function modifyRec(i){
 		location.href = "/sp/updateRecForm.do?recId="+i;
 	}
@@ -93,36 +89,22 @@
 			<table class="list-table">
 				<tbody>
 					<tr>
-						<th><div class="table-td">게시여부</div></th>
-						<th><div class="table-td">근무형태</div></th>
-						<th><div class="td-title">기업명/글제목</div></th>
-						<th><div class="table-td-location">지역</div></th>
-						<th><div class="table-td">급여</div></th>
+						
+						<th><div class="table-td">계약일</div></th>
+						<th><div class="td-title">기업명</div></th>
+						<th><div class="table-td">계약상태</div></th>
 						<td style="width:20px;">
 						</td>
-						<td style="width:20px;">
-						</td>
+			
 					</tr>
 					<%
 						for (int i = 0; i < list.size(); i++) {
-							String[] locationArr = list.get(i).getAddress().split(" ");
-							String location = locationArr[0] + " " + locationArr[1];
 					%>
-					<tr>
-						<td class="table-td" onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);">
-							<%
-								if (list.get(i).getIs_post() == 0) {
-							%>기간만료<%
-								} else {
-							%>게시중<%
-								}
-							%>
-						</td>
+					<tr id="conId" name="conId" value="<%=list.get(i).getRecruitment_id()%>">
+						<td class="table-td"><%=df.format(list.get(i).getContract_date())%></td>
 						<%-- <td class="table-td"><%=df.format(list.get(i).getWork_day()) %></td> --%>
-						<td class="table-td" onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);"><%=list.get(i).getBusiness_type()%></td>
-						<td class="td-title" onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);"><b><%=list.get(i).getRecruitment_name()%></b><br><%=list.get(i).getRecruitment_title()%></td>
-						<td class="table-td-location" onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);"><%=location%></td>
-						<th class="table-td" onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);"><%=list.get(i).getPay()%>원
+						<td class="td-title"><b></b></td>
+						<th class="table-td"><%if(list.get(i).getState()==0){%>요청중<%}else if(list.get(i).getState()==1){ %>진행중<%}else{ %>완료<%} %>
 						</td>
 						<td>
 							<button type="button" class="btn btn-default btn-xs btn-info"
@@ -136,7 +118,7 @@
 			</table>
 
 			<!--====================================	페이지선택버튼	 ==================================  -->
-			<div class="btn-toolbar mb-1" role="toolbar">
+			<%-- <div class="btn-toolbar mb-1" role="toolbar">
 				<div class="btn-group" role="group">
 					<button onclick="movePage(<%=currentPage == 1 ? 1 : currentPage - 1%>);"
 						type="button" class="btn btn-default bg-dark text-white"><</button>
@@ -164,7 +146,9 @@
 						type="button" class="btn btn-default bg-dark text-white">></button>
 				</div>
 
-			</div>
+			</div> --%>
+			
+			
 			<div align="right">
 				<button onclick="writeRec();"
 					class="btn btn-default bg-dark text-white">구인글 작성하기</button>
