@@ -36,7 +36,8 @@ CREATE TABLE CONTRACT (
        START_WORK_TIME      DATE NULL,
        END_WORK_TIME        DATE NULL,
        RECRUITMENT_ID       VARCHAR2(30) NOT NULL,
-       M_ID             VARCHAR2(30) NOT NULL,
+       BO_ID             VARCHAR2(30) NOT NULL,
+       JS_ID             VARCHAR2(30) NOT NULL,
        RESUME_ID            NUMBER NOT NULL
 );
 
@@ -112,7 +113,9 @@ CREATE TABLE RECRUITMENT (
        RECRUITMENT_TITLE    VARCHAR2(200) NOT NULL,
        INTRODUCE            VARCHAR2(4000) NULL,
        M_ID             VARCHAR2(30) NOT NULL,
-       IS_POST              NUMBER DEFAULT 0
+       IS_POST              NUMBER DEFAULT 1
+                                   CHECK (IS_POST IN (1,0)),
+	DELFLAG              NUMBER DEFAULT 1
                                    CHECK (IS_POST IN (1,0))
 );
 
