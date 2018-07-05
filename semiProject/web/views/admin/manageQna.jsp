@@ -306,7 +306,7 @@ dl {
              </div>
              
              <div class="top2" style="-webkit-margin-before: -1.5em;">
-                     <select name="category" id="category" class="slt sltL" style="width:180px;">
+                     <select name="category" id="category" class="slt sltL" style="width:180px;" >
 			               <option value="">대분류 선택</option>
 			               <option value="회원정보">회원정보</option>
 			               <option value="이력서관리">이력서관리</option>
