@@ -149,6 +149,7 @@
 		
 		if(id.length < 6 || id.length > 15){
 			alert("아이디는 6자리 ~ 15자리 이내로 입력해주세요.");
+			$("#iid").focus();
 			okFlag = false;
 			return false;
 		}else{
@@ -157,6 +158,7 @@
 		
 		if(speId >= 0){
 			alert("아이디는 특수문자를 사용할 수 없습니다.");
+			$("#iid").focus();
 			okFlag = false;
 			return false;
 		}else{
@@ -165,6 +167,7 @@
 		
 		if(numId < 0 || engId < 0){
 			alert("아이디는 영문,숫자를 혼합하여 입력해주세요.");
+			$("#iid").focus();
 			okFlag = false;
 			return false;
 		}else{
@@ -184,6 +187,7 @@
 		
 		if($("#ipw").val() != $("#ipw2").val()){
 			alert("기존 비밀번호와 일치하지 않습니다.");
+			$("#ipw2").focus();
 			okFlag = false;
 			return false;
 		}else{
@@ -197,6 +201,7 @@
 
 		if(pw.length < 8 || pw.length > 20){
 			alert("비밀번호는 8자리 ~ 20자리 이내로 입력해주세요.");
+			$("#ipw").focus();
 			okFlag = false;
 			return false;
 		}else{
@@ -205,6 +210,7 @@
 
 		if(pw.search(/₩s/) != -1){
 			alert("비밀번호는 공백없이 입력해주세요.");
+			$("#ipw").focus();
 			okFlag = false;
 			return false;
 		}else{
@@ -213,6 +219,7 @@
 		 
 		if(numPw < 0 || engPw < 0 || spePw < 0 ){
 			alert("비밀번호는 영문,숫자,특수문자를 혼합하여 입력해주세요.");
+			$("#ipw").focus();
 			okFlag = false;
 			return false;
 		}else{
@@ -223,6 +230,7 @@
 		
 		if($("#name").val()==""){
 			alert("이름을 입력해주세요.");
+			$("#name").focus();
 			okFlag = false;
 			return false;
 		}else{
@@ -231,6 +239,7 @@
 		
 		if($("#name").val().length < 2){
 			alert("이름은 2자리 이상 입력해주세요.");
+			$("#name").focus();
 			okFlag = false;
 			return false;
 		}else{
@@ -241,6 +250,7 @@
 		
 		if($("#email").val()==""){
 			alert("이메일을 입력해주세요.");
+			$("#email").focus();
 			okFlag = false;
 			return false;
 		}else{
@@ -252,6 +262,7 @@
 		
 		if(speEmail<0){
 			alert("잘못된 이메일 형식입니다.");
+			$("#email").focus();
 			okFlag = false;
 			return false;
 		}else{
@@ -262,6 +273,7 @@
 		
 		if($("#birth").val()==""){
 			alert("생일을 입력해주세요.");
+			$("#birth").focus();
 			okFlag = false;
 			return false;
 		}else{
@@ -276,6 +288,7 @@
 	 
 	    if (year < 1900 || year > adultYear){
 	         alert("년도를 확인하세요. "+adultYear+"년생 이전 출생자만 등록 가능합니다.");
+	         $("#birth").focus();
 	         return false;
 	    }
 		
@@ -283,6 +296,7 @@
 		
 		if($("#phone").val()==""){
 			alert("휴대폰번호를 입력해주세요.");
+			$("#phone").focus();
 			okFlag = false;
 			return false;
 		}else{
@@ -293,6 +307,7 @@
 		
 		if(spePhone>=0){
 			alert("휴대폰번호에 특수문자는 사용할 수 없습니다.");
+			$("#phone").focus();
 			okFlag = false;
 			return false;
 		}else{
@@ -313,6 +328,7 @@
 		
 		if($("#addressDetail").val()==""){
 			alert("상세주소를 입력해주세요.");
+			$("#addressDetail").focus();
 			okFlag = false;
 			return false;
 		}else{
@@ -355,18 +371,21 @@
 		
 		if(id.length < 6 || id.length > 15){
 			alert("아이디는 6자리 ~ 15자리 이내로 입력해주세요.");
+			$("#iid").focus();
 			okFlag = false;
 			return false;
 		}
 		
 		if(speId >= 0){
 			alert("아이디는 특수문자를 사용할 수 없습니다.");
+			$("#iid").focus();
 			okFlag = false;
 			return false;
 		}
 		
 		if(numId < 0 || engId < 0){
 			alert("아이디는 영문,숫자를 혼합하여 입력해주세요.");
+			$("#iid").focus();
 			okFlag = false;
 			return false;
 		}
