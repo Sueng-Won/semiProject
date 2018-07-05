@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.what.semi.common.template.PageInfo;
+import com.what.semi.common.template.PageTemplate;
 import com.what.semi.contract.model.service.ContractService;
 import com.what.semi.contract.model.vo.ContractVo;
 import com.what.semi.recruitment.model.service.RecruitmentService;
@@ -40,7 +42,17 @@ public class MyWorkedListServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 
-		ArrayList<ContractVo> myConList = new ContractService().selectMyWorkedList(id);
+		int contId = -1;
+		if (request.getParameter("contId") != null) {
+			contId = Integer.parseInt(request.getParameter("contId"));
+		}
+
+		ContractService cs = new ContractService();
+
+		PageInfo pi = PageTemplate.myContractPaging(request, cs, id);
+
+		ArrayList<ContractVo> myConList = new ContractService().selectMyContractList(pi.getCurrentPage(), pi.getLimit(),
+				id);
 		ArrayList<RecruitmentVo> conRecList = new ArrayList<RecruitmentVo>();
 
 		RecruitmentVo temp = null;
@@ -53,10 +65,9 @@ public class MyWorkedListServlet extends HttpServlet {
 				}
 			}
 			if (flag == -1) {
-				System.out.println(temp);
 				conRecList.add(temp);
-			}else{
-				flag=-1;
+			} else {
+				flag = -1;
 			}
 		}
 
@@ -66,8 +77,8 @@ public class MyWorkedListServlet extends HttpServlet {
 			url = "/views/member/workedList.jsp";
 			request.setAttribute("myConList", myConList);
 			request.setAttribute("conRecList", conRecList);
-			// request.setAttribute("pi", pi);
-
+			request.setAttribute("pi", pi);
+			request.setAttribute("contId", contId);
 		} else {
 			System.out.println("근로내역오류");
 		}

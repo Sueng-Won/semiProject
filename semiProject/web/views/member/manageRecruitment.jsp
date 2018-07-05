@@ -150,7 +150,7 @@
 					<%
 						if (currentPage != i) {
 					%>
-					<button onclick="movePage();" type="button"
+					<button onclick="movePage(<%=i%>);" type="button"
 						class="btn btn-default bg-dark text-white"><%=i%></button>
 					<%
 						} else {
@@ -180,4 +180,9 @@
 	<!-- /.row -->
 </div>
 <!-- /.container -->
+<script type="text/javascript">
+	function movePage(pageNum) {
+		location.href = "/sp/myRecruitmentList.do?currentPage="+pageNum;
+	}
+</script>
 <%@include file="/views/common/footer.jsp"%>

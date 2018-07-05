@@ -1,4 +1,4 @@
-package com.what.semi.recruitment.controller.date;
+package com.what.semi.contract.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,23 +9,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.what.semi.common.template.PageInfo;
 import com.what.semi.common.template.PageTemplate;
+import com.what.semi.contract.model.service.ContractService;
+import com.what.semi.contract.model.vo.ContractVo;
 import com.what.semi.recruitment.model.service.RecruitmentService;
 import com.what.semi.recruitment.model.vo.RecruitmentVo;
 
 /**
- * Servlet implementation class ByDateListServlet
+ * Servlet implementation class RejectRecruitmentServlet
  */
-@WebServlet("/byDateList.do")
-public class ByDateListServlet extends HttpServlet {
+@WebServlet("/rejectRecruitment.do")
+public class RejectRecruitmentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ByDateListServlet() {
+    public RejectRecruitmentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,29 +37,23 @@ public class ByDateListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String dateStr = "null";
-		//System.out.println(dateStr);
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
 		
-		RecruitmentService rs = new RecruitmentService();
-
-		PageInfo pi = PageTemplate.byDatePaging(request, rs, dateStr);
-
-		ArrayList<RecruitmentVo> list = rs.selectByDateList(dateStr, pi.getCurrentPage(), pi.getLimit());
+		int contId = Integer.parseInt(request.getParameter("contId"));
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
-		//System.out.println(list.size());
+		ContractService cs = new ContractService();
 		
-		RequestDispatcher view = null;
-		String url="";
-		if(list!=null){
-			url="/views/byDate/searchByDate.jsp";
-			request.setAttribute("list", list);
-			request.setAttribute("pi", pi);
-			
-		}else{
-			System.out.println("null");
+		int result = cs.updateContractState(contId,2);
+		
+		
+		if (result!=0) {
+			response.sendRedirect("/sp/myWorkedList.do?contId="+contId+"&currentPage="+currentPage);
+		} else {
+			System.out.println("계약 거절 오류");
 		}
-		view=request.getRequestDispatcher(url);
-		view.forward(request, response);
+		
 	}
 
 }

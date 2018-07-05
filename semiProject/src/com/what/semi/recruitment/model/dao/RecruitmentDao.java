@@ -410,6 +410,7 @@ public class RecruitmentDao {
 					+ "WHERE R.M_ID='" + id + "'"
 					+ "ORDER BY WORK_DAY) P) " + "WHERE RNUM BETWEEN " + startRow + " AND " + endRow;
 			// query = "SELECT * FROM RECRUITMENT";
+			System.out.println(query);
 
 			rs = stmt.executeQuery(query);
 			list = new ArrayList<RecruitmentVo>();

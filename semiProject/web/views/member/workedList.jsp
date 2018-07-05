@@ -7,31 +7,40 @@
 <%
 	ArrayList<ContractVo> myConList = (ArrayList<ContractVo>) request.getAttribute("myConList");
 	ArrayList<RecruitmentVo> conRecList = (ArrayList<RecruitmentVo>) request.getAttribute("conRecList");
+	int contId = (int) request.getAttribute("contId");
 
 	java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("MM / dd");
-	/* PageInfo pi = (PageInfo) request.getAttribute("pi");
+
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	int listCount = pi.getTotalCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage(); */
+	int endPage = pi.getEndPage();
 %>
 
 <%@include file="/views/common/header.jsp"%>
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 
 <script type="text/javascript">
-	function writeRec() {
-		location.href = "/sp/views/recruitment/recruitmentForm.jsp";
+	function contractRecDetail(i) {
+		location.href = "/sp/contractRecDetail.do?recId=" + i;
 	}
 
-	function modifyRec(i) {
-		location.href = "/sp/updateRecForm.do?recId=" + i;
+	function accept(i) {
+		location.href = "/sp/acceptRecruitment.do?contId="+i;
 	}
 
-	function deleteRec(i) {
-		location.href = "/sp/deleteRecruitment.do?recId=" + i;
+	function reject(i) {
+		location.href = "/sp/rejectRecruitment.do?contId=" + i+"&currentPage="+<%=currentPage%>;
 	}
+	
+	$(function(){
+		<%if (contId != -1) {%>
+		console.log(<%=contId%>);
+			$("#conDetails<%=contId%>").addClass('show');
+		<%}%>
+	});
 </script>
 <style>
 .btn-link {
@@ -71,7 +80,7 @@
 
 		<%@include file="/views/common/nav.jsp"%>
 		<div class="col-lg-9" style='padding-top: 50px; padding-left: 30px;'>
-			<h3>구인게시글 관리</h3>
+			<h3>근로내역 관리</h3>
 			<!-- Page Content -->
 			<!-- <div class="media mt-4 border rounded bg-light">
 		     
@@ -126,30 +135,76 @@
 
 					</td>
 				</tr>
-				<div id="conDetails<%=myConList.get(i).getC_no()%>"
-					class="panel-collapse collapse in" role="tabpanel"
-					aria-labelledby="headingOne">
-			Anim pariatur cliche
-					reprehenderit, enim eiusmod high life accusamus terry richardson ad
-					squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
-					brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-					moon tempor, sunt aliqua put a bird on it squid single-origin
-					coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
-					helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-					proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
-					craft beer farm-to-table, raw denim aesthetic synth nesciunt you
-					probably haven't heard of them accusamus labore sustainable VHS.
-				
-				</div>
+				<tr>
+					<td colspan="4">
+						<div id="conDetails<%=myConList.get(i).getC_no()%>"
+							class="collapse">
+							<div style="margin: 0 50px 0 50px;">
+								<div style="height: 50px;">
+									<div style="float: left;">
+										<button style="margin-top: 10px;"
+											onclick="contractRecDetail(<%=myConList.get(i).getRecruitment_id()%>);">해당
+											구인게시글 보기</button>
+									</div>
+									<div style="float: right;">
+										<div>
+											근무 시작 시간 :
+											<%
+											if (myConList.get(i).getStart_work_time() != null) {
+										%><%=myConList.get(i).getStart_work_time()%>
+											<%
+												}
+											%>
+										</div>
+										<div>
+											근무 종료 시간 :
+											<%
+											if (myConList.get(i).getEnd_work_time() != null) {
+										%><%=myConList.get(i).getEnd_work_time()%>
+											<%
+												}
+											%>
+										</div>
+									</div>
+								</div>
+								<div align="right">
+									<%
+										if (myConList.get(i).getState() == 0) {
+									%>
+									<button onclick="accept(<%=myConList.get(i).getC_no()%>);"
+										class="btn btn-default bg-dark text-white">수락</button>
+									<button onclick="reject(<%=myConList.get(i).getC_no()%>);"
+										class="btn btn-default bg-dark text-white">거절</button>
+									<%
+										} else if (myConList.get(i).getState() == 1) {
+									%>
+									진행중 입니다~^3^
+									<%
+										} else {
+									%>
+									<button
+										onclick="addBlacklist(<%=myConList.get(i).getRecruitment_id()%>);"
+										class="btn btn-default bg-dark text-white">신고하기</button>
+									<%
+										}
+									%>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
 				<%
 					}
 				%>
 			</table>
 
+
+
 			<!--====================================	페이지선택버튼	 ==================================  -->
-			<%-- <div class="btn-toolbar mb-1" role="toolbar">
+			<div class="btn-toolbar mb-1" role="toolbar">
 				<div class="btn-group" role="group">
-					<button onclick="movePage(<%=currentPage == 1 ? 1 : currentPage - 1%>);"
+					<button
+						onclick="movePage(<%=currentPage == 1 ? 1 : currentPage - 1%>);"
 						type="button" class="btn btn-default bg-dark text-white"><</button>
 					<%
 						for (int i = startPage; i <= endPage; i++) {
@@ -157,7 +212,7 @@
 					<%
 						if (currentPage != i) {
 					%>
-					<button onclick="movePage();" type="button"
+					<button onclick="movePage(<%=i%>);" type="button"
 						class="btn btn-default bg-dark text-white"><%=i%></button>
 					<%
 						} else {
@@ -175,12 +230,6 @@
 						type="button" class="btn btn-default bg-dark text-white">></button>
 				</div>
 
-			</div> --%>
-
-
-			<div align="right">
-				<button onclick="writeRec();"
-					class="btn btn-default bg-dark text-white">구인글 작성하기</button>
 			</div>
 			<!--=========================================================================================-->
 
@@ -189,4 +238,9 @@
 	<!-- /.row -->
 </div>
 <!-- /.container -->
+<script type="text/javascript">
+	function movePage(pageNum) {
+		location.href = "/sp/myWorkedList.do?currentPage="+pageNum;
+	}
+</script>
 <%@include file="/views/common/footer.jsp"%>
