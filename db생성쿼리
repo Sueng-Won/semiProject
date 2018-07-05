@@ -166,40 +166,40 @@ ALTER TABLE RESUME
 
 ALTER TABLE BLACKLIST
        ADD  ( FOREIGN KEY (M_ID)
-                             REFERENCES MEMBER ) ;
+                             REFERENCES MEMBER ON DELETE CASCADE) ;
 
 
 ALTER TABLE CONTRACT
        ADD  ( FOREIGN KEY (RESUME_ID)
-                             REFERENCES RESUME ) ;
+                             REFERENCES RESUME ON DELETE CASCADE) ;
 
 
 ALTER TABLE CONTRACT
        ADD  ( FOREIGN KEY (RECRUITMENT_ID)
-                             REFERENCES RECRUITMENT ) ;
+                             REFERENCES RECRUITMENT ON DELETE CASCADE) ;
 
 ALTER TABLE CONTRACT
     ADD (FOREIGN KEY (BO_ID)
-        REFERENCES MEMBER (M_ID));
+        REFERENCES MEMBER (M_ID) ON DELETE CASCADE);
 	
 ALTER TABLE CONTRACT
     ADD (FOREIGN KEY (JS_ID)
-        REFERENCES MEMBER (M_ID));
+        REFERENCES MEMBER (M_ID) ON DELETE CASCADE);
 
 
 ALTER TABLE QNA
        ADD  ( FOREIGN KEY (M_ID)
-                             REFERENCES MEMBER ) ;
+                             REFERENCES MEMBER ON DELETE CASCADE) ;
 
 
 ALTER TABLE RECRUITMENT
        ADD  ( FOREIGN KEY (M_ID)
-                             REFERENCES MEMBER ) ;
+                             REFERENCES MEMBER ON DELETE CASCADE) ;
 
 
 ALTER TABLE RESUME
        ADD  ( FOREIGN KEY (M_ID)
-                             REFERENCES MEMBER ) ;
+                             REFERENCES MEMBER ON DELETE CASCADE) ;
                              
 CREATE SEQUENCE SEQ_RECRUITMENT;
 
