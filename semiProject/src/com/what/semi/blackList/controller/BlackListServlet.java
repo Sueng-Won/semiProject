@@ -34,7 +34,7 @@ public class BlackListServlet extends HttpServlet {
 		String memberType = request.getParameter("mTypeValue");
 		String keyword = request.getParameter("keyword");
 		
-		//view에서 건내받은 값이 없을경우 초기화를 위한 로직
+		//==view에서 건내받은 값이 없을경우 초기화를 위한 로직==
 		if(null == memberType) {
 			memberType = "";
 		}
@@ -44,23 +44,34 @@ public class BlackListServlet extends HttpServlet {
 		if(null == isReport) {
 			isReport = "";
 		}
+		//======================================
 		
+		
+		//===================블랙리스트 등록==================
 		if(null != request.getParameter("blackListId")) {
 			b_id = request.getParameter("blackListId");
 			System.out.println("블랙리스트 대상 전송 ->"+b_id);
 			bls.updateBlackList(b_id);
 		}
+		//===============================================
+		
+		//===================블랙리스트 제거==================
 		if(null != request.getParameter("deleteblackId")) {
 			b_id = request.getParameter("deleteblackId");
 			bls.deleteBlackList(b_id);
 		}
+		//===============================================
 		
+		
+		//=========================검색조건기반 회원list 조회==========================
 		condition = new ConditionVo(isReport, memberType, keyword);
 		pi = PageTemplate.blackListPaging(request,bls,condition);
 		list = bls.loadBlackList(pi.getCurrentPage(), pi.getLimit(), condition);
+		//======================================================================
+		
 		System.out.println(pi.toString());
 		String url = "";
-		if(null != list) {
+		if("admin".equals(request.getSession().getAttribute("id"))) {
 			url = "views/admin/manageMember.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
