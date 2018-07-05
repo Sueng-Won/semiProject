@@ -201,7 +201,7 @@ public class PageTemplate {
 		int startPage;		//시작 페이지
 		int endPage;		//마지막 페이지 변수
 		
-		int limit = 12;			//한 페이지에 출력할 글의 개수(default=12)
+		int limit = 10;			//한 페이지에 출력할 글의 개수(default=10)
 		int listCount;
 		
 		
@@ -214,7 +214,7 @@ public class PageTemplate {
 		}
 		
 		//130 -> 13
-		maxPage = (int)((double)listCount / limit + 0.95);
+		maxPage = (int)((double)listCount / limit + 0.9);
 		//현재 페이지 번호
 		//12 - 10
 		startPage = (int)(currentPage / limitPage * limitPage) + 1;

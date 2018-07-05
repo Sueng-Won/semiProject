@@ -28,30 +28,33 @@ public class AdminQnaListServlet extends HttpServlet {
 		PageInfo pi = null;					//페이지정보를 저장할 객체 선언
 		QnaVo qv = new QnaVo();				//각각의 qna를 저장할 객체 선언
 		
-		String category = request.getParameter("category");//view에서 받아온 값을 저장할 변수 선언
-		int is_checked = Integer.parseInt(request.getParameter("is_checked"));					//view에서 받아온 값을 저장할 변수 선언
-		String m_id = request.getParameter("m_id");;					//view에서 받아온 값을 저장할 변수 선언
+		String category = "";				//view에서 받아온 값을 저장할 변수 선언
+		int is_checked = 0;					//view에서 받아온 값을 저장할 변수 선언
+		String keyword = "";
 		
-		String answer = request.getParameter("answer");
-		int q_no = Integer.parseInt(request.getParameter("q_no"));
-		//==============검색관련 전송데이터 유무를 판단하여 재 초기화하는 로직==================
-		if(null == category) {
-			category = "";
+		String answer;
+		int q_no;
+		
+		//==============전송된 값이 있을 경우 해당 데이터를 변수에 저장===============
+		if(null != request.getParameter("category")) {
+			category = request.getParameter("category");
 		}
-		if(0 > is_checked || is_checked > 1) {
-			is_checked = 0;
+		if(null != request.getParameter("is_checked")) {
+			is_checked = Integer.parseInt(request.getParameter("is_checked"));
 		}
-		if(null == request.getAttribute("")) {
-			m_id = null;
+		if(null != request.getParameter("keyword")) {
+			keyword = request.getParameter("keyword");
 		}
 		//===========================================================
 		
 		qv.setCategory(category);
 		qv.setIs_checked(is_checked);
-		qv.setM_id(m_id);
+		qv.setM_id(keyword);
 		
 		//=============답변을 올렸을때 수행될 로직============================
-		if(null != answer && null != request.getParameter("q_no")) {
+		if(null != request.getParameter("answer") && null != request.getParameter("q_no")) {
+			answer = request.getParameter("answer");
+			q_no = Integer.parseInt(request.getParameter("q_no"));
 			qs.updateAnswer(answer, q_no);
 		}
 		

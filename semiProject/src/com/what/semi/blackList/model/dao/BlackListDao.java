@@ -33,7 +33,9 @@ public class BlackListDao {
 					"FROM (SELECT * " + 
 					"FROM MEMBER M " + 
 					"WHERE MEMBER_TYPE LIKE '%'|| ? || '%' " + 
-					"AND M.NAME LIKE '%'|| ? || '%' ";
+					"AND (M.NAME LIKE '%'|| ? || '%' " +
+					"OR M.M_ID LIKE '%'|| ? || '%') " +
+					"AND MEMBER_TYPE != 'AM'";
 			
 			switch (isReport) {  //신고 유무를 확인하는 switch문
 			case "O":	//신고된 회원
@@ -50,6 +52,7 @@ public class BlackListDao {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, memberType);
 			pstmt.setString(2, keyword);
+			pstmt.setString(3, keyword);
 			
 			rs = pstmt.executeQuery();
 			
@@ -68,7 +71,8 @@ public class BlackListDao {
 
 	public ArrayList<BlackListVo> loadBlackList(Connection con, int currentPage, int limit, ConditionVo condition) {
 		ArrayList<BlackListVo> list = null;
-		
+		int startRow = (currentPage - 1) * limit + 1;
+		int endRow = startRow + limit - 1;
 		String isReport = condition.getIsReport();			//신고 유무를 저장할 변수 선언
 		String memberType = condition.getMemberType();		//회원 타입을 저장할 변수 선언
 		if("NO".equals(memberType)) {
@@ -88,7 +92,9 @@ public class BlackListDao {
 					"NVL((SELECT SUM(COUNT) FROM BLACKLIST B WHERE M.M_ID = B.M_ID),0) AS TOTALCOUNT " + 
 					"FROM MEMBER M " + 
 					"WHERE MEMBER_TYPE LIKE '%'|| ? || '%' " + 
-					"AND M.NAME LIKE '%'|| ? || '%' ";
+					"AND (M.NAME LIKE '%'|| ? || '%' "+
+					"OR M.M_ID LIKE '%'|| ? || '%') "+
+					"AND MEMBER_TYPE != 'AM'";
 			
 			switch (isReport) {  //신고 유무를 확인하는 switch문
 			case "O":	//신고된 회원
@@ -105,8 +111,9 @@ public class BlackListDao {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, memberType);
 			pstmt.setString(2, keyword);
-			pstmt.setInt(3, currentPage);
-			pstmt.setInt(4, limit);
+			pstmt.setString(3, keyword);
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, endRow);
 			
 			rs = pstmt.executeQuery();
 			list = new ArrayList<BlackListVo>();

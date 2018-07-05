@@ -51,9 +51,10 @@ String keyword = condition.getKeyword();
     		<%@include file="adminNav.jsp" %>
     		
     		<div class="col-lg-9 mt-4">
+    			<h2 align="center" class="mb-3">사용자 관리</h2>
     			<form id="blackListForm" method="post" action="/sp/blackList.do">
     			<div class="row mb-4">
-    			
+    				
     				<div class="btn-group col-2">
 					    <button type="button" id="rBtn" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 					    <%="".equals(isReport)?"신고유무": ("O".equals(isReport)?"신고 회원":("X".equals(isReport)?"미신고 회원":"회원 전체")) %>
@@ -99,7 +100,7 @@ String keyword = condition.getKeyword();
 		     	<%for(BlackListVo bv : list){ %>
 			     <div class="list-group-item">
 			     	<div class="row">
-			     		<div class="col-3"><%=bv.getM_name() %></div>
+			     		<div class="col-3"><%=bv.getM_name() %>(<%=bv.getM_id() %>)</div>
 			     		<div class="col-3"><%=bv.getM_type().equals("JS")?"구직자":"업주" %></div>
 			     		<div class="col-3">신고 <%=bv.getTotalCount() %>회</div>
 			     		

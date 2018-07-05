@@ -43,6 +43,8 @@ public class QnaDao {
 		ArrayList<QnaVo> result = new ArrayList<QnaVo>();
 		int currentPage = pi.getCurrentPage();
 		int limit = pi.getLimit();
+		int startRow = (currentPage - 1) * limit + 1;
+		int endRow = startRow + limit - 1;
 		PreparedStatement pstmt = null;	//SQL문을 나타내는 객체
 		ResultSet rs = null;
 		String query = "SELECT * FROM " + 
@@ -55,8 +57,8 @@ public class QnaDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
-			pstmt.setInt(2, currentPage);
-			pstmt.setInt(3, limit);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
 			rs = pstmt.executeQuery();
 			QnaVo temp = null;
@@ -116,15 +118,19 @@ public class QnaDao {
 		String query = "";
 		
 			query = "SELECT COUNT(*) AS LISTCOUNT "
-					+ "FROM QNA ";
+					+ "FROM QNA Q "
+					+ "JOIN MEMBER M ON (Q.M_ID = M.M_ID) ";
 			
 			if(null != qv.getM_id()) {
-				query += "WHERE M_ID = ?";
+				query += "WHERE Q.M_ID LIKE '%' || ? || '%' OR M.NAME LIKE '%' || ? || '%'";
 			}
 			
 			try {
 				pstmt = con.prepareStatement(query);
-				pstmt.setString(1, qv.getM_id());
+				if(null != qv.getM_id()) {
+					pstmt.setString(1, qv.getM_id());
+					pstmt.setString(2, qv.getM_id());
+				}
 				
 				rs = pstmt.executeQuery();
 				
@@ -145,6 +151,8 @@ public class QnaDao {
 		ArrayList<QnaVo> result = new ArrayList<QnaVo>();
 		int currentPage = pi.getCurrentPage();
 		int limit = pi.getLimit();
+		int startRow = (currentPage - 1) * limit + 1;
+		int endRow = startRow + limit - 1;
 		String m_id = qv.getM_id();
 		String category = qv.getCategory();
 		int is_checked = qv.getIs_checked();
@@ -153,14 +161,15 @@ public class QnaDao {
 		ResultSet rs = null;
 		String query = "SELECT * FROM " + 
 				"(SELECT ROWNUM RNUM, P.* " + 
-				"SELECT Q_NO, CONTENT, CATEGORY, REPORTING_DATE, Q.M_ID, IS_CHECKED, M.NAME, M.MEMBER_TYPE " + 
+				"FROM(SELECT Q_NO, CONTENT, CATEGORY, REPORTING_DATE, Q.M_ID, IS_CHECKED, M.NAME, M.MEMBER_TYPE " + 
 				"FROM QNA Q " + 
-				"JOIN MEMBER M ON (M.M_ID = Q.M_ID)" + 
-				"WHERE CATEGORY LIKE '%' || ? || '%'" + 
+				"JOIN MEMBER M ON (M.M_ID = Q.M_ID) " + 
+				"WHERE CATEGORY LIKE '%' || ? || '%' " + 
 				"AND IS_CHECKED = ? ";
 		
 		if(null != qv.getM_id()) {
-			query += "WHERE Q.M_ID = ? ";
+			query += "AND (NAME LIKE '%' || ? || '%' "
+					+ "OR Q.M_ID LIKE '%' || ? || '%') ";
 		}
 		
 		query += "ORDER BY REPORTING_DATE) P) " + 
@@ -169,9 +178,15 @@ public class QnaDao {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, category);
 			pstmt.setInt(2, is_checked);
-			pstmt.setString(3, m_id);
-			pstmt.setInt(4, currentPage);
-			pstmt.setInt(5, limit);
+			if(null != m_id) {
+				pstmt.setString(3, m_id);
+				pstmt.setString(4, m_id);
+				pstmt.setInt(5, startRow);
+				pstmt.setInt(6, endRow);
+			}else {
+				pstmt.setInt(3, startRow);
+				pstmt.setInt(4, endRow);
+			}
 			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {

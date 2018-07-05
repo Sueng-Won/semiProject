@@ -26,7 +26,7 @@ height:400px;
 </style>
 <%@include file="header.jsp" %>
     <!-- Page Content -->
-    <div class="container" style="min-height: 700px">	<!-- 내용을 담아놓을 컨테이너 -->
+    <div class="container" style="min-height: 800px">	<!-- 내용을 담아놓을 컨테이너 -->
 
       <div class="row">
 
@@ -95,9 +95,9 @@ height:400px;
 					<button onclick="movePage(<%=currentPage==1?1:currentPage-1%>);" type="button" class="btn btn-default bg-dark text-white">◀</button>
 					<%for(int i = startPage; i <= endPage; i++){ %>
 						<%if(currentPage != i){ %>
-						<button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white">1</button>
+						<button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
 						<%}else{ %>
-						<button type="button" class="btn btn-default bg-dark text-white">1</button>
+						<button type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
 						
 						<%} %>
 					<%} %>
