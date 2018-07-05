@@ -40,6 +40,7 @@ public class ByDateListServlet extends HttpServlet {
 		RecruitmentService rs = new RecruitmentService();
 
 		PageInfo pi = PageTemplate.byDatePaging(request, rs, dateStr);
+		System.out.println(pi.toString());
 
 		ArrayList<RecruitmentVo> list = rs.selectByDateList(dateStr, pi.getCurrentPage(), pi.getLimit());
 		
@@ -48,9 +49,6 @@ public class ByDateListServlet extends HttpServlet {
 		RequestDispatcher view = null;
 		String url="";
 		if(list!=null){
-			for(int i=0;i<list.size();i++){
-				System.out.println(list.get(i).toString());
-			}
 			url="/views/byDate/searchByDate.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);

@@ -446,7 +446,7 @@
       
         <!-- 지도API예제연습-->
          
-           <div class="row">
+           <div class="row" style="min-height: 200px">
          <%for(RecruitmentVo rv : list) {%>
                <div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4">
                  <div class="card h-100">

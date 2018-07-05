@@ -1,6 +1,8 @@
 package com.what.semi.common.template;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.what.semi.blackList.model.service.BlackListService;
 import com.what.semi.blackList.model.vo.ConditionVo;
@@ -106,7 +108,7 @@ public class PageTemplate {
 		
 		
 		//130 -> 13
-		maxPage = (int)((double)listCount / limit + 0.9);
+		maxPage = (int)((double)listCount / limit + 0.95);
 		//현재 페이지 번호
 		//12 - 10
 		startPage = (int)(currentPage / limitPage * limitPage) + 1;
