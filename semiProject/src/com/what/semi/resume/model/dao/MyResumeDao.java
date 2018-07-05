@@ -20,11 +20,7 @@ public class MyResumeDao {
 		ArrayList<MyResumeVo> userType = null;
 		
 		try {
-<<<<<<< HEAD
 			query = "SELECT PRI_RESUME, RESUME_ID, INTRODUCE_TITLE, IS_POST, MEMBER_TYPE FROM RESUME R JOIN MEMBER M ON (R.M_ID = M.M_ID) WHERE M.M_ID=? AND MEMBER_TYPE='JS' AND R.DELFLAG=0";
-=======
-			query = "SELECT PRI_RESUME, RESUME_ID, INTRODUCE_TITLE, IS_POST, MEMBER_TYPE, MILTARY_SERVICE, BUSINESS_TYPE, WORKABLE_DAYS, GENDER FROM RESUME R JOIN MEMBER M ON (R.M_ID = M.M_ID) WHERE M.M_ID=? AND MEMBER_TYPE='JS' ";
->>>>>>> refs/heads/master
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
