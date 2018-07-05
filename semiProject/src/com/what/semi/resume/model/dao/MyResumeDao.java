@@ -20,7 +20,7 @@ public class MyResumeDao {
 		ArrayList<MyResumeVo> userType = null;
 		
 		try {
-			query = "SELECT PRI_RESUME, RESUME_ID, INTRODUCE_TITLE, IS_POST, MEMBER_TYPE FROM RESUME R JOIN MEMBER M ON (R.M_ID = M.M_ID) WHERE M.M_ID=? AND MEMBER_TYPE='JS' ";
+			query = "SELECT PRI_RESUME, RESUME_ID, INTRODUCE_TITLE, IS_POST, MEMBER_TYPE FROM RESUME R JOIN MEMBER M ON (R.M_ID = M.M_ID) WHERE M.M_ID=? AND MEMBER_TYPE='JS' AND R.DELFLAG=0";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -206,14 +206,13 @@ public class MyResumeDao {
 		String query = null;
 		
 		try {
-			query ="SELECT NAME, PHONE, EMAIL, ADDRESS, PROFILE_IMAGE_SRC FROM RESUME R  JOIN MEMBER M ON(R.M_ID=M.M_ID) WHERE R.M_ID=? AND R.RESUME_ID=?";
+			query ="SELECT WORK_TIME, INTRODUCE_TITLE, INTRODUCE, WORKABLE_DAYS, BUSINESS_TYPE, CAREER, MILTARY_SERVICE, DISABILITY, ACHIEVEMENT, NAME, PHONE, EMAIL, ADDRESS, PROFILE_IMAGE_SRC FROM RESUME R  JOIN MEMBER M ON(R.M_ID=M.M_ID) WHERE R.M_ID=? AND R.RESUME_ID=?";
 			pstmt = con.prepareStatement(query);
 			
 			pstmt.setString(1, userId);
 			pstmt.setInt(2, resume_id);
 			
 			rs = pstmt.executeQuery();
-			
 			while(rs.next()){
 				member = new MyResumeVo();
 				member.setName(rs.getString("name"));
@@ -222,6 +221,27 @@ public class MyResumeDao {
 				member.setAddress(rs.getString("address"));
 				member.setProfile_image_src(rs.getString("profile_image_src"));
 				member.setResume_id(resume_id);
+				System.out.println(rs.getString("name"));
+				member.setAchievement(rs.getString("achievement"));
+				System.out.println(rs.getString("achievement"));
+				member.setAchievement(rs.getString("disability"));
+				System.out.println(rs.getString("disability"));
+				member.setMiltary_service(rs.getInt("miltary_service"));
+				System.out.println(rs.getInt("miltary_service"));
+				member.setCareer(rs.getInt("career"));
+				System.out.println(rs.getInt("career"));
+				member.setBusiness_type(rs.getString("business_type"));
+				System.out.println(rs.getString("business_type"));
+				member.setWorkable_days(rs.getDate("workable_days")); //데이트 ->스트링
+				//  WORKABLE_DAYS
+				System.out.println(rs.getString("name"));
+				member.setIntroduce(rs.getString("introduce"));
+				System.out.println(rs.getString("introduce"));
+				member.setIntroduce_title(rs.getString("introduce_title"));
+				System.out.println(rs.getString("introduce_title"));
+				member.setWorkTime(rs.getString("work_time"));
+				System.out.println(rs.getString("work_time"));
+				
 			}
 			
 		} catch (SQLException e) {
@@ -277,7 +297,8 @@ public class MyResumeDao {
 		String query = null;
 		
 		try {
-			query = "DELETE FROM RESUME WHERE RESUME_ID=? AND M_ID=?";
+			query = "UPDATE RESUME SET DELFLAG=1 WHERE RESUME_ID=? AND M_ID=?";
+			
 			pstmt = con.prepareStatement(query);
 			
 			pstmt.setString(1, resume_id);
