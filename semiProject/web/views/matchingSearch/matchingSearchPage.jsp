@@ -48,7 +48,7 @@ ArrayList<MyResumeVo> resumes = (ArrayList<MyResumeVo>) request.getAttribute("re
 			<div align="center" class="bg-dark text-white">작성된 이력서가 없습니다.</div>
 			<%} %>
 			<!--======================================	구인게시물	======================================== -->
-          <div class="row mt-4" style="min-height: 800px">
+          <div class="row mt-4" style="min-height: 700px">
           
             <%for(RecruitmentVo rv : list) {%><!-- for문을 통해 해당 게시물들의 개수에 맞게 생성 -->
 	            <div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4" style="max-height: 400px">
