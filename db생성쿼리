@@ -38,7 +38,9 @@ CREATE TABLE CONTRACT (
        RECRUITMENT_ID       VARCHAR2(30) NOT NULL,
        BO_ID             VARCHAR2(30) NOT NULL,
        JS_ID             VARCHAR2(30) NOT NULL,
-       RESUME_ID            NUMBER NOT NULL
+       RESUME_ID            NUMBER NOT NULL,
+       DEMANDER          VARCHAR2(30)
+                                   CHECK (MEMBER_TYPE IN ('JS','BO'))
 );
 
 
