@@ -134,5 +134,52 @@ public class MyResumeService {
 		
 		return result;
 	}
+	public int selectJSTotalCount() {
+		//페이지..
+		//1. 커넥션 연결
+				Connection con = JDBCTemplate.getConnection();
+				//2. dao 메소드 호출
+				int listCount = new MyResumeDao().selectJSTotalCount(con);
+				//3. 자원 반납(close)
+				JDBCTemplate.close(con);
+				//4. 해당 결과 리턴
+				return listCount;
+	}
+
+	public ArrayList<MyResumeVo> selectJSList(int currentPage, int limit) {
+		Connection con = JDBCTemplate.getConnection();
+		
+		ArrayList<MyResumeVo> jsList = new MyResumeDao().selectJSList(con, currentPage, limit);
+		
+		JDBCTemplate.close(con);
+		
+		return jsList;
+	}
+
+	public ArrayList<MyResumeVo> selectResumeCondition(int currentPage, int limit, String[] searchJob,
+			String[] searchLocal) {
+		Connection con = JDBCTemplate.getConnection();
+		
+		ArrayList<MyResumeVo> jsList = new MyResumeDao().selectResumeCondition(con, currentPage, limit, searchJob, searchLocal);
+		
+		JDBCTemplate.close(con);
+		
+		return jsList;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

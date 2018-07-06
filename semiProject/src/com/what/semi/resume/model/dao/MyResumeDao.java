@@ -20,7 +20,7 @@ public class MyResumeDao {
 		ArrayList<MyResumeVo> userType = null;
 		
 		try {
-			query = "SELECT PRI_RESUME, RESUME_ID, INTRODUCE_TITLE, IS_POST, MEMBER_TYPE FROM RESUME R JOIN MEMBER M ON (R.M_ID = M.M_ID) WHERE M.M_ID=? AND MEMBER_TYPE='JS' AND R.DELFLAG=0";
+			query = "SELECT MILTARY_SERVICE, BUSINESS_TYPE, WORKABLE_DAYS, GENDER, PRI_RESUME, RESUME_ID, INTRODUCE_TITLE, IS_POST, MEMBER_TYPE FROM RESUME R JOIN MEMBER M ON (R.M_ID = M.M_ID) WHERE M.M_ID=? AND MEMBER_TYPE='JS' AND R.DELFLAG=0";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -225,26 +225,15 @@ public class MyResumeDao {
 				member.setAddress(rs.getString("address"));
 				member.setProfile_image_src(rs.getString("profile_image_src"));
 				member.setResume_id(resume_id);
-				System.out.println(rs.getString("name"));
 				member.setAchievement(rs.getString("achievement"));
-				System.out.println(rs.getString("achievement"));
-				member.setAchievement(rs.getString("disability"));
-				System.out.println(rs.getString("disability"));
 				member.setMiltary_service(rs.getInt("miltary_service"));
-				System.out.println(rs.getInt("miltary_service"));
 				member.setCareer(rs.getInt("career"));
-				System.out.println(rs.getInt("career"));
 				member.setBusiness_type(rs.getString("business_type"));
-				System.out.println(rs.getString("business_type"));
 				member.setWorkable_days(rs.getDate("workable_days")); //데이트 ->스트링
 				//  WORKABLE_DAYS
-				System.out.println(rs.getString("name"));
 				member.setIntroduce(rs.getString("introduce"));
-				System.out.println(rs.getString("introduce"));
 				member.setIntroduce_title(rs.getString("introduce_title"));
-				System.out.println(rs.getString("introduce_title"));
 				member.setWorkTime(rs.getString("work_time"));
-				System.out.println(rs.getString("work_time"));
 				
 			}
 			
@@ -317,16 +306,129 @@ public class MyResumeDao {
 		
 		return result;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public int selectJSTotalCount(Connection con) {
+		//페이지 처리 쿼리..
+		int result = -1;
+		java.sql.Statement stmt = null;
+		ResultSet rs = null;
+		String query = "";
+		try {
+			stmt = con.createStatement();
+			query = "SELECT COUNT(*) AS JSLISTCOUNT FROM MEMBER M JOIN RESUME R ON(M.M_ID =R.M_ID) WHERE MEMBER_TYPE='JS' AND IS_BLACK_LIST<3";
+			System.out.println(query);
+			rs = stmt.executeQuery(query);
+			
+			while(rs.next()){
+				result = rs.getInt("jslistcount");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(stmt);
+		}
+		return result;
+	}
+
+	public ArrayList<MyResumeVo> selectJSList(Connection con, int currentPage, int limit) {
+		ArrayList<MyResumeVo> result = null;
+		PreparedStatement pstmt = null;
+		String query = "";
+		ResultSet rs = null;
+		try {
+			query = "SELECT  NAME, BIRTH, TO_CHAR(EXTRACT(YEAR FROM SYSDATE)-EXTRACT(YEAR FROM TO_DATE(SUBSTR(BIRTH,1,4), 'RRRR')))+1 AS AGE, ADDRESS, GENDER, MEMBER_TYPE, IS_BLACK_LIST, CAREER, BUSINESS_TYPE, WORKABLE_DAYS, WORK_TIME, INTRODUCE_TITLE FROM (SELECT ROWNUM RNUM, P.* FROM (SELECT NAME, BIRTH, TO_CHAR(EXTRACT(YEAR FROM SYSDATE)-EXTRACT(YEAR FROM TO_DATE(SUBSTR(BIRTH,1,2), 'RRRR')))+1 AS AGE, ADDRESS, GENDER, MEMBER_TYPE, IS_BLACK_LIST, CAREER, BUSINESS_TYPE, WORKABLE_DAYS, WORK_TIME, INTRODUCE_TITLE FROM RESUME R JOIN MEMBER M ON(R.M_ID=M.M_ID) WHERE MEMBER_TYPE='JS' AND IS_BLACK_LIST<3 ORDER BY AGE DESC) P) WHERE RNUM BETWEEN ? AND ?";
+			
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1; 
+			int endRow = startRow + limit - 1;
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs = pstmt.executeQuery();
+		
+			MyResumeVo temp = null;
+			result = new ArrayList<MyResumeVo>();
+			while(rs.next()){
+				temp = new MyResumeVo();
+				temp.setName(rs.getString("name"));
+				System.out.println("음");
+				temp.setIntroduce_title(rs.getString("INTRODUCE_TITLE"));;
+				temp.setCareer(rs.getString("career").charAt(0));
+				temp.setBusiness_type(rs.getString("business_type"));
+				temp.setAddress(rs.getString("address"));	
+				temp.setGender(rs.getString("gender").charAt(0));
+				temp.setAge(rs.getInt("age"));
+				result.add(temp);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<MyResumeVo> selectResumeCondition(Connection con, int currentPage, int limit, String[] searchJob,
+			String[] searchLocal) {
+		
+		ArrayList<MyResumeVo> result = null;
+		PreparedStatement pstmt = null;
+		String query = "";
+		String query2 = "";
+		String query3 ="";
+		ResultSet rs = null;
+
+		query = "SELECT  (ADDRESS, 1, INSTR(ADDRESS, ' ', 1, 2)) AS ADR, NAME, BIRTH, TO_CHAR(EXTRACT(YEAR FROM SYSDATE)-EXTRACT(YEAR FROM TO_DATE(SUBSTR(BIRTH,1,4), 'RRRR')))+1 AS AGE, ADDRESS, GENDER, MEMBER_TYPE, IS_BLACK_LIST, CAREER, BUSINESS_TYPE, WORKABLE_DAYS, WORK_TIME, INTRODUCE_TITLE FROM (SELECT ROWNUM RNUM, P.* FROM (SELECT NAME, BIRTH, TO_CHAR(EXTRACT(YEAR FROM SYSDATE)-EXTRACT(YEAR FROM TO_DATE(SUBSTR(BIRTH,1,2), 'RRRR')))+1 AS AGE, ADDRESS, GENDER, MEMBER_TYPE, IS_BLACK_LIST, CAREER, BUSINESS_TYPE, WORKABLE_DAYS, WORK_TIME, INTRODUCE_TITLE FROM RESUME R JOIN MEMBER M ON(R.M_ID=M.M_ID) WHERE MEMBER_TYPE='JS' AND IS_BLACK_LIST<3 ORDER BY AGE DESC) P) WHERE RNUM BETWEEN ? AND ?";
+		
+		if(searchJob.length!=1){
+			for(int i=0; i<searchJob.length; i++){
+				query2 += " OR BUSINESS_TYPE='"+searchJob[i]+"'";
+				query +=query2;
+			}			
+		}
+		if(searchLocal.length!=1){
+			for(int i=0; i<searchLocal.length; i++){
+				query3 += " OR WHERE ADR LIKE ' %"+searchLocal[i]+"%'";
+				query +=query3;
+			}
+			
+		}
+		
+		try {
+			System.out.println(query);
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1; 
+			int endRow = startRow + limit - 1;
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs = pstmt.executeQuery();
+		
+			MyResumeVo temp = null;
+			result = new ArrayList<MyResumeVo>();
+			while(rs.next()){
+				temp = new MyResumeVo();
+				temp.setName(rs.getString("name"));
+				temp.setIntroduce_title(rs.getString("INTRODUCE_TITLE"));;
+				temp.setCareer(rs.getString("career").charAt(0));
+				temp.setBusiness_type(rs.getString("business_type"));
+				temp.setAddress(rs.getString("address"));	
+				temp.setGender(rs.getString("gender").charAt(0));
+				temp.setAge(rs.getInt("age"));
+				result.add(temp);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
 	
 }

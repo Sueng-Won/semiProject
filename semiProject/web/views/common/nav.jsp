@@ -46,6 +46,9 @@
 	function logout(){
 		location.href="/sp/views/member/logout.jsp";
 	}
+	function jobSeekerInfo(){
+		location.href="/sp/jobSeekerInfo.do";
+	}
 </script>
 <div class="col-lg-3">
 <br><br>
@@ -103,6 +106,6 @@
 
 		<button type="button" onclick="searchByDateList();"
 			class="btn btn-lg btn-block btn-dark">일별알바</button>
-		<button type="button" class="btn btn-lg btn-block btn-dark">구직자정보</button>
+		<button type="button" class="btn btn-lg btn-block btn-dark" onclick="jobSeekerInfo();">구직자정보</button>
 	</div>
 </div>
