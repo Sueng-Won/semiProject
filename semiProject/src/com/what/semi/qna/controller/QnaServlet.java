@@ -19,49 +19,49 @@ import com.what.semi.qna.model.vo.QnaVo;
 
 @WebServlet("/qna.do")
 public class QnaServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
     public QnaServlet() {
         super();
     }
     
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
-	
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		PageInfo pi = null;
-		QnaService qs = new QnaService();
-		String id = (String)session.getAttribute("id");
-		String email = (String)session.getAttribute("email");
-		String phone = (String)session.getAttribute("phone");
-		String content = request.getParameter("Contents");
-		String category = request.getParameter("slt");
-		
-	
-		ArrayList<QnaVo> qna = null;
-		int result = 0;
-		
-		if(null != request.getParameter("Contents") && null != request.getParameter("slt")) {
-			result = new QnaService().insertQna(content,category,id);
-		}else {
-			pi = PageTemplate.QnaPage(request,id,qs);
-			System.out.println(pi.toString());
-			qna = new QnaService().selectQna(pi,id);
-		}
-		
-		String url= "";
-		if(result > 0) {
-			url = "views/qna/qnaNew.jsp";
-		}else {
-			request.setAttribute("qna", qna);
-			request.setAttribute("pi", pi);
-			url = "views/qna/myQna.jsp";
-		}
-		RequestDispatcher view = request.getRequestDispatcher(url);
-		view.forward(request, response);
-	}
+   @Override
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      doGet(request, response);
+   }
+   
+   @Override
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      HttpSession session = request.getSession();
+      PageInfo pi = null;
+      QnaService qs = new QnaService();
+      String id = (String)session.getAttribute("id");
+      String email = (String)session.getAttribute("email");
+      String phone = (String)session.getAttribute("phone");
+      String content = request.getParameter("Contents");
+      String category = request.getParameter("slt");
+      
+   
+      ArrayList<QnaVo> qna = null;
+      int result = 0;
+      
+      if(null != request.getParameter("Contents") && null != request.getParameter("slt")) {
+         result = new QnaService().insertQna(content,category,id);
+      }else {
+         pi = PageTemplate.QnaPage(request,id,qs);
+         System.out.println(pi.toString());
+         qna = new QnaService().selectQna(pi,id);
+      }
+      
+      String url= "";
+      if(result > 0) {
+         url = "views/qna/qnaNew.jsp";
+      }else {
+         request.setAttribute("qna", qna);
+         request.setAttribute("pi", pi);
+         url = "views/qna/myQna.jsp";
+      }
+      RequestDispatcher view = request.getRequestDispatcher(url);
+      view.forward(request, response);
+   }
 }

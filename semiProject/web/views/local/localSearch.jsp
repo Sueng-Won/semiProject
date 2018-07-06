@@ -446,7 +446,7 @@
       
         <!-- 지도API예제연습-->
          
-           <div class="row">
+           <div class="row" style="min-height: 200px">
          <%for(RecruitmentVo rv : list) {%>
                <div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4">
                  <div class="card h-100">
@@ -473,9 +473,9 @@
                <button onclick="movePage(<%=currentPage==1?1:currentPage-1%>);" type="button" class="btn btn-default bg-dark text-white">◀</button>
                <%for(int i = startPage; i <= endPage; i++){ %>
                   <%if(currentPage != i){ %>
-                  <button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white">1</button>
+                  <button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
                   <%}else{ %>
-                  <button type="button" class="btn btn-default bg-dark text-white disabled">1</button>
+                  <button type="button" class="btn btn-default bg-dark text-white disabled"><%=i %></button>
                   
                   <%} %>
                <%} %>

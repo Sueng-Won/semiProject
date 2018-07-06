@@ -21,6 +21,11 @@
 			location.href = "/sp/blackList.do";
 		}
 		
+		function manageQna() {
+			location.href = "/sp/adminQnaList.do";
+		}
+		
+		
 	</script>
 	<style type="text/css">
 		.btn-link{

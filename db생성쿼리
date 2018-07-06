@@ -17,7 +17,7 @@ drop table MEMBER CASCADE CONSTRAINTS;
 
 
 CREATE TABLE BLACKLIST (
-       B_NO                 NUMBER NOT NULL,
+       B_DATE               DATE NOT NULL,
        COUNT                NUMBER NULL,
        REASON               VARCHAR2(1000) NULL,
        M_ID             VARCHAR2(30) NOT NULL
@@ -36,7 +36,8 @@ CREATE TABLE CONTRACT (
        START_WORK_TIME      DATE NULL,
        END_WORK_TIME        DATE NULL,
        RECRUITMENT_ID       VARCHAR2(30) NOT NULL,
-       M_ID             VARCHAR2(30) NOT NULL,
+       BO_ID             VARCHAR2(30) NOT NULL,
+       JS_ID             VARCHAR2(30) NOT NULL,
        RESUME_ID            NUMBER NOT NULL
 );
 
@@ -73,6 +74,7 @@ ALTER TABLE MEMBER
 CREATE TABLE QNA (
        Q_NO                 NUMBER NOT NULL,
        CONTENT              VARCHAR2(4000) NULL,
+       ANSWER              VARCHAR2(4000) NULL,
        CATEGORY             VARCHAR2(100) NULL,
        REPORTING_DATE       DATE NULL,
        IS_CHECKED           NUMBER DEFAULT 0
@@ -112,8 +114,10 @@ CREATE TABLE RECRUITMENT (
        RECRUITMENT_TITLE    VARCHAR2(200) NOT NULL,
        INTRODUCE            VARCHAR2(4000) NULL,
        M_ID             VARCHAR2(30) NOT NULL,
-       IS_POST              NUMBER DEFAULT 0
-                                   CHECK (IS_POST IN (1,0))
+       IS_POST              NUMBER DEFAULT 1
+                                   CHECK (IS_POST IN (1,0)),
+	DELFLAG              NUMBER DEFAULT 0
+                                   CHECK (DELFLAG IN (1,0))
 );
 
 
@@ -124,7 +128,7 @@ ALTER TABLE RECRUITMENT
 
 --이력서 id값 시퀀스로 변경
 CREATE SEQUENCE RESUME_ID_SEQ START WITH 1 INCREMENT  BY 1 MINVALUE 1 MAXVALUE 99999 NOCYCLE;
-
+-- DELFLAG -->  삭제 로직이지만 DB에 남김
 --RESUME_ID -> NUMBER타입으로 변경 (시퀀스로 저장 RESUME_ID_SEQ )
 --INTRODUCE_TITLE 이력서 자기소개 타이틀 추가
 --WORK_TIME 오전 오후 저녁 야간 상관없음 컬럼
@@ -147,7 +151,9 @@ CREATE TABLE RESUME (
        INTRODUCE            VARCHAR2(4000) NULL,
        INTRODUCE_TITLE VARCHAR2(60) NOT NULL,
        PRI_RESUME CHAR(2) DEFAULT 'N' CHECK (PRI_RESUME ='Y' OR PRI_RESUME='N'),
-       WORK_TIME VARCHAR2(30) NOT NULL
+       WORK_TIME VARCHAR2(40) NOT NULL,
+       DELFLAG              NUMBER DEFAULT 0
+                                   CHECK (DELFLAG IN (1,0))
 );
 
 
@@ -160,38 +166,44 @@ ALTER TABLE RESUME
 
 ALTER TABLE BLACKLIST
        ADD  ( FOREIGN KEY (M_ID)
-                             REFERENCES MEMBER ) ;
+                             REFERENCES MEMBER ON DELETE CASCADE) ;
 
 
 ALTER TABLE CONTRACT
        ADD  ( FOREIGN KEY (RESUME_ID)
-                             REFERENCES RESUME ) ;
+                             REFERENCES RESUME ON DELETE CASCADE) ;
 
 
 ALTER TABLE CONTRACT
        ADD  ( FOREIGN KEY (RECRUITMENT_ID)
-                             REFERENCES RECRUITMENT ) ;
+                             REFERENCES RECRUITMENT ON DELETE CASCADE) ;
 
 ALTER TABLE CONTRACT
-    ADD (FOREIGN KEY (M_ID)
-        REFERENCES MEMBER);
+    ADD (FOREIGN KEY (BO_ID)
+        REFERENCES MEMBER (M_ID) ON DELETE CASCADE);
+	
+ALTER TABLE CONTRACT
+    ADD (FOREIGN KEY (JS_ID)
+        REFERENCES MEMBER (M_ID) ON DELETE CASCADE);
 
 
 ALTER TABLE QNA
        ADD  ( FOREIGN KEY (M_ID)
-                             REFERENCES MEMBER ) ;
+                             REFERENCES MEMBER ON DELETE CASCADE) ;
 
 
 ALTER TABLE RECRUITMENT
        ADD  ( FOREIGN KEY (M_ID)
-                             REFERENCES MEMBER ) ;
+                             REFERENCES MEMBER ON DELETE CASCADE) ;
 
 
 ALTER TABLE RESUME
        ADD  ( FOREIGN KEY (M_ID)
-                             REFERENCES MEMBER ) ;
+                             REFERENCES MEMBER ON DELETE CASCADE) ;
                              
 CREATE SEQUENCE SEQ_RECRUITMENT;
+
+CREATE SEQUENCE SEQ_CONTRACT;
 
 CREATE SEQUENCE QNA_SEQ 
 START WITH 1

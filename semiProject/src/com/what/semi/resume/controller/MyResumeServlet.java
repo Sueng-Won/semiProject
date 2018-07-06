@@ -28,6 +28,7 @@ public class MyResumeServlet extends HttpServlet {
 			HttpSession session = request.getSession(false);
 		
 			String id = (String)session.getAttribute("id");
+			System.out.println(id);
 		
 		ArrayList<MyResumeVo> userType = new MyResumeService().selectMyInfo(id);
 		

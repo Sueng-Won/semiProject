@@ -6,6 +6,8 @@
 		<%
 			session.invalidate();
 		%>
+		alert("탈퇴가 완료되었습니다.");
+		setTimeout("location.href='/sp/index.jsp'");
 	})
 </script>
  <div class="container" style="min-height: 800px;">

@@ -75,7 +75,10 @@
 			location.href = "/sp/deleteResume.do?resume_id="+resume_id+"&userId=<%=id%>";	
 		}
 	}
-
+	function myResume(resume_id){
+		var url = "/sp/seeMyResume.do?resume_id="+resume_id+"&userId=<%=id%>"; 
+		window.open(url, "popup_window", "width=600, height=900, scrollbars=no");
+	}
 	$(function() {
 		$("#popbutton").click(function() {
 			if(<%=userTypeFlag%>){
@@ -91,9 +94,6 @@
 			}else{
 				location.href = "/sp/getMemberInfo.do?userId=<%=id%>";
 			}
-		});
-		$(".previewResume").on("click", function(){
-			alert("asdf");
 		});
 	});
 </script>
@@ -143,7 +143,7 @@
 						<button type="button" class="btn btn-default btn-xs btn-info" onclick="deleteResume(<%=userType.get(i).getResume_id()%>);">삭제</button>
 					</td>
 					<td>
-						<img class="previewResume" src="/sp/images/resume.png" height="40px"/>
+						<img class="previewResume" src="/sp/images/resume.png" height="40px" onclick="myResume(<%=userType.get(i).getResume_id()%>);"/>
 					</td>
 				</tr>
 				<% } %>

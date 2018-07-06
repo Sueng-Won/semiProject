@@ -34,7 +34,7 @@ margin-top:50px;
 </style>
 <body>
 	<!-- Page Content -->
-	<div class="container">
+	<div class="container" style="min-height: 800px">
 		<!-- 내용을 담아놓을 컨테이너 -->
 
 		<div class="row">
@@ -56,7 +56,7 @@ margin-top:50px;
 
 
 				<!--======================================	구인게시물	======================================== -->
-          <div class="row">
+          <div class="row" style="min-height: 400px">
           
             <%for(int i =0; i<list.size();i++)  {
             System.out.print(list.get(i).getRecruitment_image_src());

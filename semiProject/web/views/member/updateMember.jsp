@@ -104,7 +104,100 @@
 	}
 	
 	function update(){
-		$("#updateFrm").submit();
+		var okFlag = false;
+		
+		//이름 유효성 검사
+		
+		if($("#name").val()==""){
+			alert("이름을 입력해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		if($("#name").val().length < 2){
+			alert("이름은 2자리 이상 입력해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		//이메일 유효성 검사
+		
+		if($("#email").val()==""){
+			alert("이메일을 입력해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		var email = $("#email").val();
+		var speEmail = email.search(/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i);
+		
+		if(speEmail<0){
+			alert("잘못된 이메일 형식입니다.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		//휴대폰번호 유효성 검사
+		
+		if($("#phone").val()==""){
+			alert("휴대폰번호를 입력해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		var phone = $("#phone").val();
+		var spePhone = phone.search(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi);
+		
+		if(spePhone>=0){
+			alert("휴대폰번호에 특수문자는 사용할 수 없습니다.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		//주소 유효성 검사
+		
+		if($("#address").val()==""){
+			alert("주소 검색 버튼을 눌러 주소를 입력해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		//상세주소 유효성 검사
+		
+		if($("#addressDetail").val()==""){
+			alert("상세주소를 입력해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		//회원 타입 유효성 검사
+		
+		if($("#rTypeValue").val()==""){
+			alert("회원구분을 선택해주세요.");
+			okFlag = false;
+			return false;
+		}else{
+			okFlag = true;
+		}
+		
+		if(okFlag){
+			$("#updateFrm").submit();
+		}
 	}
 	
 	function updatePw(){

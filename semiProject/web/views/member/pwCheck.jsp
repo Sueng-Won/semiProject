@@ -6,16 +6,25 @@
     %>
 	<script type="text/javascript">
 		function confirm(){
-			$("#pwCheckFrm").submit();
+			var okFlag = false;
+			if($("#pw").val()==""){
+				alert("비밀번호를 입력해주세요.");
+				$("#pw").focus();
+				okFlag = false;
+				return false;
+			}else{
+				okFlag = true;
+			}
+			if(okFlag){
+				$("#pwCheckFrm").submit();
+			}
 		}
 		function cancle(){
 			location.href = "/sp/index.jsp";
 		}
     	$(function(){
-    		console.log(<%=flag_pw%>);
     		<%if(flag_pw){%>
     			alert("비밀번호가 일치하지 않습니다.");
-    		
     		<%}%>
     	});
     </script>
@@ -34,7 +43,7 @@
 				<tr>
 					<td colspan="2">
 					<br>
-						<input type="password" class="form-control mb-1" name="pw" placeholder="비밀번호입력" /> 
+						<input type="password" class="form-control mb-1" name="pw" id="pw" placeholder="비밀번호입력" /> 
 					</td>
 				</tr>
 				<tr>

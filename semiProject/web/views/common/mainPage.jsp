@@ -25,7 +25,7 @@ function recDetail(i){
 </style>
 <%@include file="header.jsp"%>
 <!-- Page Content -->
-<div class="container" style="min-height: 700px">
+<div class="container" style="min-height: 800px">
 	<!-- 내용을 담아놓을 컨테이너 -->
 
 	<div class="row">
