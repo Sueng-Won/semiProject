@@ -40,7 +40,7 @@ CREATE TABLE CONTRACT (
        JS_ID             VARCHAR2(30) NOT NULL,
        RESUME_ID            NUMBER NOT NULL,
        DEMANDER          VARCHAR2(30)
-                                   CHECK (MEMBER_TYPE IN ('JS','BO'))
+                                   CHECK (DEMANDER IN ('JS','BO'))
 );
 
 
