@@ -16,21 +16,24 @@
 
 	<style>
 		 html, body{
-		 	min-height: 100%;
     		text-align: center;
-			vertical-align: middle;
+    		position: relative;
 		}
-		
 		div{
-		 	width: 100%;
-			display: block;
+			margin-top: 5%;
 		}
 	</style>
 </head>
 	
 <body>
-	<div class="row align-items-center justify-content-center">
-		<form id="loginFrm" action="/sp/login.do" method="POST">
+<div class="container">
+      <div class="row">
+        <!-- /.col-lg-3 -->
+        <div class="col-lg-9 mx-auto">
+        	<div class="row mt-3">
+        	  <div class="col-lg-4"></div>
+			  <div class="col-lg-4 bg-dark">
+			  <form id="loginFrm" action="/sp/login.do" method="POST">
 			<table>
 				<tr>
 					<td>
@@ -56,6 +59,14 @@
 				</tr>
 			</table>
 		</form>
-		</div>
+			  </div><!-- /.col-lg-6 -->
+			  <div class="col-lg-3"></div>
+        	</div>
+		</div><!-- /.row -->
+        
+        
+      </div>
+      <!-- /.row -->
+    </div>
 </body>
 </html>
