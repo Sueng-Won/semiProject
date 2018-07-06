@@ -2,11 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@page import="com.what.semi.common.template.PageInfo"%>
 <%@page import="com.what.semi.contract.model.vo.ContractVo"%>
-<%@page import="com.what.semi.recruitment.model.vo.RecruitmentVo"%>
+<%@page import="com.what.semi.resume.model.vo.MyResumeVo"%>
 <%@page import="java.util.ArrayList"%>
 <%
 	ArrayList<ContractVo> myConList = (ArrayList<ContractVo>) request.getAttribute("myConList");
-	ArrayList<RecruitmentVo> conRecList = (ArrayList<RecruitmentVo>) request.getAttribute("conRecList");
+	ArrayList<MyResumeVo> conResumeList = (ArrayList<MyResumeVo>) request.getAttribute("conResumeList");
 	int contId = (int) request.getAttribute("contId");
 
 	java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("MM / dd");
@@ -23,16 +23,16 @@
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 
 <script type="text/javascript">
-	function contractRecDetail(i) {
-		location.href = "/sp/contractRecDetail.do?recId=" + i;
+	function contractResumeDetail(i,j) {
+		location.href = "/sp/contractResumeDetail.do?resumeId=" + i+"&jsId="+j;
 	}
 
 	function accept(i) {
-		location.href = "/sp/acceptRecruitment.do?contId="+i+"&currentPage="+<%=currentPage%>;
+		location.href = "/sp/acceptResume.do?contId="+i+"&currentPage="+<%=currentPage%>;
 	}
 
 	function reject(i) {
-		location.href = "/sp/rejectRecruitment.do?contId=" + i+"&currentPage="+<%=currentPage%>;
+		location.href = "/sp/rejectResume.do?contId=" + i+"&currentPage="+<%=currentPage%>;
 	}
 	
 	$(function(){
@@ -80,7 +80,7 @@
 
 		<%@include file="/views/common/nav.jsp"%>
 		<div class="col-lg-9" style='padding-top: 50px; padding-left: 30px;'>
-			<h3>근로내역 관리</h3>
+			<h3>고용내역 관리</h3>
 			<!-- Page Content -->
 			<!-- <div class="media mt-4 border rounded bg-light">
 		     
@@ -99,7 +99,7 @@
 			<table class="list-table" id="myConTable">
 				<tr>
 					<th><div class='table-td'>계약일</div></th>
-					<th><div class='td-title'>기업명</div></th>
+					<th><div class='td-title'>구직자명</div></th>
 					<th><div class='table-td'>계약상태</div></th>
 					<td style='width: 20px;'></td>
 				</tr>
@@ -112,15 +112,16 @@
 							if (myConList.get(i).getContract_date() == null) {
 						%>-<%
 							} else {
-						%><%=myConList.get(i).getContract_date()%> <%
- 	}
- %>
+						%><%=myConList.get(i).getContract_date()%>
+						<%
+							}
+						%>
 					</td>
 					<%
-						for (int j = 0; j < conRecList.size(); j++) {
-								if (myConList.get(i).getRecruitment_id().equals(conRecList.get(j).getRecruitment_id())) {
+						for (int j = 0; j < conResumeList.size(); j++) {
+								if (myConList.get(i).getResume_id() == conResumeList.get(j).getResume_id()) {
 					%>
-					<td class="td-title"><b><%=conRecList.get(j).getRecruitment_name()%></b></td>
+					<td class="td-title"><b><%=conResumeList.get(j).getName()%></b></td>
 					<%
 						}
 							}
@@ -133,9 +134,7 @@
 							} else {
 						%>요청중<%
 							}
-								} else if (myConList.get(i).getState() == 1) {
-						%>진행중<%
-							} else {
+								} else {
 						%>완료<%
 							}
 						%>
@@ -155,8 +154,8 @@
 								<div style="height: 50px;">
 									<div style="float: left;">
 										<button style="margin-top: 10px;"
-											onclick="contractRecDetail(<%=myConList.get(i).getRecruitment_id()%>);">해당
-											구인게시글 보기</button>
+											onclick="contractResumeDetail(<%=myConList.get(i).getResume_id()%>,<%=myConList.get(i).getJs_id()%>);">해당
+											이력서 보기</button>
 									</div>
 									<div style="float: right;">
 										<div>
@@ -200,7 +199,7 @@
 										} else {
 									%>
 									<button
-										onclick="addBlacklist(<%=myConList.get(i).getRecruitment_id()%>);"
+										onclick="addBlacklist(<%=myConList.get(i).getJs_id()%>);"
 										class="btn btn-default bg-dark text-white">신고하기</button>
 									<%
 										}
@@ -257,7 +256,7 @@
 <!-- /.container -->
 <script type="text/javascript">
 	function movePage(pageNum) {
-		location.href = "/sp/myWorkedList.do?currentPage="+pageNum;
+		location.href = "/sp/myHiredList.do?currentPage="+pageNum;
 	}
 </script>
 <%@include file="/views/common/footer.jsp"%>

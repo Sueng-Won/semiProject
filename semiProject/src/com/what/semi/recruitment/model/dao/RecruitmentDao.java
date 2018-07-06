@@ -34,7 +34,7 @@ public class RecruitmentDao {
 					+ " PAY,r.GENDER, MILITARY_SERVICE, INTRODUCE,m. M_ID, IS_POST,DELFLAG, RECRUITMENT_NAME, RECRUITMENT_PHONE,"
 					+ "RECRUITMENT_EMAIL,RECRUITMENT_TITLE,ACHIEVEMENT,CAREER,M.NAME,M.PHONE "
 					+ "FROM RECRUITMENT R JOIN MEMBER M ON (M.M_ID = R.M_ID) "
-					+ "WHERE IS_POST != 0 AND DELFLAG != 0 ORDER BY WORK_DAY) P) WHERE RNUM BETWEEN " + startRow
+					+ "WHERE IS_POST != 0 AND DELFLAG = 0 ORDER BY WORK_DAY) P) WHERE RNUM BETWEEN " + startRow
 					+ " AND " + endRow;
 			// System.out.println(query);
 			rs = stmt.executeQuery(query);
@@ -91,7 +91,7 @@ public class RecruitmentDao {
 
 		try {
 			stmt = con.createStatement();
-			query = "SELECT COUNT(*) AS LISTCOUNT " + "FROM RECRUITMENT " + "WHERE IS_POST != 0 " + "AND DELFLAG != 0 "
+			query = "SELECT COUNT(*) AS LISTCOUNT " + "FROM RECRUITMENT " + "WHERE IS_POST != 0 " + "AND DELFLAG = 0 "
 					+ "ORDER BY WORK_DAY";
 			rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -119,7 +119,7 @@ public class RecruitmentDao {
 
 		try {
 			query = "SELECT COUNT(*) AS LISTCOUNT " + "FROM RECRUITMENT " + "WHERE (R_LATITUDE > ? AND R_LATITUDE < ?) "
-					+ "AND (R_LONGITUDE > ? AND R_LONGITUDE < ?) " + "AND IS_POST != 0 " + "AND DELFLAG != 0 "
+					+ "AND (R_LONGITUDE > ? AND R_LONGITUDE < ?) " + "AND IS_POST != 0 " + "AND DELFLAG = 0 "
 					+ "ORDER BY WORK_DAY";
 			pstmt = con.prepareStatement(query);
 			pstmt.setDouble(1, minLatitude);
@@ -158,7 +158,7 @@ public class RecruitmentDao {
 					+ "R.ZIPCODE, WORK_DAY, R_LATITUDE, R_LONGITUDE,  " + "START_WORK_TIME, END_WORK_TIME, PAY,  "
 					+ "R.GENDER, MILITARY_SERVICE, INTRODUCE,  "
 					+ "R.M_ID, IS_POST,DELFLAG, M.NAME, RECRUITMENT_NAME, RECRUITMENT_TITLE  " + "FROM RECRUITMENT R  "
-					+ "JOIN MEMBER M ON (M.M_ID = R.M_ID)  " + "WHERE (IS_POST != 0  " + "AND DELFLAG !=0 "
+					+ "JOIN MEMBER M ON (M.M_ID = R.M_ID)  " + "WHERE (IS_POST != 0  " + "AND DELFLAG =0 "
 					+ "AND (R_LATITUDE > ? AND R_LATITUDE < ?)  " + "AND (R_LONGITUDE > ? AND R_LONGITUDE < ?)) "
 					+ "ORDER BY WORK_DAY) P)  " + "WHERE RNUM BETWEEN ? AND ?";
 			stmt = con.prepareStatement(query);
@@ -219,7 +219,7 @@ public class RecruitmentDao {
 					+ " PAY,r.GENDER, MILITARY_SERVICE, INTRODUCE,m. M_ID, IS_POST,DELFLAG, RECRUITMENT_NAME, RECRUITMENT_PHONE,"
 					+ "RECRUITMENT_EMAIL,RECRUITMENT_TITLE,ACHIEVEMENT,CAREER,M.NAME,M.PHONE " + "FROM RECRUITMENT R "
 					+ "JOIN MEMBER M ON (M.M_ID = R.M_ID) "
-					+ "WHERE IS_POST != 0 AND DELFLAG !=0 AND TO_CHAR(WORK_DAY,'MM/DD/RRRR') IN (" + dateStr + ")"
+					+ "WHERE IS_POST != 0 AND DELFLAG =0 AND TO_CHAR(WORK_DAY,'MM/DD/RRRR') IN (" + dateStr + ")"
 					+ "ORDER BY WORK_DAY) P) " + "WHERE RNUM BETWEEN " + startRow + " AND " + endRow;
 			// query = "SELECT * FROM RECRUITMENT";
 			System.out.println(query);
@@ -284,7 +284,7 @@ public class RecruitmentDao {
 		try {
 			stmt = con.createStatement();
 			query = "SELECT COUNT(*) AS LISTCOUNT " + "FROM RECRUITMENT "
-					+ "WHERE IS_POST != 0 AND DELFLAG != 0 AND TO_CHAR(WORK_DAY,'MM/DD/RRRR') IN (" + dateStr + ")"
+					+ "WHERE IS_POST != 0 AND DELFLAG = 0 AND TO_CHAR(WORK_DAY,'MM/DD/RRRR') IN (" + dateStr + ")"
 					+ "ORDER BY WORK_DAY";
 			rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -351,7 +351,7 @@ public class RecruitmentDao {
 		try {
 			stmt = con.createStatement();
 			query = "SELECT COUNT(*) AS LISTCOUNT " + "FROM RECRUITMENT "
-					+ "WHERE IS_POST != 0 AND DELFLAG != 0 AND M_id='" + id + "'" + "ORDER BY WORK_DAY";
+					+ "WHERE IS_POST != 0 AND DELFLAG = 0 AND M_id='" + id + "'" + "ORDER BY WORK_DAY";
 			rs = stmt.executeQuery(query);
 			while (rs.next()) {
 				result = rs.getInt("listCount");
@@ -384,7 +384,7 @@ public class RecruitmentDao {
 					+ " WORK_DAY, R_LATITUDE, R_LONGITUDE, TO_CHAR(START_WORK_TIME,'HH24:MI') AS START_TIME, TO_CHAR(END_WORK_TIME,'HH24:MI') AS END_TIME,"
 					+ " PAY,r.GENDER, MILITARY_SERVICE, INTRODUCE,m. M_ID, IS_POST,DELFLAG, RECRUITMENT_NAME, RECRUITMENT_PHONE,"
 					+ "RECRUITMENT_EMAIL,RECRUITMENT_TITLE,ACHIEVEMENT,CAREER,M.NAME,M.PHONE " + "FROM RECRUITMENT R "
-					+ "JOIN MEMBER M ON (M.M_ID = R.M_ID) " + "WHERE R.M_ID='" + id + "'" + "ORDER BY WORK_DAY) P) "
+					+ "JOIN MEMBER M ON (M.M_ID = R.M_ID) " + "WHERE R.M_ID='" + id + "' AND DELFLAG=0 " + "ORDER BY WORK_DAY) P) "
 					+ "WHERE RNUM BETWEEN " + startRow + " AND " + endRow;
 			// query = "SELECT * FROM RECRUITMENT";
 			System.out.println(query);
@@ -505,7 +505,7 @@ public class RecruitmentDao {
 		String query = "";
 
 		try {
-			query = "SELECT COUNT(*) AS LISTCOUNT " + "FROM RECRUITMENT " + "WHERE (IS_POST != 0 " + "AND DELFLAG != 0"
+			query = "SELECT COUNT(*) AS LISTCOUNT " + "FROM RECRUITMENT " + "WHERE (IS_POST != 0 " + "AND DELFLAG = 0"
 					+ "AND BUSINESS_TYPE = ? " + "AND WORK_DAY = ? " + "AND GENDER = ? " + "AND MILITARY_SERVICE = ?)"
 					+ "ORDER BY WORK_DAY";
 
@@ -549,7 +549,7 @@ public class RecruitmentDao {
 					+ "BUSINESS_TYPE, R.ADDRESS, R.ADDRESS_DETAIL, " + "R.ZIPCODE, WORK_DAY, R_LATITUDE, R_LONGITUDE, "
 					+ "START_WORK_TIME, END_WORK_TIME, PAY, " + "R.GENDER, MILITARY_SERVICE, INTRODUCE, "
 					+ "R.M_ID, IS_POST,DELFLAG, M.NAME, RECRUITMENT_NAME, RECRUITMENT_TITLE " + "FROM RECRUITMENT R "
-					+ "JOIN MEMBER M ON (M.M_ID = R.M_ID) " + "WHERE (IS_POST != 0 " + "AND DELFLAG != 0 "
+					+ "JOIN MEMBER M ON (M.M_ID = R.M_ID) " + "WHERE (IS_POST != 0 " + "AND DELFLAG = 0 "
 					+ "AND BUSINESS_TYPE = ? " + "AND WORK_DAY = ? " + "AND R.GENDER = ? "
 					+ "AND MILITARY_SERVICE = ? )" + "ORDER BY WORK_DAY) P) " + "WHERE RNUM BETWEEN ? AND ?";
 			// System.out.println(query);

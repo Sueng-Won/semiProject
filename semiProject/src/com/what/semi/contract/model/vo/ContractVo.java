@@ -12,6 +12,7 @@ public class ContractVo {
 	private int resume_id; // 이력서 ID
 	private String bo_id; // 카카오아이디
 	private String js_id; // 카카오아이디
+	private String demander; //요구자 멤버 타입
 
 	public ContractVo() {
 		// TODO Auto-generated constructor stub
@@ -20,7 +21,7 @@ public class ContractVo {
 
 
 	public ContractVo(int c_no, int state, Date contract_date, String start_work_time, String end_work_time,
-			String recruitment_id, int resume_id, String bo_id, String js_id) {
+			String recruitment_id, int resume_id, String bo_id, String js_id, String demander) {
 		super();
 		this.c_no = c_no;
 		this.state = state;
@@ -31,6 +32,7 @@ public class ContractVo {
 		this.resume_id = resume_id;
 		this.bo_id = bo_id;
 		this.js_id = js_id;
+		this.demander = demander;
 	}
 
 
@@ -116,10 +118,24 @@ public class ContractVo {
 
 
 
+	public String getDemander() {
+		return demander;
+	}
+
+
+
+	public void setDemander(String demander) {
+		this.demander = demander;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "ContractVo [c_no=" + c_no + ", state=" + state + ", contract_date=" + contract_date
 				+ ", start_work_time=" + start_work_time + ", end_work_time=" + end_work_time + ", recruitment_id="
-				+ recruitment_id + ", resume_id=" + resume_id + ", bo_id=" + bo_id + ", js_id=" + js_id + "]";
+				+ recruitment_id + ", resume_id=" + resume_id + ", bo_id=" + bo_id + ", js_id=" + js_id + ", demander="
+				+ demander + "]";
 	}
+
 }

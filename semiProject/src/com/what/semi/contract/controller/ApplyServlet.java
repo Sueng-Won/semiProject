@@ -1,4 +1,4 @@
-package com.what.semi.recruitment.controller;
+package com.what.semi.contract.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.what.semi.common.GmailSend;
 import com.what.semi.contract.model.service.ContractService;
@@ -44,10 +45,12 @@ public class ApplyServlet extends HttpServlet {
 		String recId = request.getParameter("recId");
 		String boId = request.getParameter("bo_id");
 		String jsId = request.getParameter("userId");
+		HttpSession session =request.getSession();
+		String demander = (String) session.getAttribute("member_type");
 
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 
-		int result = new ContractService().insertContract(recId, boId, jsId, resumeId);
+		int result = new ContractService().insertContract(recId, boId, jsId, resumeId,demander);
 		RecruitmentVo rec = new RecruitmentService().selectRecruitment(recId);
 		MemberVo writer = new MemberService().getMemberInfo(rec.getM_id());
 		MyResumeVo resume = new MyResumeService().selectMyResume(jsId, resumeId);
