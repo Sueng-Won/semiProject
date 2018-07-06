@@ -174,6 +174,7 @@ public class MyResumeDao {
 		
 		try {
 			query = "INSERT INTO RESUME VALUES(RESUME_ID_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, DEFAULT, ?, ?, ?, DEFAULT, ?, DEFAULT)";
+
 			pstmt = con.prepareStatement(query);
 			
 			

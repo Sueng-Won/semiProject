@@ -1,7 +1,6 @@
-package com.what.semi.recruitment.controller.date;
+package com.what.semi.contract.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,22 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.what.semi.common.template.PageInfo;
-import com.what.semi.common.template.PageTemplate;
 import com.what.semi.recruitment.model.service.RecruitmentService;
 import com.what.semi.recruitment.model.vo.RecruitmentVo;
 
 /**
- * Servlet implementation class ByDateListServlet
+ * Servlet implementation class ContractRecDetailServlet
  */
-@WebServlet("/byDateList.do")
-public class ByDateListServlet extends HttpServlet {
+@WebServlet("/contractRecDetail.do")
+public class ContractRecDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ByDateListServlet() {
+    public ContractRecDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,28 +31,20 @@ public class ByDateListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String dateStr = "null";
-		//System.out.println(dateStr);
+		String recId = request.getParameter("recId");
 		
-		RecruitmentService rs = new RecruitmentService();
-
-		PageInfo pi = PageTemplate.byDatePaging(request, rs, dateStr);
-
-		ArrayList<RecruitmentVo> list = rs.selectByDateList(dateStr, pi.getCurrentPage(), pi.getLimit());
-		
-		//System.out.println(list.size());
+		RecruitmentVo rec = new RecruitmentService().selectRecruitment(recId);
 		
 		RequestDispatcher view = null;
-		String url="";
-		if(list!=null){
-			url="/views/byDate/searchByDate.jsp";
-			request.setAttribute("list", list);
-			request.setAttribute("pi", pi);
-			
-		}else{
-			System.out.println("null");
+		String url = "";
+		if (rec != null) {
+			url = "/views/recruitment/contractRecDetail.jsp";
+			request.setAttribute("rec", rec);
+
+		} else {
+			System.out.println("계약구인상세페이지오류");
 		}
-		view=request.getRequestDispatcher(url);
+		view = request.getRequestDispatcher(url);
 		view.forward(request, response);
 	}
 

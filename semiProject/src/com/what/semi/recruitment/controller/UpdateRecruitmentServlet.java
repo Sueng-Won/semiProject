@@ -136,7 +136,7 @@ public class UpdateRecruitmentServlet extends HttpServlet {
 		rec.setCareer(career);
 		
 		//System.out.println(recImg);
-		System.out.println(rec);
+		//System.out.println(rec);
 		
 		
 		

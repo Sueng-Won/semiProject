@@ -122,7 +122,7 @@
 						<td class="table-td" onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);"><%=list.get(i).getBusiness_type()%></td>
 						<td class="td-title" onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);"><b><%=list.get(i).getRecruitment_name()%></b><br><%=list.get(i).getRecruitment_title()%></td>
 						<td class="table-td-location" onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);"><%=location%></td>
-						<th class="table-td" onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);"><%=list.get(i).getPay()%>원
+						<td class="table-td" onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);"><%=list.get(i).getPay()%>원
 						</td>
 						<td>
 							<button type="button" class="btn btn-default btn-xs btn-info"
@@ -150,7 +150,7 @@
 					<%
 						if (currentPage != i) {
 					%>
-					<button onclick="movePage();" type="button"
+					<button onclick="movePage(<%=i%>);" type="button"
 						class="btn btn-default bg-dark text-white"><%=i%></button>
 					<%
 						} else {
@@ -180,4 +180,9 @@
 	<!-- /.row -->
 </div>
 <!-- /.container -->
+<script type="text/javascript">
+	function movePage(pageNum) {
+		location.href = "/sp/myRecruitmentList.do?currentPage="+pageNum;
+	}
+</script>
 <%@include file="/views/common/footer.jsp"%>

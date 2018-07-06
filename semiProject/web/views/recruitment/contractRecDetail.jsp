@@ -6,18 +6,7 @@
 <%@page import="java.util.ArrayList"%>
 <%
 	RecruitmentVo rec = (RecruitmentVo) request.getAttribute("rec");
-	int currentPage = (int) request.getAttribute("currentPage");
-	MemberVo writer = (MemberVo) request.getAttribute("writer");
-	String Mtype = (String) session.getAttribute("member_type");
-	ArrayList<MyResumeVo> resumes = (ArrayList<MyResumeVo>) request.getAttribute("myResumes");
-	int is_post = 0;
-	boolean userTypeFlag = false;
-	if (0 != resumes.size()) {
-		is_post = resumes.get(0).getIs_post();
-		userTypeFlag = true;
-	}
-	
-	int contRe = (int) request.getAttribute("contRe");
+
 	/* rec.setRecruitment_image_src(null); */
 %>
 <%@include file="/views/common/header.jsp"%>
@@ -25,22 +14,6 @@
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 
 <script type="text/javascript">
-	function applyBtn() {
-		console.log("지원");
-		if (<%=Mtype.equals("JS")%>) {
-			if (<%=userTypeFlag%>) {
-				$('div.modal').modal();
-			} else {
-				alert("등록된 이력서가 없습니다!!");
-			}
-		}else{
-			alert("구직자가 아니면 지원할 수 없습니다.");
-		}
-	}
-
-	function apply() {
-		$("#postNum").submit();
-	}
 
 	$(function() {
 		var count = $("#ta").text().length;
@@ -51,10 +24,6 @@
 			$("#ta").css("height", he + "px");
 		}
 		
-		if(<%=contRe%> != 0){
-			alert("구직신청이 완료되었습니다.");
-		}
-
 	});
 </script>
 <style>
@@ -216,33 +185,24 @@ tr {
 							<tr>
 								<td>채용자</td>
 								<%
-									if (writer.getName().length() >= 3) {
+									if (rec.getName().length() >= 3) {
 								%>
-								<td><%=writer.getName().charAt(0)%>
-									<%
-										for (int i = 0; i < writer.getName().length() - 3; i++) {
-									%>*<%
-										}
-									%><%=writer.getName().charAt(writer.getName().length() - 1)%></td>
+								<td><%=rec.getName().charAt(0)%><%
+ 	for (int i = 0; i < rec.getName().length() - 3; i++) {
+ %>*<%
+ 	}
+ %><%=rec.getName().charAt(rec.getName().length() - 1)%></td>
 								<%
 									} else {
 								%>
-								<td><%=writer.getName().charAt(0)%>*</td>
+								<td><%=rec.getName().charAt(0)%>*</td>
 								<%
 									}
 								%>
 							</tr>
 							<tr>
 								<td>연락처</td>
-								<td>
-									<%
-										if (id == null) {
-									%>로그인후 확인이 가능합니다.<%
-										} else {
-									%><%=rec.getRecruitment_phone()%> <%
- 	}
- %>
-								</td>
+								<td><%=rec.getRecruitment_phone()%></td>
 							</tr>
 						</table>
 					</div>
@@ -255,20 +215,11 @@ tr {
 				<div class="line">지도</div>
 				<div class="space"></div>
 				<div class="line">
-					<%
-						if (!(writer.getId().equals(id))) {
-					%>
 					<div align="center">
 						<button onclick="applyBtn();"
-							class="btn btn-default bg-dark text-white">지원하기</button>
+							class="btn btn-default bg-dark text-white">해당 업체에 지원하기</button>
 					</div>
-					<%
-						}
-					%>
-					<div align="right">
-						<button onclick="goList();"
-							class="btn btn-default bg-dark text-white">목록으로</button>
-					</div>
+
 				</div>
 			</div>
 		</div>
@@ -279,54 +230,5 @@ tr {
 	<!-- /.row -->
 </div>
 <!-- /.container -->
-<!-- 팝업 모달영역 -->
-<div class="modal fade" id="layerpop">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<!-- header -->
-			<div class="modal-header">
-				<!-- 닫기(x) 버튼 -->
-				<!-- header title -->
-				<h4 class="modal-title">이력서 선택</h4>
-				<button type="button" class="close" data-dismiss="modal">×</button>
-			</div>
-			<!-- body -->
-			<div class="modal-body">
-				<form id="postNum" method="get" action="/sp/apply.do">
-					<input type="hidden" name="userId" value="<%=id%>" /> <input
-						type="hidden" name="bo_id" value="<%=writer.getId()%>" /> <input
-						type="hidden" name="recId" value="<%=rec.getRecruitment_id()%>" />
-						<input type="hidden" name="currentPage" value="<%=currentPage%>" />
-					<div class="radio">
-						<%
-							for (int i = 0; i < resumes.size(); i++) {
-						%>
-						<%
-							if (resumes.get(i).getPri_resume() == 'Y' || resumes.size() != 2) {
-						%>
-						<label for="post<%=i%>"><%=resumes.get(i).getIntroduce_title()%>
-							<input id="post<%=i%>" type="radio"
-							value="<%=resumes.get(i).getResume_id()%>" name="resume_id"
-							checked /> </label><br>
-						<%
-							} else {
-						%>
-						<label for="post<%=i%>"><%=resumes.get(i).getIntroduce_title()%>
-							<input id="post<%=i%>" type="radio"
-							value="<%=resumes.get(i).getResume_id()%>" name="resume_id" /> </label><br>
-						<%
-							}
-						%>
-						<%
-							}
-						%>
-					</div>
-				</form>
-				<hr>
-				<button type="button" class="btn btn-success" onclick="apply();">지원</button>
-				<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
-			</div>
-		</div>
-	</div>
-</div>
+
 <%@include file="/views/common/footer.jsp"%>

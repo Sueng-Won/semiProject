@@ -9,12 +9,13 @@
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 
 <script type="text/javascript">
-	function writeRecruitment() {
+	function writeRecruitment(flag) {
+		if(flag){
+			$("#writeRecruitment").attr("action", "/sp/writeRecruitment.do");
+		}else{
+			$("#writeRecruitment").attr("action", "/sp/updateRecruitment.do");
+		}
 		$("#writeRecruitment").submit();
-	}
-
-	function updateRecruitment() {
-		$("#updateRecruitment").submit();
 	}
 
 	var searchAddr;
@@ -114,8 +115,8 @@
 					<br>
 					<form id="writeRecruitment" method="post"
 						action="/sp/writeRecruitment.do" enctype="multipart/form-data">
-						<form id="updateRecruitment" method="post"
-							action="/sp/updateRecruitment.do" enctype="multipart/form-data">
+<!-- 						<form id="updateRecruitment" method="post" -->
+<!-- 							action="/sp/updateRecruitment.do" enctype="multipart/form-data"> -->
 							<div class="row">
 								<div class="col-3 mb-1" id="titleImage">
 									<img
@@ -312,12 +313,11 @@
 
 							<div>
 								<button class="btn btn-light text-dark mt-4 mb-2"
-									onclick="updateRecruitment();">수정하기</button>
+									onclick="writeRecruitment(false);">수정하기</button>
 								<button class="btn btn-light text-dark mt-4 mb-2"
-									onclick="writeRecruitment();">구인 등록</button>
+									onclick="writeRecruitment(true);">구인 등록</button>
 							</div>
 
-						</form>
 					</form>
 
 				</div>
