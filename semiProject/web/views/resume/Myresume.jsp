@@ -1,251 +1,141 @@
 <%@page import="com.what.semi.resume.model.vo.MyResumeVo"%>
-<%@page import="com.what.semi.member.model.vo.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
+   <%
+   		MyResumeVo member = (MyResumeVo)request.getAttribute("member");
+   		System.out.println(member.getAchievement());
+   %>
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<title>이력서샘플</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
-<title>[오늘뭐해?]홈페이지</title>
-<link href="/sp/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/sp/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
-
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=154d504288d7ddddd16f6867efe451af&libraries=services,clusterer,drawing"></script>
-
-<!-- Custom styles for this template -->
-<link href="/sp/css/shop-homepage.css" rel="stylesheet">
-
-<link href="/sp/css/daum.css" rel="stylesheet">
-<script src="/sp/vendor/jquery/jquery.min.js"></script>
-<script type="text/javascript">
-<%MyResumeVo member = (MyResumeVo) request.getAttribute("member");%>
-
-<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript">
-	function writeResume() {
-		$("#writeResume").submit();
-	}
-</script>
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script
+   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
+<style>
+
+.img {
+   border: 1px solid black;
+}
+
+.page-header {
+   text-align: center;
+}
+.wrap{
+   padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.innerWrap{
+   border: 1px solid black;
+   height:150px;
+   padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top:15px;
+   padding-bottom:15px;
+}
+.auth{
+   color:lightGray;
+}
+ul{
+ list-style:none;
+}
+#profileImg{
+	height:120px;
+}
+</style>
 <body>
-<!-- Page Content -->
-<div class="container" style="min-height: 1000px">
-	<div class="row">
-		<!-- /.col-lg-3 -->
-		<div class="col-lg-9 mt-lg-auto">
-			<div class="row mt-4">
-				<div class="col-lg-2"></div>
-				<div class="col-lg-8 bg-dark">
-					<h3 align="center" class="text-white-50">이력서</h3>
-					<br>
-						<div class="row">
-							<div class="col-3 mb-1">
-								<%if(null!=member.getProfile_image_src()){ %>
-				  		<img alt="" height="140px" width="120px" src="/sp/profile_photo/<%=member.getProfile_image_src() %>" id="userPhoto">
-						<input type="file" id="userPhotoInput" name="userPhoto"  onchange="printImage(this);"/> 
-						<%}else{ %>
-						<img alt="" height="140px" width="120px" src="http://placehold.it/300x400" id="userPhoto">
-						<input type="file" id="userPhotoInput" name="userPhoto"  onchange="printImage(this);"/> 
-						<%} %>
-							</div>
-							<div class="col-9">
-								<!-- 사용자 이름 -->
-								<div class="input-group" style="min-height: 33%">
-									<input type="text" class="form-control mb-1" name="name"
-										placeholder="<%=member.getName()%>" readonly />
-								</div>
+   <div class="container">
+      <div class="row">
 
-								<!-- 사용자 전화번호 -->
-								<div class="input-group" style="min-height: 33%">
-									<input type="text" class="form-control mb-1" name="phone"
-										placeholder="<%=member.getPhone()%>" readonly />
-								</div>
-
-								<!-- 사용자 이메일 -->
-								<div class="input-group" style="min-height: 33%">
-									<input type="email" class="form-control mb-1" name="email"
-										placeholder="<%=member.getEmail()%>" readonly />
-								</div>
-							</div>
-						</div>
-						<div class="input-group">
-							<!-- 주소 -->
-							<input type="text" class="form-control mb-1 mr-1" name="address"
-								id="address" placeholder="<%=member.getAddress()%>" readonly />
-						</div>
-						<div class="row">
-							<div class="btn-group mt-1 ml-3">
-								<P readonly class="caret" id="acBtn"><%=member.getAchievement() %></p>
-							
-							</div>
-
-							<div class="btn-group mt-1 ml-1">
-								<button type="button" style="min-width: 130px"
-									class="btn btn-lg btn-dark dropdown-toggle"
-									data-toggle="dropdown" aria-expanded="false">
-									<span class="caret" id="dBtn"><%=member.getDisability()==1?"장애":"비장애" %></span>
-								</button>
-
-							</div>
-
-							<div class="btn-group mt-1 ml-1">
-								<button type="button" style="min-width: 130px"
-									class="btn btn-lg btn-dark dropdown-toggle"
-									data-toggle="dropdown" aria-expanded="false">
-									<span id="mBtn" class="caret"><%=member.getMiltary_service()==1?"군필":"미필" %></span>
-								</button>
-
-								
-							</div>
-						</div>
-
-						<br>
-
-						<h4 class="text-white-50">근무 희망 사항</h4>
-
-						<div class="row">
-							<div class="col-3">
-							<!-- 근무희탕타입 -->
-							<p><%=member.getBusiness_type() %></p>
-								
-							</div>
-
-							<div class="col-2">
-							<p><%=member.getCareer()==1?"있음":"없음" %></p>
-								
-							</div>
-
-							<div class="col-7">
-								<div class="mt-1 ml-3" style="max-height: 33%">
-									<h5 class="text-white">근무가능일</h5>
-								</div>
-								<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
-									<%=member.getWorkable_days() %>
-								</div>
-
-							</div>
-						</div>
-
-						<br> <input type="hidden" name="workTime" id="workTime" />
-						<!-- 희망근무시간대 -->
-						<div class="btn-group-toggle ml-3" id="workTimeCkb">
-							<div class="text-white">희망 근무시간대</div>
-							<p><%=member.getWorkTime() %></p>
-							<label class="checkbox-inline btn-dark btn-md mr-3"> <input
-								type="checkbox" name="workTime[]" class="inlineCheckbox"
-								value="오전" onclick="checkBoxSelector(this, 0);"> 오전
-							</label> <label class="checkbox-inline btn-dark btn-md mr-3"> <input
-								type="checkbox" name="workTime[]" class="inlineCheckbox"
-								value="오후" onclick="checkBoxSelector(this, 1);"> 오후
-							</label> <label class="checkbox-inline btn-dark btn-md mr-3"> <input
-								type="checkbox" name="workTime[]" class="inlineCheckbox"
-								value="저녁" onclick="checkBoxSelector(this, 2);"> 저녁
-							</label> <label class="checkbox-inline btn-dark btn-md mr-3"> <input
-								type="checkbox" name="workTime[]" class="inlineCheckbox"
-								value="야간" onclick="checkBoxSelector(this, 3);"> 야간
-							</label> <label class="checkbox-inline btn-dark btn-md mr-3"> <input
-								type="checkbox" name="workTime[]" class="inlineCheckbox"
-								value="상관없음" onclick="checkBoxSelector(this, 4);"> 상관없음
-							</label>
-						</div>
-
-
-						<div class="input-group">
-							<input type="text" class="form-control mb-1 mr-1"
-								name="introduce_title" id="introduce_title"
-								placeholder="<%=member.getIntroduce_title()%>" />
-						</div>
-						<div>
-							<textarea name="introduce" id="introduce" class="col-12" rows="5"
-								placeholder="<%=member.getIntroduce()%>"></textarea>
-						</div>
-
-				</div>
-				<!-- /.col-lg-6 -->
-				<div class="col-lg-2"></div>
-			</div>
-		</div>
-		<!-- /.row -->
-
-
-	</div>
-	<!-- /.row -->
-</div>
-<!-- /.container -->
-<script type="text/javascript">
-	function acSelect(obj) {
-		var text = $(obj).text();
-		var value = $(obj).val();
-		$("#acBtn").text(text);
-		$("#achievementValue").val(value);
-	}
-	function dSelect(obj) {
-		var text = $(obj).text();
-		var value = $(obj).val();
-		$("#dBtn").text(text);
-		$("#dValue").val(value);
-	}
-	function mSelect(obj) {
-		var text = $(obj).text();
-		var value = $(obj).val();
-		$("#mBtn").text(text);
-		$("#mValue").val(value);
-	}
-	$(function(){
-		$("#userPhotoInput").hide();
-		$("#userPhoto").click(function(){
-			$("#userPhotoInput").click();
-		});
-	});
-	function printImage(obj){
-		if(obj.files && obj.files[0]){
-			var reader = new FileReader();
-			reader.onload=function(e){
-					$("#userPhoto").attr("src", e.target.result);
-				}
-			}
-			reader.readAsDataURL(obj.files[0]);
-		}
-	
-	function checkBoxSelector(obj, index){
-		var $chkBoxArr = $(".inlineCheckbox");
-		
-		var send_array = Array();
-		var send_cnt = 0;
-		
-		
-		if(index==4 && $(obj).prop("checked")){
-			$chkBoxArr.each(function(index, value){
-				if(index != 4){
-					$(this).prop("checked", false);
-				}
-			});
-		}else if(index!=4 && $(obj).prop("checked")){
-			$chkBoxArr.eq(4).prop("checked", false);
-		}
-		
-		for(i=0;i<$chkBoxArr.length;i++) {
-		    if ($chkBoxArr[i].checked == true){
-		        send_array[send_cnt] = $chkBoxArr[i].value;
-		        send_cnt++;
-		    }
-		}
-		var resultStr = send_array.join(",");
-		
-		$("#workTime").val(resultStr);
-		console.log(resultStr);
-
-	}
-</script>
-<!-- Bootstrap core JavaScript -->
-<!--  <script src="/sp/vendor/jquery/jquery.min.js"></script> -->
-<script src="/sp/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+         <div class="page-header">
+            <h1>
+               나의 이력서<br> 
+               <small><%=member.getIntroduce_title() %></small>
+            </h1>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-xs-3 col-md-3 col-xs-offset-1">
+            <a class="thumbnail"><img id="profileImg" src="/sp/profile_photo/<%=member.getProfile_image_src() %>" >
+            </a>
+         </div>
+         <div class="col-xs-7 col-md-9 col-xs-offset-1"">
+         <h4><strong><%=member.getName() %></strong></h4> 
+         <address>
+            <%=member.getGender()=='M'?"남":"여" %>, <%=member.getAge() %>(<%=member.getAge()-1 %>) / <%=member.getBirth() %><br>
+            <%=member.getAddress() %><br> <abbr title="Phone">P:</abbr> <%=member.getPhone() %>
+            <strong>Full Name</strong><br> <a href="#"><%=member.getEmail() %></a>
+         </address>
+         </div>
+      </div>
+      <hr>
+      <div class="row wrap">
+         <h3>희망 근무 조건</h3>
+         <div class="innerWrap">
+         	<div class="contentsWrap col-xs-4">
+            <ul>
+            	<li><p class="tit"><img src="/sp/images/resume/store.png"/>근무지</p></li>
+            	<li><strong><%=member.getAddress() %></strong></li>
+            </ul>
+         	</div>
+         	<div class="contentsWrap col-xs-4">
+            <ul>
+            	<li><p class="tit"><img src="/sp/images/resume/business_type.png"/>업종</p></li>
+            	<li><strong><%=member.getBusiness_type() %></strong></li>
+            	<li><strong>경력 :<%=member.getCareer()==1?"있음":"없음" %></strong></li>
+            </ul>
+         	</div>
+         	<div class="contentsWrap col-xs-4">
+            <ul>
+            	<li><p class="tit"><img src="/sp/images/resume/clock.png"/>희망시간</p></li>
+            	<li><strong><%=member.getWorkable_days() %></strong></li>
+            	<li><strong><%=member.getWorkTime() %></strong></li>
+            </ul>
+         	</div>
+         </div>
+      </div>
+      <div class="row wrap">
+         <h3>학력, 우대사항</h3>
+         <div class="innerWrap">
+         	<div class="contentsWrap col-xs-6">
+            <ul>
+            	<li><p class="tit"><img src="/sp/images/resume/achievement.png"/>학력</p></li>
+            	<li><strong><%=member.getAchievement() %></strong></li>
+            </ul>
+         	</div>
+         	<div class="contentsWrap col-xs-6">
+            <ul>
+            	<li><p class="tit"><img src="/sp/images/resume/disability.png"/>장애여부</p></li>
+            	<li><strong><%=member.getDisability()==1?"장애":"정상" %></strong></li>
+            </ul>
+         	</div>
+         </div>
+      </div>
+      <div class="row wrap">
+         <h3>자기 소개서</h3>
+         <div class="innerWrap">
+         	<textarea class="form-control" rows="5" readonly><%=member.getIntroduce() %></textarea>
+         </div>
+      </div>
+         <div class="col-xs-12 auth">
+            <h2 align="center" >위 입력사항은 사실과 다름이 없습니다</h2>
+            <p align="center">작성자: XXX</p>
+         </div>
+   </div>
 </body>
-
 </html>

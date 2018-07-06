@@ -32,7 +32,8 @@ public class SeeMyResumeServlet extends HttpServlet {
 		
 		MyResumeVo member = new MyResumeService().selectMyResume(userId, resume_id);
 		
-		
+		System.out.println("test3 : " + member.getAchievement());
+		System.out.println("seeMYresume 호출");
 			String url = "";
 		if(null!=member){
 			url="views/resume/Myresume.jsp";
