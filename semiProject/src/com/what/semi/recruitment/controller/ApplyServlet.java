@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.what.semi.common.GmailSend;
 import com.what.semi.contract.model.service.ContractService;
-import com.what.semi.contract.model.vo.ContractVo;
 import com.what.semi.member.model.service.MemberService;
 import com.what.semi.member.model.vo.MemberVo;
 import com.what.semi.recruitment.model.service.RecruitmentService;
@@ -50,6 +50,7 @@ public class ApplyServlet extends HttpServlet {
 		int result = new ContractService().insertContract(recId, boId, jsId, resumeId);
 		RecruitmentVo rec = new RecruitmentService().selectRecruitment(recId);
 		MemberVo writer = new MemberService().getMemberInfo(rec.getM_id());
+		MyResumeVo resume = new MyResumeService().selectMyResume(jsId, resumeId);
 
 		ArrayList<MyResumeVo> myResumes = new MyResumeService().selectMyInfo(jsId);
 		
@@ -58,7 +59,13 @@ public class ApplyServlet extends HttpServlet {
 				myResumes.remove(i);
 			}
 		}
-
+		
+		String title="<"+rec.getRecruitment_title()+">의 지원 이력서가 등록되었습니다.";
+		String resumeUrl="seeMyResume.do?resume_id="+resumeId+"&userId="+jsId;
+		new GmailSend().sendResume(writer.getEmail(),title,resumeUrl);
+		
+		
+		
 		RequestDispatcher view = null;
 		String url = "";
 		if (result != 0) {
