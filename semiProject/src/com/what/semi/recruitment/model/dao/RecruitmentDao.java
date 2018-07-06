@@ -674,4 +674,23 @@ public class RecruitmentDao {
 		return result;
 	}
 
+	public int updateRecIsPost(Connection con) {
+		int result= -1;
+		Statement stmt = null;
+		String query = null;
+		
+		try {
+			stmt=con.createStatement();
+			query = "UPDATE RECRUITMENT SET IS_POST=0 WHERE WORK_DAY<SYSDATE";
+			result=stmt.executeUpdate(query);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			JDBCTemplate.close(stmt);
+		}
+		
+		return result;
+	}
+
 }

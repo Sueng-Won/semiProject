@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.what.semi.common.template.PageInfo;
 import com.what.semi.common.template.PageTemplate;
+import com.what.semi.contract.model.service.ContractService;
 import com.what.semi.recruitment.model.service.RecruitmentService;
 import com.what.semi.recruitment.model.vo.RecruitmentVo;
 
@@ -29,8 +30,10 @@ public class IndexListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		RecruitmentService rs = new RecruitmentService();
+		int is_post_result = rs.updateRecIsPost();
+		int state_result = new ContractService().updateExpriedContractState();
+
 		PageInfo pi = PageTemplate.indexPaging(request, rs);
-		
 		ArrayList<RecruitmentVo> list = rs.loadRecruitmentList(pi.getCurrentPage(), pi.getLimit());
 		String url = "";
 		if(null != list) {

@@ -78,4 +78,19 @@ public class ContractService {
 
 		return list;
 	}
+
+	public int updateExpriedContractState() {
+		Connection con = JDBCTemplate.getConnection();
+
+		int result = new ContractDao().updateExpriedContractState(con);
+
+		if (result != 0) {
+			JDBCTemplate.commit(con);
+		} else {
+			JDBCTemplate.rollback(con);
+		}
+		JDBCTemplate.close(con);
+
+		return result;
+	}
 }

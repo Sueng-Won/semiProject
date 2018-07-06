@@ -25,6 +25,10 @@
 		}
 		
 	});
+	
+	function applyBtn() {
+		//해당업체에 구인글이 있는지 검색
+	}
 </script>
 <style>
 .line {

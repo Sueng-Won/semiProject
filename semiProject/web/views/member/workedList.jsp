@@ -107,7 +107,7 @@
 					for (int i = 0; i < myConList.size(); i++) {
 				%>
 				<tr>
-					<td class="table-td"><%=myConList.get(i).getContract_date()%></td>
+					<td class="table-td"><%if(myConList.get(i).getContract_date()==null){%>-<%}else{%><%=myConList.get(i).getContract_date()%><%} %></td>
 					<%
 						for (int j = 0; j < conRecList.size(); j++) {
 								if (myConList.get(i).getRecruitment_id().equals(conRecList.get(j).getRecruitment_id())) {
