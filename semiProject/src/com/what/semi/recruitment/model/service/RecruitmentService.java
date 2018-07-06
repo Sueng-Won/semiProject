@@ -146,4 +146,18 @@ public class RecruitmentService {
 
 		return result;
 	}
+
+	public int deleteRec(String recId) {
+		Connection con = JDBCTemplate.getConnection();
+		
+		int result = new RecruitmentDao().deleteRec(con,recId);
+		if(result != 0) {
+			JDBCTemplate.commit(con);
+		}else {
+			JDBCTemplate.rollback(con);
+		}
+		JDBCTemplate.close(con);
+		
+		return result;
+	}
 }

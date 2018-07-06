@@ -676,4 +676,23 @@ public class RecruitmentDao {
 		return result;
 	}
 
+	public int deleteRec(Connection con, String recId) {
+		int result = -1;
+		
+		PreparedStatement pstmt = null;
+
+		String query = "DELETE FROM RECRUITMENT WHERE RECRUITMENT_ID = ?";
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,recId);
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 }
