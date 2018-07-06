@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.what.semi.common.template.PageInfo;
 import com.what.semi.recruitment.model.service.RecruitmentService;
 
 /**
@@ -32,10 +33,10 @@ public class DeleteRecruitmentServlet extends HttpServlet {
 		int result = new RecruitmentService().deleteRec(recId);
 		
 		if(result<0) {
-			System.out.println("삭제실패");
+			System.out.println("DELFLAG 업데이트 실패");
 		}else {
-			System.out.println("삭제 성공");
-			response.sendRedirect("/sp/views/member/manageRecruitment.jsp");
+			System.out.println("DELFLAG 업데이트 성공");
+			response.sendRedirect("/sp/myRecruitmentList.do");
 		}
 	}
 

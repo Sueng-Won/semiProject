@@ -681,7 +681,7 @@ public class RecruitmentDao {
 		
 		PreparedStatement pstmt = null;
 
-		String query = "DELETE FROM RECRUITMENT WHERE RECRUITMENT_ID = ?";
+		String query = "UPDATE RECRUITMENT SET DELFLAG = 1 WHERE RECRUITMENT_ID = ?";
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,recId);
