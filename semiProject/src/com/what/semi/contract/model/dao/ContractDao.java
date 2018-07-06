@@ -202,7 +202,7 @@ public class ContractDao {
 		
 		try {
 			stmt=con.createStatement();
-			query = "UPDATE CONTRACT SET STATE=2 WHERE RECRUITMENT_ID IN (SELECT RECRUITMENT_ID FROM RECRUITMENT WHERE IS_POST=0);";
+			query = "UPDATE CONTRACT SET STATE=2 WHERE RECRUITMENT_ID IN (SELECT RECRUITMENT_ID FROM RECRUITMENT WHERE IS_POST=0)";
 			result=stmt.executeUpdate(query);
 			
 		} catch (SQLException e) {
