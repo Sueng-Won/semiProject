@@ -42,7 +42,7 @@ public class ContractResumeDetailServlet extends HttpServlet {
 		String url = "";
 		if (resume != null) {
 			url = "/views/resume/contractResumeDetail.jsp";
-			request.setAttribute("resume", resume);
+			request.setAttribute("member", resume);
 
 		} else {
 			System.out.println("계약이력서상세페이지오류");

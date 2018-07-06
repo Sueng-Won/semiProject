@@ -154,7 +154,7 @@
 								<div style="height: 50px;">
 									<div style="float: left;">
 										<button style="margin-top: 10px;"
-											onclick="contractResumeDetail(<%=myConList.get(i).getResume_id()%>,<%=myConList.get(i).getJs_id()%>);">해당
+											onclick="contractResumeDetail(<%=myConList.get(i).getResume_id() %>,'<%=myConList.get(i).getJs_id()%>');">해당
 											이력서 보기</button>
 									</div>
 									<div style="float: right;">
@@ -199,7 +199,7 @@
 										} else {
 									%>
 									<button
-										onclick="addBlacklist(<%=myConList.get(i).getJs_id()%>);"
+										onclick="addBlacklist('<%=myConList.get(i).getJs_id()%>');"
 										class="btn btn-default bg-dark text-white">신고하기</button>
 									<%
 										}
