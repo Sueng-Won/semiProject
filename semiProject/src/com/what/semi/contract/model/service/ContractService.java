@@ -43,4 +43,19 @@ public class ContractService {
 
 		return result;
 	}
+
+	public int insertContract(String recId, String bo_id, String js_id, int resumeId) {
+		Connection con = JDBCTemplate.getConnection();
+
+		int result = new ContractDao().insertContract(con,recId, bo_id, js_id, resumeId);
+
+		if (result != 0) {
+			JDBCTemplate.commit(con);
+		} else {
+			JDBCTemplate.rollback(con);
+		}
+		JDBCTemplate.close(con);
+
+		return result;
+	}
 }

@@ -99,4 +99,23 @@ public class ContractDao {
 		return result;
 	}
 
+	public int insertContract(Connection con, String recId, String bo_id, String js_id, int resumeId) {
+		int result = -1;
+
+		Statement stmt = null;
+		String query = "";
+		try {
+			stmt = con.createStatement();
+			query = "INSERT INTO CONTRACT VALUES (SEQ_CONTRACT.NEXTVAL,0,NULL,NULL,NULL,'"+recId+"','"+bo_id+"','"+js_id+"',"+resumeId;
+			result = stmt.executeUpdate(query);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(stmt);
+		}
+
+		return result;
+	}
+
 }

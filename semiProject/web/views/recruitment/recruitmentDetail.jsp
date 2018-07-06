@@ -282,6 +282,8 @@ tr {
 			<div class="modal-body">
 				<form id="postNum" method="get" action="/sp/apply.do">
 					<input type="hidden" name="userId" value="<%=id%>" />
+					<input type="hidden" name="bo_id" value="<%=writer.getId()%>" />
+					<input type="hidden" name="recId" value="<%=rec.getRecruitment_id()%>" />
 					<div class="radio">
 						<%
 							for (int i = 0; i < resumes.size(); i++) {
@@ -309,7 +311,7 @@ tr {
 				</form>
 				<hr>
 				<button type="button" class="btn btn-success"
-					onclick="apply();">수정</button>
+					onclick="apply();">지원</button>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
 			</div>
 		</div>

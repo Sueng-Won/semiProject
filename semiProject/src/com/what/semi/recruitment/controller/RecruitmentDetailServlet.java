@@ -38,21 +38,23 @@ public class RecruitmentDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String m_id = (String) session.getAttribute("id");
+		String js_id = (String) session.getAttribute("id");
+		String Mtype = (String)session.getAttribute("member_type");
 		
 		String recId = (String) request.getParameter("recId");
 		int currentPage=Integer.parseInt(request.getParameter("currentPage"));
-		System.out.println(currentPage);
 		
 		RecruitmentVo rec = new RecruitmentService().selectRecruitment(recId);
 		MemberVo writer = new MemberService().getMemberInfo(rec.getM_id());
-		ArrayList<MyResumeVo> myResumes = new MyResumeService().selectMyInfo(m_id);
-		System.out.println(myResumes.size());
-	
+		
+		ArrayList<MyResumeVo> myResumes=null;
+		if(Mtype.equals("JS")){
+			myResumes = new MyResumeService().selectMyInfo(js_id);
+		}
+		
 		String url = "";
 		if(null != rec){
 			url = "views/recruitment/recruitmentDetail.jsp";
-			System.out.println(rec.toString());
 			request.setAttribute("rec", rec);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("writer", writer);
