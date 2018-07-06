@@ -58,4 +58,24 @@ public class ContractService {
 
 		return result;
 	}
+
+	public ContractVo selectThisCon(String recId, String bo_id, String js_id, int resumeId) {
+		Connection con = JDBCTemplate.getConnection();
+
+		ContractVo thisCon = new ContractDao().selectThisCon(con,recId, bo_id, js_id, resumeId);
+
+		JDBCTemplate.close(con);
+
+		return thisCon;
+	}
+
+	public ArrayList<ContractVo> selectmyAppliedConList(String recId, String js_id) {
+		Connection con = JDBCTemplate.getConnection();
+
+		ArrayList<ContractVo> list = new ContractDao().selectMyContractList(con,recId, js_id);
+
+		JDBCTemplate.close(con);
+
+		return list;
+	}
 }

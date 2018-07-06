@@ -8,6 +8,7 @@
 	RecruitmentVo rec = (RecruitmentVo) request.getAttribute("rec");
 	int currentPage = (int) request.getAttribute("currentPage");
 	MemberVo writer = (MemberVo) request.getAttribute("writer");
+	String Mtype = (String) session.getAttribute("member_type");
 	ArrayList<MyResumeVo> resumes = (ArrayList<MyResumeVo>) request.getAttribute("myResumes");
 	int is_post = 0;
 	boolean userTypeFlag = false;
@@ -15,6 +16,8 @@
 		is_post = resumes.get(0).getIs_post();
 		userTypeFlag = true;
 	}
+	
+	int contRe = (int) request.getAttribute("contRe");
 	/* rec.setRecruitment_image_src(null); */
 %>
 <%@include file="/views/common/header.jsp"%>
@@ -23,14 +26,19 @@
 
 <script type="text/javascript">
 	function applyBtn() {
-		if(<%=userTypeFlag%>){
-			$('div.modal').modal();			
+		console.log("지원");
+		if (<%=Mtype.equals("JS")%>) {
+			if (<%=userTypeFlag%>) {
+				$('div.modal').modal();
+			} else {
+				alert("등록된 이력서가 없습니다!!");
+			}
 		}else{
-			alert("등록된 이력서가 없습니다!!");
+			alert("구직자가 아니면 지원할 수 없습니다.");
 		}
 	}
-	
-	function apply(){
+
+	function apply() {
 		$("#postNum").submit();
 	}
 
@@ -43,6 +51,10 @@
 			$("#ta").css("height", he + "px");
 		}
 		
+		if(<%=contRe%> != 0){
+			alert("구직신청이 완료되었습니다.");
+		}
+
 	});
 </script>
 <style>
@@ -206,11 +218,12 @@ tr {
 								<%
 									if (writer.getName().length() >= 3) {
 								%>
-								<td><%=writer.getName().charAt(0)%><%
- 	for (int i = 0; i < writer.getName().length() - 3; i++) {
- %>*<%
- 	}
- %><%=writer.getName().charAt(writer.getName().length() - 1)%></td>
+								<td><%=writer.getName().charAt(0)%>
+									<%
+										for (int i = 0; i < writer.getName().length() - 3; i++) {
+									%>*<%
+										}
+									%><%=writer.getName().charAt(writer.getName().length() - 1)%></td>
 								<%
 									} else {
 								%>
@@ -226,10 +239,9 @@ tr {
 										if (id == null) {
 									%>로그인후 확인이 가능합니다.<%
 										} else {
-									%><%=rec.getRecruitment_phone()%>
-									<%
-										}
-									%>
+									%><%=rec.getRecruitment_phone()%> <%
+ 	}
+ %>
 								</td>
 							</tr>
 						</table>
@@ -281,9 +293,10 @@ tr {
 			<!-- body -->
 			<div class="modal-body">
 				<form id="postNum" method="get" action="/sp/apply.do">
-					<input type="hidden" name="userId" value="<%=id%>" />
-					<input type="hidden" name="bo_id" value="<%=writer.getId()%>" />
-					<input type="hidden" name="recId" value="<%=rec.getRecruitment_id()%>" />
+					<input type="hidden" name="userId" value="<%=id%>" /> <input
+						type="hidden" name="bo_id" value="<%=writer.getId()%>" /> <input
+						type="hidden" name="recId" value="<%=rec.getRecruitment_id()%>" />
+						<input type="hidden" name="currentPage" value="<%=currentPage%>" />
 					<div class="radio">
 						<%
 							for (int i = 0; i < resumes.size(); i++) {
@@ -310,8 +323,7 @@ tr {
 					</div>
 				</form>
 				<hr>
-				<button type="button" class="btn btn-success"
-					onclick="apply();">지원</button>
+				<button type="button" class="btn btn-success" onclick="apply();">지원</button>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
 			</div>
 		</div>
