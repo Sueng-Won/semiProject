@@ -78,4 +78,13 @@ public class QnaService {
 		
 		JDBCTemplate.close(con);
 	}
+
+	public String getContent(int q_no) {
+		Connection con = JDBCTemplate.getConnection();
+		
+		String result = new QnaDao().getContent(con, q_no);
+		
+		JDBCTemplate.close(con);
+		return result;
+	}
 }

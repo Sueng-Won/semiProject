@@ -26,7 +26,7 @@
 		<br><br>
 		<div class="list-group">
 			<button type="button" onclick="manageMember();" class="btn btn-lg btn-block btn-dark">사용자 관리</button>
-			<button type="button" class="btn btn-lg btn-block btn-dark">게시물 관리</button>
+			<button type="button" onclick="managePost();" class="btn btn-lg btn-block btn-dark">게시물 관리</button>
 			<button type="button" onclick="manageQna();" class="btn btn-lg btn-block btn-dark">Q&A 관리</button>
 		</div>
 	</div>

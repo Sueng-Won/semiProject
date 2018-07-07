@@ -482,6 +482,7 @@ tr {
 	       <input id="btn_submit" class="bBtn bg-dark" value="보내기" onclick="starList();"/>
 	       <a href="javascript:self.close();" class="cBtn">취소</a>
 	    </p>
+	    
 	   	<div class="col-4"></div>
   	</div>
   </div>

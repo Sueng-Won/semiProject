@@ -48,7 +48,7 @@ public class BlackListServlet extends HttpServlet {
 		
 		
 		//===================블랙리스트 등록==================
-		if(null != request.getParameter("blackListId")) {
+		if(null != request.getParameter("blackListId")&&!"".equals(request.getParameter("blackListId"))) {
 			b_id = request.getParameter("blackListId");
 			System.out.println("블랙리스트 대상 전송 ->"+b_id);
 			bls.updateBlackList(b_id);
@@ -56,7 +56,7 @@ public class BlackListServlet extends HttpServlet {
 		//===============================================
 		
 		//===================블랙리스트 제거==================
-		if(null != request.getParameter("deleteblackId")) {
+		if(null != request.getParameter("deleteblackId")&&!"".equals(request.getParameter("deleteblackId"))) {
 			b_id = request.getParameter("deleteblackId");
 			bls.deleteBlackList(b_id);
 		}

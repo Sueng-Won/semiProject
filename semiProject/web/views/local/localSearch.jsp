@@ -189,10 +189,7 @@
    }
    
    .nowMap .helpLayer .local li a {
-    padding: 0 3px;
-    color: #494949;
-    text-decoration: none;
-    font-size: 12px;
+    
    }
    
    
@@ -335,6 +332,27 @@
     height: 20px;
     padding: 3px;
    }
+   
+   .nowMap .helpLayer .local li a.seoulO{
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .local li a.seoulC{
+    padding: 0 3px;
+    color: #5e77fb;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .local li a{
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
 </style>
     <!-- 화면 상단 아이콘 이미지 -->
    <link rel="shortcut icon" href="/sp/images/icon.png">
@@ -363,22 +381,22 @@
                   <p class="title">* 지역을 선택하시면 <strong>중심지역(시청·구청·주민센터)</strong>으로 지도가 이동합니다.</p>
                <ul class="local">
                   <li id="dev_map_sicode_I000" ><a class="seoulO btn" id="lis" onclick="map_area_move_view2('')">서울</a></li>
-                  <li id="dev_map_sicode_B000"><a href="">경기</a></li>
-                  <li id="dev_map_sicode_K000"><a href="">인천</a></li>
-                  <li id="dev_map_sicode_A000"><a href="">강원</a></li>
-                  <li id="dev_map_sicode_G000"><a href="">대전</a></li>
-                  <li id="dev_map_sicode_1000"><a href="">세종</a></li>
-                  <li id="dev_map_sicode_O000"><a href="">충남</a></li>
-                  <li id="dev_map_sicode_P000"><a href="">충북</a></li>
-                  <li id="dev_map_sicode_H000"><a href="">부산</a></li>
-                  <li id="dev_map_sicode_J000"><a href="">울산</a></li>
-                  <li id="dev_map_sicode_C000"><a href="">경남</a></li>
-                  <li id="dev_map_sicode_D000"><a href="">경북</a></li>
-                  <li id="dev_map_sicode_F000"><a href="">대구</a></li>
-                  <li id="dev_map_sicode_E000"><a href="">광주</a></li>
-                  <li id="dev_map_sicode_L000"><a href="">전남</a></li>
-                  <li id="dev_map_sicode_M000"><a href="">전북</a></li>
-                  <li id="dev_map_sicode_N000"><a href="">제주</a></li>
+                  <li id="dev_map_sicode_B000"><a href="" >경기</a></li>
+                  <li id="dev_map_sicode_K000"><a href="" >인천</a></li>
+                  <li id="dev_map_sicode_A000"><a href="" >강원</a></li>
+                  <li id="dev_map_sicode_G000"><a href="" >대전</a></li>
+                  <li id="dev_map_sicode_1000"><a href="" >세종</a></li>
+                  <li id="dev_map_sicode_O000"><a href="" >충남</a></li>
+                  <li id="dev_map_sicode_P000"><a href="" >충북</a></li>
+                  <li id="dev_map_sicode_H000"><a href="" >부산</a></li>
+                  <li id="dev_map_sicode_J000"><a href="" >울산</a></li>
+                  <li id="dev_map_sicode_C000"><a href="" >경남</a></li>
+                  <li id="dev_map_sicode_D000"><a href="" >경북</a></li>
+                  <li id="dev_map_sicode_F000"><a href="" >대구</a></li>
+                  <li id="dev_map_sicode_E000"><a href="" >광주</a></li>
+                  <li id="dev_map_sicode_L000"><a href="" >전남</a></li>
+                  <li id="dev_map_sicode_M000"><a href="" >전북</a></li>
+                  <li id="dev_map_sicode_N000"><a href="" >제주</a></li>
                </ul>
                   <div id="dev_map_areagu_box" class="area hide">
                      <h3 class="skip">서울</h3>
@@ -446,7 +464,7 @@
       
         <!-- 지도API예제연습-->
          
-           <div class="row" style="min-height: 240px">
+           <div class="row" style="min-height: 200px">
          <%for(RecruitmentVo rv : list) {%>
                <div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4">
                  <div class="card h-100">

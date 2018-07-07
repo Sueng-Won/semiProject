@@ -49,7 +49,7 @@ public class QnaDao {
 		ResultSet rs = null;
 		String query = "SELECT * FROM " + 
 				"(SELECT ROWNUM RNUM, P.* " + 
-				"FROM(SELECT Q_NO, CONTENT, ANSWER, CATEGORY, REPORTING_DATE, M_ID " + 
+				"FROM(SELECT Q_NO, CONTENT, ANSWER, CATEGORY, IS_CHECKED , REPORTING_DATE, M_ID " + 
 				"FROM QNA " + 
 				"WHERE M_ID = ? " + 
 				"ORDER BY REPORTING_DATE) P) " + 
@@ -68,6 +68,7 @@ public class QnaDao {
 				temp.setContent(rs.getString("content"));
 				temp.setAnswer(rs.getString("answer"));
 				temp.setCategory(rs.getString("category"));
+				temp.setIs_checked(rs.getInt("is_checked"));
 				temp.setReporting_date(rs.getDate("reporting_date"));
 				temp.setM_id(id);
 				
@@ -204,9 +205,10 @@ public class QnaDao {
 				qv.setAnswer(rs.getString("answer"));
 				qv.setCategory(rs.getString("category"));
 				qv.setReporting_date(rs.getDate("reporting_date"));
+				qv.setIs_checked(rs.getInt("is_checked"));
 				qv.setName(rs.getString("name"));
 				qv.setMember_type(rs.getString("member_type"));
-				qv.setM_id(m_id);
+				qv.setM_id(rs.getString("m_id"));
 				result.add(qv);	
 			}
 			System.out.println("admin select 성공");
@@ -239,6 +241,31 @@ public class QnaDao {
 			}finally {
 				JDBCTemplate.close(pstmt);
 			}
+		return result;
+	}
+
+	public String getContent(Connection con, int q_no) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String result = null;
+		String query = "SELECT CONTENT FROM QNA WHERE Q_NO = ? ";
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, q_no);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				result = rs.getString("CONTENT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+			
+			
+		}
 		return result;
 	}
 }

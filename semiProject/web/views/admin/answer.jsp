@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% int q_no = (int)request.getAttribute("q_no");
-   String answer = (String)request.getAttribute("answer");
-   
-   System.out.println(q_no);
-   
+	String answer = (String)request.getAttribute("answer");
+	String content = (String)request.getAttribute("content");
+	
 %>
 <!DOCTYPE html >
 <!-- 브랜치 생성 -->
@@ -22,7 +21,7 @@
     border-bottom: 1px solid #363d54;
     list-style: none;
     padding: 0;
-    margin: 0;   
+    margin: 0;	
     display: block;
     -webkit-margin-before: 1.5em;
     -webkit-margin-after: 1em;
@@ -70,7 +69,7 @@
 }
 
 .star{
-   color : orangered;
+	color : orangered;
 }
 
 .tableA {
@@ -107,7 +106,7 @@ tr {
 }
 
 .slt{
-   height: 32px;
+	height: 32px;
     padding: 0 0 0 10px;
     border: 1px solid #dbdee1;
     font: 14px "맑은고딕", "Malgun Gothic",Dotum, "돋움", sans-serif;
@@ -163,7 +162,7 @@ p {
 }
 
 .chk{
-   width: 13px;
+	width: 13px;
     height: 13px;
     margin: 0 6px 0 0;
     vertical-align: middle;
@@ -285,7 +284,6 @@ tr {
     font: 14px "맑은고딕", "Malgun Gothic",Dotum, "돋움", sans-serif;
     color: #494949;
     background: #fdfdfd;
-   
 }
 
 .top2 ul li {
@@ -301,6 +299,7 @@ tr {
     font: 14px 맑은고딕, "Malgun Gothic", Dotum, 돋움, sans-serif;
     resize: none;
 }
+
 .privacyWp {
     margin-top: 20px;
     font-size: 12px;
@@ -335,14 +334,20 @@ tr {
 }
 
 .btn{
-   padding: 40px 0 62px 0;
-   margin: 0;
+	padding: 40px 0 62px 0;
+	margin: 0;
     display: block;
     -webkit-margin-before: 0em;
     -webkit-margin-after: 0em;
     -webkit-margin-start: -50px;
     -webkit-margin-end: 0px;
 } 
+
+span {
+    font-weight: bold;
+    font-size: 15px;
+    color: #ff6633;
+}
 </style>
 
 
@@ -351,18 +356,18 @@ tr {
    <link href="/sp/vendor/bootstrap/css/bootstrap.min.css"rel="stylesheet">
     <link href="/sp/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
     <!-- 화면 상단 아이콘 이미지 -->
-   <link rel="shortcut icon" href="/sp/images/icon.png">
+	<link rel="shortcut icon" href="/sp/images/icon.png">
     <!-- <link href="/sp/css/qnaNew.css" rel="stylesheet"> -->
     <script src="/sp/vendor/jquery/jquery.min.js"></script>
     <script type="text/javascript">
-         
+   	   
 
     </script>
 </head>
 <body>
    
 
-<form id="qnaFrm" name="form" class="fixed-top" method="post" action="/sp/qna.do"  style="padding: 20px 28px 20px 28px; overflow-y:scroll; height:700px;">
+<form id="qnaFrm" name="form" class="fixed-top" method="post" action="/sp/answerQna.do"  style="padding: 20px 28px 20px 28px; overflow-y:scroll; height:700px;">
    <div class="allwp">
    <div>답변 페이지
       <div class="progress" style="height: 1.5px; ">
@@ -370,66 +375,48 @@ tr {
       </div>
    </div>
 
-   <div class="top" style="-webkit-margin-before: -1em;">
+    <div class="top" style="-webkit-margin-before: -1em;">
          <ul>
              <li class="m1"><a>답변 하기</a></li>
          </ul>
     </div>
     
     <div class="top2" style="-webkit-margin-before: -1.5em;">
-          <ul>
-              <li></li>
-              <li></li>
-          </ul>
+          
     </div>
    
    <table class="tableA" style="-webkit-margin-before: -1.5em;">
       <tbody>
-         <tr>
-            <th>
-               <label>
-                  <span class="star">*</span> 문의유형
-               </label>
-            </th>
-            <td>
-               <select name="slt" id="slt" class="slt sltL" title="대분류 선택" style="width:180px;">
-               <option value="대분류 선택">대분류 선택</option>
-               <option value="회원정보">회원정보</option>
-               <option value="이력서관리">이력서관리</option>
-               <option value="구직활동관리">구직활동관리</option>
-               <option value="공고등록관리">공고등록관리</option>
-               <option value="유료서비스">유료서비스</option>
-               <option value="오류/의견">오류/의견</option>
-               <option value="기타">기타</option>
-               </select>
+      	 <tr>
+            <td colspan="3">
+                 <dl>
+                 	<dt style="-webkit-margin-before: 1em;"><span class="mr-2">Q.</span><%= content%></dt>
+                 </dl>
             </td>
          </tr>
-                        
+      
          <tr>
             <th class="loc">
-               <label>
-                  <span class="star">*</span> 문의내용
-               </label>
+               <label>답변하기</label>
             </th>
             <td>
                <div class="txWp">
-               <textarea name="Contents" id="Contents" maxlength="3000"></textarea>
+               <textarea name="answer" id="answer" maxlength="3000"></textarea>
                </div>
             </td>
          </tr>
-                        
-                       
       </tbody>   
    </table>
    
-      <div class="row">
-         <div class="col-4"></div>
-       <p class="btn col-4">
-          <input id="btn_submit" class="bBtn bg-dark" value="보내기" onclick="starList();"/>
-          <a href="javascript:self.close();" class="cBtn">취소</a>
-       </p>
-         <div class="col-4"></div>
-     </div>
+   	<div class="row">
+   		<div class="col-4"></div>
+	    <p class="btn col-4">
+	       <input type="hidden" name="q_no" value="<%=q_no %>"/>
+	       <input id="btn_submit" class="bBtn bg-dark" value="보내기" type="submit"/>
+	       <a href="javascript:self.close();" class="cBtn">취소</a>
+	    </p>
+	   	<div class="col-4"></div>
+  	</div>
   </div>
 </form>
 
