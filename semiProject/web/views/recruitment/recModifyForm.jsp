@@ -97,6 +97,39 @@
 					}
 				}).open();
 	}
+	$(function() {
+		$('#workdate').datepicker({
+			format : "yyyy/mm/dd",
+			language : "kr",
+			autoclose : true,
+			startDate : "today"
+		});
+
+		$("#pay").keyup(function() {
+			var date = $("#workdate").val();
+			var start = $("#starttime").val();
+			var starthour = start.split(":")[0];
+			var startmin = start.split(":")[1];
+			if(startmin>0){
+				startmin=60-startmin;
+				}
+			var end = $("#endtime").val();
+			var endhour = end.split(":")[0];
+			var endmin = end.split(":")[1];
+			var min = endmin+startmin;
+			var hour = endhour-starthour-1;
+			if(min==0){
+				hour=hour+1;
+			}
+			var pay = ((7530*hour)+(7530/60)*min)/10;
+			if((((7530*hour)+(7530/60)*min)%10)>0){
+				pay=pay+1;
+			}
+			if(start!=""&&end!=""){
+			$("#calculatePay").text("*최저시급 : 약"+pay+"0원");
+			}
+		});
+	});
 </script>
 
 <!-- Page Content -->
@@ -188,7 +221,7 @@
 										<option>생산/건설</option>
 									</select>
 								</div>
-								<div class="col-2">
+								<div class="col-3">
 									<select name="career" multiple
 										class="custom-select-lg mt-1 ml-3 btn-dark"
 										style="min-height: 150px">
@@ -198,23 +231,25 @@
 									</select>
 								</div>
 
-								<div class="col-7">
+								<div class="col-6">
 									<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
-										<label>근무일</label> <input type="date" class="btn-dark"
-											name="workdate" />
-									</div>
-									<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
-										<label>시작시간</label> <input type="time" class="btn-dark"
-											name="starttime" />
-									</div>
-									<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
-										<label>종료시간</label> <input type="time" class="btn-dark"
-											name="endtime" />
-									</div>
-									<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
-										<label>급여</label> <input type="text" class="btn-dark"
-											name="pay" value="<%=rec.getPay()%>" />원
-									</div>
+								<label>근무일</label> <input type="text" id="workdate"
+									class="btn-dark" name="workdate" />
+							</div>
+							<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
+								<label>시작시간</label> <input type="time" class="btn-dark"
+									id="starttime" name="starttime" />
+							</div>
+							<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
+								<label>종료시간</label> <input type="time" class="btn-dark"
+									id="endtime" name="endtime" />
+							</div>
+							<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
+								<label>급여</label> <input type="text" class="btn-dark" id="pay"
+									name="pay" />원
+							</div>
+							<div class="text-white-50 ml-1" id="calculatePay" align="center">*최저시급
+								: 7,530원</div>s
 								</div>
 							</div>
 							<br>

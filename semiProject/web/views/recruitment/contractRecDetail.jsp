@@ -27,7 +27,7 @@
 	});
 	
 	function applyBtn() {
-		//해당업체에 구인글이 있는지 검색
+		location.href="/sp/searchSameBusiness.do?recId="+<%=rec.getRecruitment_id()%>;
 	}
 </script>
 <style>

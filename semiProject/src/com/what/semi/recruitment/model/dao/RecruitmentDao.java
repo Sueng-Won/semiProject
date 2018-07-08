@@ -670,4 +670,66 @@ public class RecruitmentDao {
 		return result;
 	}
 
+	public ArrayList<RecruitmentVo> loadSameBusiness(Connection con, String m_id) {
+		ArrayList<RecruitmentVo> list = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		String query = "";
+		try {
+			stmt = con.createStatement();
+			query = "SELECT RECRUITMENT_ID, RECRUITMENT_IMAGE_SRC, BUSINESS_TYPE, r.ADDRESS, r.ADDRESS_DETAIL, r.ZIPCODE,"
+					+ " WORK_DAY, R_LATITUDE, R_LONGITUDE, TO_CHAR(START_WORK_TIME,'HH24:MI') AS START_TIME, TO_CHAR(END_WORK_TIME,'HH24:MI') AS END_TIME,"
+					+ " PAY,r.GENDER, MILITARY_SERVICE, INTRODUCE,m. M_ID, IS_POST,DELFLAG, RECRUITMENT_NAME, RECRUITMENT_PHONE,"
+					+ "RECRUITMENT_EMAIL,RECRUITMENT_TITLE,ACHIEVEMENT,CAREER,M.NAME,M.PHONE " + "FROM RECRUITMENT R "
+					+ "JOIN MEMBER M ON (M.M_ID = R.M_ID) " + "WHERE R.M_ID='" + m_id + "' AND DELFLAG=0 AND IS_POST=1 " + "ORDER BY WORK_DAY";
+			// query = "SELECT * FROM RECRUITMENT";
+			//System.out.println(query);
+
+			rs = stmt.executeQuery(query);
+			list = new ArrayList<RecruitmentVo>();
+			RecruitmentVo rec = null;
+			while (rs.next()) {
+				rec = new RecruitmentVo();
+				rec = new RecruitmentVo();
+				rec.setRecruitment_id(rs.getString("RECRUITMENT_ID"));
+				rec.setRecruitment_image_src(rs.getString("RECRUITMENT_IMAGE_SRC"));
+				rec.setRecruitment_name(rs.getString("recruitment_name"));
+				rec.setRecruitment_title(rs.getString("recruitment_title"));
+				rec.setAddress(rs.getString("address"));
+				rec.setAddress_detail(rs.getString("address_detail"));
+				rec.setBusiness_type(rs.getString("business_type"));
+				rec.setR_latitude(rs.getDouble("r_latitude"));
+				rec.setR_longitude(rs.getDouble("r_longitude"));
+				rec.setPay(rs.getInt("pay"));
+				rec.setWork_day(rs.getDate("work_day"));
+				rec.setStart_work_time(rs.getString("start_time"));
+				rec.setEnd_work_time(rs.getString("end_time"));
+				rec.setGender(rs.getString("gender").charAt(0));
+				rec.setMilitary_service(rs.getInt("military_service"));
+				rec.setIntroduce(rs.getString("introduce"));
+				rec.setM_id(rs.getString("m_id"));
+				rec.setRecruitment_phone(rs.getString("RECRUITMENT_PHONE"));
+				rec.setRecruitment_email(rs.getString("RECRUITMENT_email"));
+				rec.setZipcode(rs.getString("zipcode"));
+				rec.setAchievement(rs.getString("achievement"));
+				rec.setCareer(rs.getInt("career"));
+				rec.setName(rs.getString("name"));
+				rec.setPhone(rs.getString("phone"));
+				rec.setIs_post(rs.getInt("is_post"));
+				rec.setDelflag(rs.getInt("delflag"));
+
+				// System.out.println(temp);
+				list.add(rec);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(stmt);
+		}
+
+		return list;
+	}
+
 }

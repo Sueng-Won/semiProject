@@ -174,4 +174,14 @@ public class RecruitmentService {
 
 		return result;
 	}
+
+	public ArrayList<RecruitmentVo> loadSameBusiness(String m_id) {
+		Connection con = JDBCTemplate.getConnection();
+
+		ArrayList<RecruitmentVo> list = new RecruitmentDao().loadSameBusiness(con, m_id);
+
+		JDBCTemplate.close(con);
+
+		return list;
+	}
 }

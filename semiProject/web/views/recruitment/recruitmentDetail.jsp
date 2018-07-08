@@ -41,6 +41,9 @@
 		$("#postNum").submit();
 	}
 
+	function goList(){
+		history.back();
+	}
 	$(function() {
 		var count = $("#ta").text().length;
 		if (count > 510) {
