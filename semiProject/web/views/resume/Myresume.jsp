@@ -1,8 +1,14 @@
 <%@page import="com.what.semi.resume.model.vo.MyResumeVo"%>
+<%@page import="com.what.semi.common.template.PageInfo"%>
+<%@page import="com.what.semi.recruitment.model.vo.RecruitmentVo"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	MyResumeVo member = (MyResumeVo) request.getAttribute("member");
+	ArrayList<RecruitmentVo> recList = (ArrayList<RecruitmentVo>) request.getAttribute("recList");
+	
+	int contRe = (int) request.getAttribute("contRe");
 %>
 <%@include file="/views/common/header.jsp"%>
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
@@ -51,18 +57,46 @@ div {
 	height: 120px;
 }
 </style>
+<script>
+	function applyBtn() {
+		if (
+<%=member_type.equals("BO")%>
+	) {
+			if (<%=recList.size()%>>0) {
+				$('div.modal').modal();
+			} else {
+				alert("등록된 구인글이 없습니다!!");
+			}
+		} else {
+			alert("업주가 아니면 고용할 수 없습니다.");
+		}
+	}
 
+	function apply() {
+		$("#postNum").submit();
+	}
+
+	function goList() {
+		history.back();
+	}
+	$(function() {
+		if(<%=contRe%> != 0){
+			alert("고용제안이 완료되었습니다.");
+		}
+
+	});
+</script>
 <div class="container">
 	<div class="row">
 		<%@include file="/views/common/nav.jsp"%>
 		<div class="col-lg-9 mt-lg-auto">
-			<div class="row" style="margin:30px 0 0 40px;;">
-					<div class="row page-header" style="width:700px;">
-						<h1>
-							나의 이력서<br> <small><%=member.getIntroduce_title()%></small>
-						</h1>
-					</div>
-				<div class="row" style="width:700px;">
+			<div class="row" style="margin: 30px 0 0 40px;">
+				<div class="row page-header" style="width: 700px;">
+					<h1>
+						나의 이력서<br> <small><%=member.getIntroduce_title()%></small>
+					</h1>
+				</div>
+				<div class="row" style="width: 700px;">
 					<div class="col-xs-3 col-md-3 col-xs-offset-1">
 						<a class="thumbnail"><img id="profileImg"
 							src="/sp/profile_photo/<%if (member.getProfile_image_src() == null) {%>default_photo.jpeg<%} else {%><%=member.getProfile_image_src()%><%}%>">
@@ -141,6 +175,59 @@ div {
 			<div class="col-xs-12 auth">
 				<h2 align="center">위 입력사항은 사실과 다름이 없습니다</h2>
 				<p align="center">작성자: XXX</p>
+			</div>
+			<div class="line">
+				<%
+					if (!(member.getId().equals(id))) {
+				%>
+				<div align="center">
+					<button onclick="applyBtn();"
+						class="btn btn-default bg-dark text-white">제안하기</button>
+				</div>
+				<%
+					}
+				%>
+				<div align="right">
+					<button onclick="goList();"
+						class="btn btn-default bg-dark text-white">목록으로</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 팝업 모달영역 -->
+<div class="modal fade" id="layerpop">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- header -->
+			<div class="modal-header">
+				<!-- 닫기(x) 버튼 -->
+				<!-- header title -->
+				<h4 class="modal-title">이력서 선택</h4>
+				<button type="button" class="close" data-dismiss="modal">×</button>
+			</div>
+			<!-- body -->
+			<div class="modal-body">
+				<form id="postNum" method="get" action="/sp/apply.do">
+					<input type="hidden" name="js_id" value="<%=member.getId()%>" /> <input
+						type="hidden" name="bo_id" value="<%=id%>" /> <input
+						type="hidden" name="resumeId" value="<%=member.getResume_id()%>" />
+					<div class="radio">
+						<%
+							for (int i = 0; i < recList.size(); i++) {
+						%>
+						<label for="post<%=i%>"><%=recList.get(i).getRecruitment_title()%>
+							<input id="post<%=i%>" type="radio"
+							value="<%=recList.get(i).getRecruitment_id()%>" name="recId"
+							checked /> </label><br>
+						<%
+							}
+						%>
+					</div>
+				</form>
+				<hr>
+				<button type="button" class="btn btn-success" onclick="apply();">제안</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
 			</div>
 		</div>
 	</div>

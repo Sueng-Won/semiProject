@@ -56,7 +56,7 @@
 
 		<%@include file="/views/common/nav.jsp"%>
 		<div class="col-lg-9" style='padding-top: 50px; padding-left: 30px;'>
-			<h3>해당 업체 목록</h3>
+			<h3>해당 구직자 목록</h3>
 			<!-- Page Content -->
 			<!-- <div class="media mt-4 border rounded bg-light">
 		     
@@ -75,10 +75,10 @@
 			<table class="list-table">
 				<tbody>
 					<tr>
-						<th><div class="table-td">근무형태</div></th>
+						<th><div class="table-td">업종</div></th>
 						<th><div class="td-title">구직자명/이력서제목</div></th>
-						<th><div class="table-td-location">지역</div></th>
-						<th><div class="table-td">근무일</div></th>
+						<th><div class="table-td-location">희망근무지</div></th>
+						<th><div class="table-td">근무희망일</div></th>
 					</tr>
 					<%
 						for (int i = 0; i < list.size(); i++) {

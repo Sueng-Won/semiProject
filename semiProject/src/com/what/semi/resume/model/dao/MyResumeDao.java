@@ -21,7 +21,7 @@ public class MyResumeDao {
 		
 		try {
 			query = "SELECT MILTARY_SERVICE, BUSINESS_TYPE, WORKABLE_DAYS, GENDER, PRI_RESUME, RESUME_ID, ADDRESS, INTRODUCE_TITLE, IS_POST, NAME, MEMBER_TYPE FROM RESUME R JOIN MEMBER M ON (R.M_ID = M.M_ID) WHERE M.M_ID=? AND MEMBER_TYPE='JS' AND R.DELFLAG=0";
-			System.out.println(query);
+			//System.out.println(query);
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();

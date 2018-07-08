@@ -41,7 +41,6 @@ public class SearchSameJobseekerServlet extends HttpServlet {
 		MyResumeVo resume = new MyResumeService().selectResume(resumeId);
 		
 		ArrayList<MyResumeVo> list = new MyResumeService().selectMyInfo(resume.getId());
-		System.out.println(list.size());
 
 		String url = "";
 		if (null != list) {
