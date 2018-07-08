@@ -32,9 +32,11 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
 %>
 
 <%@include file="/views/common/header.jsp" %>
-<script>
-	fu
-</script>
+<style>
+	h4{
+		cursor: pointer;
+	}
+</style>
     <!-- Page Content -->
     <div class="container" style="min-height: 800px">	<!-- 내용을 담아놓을 컨테이너 -->
 
@@ -69,11 +71,12 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
             <%for(RecruitmentVo rv : list) {%><!-- for문을 통해 해당 게시물들의 개수에 맞게 생성 -->
 	            <div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4" style="max-height: 400px">
 	              <div class="card h-100">
-	                <a href="#"><img class="card-img-top" src="http://placehold.it/300x300" alt=""></a>
+	                <img class="card-img-top" src="<%=null == rv.getRecruitment_image_src()?"/sp/images/building.jpeg":"/sp/images/recruitmentImg/"+rv.getRecruitment_image_src() %>" alt="">
 	                <div class="card-body">
-	                  <h4 class="card-title">
-	                    <a href="#"><%=rv.getRecruitment_title() %></a><!-- 게시물 이름 -->
+	                  <h4 class="card-title btn-link" onclick="recDetail(<%=rv.getRecruitment_id()%>)">
+	                    <%=rv.getRecruitment_title() %><!-- 게시물 이름 -->
 	                  </h4>
+	                  <h6><%=rv.getRecruitment_name() %></h6>
 	                  <h5>시급 : <%=rv.getPay()%></h5>
 	                  <p class="card-text"><%=rv.getWork_day() %></p>
 	                </div>
@@ -123,6 +126,10 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
 		$("#resumeId").val(value);
 		$("#matchingSearchForm").submit();
 		
+	}
+	
+	function recDetail(i){
+		location.href="/sp/recruitmentDetail.do?recId="+i+"&currentPage="+<%=currentPage%>;
 	}
 </script>
 <%@include file="/views/common/footer.jsp"%>

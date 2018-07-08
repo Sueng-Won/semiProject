@@ -59,6 +59,8 @@
 			close();
 		});
 	});
+	
+	
 </script>
 <style>
 .line {
@@ -230,11 +232,13 @@ tr {
 				<div id="ta"><%=rec.getIntroduce()%></div>
 			</div>
 			<div class="space"></div>
-			<div class="line">지도</div>
+			<div class="line">
+				<div id="map" style="width:670px;height:400px;"></div>
+			</div>
 			<div class="space"></div>
 			<div class="line">
 				<div align="center">
-					<%if(rec.getDelflag() != 0){ %>
+					<%if(rec.getDelflag() != 1){ %>
 					<button id="deleteBtn"
 						class="btn btn-default bg-dark text-white mr-2">게시물 삭제</button>
 					<%}else{ %>
@@ -247,5 +251,44 @@ tr {
 			</div>
 		</div>
 	</div>
+<script type="text/javascript">
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = { 
+   
+   center: new daum.maps.LatLng(<%=rec.getR_latitude()%>, <%=rec.getR_longitude()%>), // 지도의 중심좌표
+   level: 3 // 지도의 확대 레벨
+
+};
+
+// 지도를 생성합니다
+   var map = new daum.maps.Map(mapContainer, mapOption); 
+
+   var content = '<div><%=rec.getRecruitment_name()%></div>';
+   var latlng = new daum.maps.LatLng(<%=rec.getR_latitude()%>, <%=rec.getR_longitude()%>);
+      
+var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+
+       
+       // 마커 이미지의 이미지 크기 입니다
+       var imageSize = new daum.maps.Size(24, 35); 
+       
+       // 마커 이미지를 생성합니다    
+       var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize); 
+      
+       // 마커를 생성합니다
+       var marker = new daum.maps.Marker({
+           map: map, // 마커를 표시할 지도
+           position: latlng, // 마커를 표시할 위치
+           image : markerImage // 마커 이미지 
+       });
+       
+       // 마커에 표시할 인포윈도우를 생성합니다 
+       var infowindow = new daum.maps.InfoWindow({
+           content: content // 인포윈도우에 표시할 내용
+       });
+       
+       daum.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+       daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+</script>
 </body>
 </html>
