@@ -25,6 +25,10 @@
 			location.href = "/sp/adminQnaList.do";
 		}
 		
+		function managePost() {
+			location.href = "/sp/managePost.do";
+		}
+		
 		
 	</script>
 	<style type="text/css">

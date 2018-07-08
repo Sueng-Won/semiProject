@@ -351,17 +351,14 @@ dl {
 	            <td colspan="3">
 	            	<dl>
 	            	<dt><span>Q.</span><%=qv.getContent() %></dt>
-	            	<dd><span>A.</span>안녕하세요. 오늘뭐해 고객센터입니다.<br><br>늘 오늘뭐해를 이용해주셔서 진심으로 감사 드립니다. <br>
-	            	<br>문의 주신 내역에 대해 답변 드립니다. <br><br>앞으로도 고객님께 더욱 큰 만족을 드릴 수 있도록 노력하는 오늘뭐해가 되겠습니다.<br>
-	            	<br>추가 문의사항은 오늘뭐해 고객센터로 문의 주시면 신속히 안내해드리겠습니다.<br><br>
-	            	감사합니다.<br></dd></dl>
+	            	<dd><span>A.</span><%=qv.getAnswer() %></dd></dl>
 	            </td>
             </tr>
          	<%}else if(qv.getIs_checked() == 0) { %>
          	<tr class="ask" data-idx="251696" >
                 <td class="date"><%=qv.getReporting_date() %></td>
                 <td class="his"><a><%=qv.getContent() %></a></td>
-                <td class="state "><a href="#"><em>접수 완료</em>
+                <td class="state "><a href="#"><em>접수 확인중</em>
                 	<span class="arrow" >열기</span></a>
                 </td>
             </tr>

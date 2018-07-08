@@ -7,15 +7,13 @@
    String id = (String)session.getAttribute("id"); 
    ArrayList<QnaVo> qna = (ArrayList<QnaVo>)request.getAttribute("list");
 
-  /*  PageInfo pi = (PageInfo)request.getAttribute("pi");
+   PageInfo pi = (PageInfo)request.getAttribute("pi");
    int listCount = pi.getTotalCount();
    int currentPage = pi.getCurrentPage();
    int maxPage = pi.getMaxPage();
    int startPage = pi.getStartPage();
-   int endPage = pi.getEndPage(); */
-
+   int endPage = pi.getEndPage(); 
 %>
-
 <!DOCTYPE html >
 
 <html>
@@ -166,6 +164,13 @@ tbody {
     font-size: 13px;
 }   
 
+.tbl tr td.id {
+    text-align: left;
+    color: #494949;
+    text-decoration: none;
+    font-size: 13px;
+}   
+
 .myInquire .tbl {
     border-collapse: collapse;
     font-size: 13px;
@@ -282,16 +287,36 @@ dl {
     });
     
     function movePage(pageNum){
-       location.href = "/sp/qna.do?currentPage=" + pageNum;
+       location.href = "/sp/adminQnaList.do?currentPage=" + pageNum;
+       
+       
     }
-   </script>
+    
+    //Q&A 게시판
+    function answer(q_no){
+          window.open("/sp/answerQna.do?q_no="+q_no,"_blank","width=600, height=700, left=auto,top=auto");
+    }; 
+    
+    //셀렉트 값 입력한 값으로 고정
+    /* $(document).ready(function () {
+       var category="${param.category}";
+         $("#category").val(category);
+         
+         var is_checked="${param.is_checked}";
+         $("#is_checked").val(is_checked);
+    }); */ 
+    
+    
+</script>
+   
+   
 </head>
 <body>
    <div class="container" style="min-height: 800px">
       <div class="row">
       <%@include file="adminNav.jsp" %>
          
-      <form class="" method="post" action="/sp/adminQnaList.do" style="padding: 20px;">
+      <form class="col-lg-9 my-4" method="post" action="/sp/adminQnaList.do" style="padding: 20px;" name="test">
          <div class="allwp">
             <div>회원 문의내역
                <div class="progress" style="height: 1.5px; ">
@@ -306,20 +331,21 @@ dl {
              </div>
              
              <div class="top2" style="-webkit-margin-before: -1.5em;">
+                    
                      <select name="category" id="category" class="slt sltL" style="width:180px;" >
-			               <option value="">대분류 선택</option>
-			               <option value="회원정보">회원정보</option>
-			               <option value="이력서관리">이력서관리</option>
-			               <option value="구직활동관리">구직활동관리</option>
-			               <option value="공고등록관리">공고등록관리</option>
-			               <option value="유료서비스">유료서비스</option>
-			               <option value="오류/의견">오류/의견</option>
-			               <option value="기타">기타</option>
+                        <option value="">대분류 선택</option>
+                        <option value="회원정보" ${param.category eq "회원정보" ? "selected" :""}>회원정보</option>
+                        <option value="이력서관리" ${param.category eq "이력서관리" ? "selected" :""}>이력서관리</option>
+                        <option value="구직활동관리" ${param.category eq "구직활동관리" ? "selected" :""}>구직활동관리</option>
+                        <option value="공고등록관리" ${param.category eq "공고등록관리" ? "selected" :""}>공고등록관리</option>
+                        <option value="유료서비스" ${param.category eq "유료서비스" ? "selected" :""}>유료서비스</option>
+                        <option value="오류/의견" ${param.category eq "오류/의견" ? "selected" :""}>오류/의견</option>
+                        <option value="기타" ${param.category eq "기타" ? "selected" :""}>기타</option>
                      </select>
-                     
+                
                      <select name="is_checked" id="is_checked" class="slt sltL ml-5" style="width:180px;">
-                     <option value="0">미답변</option>
-                     <option value="1">답변완료</option>
+                     <option value="0" ${param.is_checked eq "0" ? "selected" :""}>미답변</option>
+                     <option value="1" ${param.is_checked eq "1" ? "selected" :""}>답변완료</option>
                      </select>
                      
                      <div class="input-group col-4" style="-webkit-margin-before: -3em; -webkit-margin-start: 450px;">
@@ -338,13 +364,15 @@ dl {
                </caption>
                
                <colgroup>
-                  <col width="19%">
-                  <col width="420px">
-                  <col width="20%">
+                   <col width="10%">
+                  <col width="15%">
+                  <col width="320px">
+                  <col width="15%">
                </colgroup>
                
                <thead>
                   <tr>
+                  <th scope="col">아이디</th>
                   <th scope="col">문의일</th>
                   <th scope="col">문의내역</th>
                   <th scope="col">처리상태</th>
@@ -363,6 +391,7 @@ dl {
                   
                   <%if(qv.getIs_checked() == 1){ %>
                   <tr class="ask" data-idx="251696" >
+                       <td class="id"><%=qv.getM_id()%></td>
                       <td class="date"><%=qv.getReporting_date() %></td>
                       <td class="his"><a><%=qv.getContent() %></a></td>
                       <td class="state on"><a href="#"><em>답변완료</em>
@@ -371,15 +400,16 @@ dl {
                   </tr>
                   
                   <tr class="answer" style="display: none;">
-                     <td colspan="3">
+                     <td colspan="4">
                         <dl>
                         <dt><span>Q.</span><%=qv.getContent() %></dt>
-                        <dd><span style="-webkit-margin-start: -69px; -webkit-margin-before: 1.5em;">A.</span>
-                        </dd></dl>
+                        <dd><span style="-webkit-margin-start: -69px; -webkit-margin-before: -1.6em;">A.</span><%=qv.getAnswer() %></dd></dl>
                      </td>
-                  </tr>
+                 </tr>
+                  
                   <%}else if(qv.getIs_checked() == 0) { %>
                   <tr class="ask" data-idx="251696" >
+                      <td class="id"><%=qv.getM_id()%></td>
                       <td class="date"><%=qv.getReporting_date() %></td>
                       <td class="his"><a><%=qv.getContent() %></a></td>
                       <td class="state "><a href="#"><em>답변보기</em>
@@ -388,11 +418,12 @@ dl {
                   </tr>
                   
                   <tr class="answer" style="display: none;">
-                     <td colspan="3">
+                     <td colspan="4">
                         <dl>
-                        <dt style="-webkit-margin-before: 1em;"><span>Q.</span>답변좀요</dt>
+                        <dt style="-webkit-margin-before: 1em;"><span>Q.</span><%=qv.getContent() %></dt>
                         </dl>
-                        <input class="btn btn-dark ml-1" type="submit" id="" value="답변달기" style="">
+                        <hr>
+                        <button class="btn btn-dark ml-1" id="" onclick="answer(<%=qv.getQ_no()%>);">답변달기</button>
                      </td>
                      
                   </tr>
@@ -404,14 +435,19 @@ dl {
             </div>
             
            <!-- 페이징 처리 -->
-            <!--  <div class="btn-toolbar mb-1" role="toolbar">
-                 <div class="btn-group" role="group">
-                     <button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white">◀</button>
-                        <button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white"></button>
-                        <button type="button" class="btn btn-default bg-dark text-white disabled"></button>
-                     <button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white">▶</button>
-                 </div>
-             </div> --> 
+             <div class="btn-toolbar mb-1" role="toolbar">
+           <div class="btn-group" role="group">
+               <button onclick="movePage(<%=currentPage==1?1:currentPage-1%>);" type="button" class="btn btn-default bg-dark text-white">◀</button>
+               <%for(int i = startPage; i <= endPage; i++){ %>
+                  <%if(currentPage != i){ %>
+                  <button onclick="movePage(<%=i %>);" type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
+                  <%}else{ %>
+                  <button type="button" class="btn btn-default bg-dark text-white disabled"><%=i %></button>
+                  <%} %>
+               <%} %>
+               <button onclick="movePage(<%=currentPage==maxPage?maxPage:currentPage+1%>);" type="button" class="btn btn-default bg-dark text-white">▶</button>
+           </div>
+       </div> 
          </div>
       </form>
    </div>
