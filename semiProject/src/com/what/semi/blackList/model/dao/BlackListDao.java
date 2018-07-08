@@ -35,7 +35,7 @@ public class BlackListDao {
 					"WHERE MEMBER_TYPE LIKE '%'|| ? || '%' " + 
 					"AND (M.NAME LIKE '%'|| ? || '%' " +
 					"OR M.M_ID LIKE '%'|| ? || '%') " +
-					"AND MEMBER_TYPE != 'AM'";
+					"AND M.M_ID != 'admin'";
 			
 			switch (isReport) {  //신고 유무를 확인하는 switch문
 			case "O":	//신고된 회원
@@ -94,7 +94,7 @@ public class BlackListDao {
 					"WHERE MEMBER_TYPE LIKE '%'|| ? || '%' " + 
 					"AND (M.NAME LIKE '%'|| ? || '%' "+
 					"OR M.M_ID LIKE '%'|| ? || '%') "+
-					"AND MEMBER_TYPE != 'AM'";
+					"AND M.M_ID != 'admin'";
 			
 			switch (isReport) {  //신고 유무를 확인하는 switch문
 			case "O":	//신고된 회원

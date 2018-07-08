@@ -65,7 +65,7 @@ String keyword = condition.getUserName();
 		
 		function deleteRecruitment(obj) {
 			$.ajax({
-				url : "/sp/deleteRec.do",
+				url : "/sp/adminDeleteRec.do",
 				type : "get",
 				data : {r_no : obj},
 				success : function(data) {
@@ -82,7 +82,7 @@ String keyword = condition.getUserName();
 		
 		function resetRecruitment(obj) {
 			$.ajax({
-				url : "/sp/resetRec.do",
+				url : "/sp/adminResetRec.do",
 				type : "get",
 				data : {r_no : obj},
 				success : function(data) {
@@ -97,9 +97,57 @@ String keyword = condition.getUserName();
 			});
 		}
 		
-		var win;
+		function deleteResume(obj) {
+			$.ajax({
+				url : "/sp/adminDeleteResume.do",
+				type : "get",
+				data : {r_no : obj},
+				success : function(data) {
+					alert(data);
+				},
+				error : function() {
+					alert("게시물 삭제중 오류가 발생하였습니다.")
+				},
+				complete : function() {
+					$("#postListForm").submit();
+				}
+			});
+		}
+		
+		function resetResume(obj) {
+			$.ajax({
+				url : "/sp/adminResetResume.do",
+				type : "get",
+				data : {r_no : obj},
+				success : function(data) {
+					alert(data);
+				},
+				error : function() {
+					alert("게시물 복구중 오류가 발생하였습니다.")
+				},
+				complete : function() {
+					$("#postListForm").submit();
+				}
+			});
+		}
+		
+		
 		function newRecruitmentPage(r_no){
-	        win = window.open("/sp/manageRecFormView.do?r_no="+r_no,"_blank","width=1000, height=900, left=auto,top=auto");
+	        var win = window.open("/sp/manageRecFormView.do?r_no="+r_no,"_blank","width=1000, height=900, left=auto,top=auto");
+	        var interval = window.setInterval(function() {
+	        	try {
+	                if (win.closed) {
+	                    window.clearInterval(interval);
+	                    $("#postListForm").submit();
+	                }
+	            }
+	            catch (e) {
+	            }
+	        }, 10);
+	    }; 
+	    
+		function newResumePage(r_no){
+	        var win = window.open("/sp/manageResFormView.do?r_no="+r_no,"_blank","width=1000, height=900, left=auto,top=auto");
 	        var interval = window.setInterval(function() {
 	        	try {
 	                if (win.closed) {
@@ -204,7 +252,11 @@ String keyword = condition.getUserName();
 			     		<div class="col-3">구직자</div>
 			     		<div class="col-3 btn-link" onclick="newResumePage(<%=mv.getResume_id()%>);"><%=mv.getIntroduce_title() %></div>
 			     		<div class="btn-group col-lg-3 col-12" role="group" aria-label="...">
+			     			<%if(mv.getDelflag() != 0){ %>
 						  <button onclick="deleteResume('<%=mv.getResume_id()%>');" class="btn btn-dark btn-sm">게시물 삭제</button>
+						  	<%}else{ %>
+						  <button onclick="resetResume('<%=mv.getResume_id()%>');" class="btn btn-dark btn-sm">게시물 복구</button>
+						  	<%} %>
 						</div>
 			     	</div>
 			      </div>

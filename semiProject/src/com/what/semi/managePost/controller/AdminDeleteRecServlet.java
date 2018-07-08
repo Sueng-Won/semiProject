@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.what.semi.managePost.model.service.ManagePostService;
 
 
-@WebServlet("/deleteRec.do")
-public class DeleteRecServlet extends HttpServlet {
+@WebServlet("/adminDeleteRec.do")
+public class AdminDeleteRecServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public DeleteRecServlet() {
+    public AdminDeleteRecServlet() {
         super();
     }
 

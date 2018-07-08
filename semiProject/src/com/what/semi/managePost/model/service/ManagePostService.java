@@ -56,6 +56,20 @@ public class ManagePostService {
 		return result;
 	}
 
+	public int resetRecruitment(int r_no) {
+		Connection con = JDBCTemplate.getConnection();
+		
+		int result = new ManagePostDao().resetRecruitment(con, r_no);
+		if (result != 0) {
+			JDBCTemplate.commit(con);
+		} else {
+			JDBCTemplate.rollback(con);
+		}
+		JDBCTemplate.close(con);
+		
+		return result;
+	}
+	
 	public ManageRecruitmentVo selectedRecruitment(int r_no) {
 		Connection con = JDBCTemplate.getConnection();
 		
@@ -65,10 +79,10 @@ public class ManagePostService {
 		return mrv;
 	}
 
-	public int resetRecruitment(int r_no) {
+	public int deleteReume(int r_no) {
 		Connection con = JDBCTemplate.getConnection();
 
-		int result = new ManagePostDao().resetRecruitment(con, r_no);
+		int result = new ManagePostDao().deleteReume(con, r_no);
 		if (result != 0) {
 			JDBCTemplate.commit(con);
 		} else {
@@ -76,6 +90,20 @@ public class ManagePostService {
 		}
 		JDBCTemplate.close(con);
 
+		return result;
+	}
+	
+	public int resetResume(int r_no) {
+		Connection con = JDBCTemplate.getConnection();
+		
+		int result = new ManagePostDao().resetResume(con, r_no);
+		if (result != 0) {
+			JDBCTemplate.commit(con);
+		} else {
+			JDBCTemplate.rollback(con);
+		}
+		JDBCTemplate.close(con);
+		
 		return result;
 	}
 }

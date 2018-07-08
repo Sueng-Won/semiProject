@@ -206,6 +206,7 @@ public class ManagePostDao {
 				mrec.setIntroduce(rs.getString("introduce"));
 				mrec.setWorkTime(rs.getString("work_time"));
 				mrec.setGender(rs.getString("gender").charAt(0));
+				mrec.setDelflag(rs.getInt("DELFLAG"));
 				list.add(mrec);
 			}
 
@@ -426,6 +427,42 @@ public class ManagePostDao {
 		}
 		
 		
+		return result;
+	}
+
+	public int deleteReume(Connection con, int r_no) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE RESUME SET DELFLAG = 0 WHERE RESUME_ID = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, r_no);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	public int resetResume(Connection con, int r_no) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE RESUME SET DELFLAG = 1 WHERE RESUME_ID = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, r_no);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
 	

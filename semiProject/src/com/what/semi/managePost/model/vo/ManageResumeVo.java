@@ -25,21 +25,8 @@ public class ManageResumeVo {
 	private String introduce;
 	private String workTime;
 	private char gender;
-	public String getWorkTime() {
-		return workTime;
-	}
-
-	public void setWorkTime(String workTime) {
-		this.workTime = workTime;
-	}
-
-	public String getIntroduce() {
-		return introduce;
-	}
-
-	public void setIntroduce(String introduce) {
-		this.introduce = introduce;
-	}
+	private int delflag;
+	
 
 	public ManageResumeVo() {
 
@@ -48,7 +35,7 @@ public class ManageResumeVo {
 	public ManageResumeVo(String id, int resume_id, String introduce_title, int is_post, String member_type,
 			char pri_resume, String profile_image_src, String achievement, int disability, int miltary_service,
 			int career, String business_type, Date workable_days, String name, String birth, String phone, String email,
-			String address) {
+			String address, int delflag) {
 		super();
 		this.id = id;
 		this.resume_id = resume_id;
@@ -68,6 +55,7 @@ public class ManageResumeVo {
 		this.phone = phone;
 		this.email = email;
 		this.address = address;
+		this.delflag = delflag;
 	}
 
 	public String getProfile_image_src() {
@@ -223,7 +211,21 @@ public class ManageResumeVo {
 		this.gender = gender;
 	}
 
-	
+	public String getWorkTime() {
+		return workTime;
+	}
+
+	public void setWorkTime(String workTime) {
+		this.workTime = workTime;
+	}
+
+	public String getIntroduce() {
+		return introduce;
+	}
+
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
+	}
 	
 	public String getAddressDetail() {
 		return addressDetail;
@@ -231,6 +233,16 @@ public class ManageResumeVo {
 
 	public void setAddressDetail(String addressDetail) {
 		this.addressDetail = addressDetail;
+	}
+	
+	
+
+	public int getDelflag() {
+		return delflag;
+	}
+
+	public void setDelflag(int delflag) {
+		this.delflag = delflag;
 	}
 
 	@Override
@@ -241,9 +253,9 @@ public class ManageResumeVo {
 				+ disability + ", miltary_service=" + miltary_service + ", career=" + career + ", business_type="
 				+ business_type + ", workable_days=" + workable_days + ", name=" + name + ", birth=" + birth
 				+ ", phone=" + phone + ", email=" + email + ", address=" + address + ", addressDetail=" + addressDetail
-				+ ", introduce=" + introduce + ", workTime=" + workTime + ", gender=" + gender + "]";
+				+ ", introduce=" + introduce + ", workTime=" + workTime + ", gender=" + gender + ", delflag=" + delflag
+				+ "]";
 	}
-	
-	
 
+	
 }

@@ -31,6 +31,7 @@ String keyword = condition.getKeyword();
 			var value = $(obj).val();
 			$("#mBtn").text(text);
 			$("#mTypeValue").val(value);
+			$("#blackListForm").submit();
 		}
 		
 		function Reported(obj) {
@@ -39,13 +40,13 @@ String keyword = condition.getKeyword();
 			console.log(text, value);
 			$("#rBtn").text(text);
 			$("#reportValue").val(value);
+			$("#blackListForm").submit();
 		}
 		
 		function movePage(pageNum) {
 			$("#currentPage").val(pageNum);
 			$("#blackListForm").submit();
 		}
-		
 		function updateBList(userId) {
 			console.log(userId);
 			$("#blackListId").val(userId);
@@ -70,34 +71,40 @@ String keyword = condition.getKeyword();
     			<h2 align="center" class="mb-3">사용자 관리</h2>
     			<form id="blackListForm" method="post" action="/sp/blackList.do">
     			<div class="row mb-4">
-    				
-    				<div class="btn-group col-md-2 col-xs-3 col-12 mb-1">
-					    <button type="button" id="rBtn" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-					    <%="".equals(isReport)?"신고유무": ("O".equals(isReport)?"신고 회원":("X".equals(isReport)?"미신고 회원":"회원 전체")) %>
-						    <span class="caret"></span>
-						</button>
-					    <input type="hidden" name="reportValue" id="reportValue" value="<%=isReport%>">
-						<ul class="dropdown-menu bg-dark" role="menu">
-							<li><button type="button" onclick="Reported(this);" name="isReport" class="btn btn-dark btn-sm btn-block" value="N">회원 전체</button></li>
-							<li><button type="button" onclick="Reported(this);" name="isReport" class="btn btn-dark btn-sm btn-block" value="O">신고 회원</button></li>
-							<li><button type="button" onclick="Reported(this);" name="isReport" class="btn btn-dark btn-sm btn-block" value="X">미신고 회원</button></li>
-							<li class="divider"></li>
-						</ul>
+    			
+    				<div class="btn-group col-lg-3 col-md-4 mb-2" role="group" aria-label="...">
+						<input class="btn btn-default btn-sm" type="submit" value="신고여부">
+						<div class="btn-group" role="group">
+						    <button type="button" id="rBtn" class="btn btn-sm btn-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+						    <%="O".equals(isReport)?"신고 회원":("X".equals(isReport)?"미신고 회원":"회원 전체") %>
+							    <span class="caret"></span>
+							</button>
+						    <input type="hidden" name="reportValue" id="reportValue" value="<%=isReport%>">
+							<ul class="dropdown-menu bg-dark" role="menu">
+								<li><button type="button" onclick="Reported(this);" name="isReport" class="btn btn-dark btn-sm btn-block" value="N">회원 전체</button></li>
+								<li><button type="button" onclick="Reported(this);" name="isReport" class="btn btn-dark btn-sm btn-block" value="O">신고 회원</button></li>
+								<li><button type="button" onclick="Reported(this);" name="isReport" class="btn btn-dark btn-sm btn-block" value="X">미신고 회원</button></li>
+								<li class="divider"></li>
+							</ul>
+						</div>
 					</div>
     			
-					<div class="btn-group col-md-5 col-xs-4 col-12 mb-1">
-					    <button type="button" id="mBtn" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-					    <%="".equals(memberType)?"회원 타입": ("BO".equals(memberType)?"업체 회원":("JS".equals(memberType)?"구직 회원":"회원 전체")) %>
-						    <span class="caret"></span>
-						</button>
-					    <input type="hidden" name="mTypeValue" id="mTypeValue" value="<%=memberType%>">
-						<ul class="dropdown-menu bg-dark" role="menu">
-							<li><button type="button" onclick="mType(this);" name="memberType" class="btn btn-dark btn-sm btn-block" value="NO">회원 전체</button></li>
-							<li><button type="button" onclick="mType(this);" name="memberType" class="btn btn-dark btn-sm btn-block" value="JS">구직 회원</button></li>
-							<li><button type="button" onclick="mType(this);" name="memberType" class="btn btn-dark btn-sm btn-block" value="BO">업체 회원</button></li>
-						</ul>
+					<div class="btn-group col-lg-3 col-md-4 mb-2" role="group" aria-label="...">
+						<input class="btn btn-default btn-sm" type="submit" value="회원타입">
+						<div class="btn-group" role="group">
+						    <button type="button" id="mBtn" class="btn btn-sm btn-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+						    <%="BO".equals(memberType)?"업체 회원":("JS".equals(memberType)?"구직 회원":"회원 전체") %>
+							    <span class="caret"></span>
+							</button>
+						    <input type="hidden" name="mTypeValue" id="mTypeValue" value="<%=memberType%>">
+							<ul class="dropdown-menu bg-dark" role="menu">
+								<li><button type="button" onclick="mType(this);" name="memberType" class="btn btn-dark btn-sm btn-block" value="NO">회원 전체</button></li>
+								<li><button type="button" onclick="mType(this);" name="memberType" class="btn btn-dark btn-sm btn-block" value="JS">구직 회원</button></li>
+								<li><button type="button" onclick="mType(this);" name="memberType" class="btn btn-dark btn-sm btn-block" value="BO">업체 회원</button></li>
+							</ul>
+						</div>
 					</div>
-					<div class="input-group col-md-5 col-xs-5 col-12 mb-1">
+					<div class="input-group col-md-6 col-xs-5 col-12 mb-1">
 					<input type="text" class="form-control mb-1" name="keyword" id="keyword" value="<%=keyword %>" placeholder="회원명/아이디 입력"/>
 				      <span class="input-group-btn">
 				        <input class="btn btn-dark ml-1" type="submit" id="searchMember" value="검색">

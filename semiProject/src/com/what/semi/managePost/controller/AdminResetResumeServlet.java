@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.what.semi.managePost.model.service.ManagePostService;
 
 
-@WebServlet("/resetRec.do")
-public class ResetRecServlet extends HttpServlet {
+@WebServlet("/adminResetResume.do")
+public class AdminResetResumeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ResetRecServlet() {
+    public AdminResetResumeServlet() {
         super();
     }
 
@@ -27,7 +27,7 @@ public class ResetRecServlet extends HttpServlet {
 		if("admin".equals(isAdmin)&&null != request.getParameter("r_no")) {
 			r_no = Integer.parseInt(request.getParameter("r_no"));
 			System.out.println(r_no);
-			result = mps.resetRecruitment(r_no);
+			result = mps.resetResume(r_no);
 		}
 		String msg = "";
 		if(result != -1) {
