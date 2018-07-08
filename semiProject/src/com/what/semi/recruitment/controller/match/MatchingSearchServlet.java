@@ -36,6 +36,8 @@ public class MatchingSearchServlet extends HttpServlet {
 		HttpSession session = request.getSession();			//세션 선언
 		String id = null;									//세션으로부터 조회한 id를 저장할 변수 선언
 		
+		int resumeId = 0;
+		String resumeTitle = "";
 		
 		ArrayList<String> resumeNames = null;				//회원의 이력서title명을 저장할 List 선언
 		ArrayList<MyResumeVo> resume = null;				//해당 회원의 이력서를 조회해올 List 선언
@@ -58,6 +60,8 @@ public class MatchingSearchServlet extends HttpServlet {
 					if(Integer.parseInt(request.getParameter("resumeId")) == mr.getResume_id()) {
 						pi = PageTemplate.machingSearchPaging(request, rs, mr);						
 						list = rs.loadMatchingSearchList(pi.getCurrentPage(), pi.getLimit(), mr);
+						resumeId = mr.getResume_id();
+						resumeTitle = mr.getIntroduce_title();
 					}
 				}
 				
@@ -67,6 +71,8 @@ public class MatchingSearchServlet extends HttpServlet {
 				System.out.println(resume.get(0).toString());
 				pi = PageTemplate.machingSearchPaging(request, rs, resume.get(0));						
 				list = rs.loadMatchingSearchList(pi.getCurrentPage(), pi.getLimit(), resume.get(0));
+				resumeId = resume.get(0).getResume_id();
+				resumeTitle = resume.get(0).getIntroduce_title();
 			}
 			
 			
@@ -87,6 +93,8 @@ public class MatchingSearchServlet extends HttpServlet {
 			request.setAttribute("pi", pi);
 			if(0 < resume.size()) {
 				request.setAttribute("resume", resume);
+				request.setAttribute("resumeId", resumeId);
+				request.setAttribute("resumeTitle", resumeTitle);
 			}
 		}else {
 			url = "index.jsp";

@@ -18,9 +18,23 @@ int startPage = pi.getStartPage();
 int endPage = pi.getEndPage();
 
 ArrayList<MyResumeVo> resumes = (ArrayList<MyResumeVo>) request.getAttribute("resume");
+
+int resumeId = -1;
+String resumeTitle = null;
+
+if(null != request.getAttribute("resumeId")){
+resumeId = (Integer)request.getAttribute("resumeId");
+}
+if(null != request.getAttribute("resumeTitle")){
+resumeTitle = (String)request.getAttribute("resumeTitle");
+}
+
 %>
 
 <%@include file="/views/common/header.jsp" %>
+<script>
+	fu
+</script>
     <!-- Page Content -->
     <div class="container" style="min-height: 800px">	<!-- 내용을 담아놓을 컨테이너 -->
 
@@ -30,18 +44,20 @@ ArrayList<MyResumeVo> resumes = (ArrayList<MyResumeVo>) request.getAttribute("re
         <!-- /.col-lg-3 -->
         <div class="col-lg-9">
 			<%if(null != resumes){ %>
-			<form action="/sp/matchingSearch.do" method="post">
+			<form action="/sp/matchingSearch.do" id="matchingSearchForm" method="post">
 				<div class="btn-group mt-3">
+					<button class="btn btn-default text-dark">이력서 선택</button>
+					<div class="btn-group" role="group">
 				    	<button type="button" id="rBtn" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-					    	<span class="caret">이력서 선택</span>
+				    	<%=null != resumeTitle? resumeTitle : resumes.get(0).getIntroduce_title()%>
 						</button>
-				    	<input type="hidden" name="resumeId" id="resumeId">
+				    	<input type="hidden" name="resumeId" id="resumeId" value="<%=-1 != resumeId? resumeId : resumes.get(0).getResume_id()%>">
 						  <ul class="dropdown-menu bg-dark" role="menu">
 						  	<%for(MyResumeVo resume : resumes) {%>
 						    <li><button type="button" onclick="resumeSelect(this);" name="resume" class="btn btn-dark btn-sm btn-block" value="<%=resume.getResume_id()%>"><%=resume.getIntroduce_title() %></button></li>
 						    <%} %>
 						  </ul>
-						<input type="submit" class="btn btn-dark ml-1" value="검색"/>
+					</div>
 				</div>
 			</form>
 			<%}else{ %>
@@ -49,7 +65,7 @@ ArrayList<MyResumeVo> resumes = (ArrayList<MyResumeVo>) request.getAttribute("re
 			<%} %>
 			<!--======================================	구인게시물	======================================== -->
           <div class="row mt-4" style="min-height: 700px">
-          
+          <%if(null != request.getAttribute("list")){ %>
             <%for(RecruitmentVo rv : list) {%><!-- for문을 통해 해당 게시물들의 개수에 맞게 생성 -->
 	            <div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4" style="max-height: 400px">
 	              <div class="card h-100">
@@ -67,6 +83,7 @@ ArrayList<MyResumeVo> resumes = (ArrayList<MyResumeVo>) request.getAttribute("re
 	              </div>
 	            </div>
 	            
+			<%} %>
 			<%} %>
           <!-- /.row -->
           
@@ -104,6 +121,8 @@ ArrayList<MyResumeVo> resumes = (ArrayList<MyResumeVo>) request.getAttribute("re
 		var value = $(obj).val();
 		$("#rBtn").text(text);
 		$("#resumeId").val(value);
+		$("#matchingSearchForm").submit();
+		
 	}
 </script>
 <%@include file="/views/common/footer.jsp"%>
