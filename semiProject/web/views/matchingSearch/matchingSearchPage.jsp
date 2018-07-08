@@ -33,7 +33,9 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
 
 <%@include file="/views/common/header.jsp" %>
 <script>
-	fu
+function recDetail(recId){
+	location.href="/sp/recruitmentDetail.do?recId="+recId+"&currentPage="+<%=currentPage%>;
+}
 </script>
     <!-- Page Content -->
     <div class="container" style="min-height: 800px">	<!-- 내용을 담아놓을 컨테이너 -->
@@ -69,10 +71,12 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
             <%for(RecruitmentVo rv : list) {%><!-- for문을 통해 해당 게시물들의 개수에 맞게 생성 -->
 	            <div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4" style="max-height: 400px">
 	              <div class="card h-100">
-	                <a href="#"><img class="card-img-top" src="http://placehold.it/300x300" alt=""></a>
+	                <a onclick="recDetail(<%=rv.getRecruitment_id()%>);">
+	                <img class="card-img-top" src="<%=rv.getRecruitment_image_src() == null? "/sp/images/building.jpeg" : "/sp/images/recruitmentImg/"+ rv.getRecruitment_image_src()%>" alt="">
+	                </a>
 	                <div class="card-body">
 	                  <h4 class="card-title">
-	                    <a href="#"><%=rv.getRecruitment_title() %></a><!-- 게시물 이름 -->
+	                    <a onclick="recDetail(<%=rv.getRecruitment_id()%>);"><%=rv.getRecruitment_title() %></a><!-- 게시물 이름 -->
 	                  </h4>
 	                  <h5>시급 : <%=rv.getPay()%></h5>
 	                  <p class="card-text"><%=rv.getWork_day() %></p>
@@ -102,7 +106,7 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
 						
 						<%} %>
 					<%} %>
-					<button onclick="movePage(<%=currentPage==maxPage?maxPage:maxPage+1%>);" type="button" class="btn btn-default bg-dark text-white">▶</button>
+					<button onclick="movePage(<%=currentPage==maxPage?maxPage:currentPage+1%>);" type="button" class="btn btn-default bg-dark text-white">▶</button>
 			  </div>
 			</div>
 		<!--=========================================================================================-->

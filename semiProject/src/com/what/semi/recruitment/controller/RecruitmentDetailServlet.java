@@ -45,7 +45,9 @@ public class RecruitmentDetailServlet extends HttpServlet {
 		System.out.println(currentPage);
 		
 		RecruitmentVo rec = new RecruitmentService().selectRecruitment(recId);
+		System.out.println(rec);
 		MemberVo writer = new MemberService().getMemberInfo(rec.getM_id());
+
 		ArrayList<MyResumeVo> myResumes = new MyResumeService().selectMyInfo(m_id);
 		System.out.println(myResumes.size());
 	
