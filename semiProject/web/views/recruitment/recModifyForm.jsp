@@ -308,7 +308,7 @@
 
 							<div id="fileArea">
 								<input type="file" id="recImg" name="recImg"
-									onchange="printImage(this);" />
+									onchange="printImage(this);" value="<%=rec.getRecruitment_image_src()%>"/>
 							</div>
 
 							<div>
@@ -360,7 +360,7 @@
 	function printImage(obj) {
 		var reader = new FileReader();
 		reader.onload = function(e) {
-			//console.log(e.target.result);
+			console.log(e.target.result);
 			$("#titleImg").attr("src", e.target.result);
 		}
 		reader.readAsDataURL(obj.files[0]);

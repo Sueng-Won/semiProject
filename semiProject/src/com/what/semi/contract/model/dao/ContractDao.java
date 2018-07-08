@@ -25,7 +25,7 @@ public class ContractDao {
 					+"FROM (SELECT ROWNUM RNUM, P.* "
 					+"FROM (SELECT C_NO,STATE,C_DATE,START_WORK_TIME,END_WORK_TIME,RECRUITMENT_ID,BO_ID,JS_ID,RESUME_ID,DEMANDER "
 					+"FROM CONTRACT WHERE BO_ID='"+id+"' OR JS_ID='"+id+"' "
-					+"ORDER BY C_DATE DESC) P) WHERE RNUM BETWEEN "+startRow+" AND "+endRow;
+					+"ORDER BY C_NO DESC) P) WHERE RNUM BETWEEN "+startRow+" AND "+endRow;
 			 //System.out.println(query);
 			rs = stmt.executeQuery(query);
 			list = new ArrayList<ContractVo>();
@@ -206,6 +206,101 @@ public class ContractDao {
 		try {
 			stmt=con.createStatement();
 			query = "UPDATE CONTRACT SET STATE=2 WHERE RECRUITMENT_ID IN (SELECT RECRUITMENT_ID FROM RECRUITMENT WHERE IS_POST=0)";
+			result=stmt.executeUpdate(query);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			JDBCTemplate.close(stmt);
+		}
+		
+		return result;
+	}
+
+	public int updateContractDate(Connection con, int contId) {
+		int result= -1;
+		Statement stmt = null;
+		String query = null;
+		
+		try {
+			stmt=con.createStatement();
+			query = "UPDATE CONTRACT SET C_DATE=SYSDATE WHERE C_NO="+contId;
+			result=stmt.executeUpdate(query);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			JDBCTemplate.close(stmt);
+		}
+		
+		return result;
+	}
+
+	public ContractVo selectContract(Connection con, int c_no) {
+		ContractVo cont = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		String query = "";
+		try {
+			stmt = con.createStatement();
+			query = "SELECT * "
+					+"FROM CONTRACT "
+					+"WHERE C_NO="+c_no;
+			 //System.out.println(query);
+			rs = stmt.executeQuery(query);
+			
+			while (rs.next()) {
+				cont = new ContractVo();
+				cont.setC_no(rs.getInt("c_no"));
+				cont.setState(rs.getInt("state"));
+				cont.setContract_date(rs.getDate("c_date"));
+				cont.setStart_work_time(rs.getString("start_work_time"));
+				cont.setEnd_work_time(rs.getString("end_work_time"));
+				cont.setRecruitment_id(rs.getString("recruitment_id"));
+				cont.setBo_id(rs.getString("bo_id"));
+				cont.setJs_id(rs.getString("js_id"));
+				cont.setResume_id(rs.getInt("resume_id"));
+				cont.setDemander(rs.getString("demander"));
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(stmt);
+		}
+
+		return cont;
+	}
+
+	public int updateStartTime(Connection con, int c_no) {
+		int result= -1;
+		Statement stmt = null;
+		String query = null;
+		
+		try {
+			stmt=con.createStatement();
+			query = "UPDATE CONTRACT SET START_WORK_TIME=SYSDATE WHERE C_NO="+c_no;
+			result=stmt.executeUpdate(query);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			JDBCTemplate.close(stmt);
+		}
+		
+		return result;
+	}
+
+	public int updateEndTime(Connection con, int c_no) {
+		int result= -1;
+		Statement stmt = null;
+		String query = null;
+		
+		try {
+			stmt=con.createStatement();
+			query = "UPDATE CONTRACT SET END_WORK_TIME=SYSDATE WHERE C_NO="+c_no;
 			result=stmt.executeUpdate(query);
 			
 		} catch (SQLException e) {

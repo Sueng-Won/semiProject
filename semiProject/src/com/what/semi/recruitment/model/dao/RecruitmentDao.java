@@ -222,7 +222,7 @@ public class RecruitmentDao {
 					+ "WHERE IS_POST != 0 AND DELFLAG =0 AND TO_CHAR(WORK_DAY,'MM/DD/RRRR') IN (" + dateStr + ")"
 					+ "ORDER BY WORK_DAY) P) " + "WHERE RNUM BETWEEN " + startRow + " AND " + endRow;
 			// query = "SELECT * FROM RECRUITMENT";
-			System.out.println(query);
+			//System.out.println(query);
 
 			rs = stmt.executeQuery(query);
 			list = new ArrayList<RecruitmentVo>();
@@ -306,7 +306,7 @@ public class RecruitmentDao {
 		PreparedStatement pstmt = null;
 
 		String query = "INSERT INTO RECRUITMENT VALUES (SEQ_RECRUITMENT.NEXTVAL" + ",?,?,?,?," + "?,?,?,?,?,"
-				+ "?,?,TO_DATE(?,'RRRR-MM-DD'),TO_DATE(?,'HH24-MI'),TO_DATE(?,'HH24-MI')," + "?,?,?,?,?," + "?,?,1,1)";
+				+ "?,?,TO_DATE(?,'RRRR-MM-DD'),TO_DATE(?,'HH24-MI'),TO_DATE(?,'HH24-MI')," + "?,?,?,?,?," + "?,?,1,0)";
 		try {
 			pstmt = con.prepareStatement(query);
 
@@ -387,7 +387,7 @@ public class RecruitmentDao {
 					+ "JOIN MEMBER M ON (M.M_ID = R.M_ID) " + "WHERE R.M_ID='" + id + "' AND DELFLAG=0 " + "ORDER BY WORK_DAY) P) "
 					+ "WHERE RNUM BETWEEN " + startRow + " AND " + endRow;
 			// query = "SELECT * FROM RECRUITMENT";
-			System.out.println(query);
+			//System.out.println(query);
 
 			rs = stmt.executeQuery(query);
 			list = new ArrayList<RecruitmentVo>();

@@ -37,7 +37,6 @@
 	
 	$(function(){
 		<%if (contId != -1) {%>
-		console.log(<%=contId%>);
 			$("#conDetails<%=contId%>").addClass('show');
 		<%}%>
 	});
@@ -134,7 +133,9 @@
 							} else {
 						%>요청중<%
 							}
-								} else {
+								} else if (myConList.get(i).getState() == 1) {
+						%>진행중<%
+							} else {
 						%>완료<%
 							}
 						%>
