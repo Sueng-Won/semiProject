@@ -77,7 +77,7 @@
               <a class="nav-link" href="/sp/myRecruitmentList.do">업체정보관리</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">고용내역</a>
+              <a class="nav-link" href="/sp/myHiredList.do">고용내역</a>
             </li>
             <%} %>
             <li class="nav-item">

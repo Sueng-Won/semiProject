@@ -21,9 +21,9 @@ public class ContractDao {
 		int endRow = startRow +limit - 1;
 		try {
 			stmt = con.createStatement();
-			query = "select C_NO,STATE,C_DATE,START_WORK_TIME,END_WORK_TIME,RECRUITMENT_ID,BO_ID,JS_ID,RESUME_ID "
+			query = "select C_NO,STATE,C_DATE,START_WORK_TIME,END_WORK_TIME,RECRUITMENT_ID,BO_ID,JS_ID,RESUME_ID,DEMANDER "
 					+"FROM (SELECT ROWNUM RNUM, P.* "
-					+"FROM (SELECT C_NO,STATE,C_DATE,START_WORK_TIME,END_WORK_TIME,RECRUITMENT_ID,BO_ID,JS_ID,RESUME_ID "
+					+"FROM (SELECT C_NO,STATE,C_DATE,START_WORK_TIME,END_WORK_TIME,RECRUITMENT_ID,BO_ID,JS_ID,RESUME_ID,DEMANDER "
 					+"FROM CONTRACT WHERE BO_ID='"+id+"' OR JS_ID='"+id+"' "
 					+"ORDER BY C_DATE DESC) P) WHERE RNUM BETWEEN "+startRow+" AND "+endRow;
 			 //System.out.println(query);
@@ -41,6 +41,7 @@ public class ContractDao {
 				cont.setBo_id(rs.getString("bo_id"));
 				cont.setJs_id(rs.getString("js_id"));
 				cont.setResume_id(rs.getInt("resume_id"));
+				cont.setDemander(rs.getString("demander"));
 
 				list.add(cont);
 			}
@@ -99,14 +100,14 @@ public class ContractDao {
 		return result;
 	}
 
-	public int insertContract(Connection con, String recId, String bo_id, String js_id, int resumeId) {
+	public int insertContract(Connection con, String recId, String bo_id, String js_id, int resumeId,String demander) {
 		int result = -1;
 
 		Statement stmt = null;
 		String query = "";
 		try {
 			stmt = con.createStatement();
-			query = "INSERT INTO CONTRACT VALUES (SEQ_CONTRACT.NEXTVAL,0,NULL,NULL,NULL,'"+recId+"','"+bo_id+"','"+js_id+"',"+resumeId+")";
+			query = "INSERT INTO CONTRACT VALUES (SEQ_CONTRACT.NEXTVAL,0,NULL,NULL,NULL,'"+recId+"','"+bo_id+"','"+js_id+"',"+resumeId+",'"+demander+"')";
 			System.out.println(query);
 			result = stmt.executeUpdate(query);
 			
@@ -143,6 +144,7 @@ public class ContractDao {
 				cont.setBo_id(rs.getString("bo_id"));
 				cont.setJs_id(rs.getString("js_id"));
 				cont.setResume_id(rs.getInt("resume_id"));
+				cont.setDemander(rs.getString("demander"));
 
 			}
 
@@ -181,6 +183,7 @@ public class ContractDao {
 				cont.setBo_id(rs.getString("bo_id"));
 				cont.setJs_id(rs.getString("js_id"));
 				cont.setResume_id(rs.getInt("resume_id"));
+				cont.setDemander(rs.getString("demander"));
 
 				list.add(cont);
 			}
@@ -193,6 +196,25 @@ public class ContractDao {
 		}
 
 		return list;
+	}
+
+	public int updateExpriedContractState(Connection con) {
+		int result= -1;
+		Statement stmt = null;
+		String query = null;
+		
+		try {
+			stmt=con.createStatement();
+			query = "UPDATE CONTRACT SET STATE=2 WHERE RECRUITMENT_ID IN (SELECT RECRUITMENT_ID FROM RECRUITMENT WHERE IS_POST=0)";
+			result=stmt.executeUpdate(query);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			JDBCTemplate.close(stmt);
+		}
+		
+		return result;
 	}
 
 }

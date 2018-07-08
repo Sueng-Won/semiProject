@@ -26,7 +26,6 @@
 
 <script type="text/javascript">
 	function applyBtn() {
-		console.log("지원");
 		if (<%=Mtype.equals("JS")%>) {
 			if (<%=userTypeFlag%>) {
 				$('div.modal').modal();
