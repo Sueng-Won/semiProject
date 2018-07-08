@@ -55,14 +55,14 @@ public class RecruitmentService {
 		return list;
 	}
 
-	public String getDefaultResume(String id) {
+/*	public String getDefaultResume(String id) {
 		Connection con = JDBCTemplate.getConnection();
 
 		String resume = new RecruitmentDao().getDefaultResume(con, id);
 
 		JDBCTemplate.close(con);
 		return resume;
-	}
+	}*/
 
 	public int byDateListTotalCount(String dateStr) {
 		Connection con = JDBCTemplate.getConnection();
@@ -159,5 +159,18 @@ public class RecruitmentService {
 		JDBCTemplate.close(con);
 		
 		return result;
+	}
+
+	public String searchIdByRecId(String recId) {
+		Connection con = JDBCTemplate.getConnection();
+		
+		String memId = new RecruitmentDao().searchIdByRecId(con,recId);
+		if(memId != null) {
+			JDBCTemplate.commit(con);
+		}else {
+			JDBCTemplate.rollback(con);
+		}
+		
+		return memId;
 	}
 }

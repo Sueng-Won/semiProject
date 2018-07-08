@@ -204,4 +204,69 @@ public class BlackListDao {
 		return result;
 	}
 
+	public int addBlackList(Connection con, String id, String reason) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = "";
+		
+		try {
+			query = "INSERT INTO BLACKLIST "
+					+ "VALUES(SEQ_BLACKLIST_ID.NEXTVAL,"
+					+ "1,?,?)";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, reason);
+			pstmt.setString(2, id);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public boolean searchCount(Connection con, String id, String reason) {
+		boolean result = false;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "";
+		
+		try {
+			query = "SELECT * FROM BLACKLIST WHERE REASON = ? AND M_ID = ?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, reason);
+			pstmt.setString(2, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = true;
+			}else {
+				result = false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateCount(Connection con, String id, String reason) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = "";
+		
+		try {
+			query = "UPDATE BLACKLIST SET COUNT = COUNT+1 WHERE REASON = ? AND M_ID = ?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, reason);
+			pstmt.setString(2, id);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 }

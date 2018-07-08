@@ -35,6 +35,10 @@
 		location.href = "/sp/rejectRecruitment.do?contId=" + i+"&currentPage="+<%=currentPage%>;
 	}
 	
+	function addBlacklist(i){
+		window.open("/sp/searchIdByRecId.do?recId="+i,"_blank", "width=600, height=700");
+	}
+	
 	$(function(){
 		<%if (contId != -1) {%>
 		console.log(<%=contId%>);

@@ -66,5 +66,24 @@ public class BlackListService {
 		
 		JDBCTemplate.close(con);
 	}
-
+	
+	public int addBlackList(String id, String reason) {
+		Connection con = JDBCTemplate.getConnection();
+		int result = -1;
+		boolean isExistCount = new BlackListDao().searchCount(con,id,reason);
+		
+		if(!isExistCount) {
+			result = new BlackListDao().addBlackList(con, id, reason);
+			System.out.println("insert 성공");
+		}else {
+			result = new BlackListDao().updateCount(con, id, reason);
+			System.out.println("count 증가");
+		}
+		if(result>=0) {
+			JDBCTemplate.commit(con);
+		}else {
+			JDBCTemplate.rollback(con);
+		}
+		return result;
+	}
 }

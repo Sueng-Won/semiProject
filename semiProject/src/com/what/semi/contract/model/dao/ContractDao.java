@@ -26,7 +26,7 @@ public class ContractDao {
 					+"FROM (SELECT C_NO,STATE,C_DATE,START_WORK_TIME,END_WORK_TIME,RECRUITMENT_ID,BO_ID,JS_ID,RESUME_ID "
 					+"FROM CONTRACT WHERE BO_ID='"+id+"' OR JS_ID='"+id+"' "
 					+"ORDER BY C_DATE DESC) P) WHERE RNUM BETWEEN "+startRow+" AND "+endRow;
-			 //System.out.println(query);
+			System.out.println(query);
 			rs = stmt.executeQuery(query);
 			list = new ArrayList<ContractVo>();
 			ContractVo cont = null;
