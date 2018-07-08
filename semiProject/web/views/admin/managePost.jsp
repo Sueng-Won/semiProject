@@ -255,7 +255,7 @@ String keyword = condition.getUserName();
 			     			<%if(mv.getDelflag() != 0){ %>
 						  <button onclick="deleteResume('<%=mv.getResume_id()%>');" class="btn btn-dark btn-sm">게시물 삭제</button>
 						  	<%}else{ %>
-						  <button onclick="resetResume('<%=mv.getResume_id()%>');" class="btn btn-dark btn-sm">게시물 복구</button>
+						  <button onclick="resetResume('<%=mv.getResume_id()%>');" class="btn btn-info btn-sm">게시물 복구</button>
 						  	<%} %>
 						</div>
 			     	</div>
