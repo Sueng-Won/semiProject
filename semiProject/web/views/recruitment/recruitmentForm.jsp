@@ -119,7 +119,7 @@
 			if(min==0){
 				hour=hour+1;
 			}
-			var pay = ((7530*hour)+(7530/60)*min)/10;
+			var pay = ((7530*hour)+((7530/60)*min))/10;
 			if((((7530*hour)+(7530/60)*min)%10)>0){
 				pay=pay+1;
 			}
@@ -144,197 +144,199 @@
 					<br> <br>
 					<h3 align="center" class="text-white-50">구인 게시물</h3>
 					<br>
-					<!-- <form id="writeRecruitment" method="post"
-						action="/sp/writeRecruitment.do" enctype="multipart/form-data"> -->
-					<div class="row">
-						<div class="col-3 mb-1" id="titleImage">
-							<img id="titleImg" alt="" style="max-width: 130px;"
-								src="http://placehold.it/300x400">
-						</div>
-						<div class="col-9">
+					<form id="writeRecruitment" method="post"
+						action="/sp/writeRecruitment.do" enctype="multipart/form-data">
+						<div class="row">
+							<div class="col-3 mb-1" id="titleImage">
+								<img id="titleImg" alt="" style="max-width: 130px;"
+									src="http://placehold.it/300x400">
+							</div>
+							<div class="col-9">
 
-							<!-- 업체명 -->
-							<div class="input-group" style="min-height: 33%">
-								<input type="text" class="form-control mb-1" name="name"
-									placeholder="업체명" />
+								<!-- 업체명 -->
+								<div class="input-group" style="min-height: 33%">
+									<input type="text" class="form-control mb-1" name="name"
+										placeholder="업체명" />
+								</div>
+
+								<!-- 업체 전화번호 -->
+								<div class="input-group" style="min-height: 33%">
+									<input type="text" class="form-control mb-1" name="phone"
+										placeholder="업체 연락처" />
+								</div>
+
+								<!-- 업체 이메일 -->
+								<div class="input-group" style="min-height: 33%">
+									<input type="email" class="form-control mb-1" name="email"
+										placeholder="email" />
+								</div>
+							</div>
+						</div>
+
+						<!-- 업체 주소 -->
+						<div class="input-group">
+							<!-- 주소검색을 통해 입력받은 우편번호 저장 input -->
+							<input type="hidden" name="zipcode" id="zipcode" />
+
+							<!-- 주소를 통한 좌표값 저장 input -->
+							<input type="hidden" name="latitude" id="latitude" /> <input
+								type="hidden" name="longitude" id="longitude" />
+
+							<!-- 주소 -->
+							<input type="text" class="form-control mb-1 mr-1" name="address"
+								id="address" placeholder="사업장 주소" readonly /> <span
+								class="input-group-btn">
+								<button class="btn btn-light text-dark" type="button"
+									onclick="openAddressPopup();">주소 검색</button>
+							</span>
+
+						</div>
+
+						<div class="input-group">
+							<!-- 상세주소 입력 -->
+							<input type="text" class="form-control mb-1" name="addressDetail"
+								id="addressDetail" placeholder="상세주소" />
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-3">
+								<select multiple class="custom-select-lg mt-1 ml-3 btn-dark"
+									style="min-height: 150px" name="business_type">
+									<option disabled="disabled" class="text-white-50">[업종]</option>
+									<option>사무직</option>
+									<option>서비스</option>
+									<option>유통/판매</option>
+									<option>외식/음료</option>
+									<option>고객상담</option>
+									<option>생산/건설</option>
+								</select>
+							</div>
+							<div class="col-3">
+								<select name="career" multiple
+									class="custom-select-lg mt-1 ml-3 btn-dark"
+									style="min-height: 150px">
+									<option disabled="disabled" class="text-white-50">[경력]</option>
+									<option value="1">있음</option>
+									<option value="0">무관</option>
+								</select>
 							</div>
 
-							<!-- 업체 전화번호 -->
-							<div class="input-group" style="min-height: 33%">
-								<input type="text" class="form-control mb-1" name="phone"
-									placeholder="업체 연락처" />
+							<div class="col-6">
+								<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
+									<label>근무일</label> <input type="text" id="workdate"
+										class="btn-dark" name="workdate" />
+								</div>
+								<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
+									<label>시작시간</label> <input type="time" class="btn-dark"
+										id="starttime" name="starttime" />
+								</div>
+								<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
+									<label>종료시간</label> <input type="time" class="btn-dark"
+										id="endtime" name="endtime" />
+								</div>
+								<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
+									<label>급여</label> <input type="text" class="btn-dark" id="pay"
+										name="pay" />원
+								</div>
+								<div class="text-white-50 ml-1" id="calculatePay" align="center">*최저시급
+									: 7,530원</div>
+							</div>
+						</div>
+						<br>
+
+						<h4 class="text-white-50 ml-1">우대 사항</h4>
+						<div class="row">
+							<div class="btn-group mt-1 ml-1">
+								<button type="button" style="min-width: 140px"
+									class="btn btn-lg btn-dark dropdown-toggle"
+									data-toggle="dropdown" aria-expanded="false">
+									<span id="mBtn" class="caret">병역사항</span>
+								</button>
+
+								<input type="hidden" name="mValue" id="mValue" value="x">
+								<!-- 병역여부에 대한 값을 저장할 hidden input -->
+
+								<ul class="dropdown-menu bg-dark" role="menu">
+									<li><button type="button" onclick="mSelect(this);"
+											name="miltary" class="btn btn-dark btn-sm btn-block"
+											value="y">군필</button></li>
+									<li><button type="button" onclick="mSelect(this);"
+											name="miltary" class="btn btn-dark btn-sm btn-block"
+											value="x">무관</button></li>
+									<li class="divider"></li>
+								</ul>
 							</div>
 
-							<!-- 업체 이메일 -->
-							<div class="input-group" style="min-height: 33%">
-								<input type="email" class="form-control mb-1" name="email"
-									placeholder="email" />
+							<div class="btn-group mt-1 ml-1">
+								<button type="button" style="min-width: 100px"
+									class="btn btn-lg btn-dark dropdown-toggle"
+									data-toggle="dropdown" aria-expanded="false">
+									<span class="caret" id="gBtn">성별</span>
+								</button>
+
+								<input type="hidden" name="gValue" id="gValue" value="N" />
+								<!-- 성별에 대한 값을 저장할 hidden input -->
+
+								<ul class="dropdown-menu bg-dark" role="menu">
+									<li><button type="button" onclick="gSelect(this);"
+											name="gender" class="btn btn-dark btn-sm btn-block" value="M">남</button></li>
+									<li><button type="button" onclick="gSelect(this);"
+											name="gender" class="btn btn-dark btn-sm btn-block" value="F">여</button></li>
+									<li><button type="button" onclick="gSelect(this);"
+											name="gender" class="btn btn-dark btn-sm btn-block" value="N">무관</button></li>
+									<li class="divider"></li>
+								</ul>
+							</div>
+
+							<div class="btn-group mt-1 ml-3">
+								<button type="button" style="min-width: 130px"
+									class="btn btn-lg btn-dark dropdown-toggle"
+									data-toggle="dropdown" aria-expanded="false">
+									<span class="caret" id="acBtn">학력</span>
+								</button>
+
+								<input type="hidden" name="achievement" id="achievementValue" />
+
+								<ul class="dropdown-menu bg-dark" role="menu">
+									<li><button type="button" onclick="acSelect(this);"
+											class="btn btn-dark btn-sm btn-block" value="무관">무관</button></li>
+									<li><button type="button" onclick="acSelect(this);"
+											class="btn btn-dark btn-sm btn-block" value="초졸">초졸</button></li>
+									<li><button type="button" onclick="acSelect(this);"
+											class="btn btn-dark btn-sm btn-block" value="중졸">중졸</button></li>
+									<li><button type="button" onclick="acSelect(this);"
+											class="btn btn-dark btn-sm btn-block" value="고졸">고졸</button></li>
+									<li><button type="button" onclick="acSelect(this);"
+											class="btn btn-dark btn-sm btn-block" value="대졸">대졸</button></li>
+									<li class="divider"></li>
+								</ul>
+
 							</div>
 						</div>
-					</div>
+						<br>
 
-					<!-- 업체 주소 -->
-					<div class="input-group">
-						<!-- 주소검색을 통해 입력받은 우편번호 저장 input -->
-						<input type="hidden" name="zipcode" id="zipcode" />
-
-						<!-- 주소를 통한 좌표값 저장 input -->
-						<input type="hidden" name="latitude" id="latitude" /> <input
-							type="hidden" name="longitude" id="longitude" />
-
-						<!-- 주소 -->
-						<input type="text" class="form-control mb-1 mr-1" name="address"
-							id="address" placeholder="사업장 주소" readonly /> <span
-							class="input-group-btn">
-							<button class="btn btn-light text-dark" type="button"
-								onclick="openAddressPopup();">주소 검색</button>
-						</span>
-
-					</div>
-
-					<div class="input-group">
-						<!-- 상세주소 입력 -->
-						<input type="text" class="form-control mb-1" name="addressDetail"
-							id="addressDetail" placeholder="상세주소" />
-					</div>
-					<br>
-					<div class="row">
-						<div class="col-3">
-							<select multiple class="custom-select-lg mt-1 ml-3 btn-dark"
-								style="min-height: 150px" name="business_type">
-								<option disabled="disabled" class="text-white-50">[업종]</option>
-								<option>사무직</option>
-								<option>서비스</option>
-								<option>유통/판매</option>
-								<option>외식/음료</option>
-								<option>고객상담</option>
-								<option>생산/건설</option>
-							</select>
+						<!-- 글제목 -->
+						<div class="input-group" style="min-height: 33%">
+							<input type="text" class="form-control mb-1" name="title"
+								placeholder="구인글 제목" />
 						</div>
-						<div class="col-3">
-							<select name="career" multiple
-								class="custom-select-lg mt-1 ml-3 btn-dark"
-								style="min-height: 150px">
-								<option disabled="disabled" class="text-white-50">[경력]</option>
-								<option value="1">있음</option>
-								<option value="0">무관</option>
-							</select>
+						<div>
+
+							<textarea class="col-12" rows="5" placeholder="업체 소개 및 희망 인력"
+								name="introduce"></textarea>
 						</div>
 
-						<div class="col-6">
-							<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
-								<label>근무일</label> <input type="text" id="workdate"
-									class="btn-dark" name="workdate" />
-							</div>
-							<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
-								<label>시작시간</label> <input type="time" class="btn-dark"
-									id="starttime" name="starttime" />
-							</div>
-							<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
-								<label>종료시간</label> <input type="time" class="btn-dark"
-									id="endtime" name="endtime" />
-							</div>
-							<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
-								<label>급여</label> <input type="text" class="btn-dark" id="pay"
-									name="pay" />원
-							</div>
-							<div class="text-white-50 ml-1" id="calculatePay" align="center">*최저시급
-								: 7,530원</div>
-						</div>
-					</div>
-					<br>
-
-					<h4 class="text-white-50 ml-1">우대 사항</h4>
-					<div class="row">
-						<div class="btn-group mt-1 ml-1">
-							<button type="button" style="min-width: 140px"
-								class="btn btn-lg btn-dark dropdown-toggle"
-								data-toggle="dropdown" aria-expanded="false">
-								<span id="mBtn" class="caret">병역사항</span>
-							</button>
-
-							<input type="hidden" name="mValue" id="mValue" value="x">
-							<!-- 병역여부에 대한 값을 저장할 hidden input -->
-
-							<ul class="dropdown-menu bg-dark" role="menu">
-								<li><button type="button" onclick="mSelect(this);"
-										name="miltary" class="btn btn-dark btn-sm btn-block" value="y">군필</button></li>
-								<li><button type="button" onclick="mSelect(this);"
-										name="miltary" class="btn btn-dark btn-sm btn-block" value="x">무관</button></li>
-								<li class="divider"></li>
-							</ul>
+						<div id="fileArea">
+							<input type="file" id="recImg" name="recImg"
+								onchange="printImage(this);" />
 						</div>
 
-						<div class="btn-group mt-1 ml-1">
-							<button type="button" style="min-width: 100px"
-								class="btn btn-lg btn-dark dropdown-toggle"
-								data-toggle="dropdown" aria-expanded="false">
-								<span class="caret" id="gBtn">성별</span>
-							</button>
-
-							<input type="hidden" name="gValue" id="gValue" value="N" />
-							<!-- 성별에 대한 값을 저장할 hidden input -->
-
-							<ul class="dropdown-menu bg-dark" role="menu">
-								<li><button type="button" onclick="gSelect(this);"
-										name="gender" class="btn btn-dark btn-sm btn-block" value="M">남</button></li>
-								<li><button type="button" onclick="gSelect(this);"
-										name="gender" class="btn btn-dark btn-sm btn-block" value="F">여</button></li>
-								<li><button type="button" onclick="gSelect(this);"
-										name="gender" class="btn btn-dark btn-sm btn-block" value="N">무관</button></li>
-								<li class="divider"></li>
-							</ul>
+						<div>
+							<button class="btn btn-light text-dark mt-4 mb-2"
+								onclick="writeRecruitment();">구인 등록</button>
 						</div>
 
-						<div class="btn-group mt-1 ml-3">
-							<button type="button" style="min-width: 130px"
-								class="btn btn-lg btn-dark dropdown-toggle"
-								data-toggle="dropdown" aria-expanded="false">
-								<span class="caret" id="acBtn">학력</span>
-							</button>
-
-							<input type="hidden" name="achievement" id="achievementValue" />
-
-							<ul class="dropdown-menu bg-dark" role="menu">
-								<li><button type="button" onclick="acSelect(this);"
-										class="btn btn-dark btn-sm btn-block" value="무관">무관</button></li>
-								<li><button type="button" onclick="acSelect(this);"
-										class="btn btn-dark btn-sm btn-block" value="초졸">초졸</button></li>
-								<li><button type="button" onclick="acSelect(this);"
-										class="btn btn-dark btn-sm btn-block" value="중졸">중졸</button></li>
-								<li><button type="button" onclick="acSelect(this);"
-										class="btn btn-dark btn-sm btn-block" value="고졸">고졸</button></li>
-								<li><button type="button" onclick="acSelect(this);"
-										class="btn btn-dark btn-sm btn-block" value="대졸">대졸</button></li>
-								<li class="divider"></li>
-							</ul>
-
-						</div>
-					</div>
-					<br>
-
-					<!-- 글제목 -->
-					<div class="input-group" style="min-height: 33%">
-						<input type="text" class="form-control mb-1" name="title"
-							placeholder="구인글 제목" />
-					</div>
-					<div>
-
-						<textarea class="col-12" rows="5" placeholder="업체 소개 및 희망 인력"
-							name="introduce"></textarea>
-					</div>
-
-					<div id="fileArea">
-						<input type="file" id="recImg" name="recImg"
-							onchange="printImage(this);" />
-					</div>
-
-					<div>
-						<button class="btn btn-light text-dark mt-4 mb-2"
-							onclick="writeRecruitment();">구인 등록</button>
-					</div>
-
-					<!-- </form> -->
+					</form>
 
 				</div>
 				<!-- /.col-lg-6 -->
@@ -366,6 +368,10 @@
 		var value = $(obj).val();
 		$("#mBtn").text(text);
 		$("#mValue").val(value);
+		if(value=='y'){
+			$("#gBtn").text("남");
+			$("#gValue").val("M");
+		}
 	}
 	$(function() {
 		$("#fileArea").hide();
