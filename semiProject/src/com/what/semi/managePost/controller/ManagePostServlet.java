@@ -35,6 +35,7 @@ public class ManagePostServlet extends HttpServlet {
 		String userName = "";
 		String content = "";
 		int isPost = -1;
+		int delflag = -1;
 		
 		if(null != request.getParameter("member_type") && !"NO".equals(request.getParameter("member_type"))) {
 			member_type = request.getParameter("member_type");
@@ -48,8 +49,11 @@ public class ManagePostServlet extends HttpServlet {
 		if(null != request.getParameter("is_Post")&&!"".equals(request.getParameter("is_Post"))) {
 			isPost = Integer.parseInt(request.getParameter("is_Post"));
 		}
+		if(null != request.getParameter("delflag")&&!"".equals(request.getParameter("delflag"))) {
+			delflag = Integer.parseInt(request.getParameter("delflag"));
+		}
 		
-		PostCondition condition = new PostCondition(member_type, userName, content, isPost);
+		PostCondition condition = new PostCondition(member_type, userName, content, isPost, delflag);
 		
 		pi = PageTemplate.postPaging(request, mps, condition);
 		if("JS".equals(condition.getMember_type())) {

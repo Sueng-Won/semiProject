@@ -41,5 +41,41 @@ public class ManagePostService {
 		JDBCTemplate.close(con);
 		return list;
 	}
+	
+	public int deleteRecruitment(int r_no) {
+		Connection con = JDBCTemplate.getConnection();
 
+		int result = new ManagePostDao().deleteRecruitment(con, r_no);
+		if (result != 0) {
+			JDBCTemplate.commit(con);
+		} else {
+			JDBCTemplate.rollback(con);
+		}
+		JDBCTemplate.close(con);
+
+		return result;
+	}
+
+	public ManageRecruitmentVo selectedRecruitment(int r_no) {
+		Connection con = JDBCTemplate.getConnection();
+		
+		ManageRecruitmentVo mrv = new ManagePostDao().selectedRecruitment(con, r_no);
+		
+		JDBCTemplate.close(con);
+		return mrv;
+	}
+
+	public int resetRecruitment(int r_no) {
+		Connection con = JDBCTemplate.getConnection();
+
+		int result = new ManagePostDao().resetRecruitment(con, r_no);
+		if (result != 0) {
+			JDBCTemplate.commit(con);
+		} else {
+			JDBCTemplate.rollback(con);
+		}
+		JDBCTemplate.close(con);
+
+		return result;
+	}
 }
