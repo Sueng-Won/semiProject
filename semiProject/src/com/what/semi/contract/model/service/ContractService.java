@@ -93,4 +93,59 @@ public class ContractService {
 
 		return result;
 	}
+
+	public int updateContractDate(int contId) {
+		Connection con = JDBCTemplate.getConnection();
+
+		int result = new ContractDao().updateContractDate(con, contId);
+
+		if (result != 0) {
+			JDBCTemplate.commit(con);
+		} else {
+			JDBCTemplate.rollback(con);
+		}
+		JDBCTemplate.close(con);
+
+		return result;
+	}
+
+	public ContractVo selectContract(int c_no) {
+		Connection con = JDBCTemplate.getConnection();
+
+		ContractVo cont = new ContractDao().selectContract(con,c_no);
+
+		JDBCTemplate.close(con);
+
+		return cont;
+	}
+
+	public int writeStartTime(int c_no) {
+		Connection con = JDBCTemplate.getConnection();
+
+		int result = new ContractDao().updateStartTime(con, c_no);
+
+		if (result != 0) {
+			JDBCTemplate.commit(con);
+		} else {
+			JDBCTemplate.rollback(con);
+		}
+		JDBCTemplate.close(con);
+
+		return result;
+	}
+
+	public int writeEndTime(int c_no) {
+		Connection con = JDBCTemplate.getConnection();
+
+		int result = new ContractDao().updateEndTime(con, c_no);
+
+		if (result != 0) {
+			JDBCTemplate.commit(con);
+		} else {
+			JDBCTemplate.rollback(con);
+		}
+		JDBCTemplate.close(con);
+
+		return result;
+	}
 }

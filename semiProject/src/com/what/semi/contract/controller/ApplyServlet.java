@@ -65,7 +65,7 @@ public class ApplyServlet extends HttpServlet {
 		
 		String title="<"+rec.getRecruitment_title()+">의 지원 이력서가 등록되었습니다.";
 		String resumeUrl="seeMyResume.do?resume_id="+resumeId+"&userId="+jsId;
-		new GmailSend().sendResume(writer.getEmail(),title,resumeUrl);
+		new GmailSend().sendResume(rec.getRecruitment_email(),title,resumeUrl);
 		
 		
 		

@@ -8,7 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.what.semi.common.GmailSend;
+import com.what.semi.contract.QRUtil;
 import com.what.semi.contract.model.service.ContractService;
+import com.what.semi.contract.model.vo.ContractVo;
+import com.what.semi.recruitment.model.service.RecruitmentService;
+import com.what.semi.recruitment.model.vo.RecruitmentVo;
 
 /**
  * Servlet implementation class AcceptResumeServlet
@@ -33,12 +38,19 @@ public class AcceptResumeServlet extends HttpServlet {
 		String id = (String) session.getAttribute("id");
 		
 		int contId = Integer.parseInt(request.getParameter("contId"));
+		System.out.println(contId);
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
 		ContractService cs = new ContractService();
 		
+		ContractVo cont = cs.selectContract(contId);
 		int result = cs.updateContractState(contId,1);
+		int dateresult = cs.updateContractDate(contId);
 		
+		RecruitmentVo rec = new RecruitmentService().selectRecruitment(cont.getRecruitment_id());
+		String root = request.getServletContext().getRealPath("/");
+		QRUtil.makeQR("http://localhost:8081/sp/timeStampPage.do?contId="+contId, root,String.valueOf(contId)+".png");
+		new GmailSend().sendQRcode(rec.getRecruitment_email(), cont, String.valueOf(contId)+".png");
 		
 		if (result!=0) {
 			response.sendRedirect("/sp/myHiredList.do?contId="+contId+"&currentPage="+currentPage);

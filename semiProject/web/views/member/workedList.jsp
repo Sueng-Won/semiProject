@@ -41,7 +41,6 @@
 	
 	$(function(){
 		<%if (contId != -1) {%>
-		console.log(<%=contId%>);
 			$("#conDetails<%=contId%>").addClass('show');
 		<%}%>
 	});
