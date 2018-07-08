@@ -2,6 +2,7 @@ package com.what.semi.member.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +37,6 @@ public class LoginServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		
-		if(query == null) {
 			if(result>0) {
 				session.setAttribute("id", id);
 				session.setAttribute("member_type", mv.getMember_type());
@@ -46,6 +46,8 @@ public class LoginServlet extends HttpServlet {
 				System.out.println(id);
 				if("admin".equals(id)) {
 					response.sendRedirect("views/admin/adminMain.jsp");
+				}else if(query!=null){
+					response.sendRedirect(query);
 				}else {
 					response.sendRedirect("index.jsp");
 				}
@@ -53,9 +55,6 @@ public class LoginServlet extends HttpServlet {
 			}else {
 				response.sendRedirect("index.jsp");
 			}
-		}else {
-			//여기다가 작성하시면 됩니당
-		}
 	}
 
 }

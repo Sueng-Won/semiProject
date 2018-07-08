@@ -148,4 +148,14 @@ public class ContractService {
 
 		return result;
 	}
+
+	public int contractCurrentPage(String js_id, int contId) {
+		Connection con = JDBCTemplate.getConnection();
+
+		int result = new ContractDao().selectContractCurrentPage(con,js_id, contId);
+
+		JDBCTemplate.close(con);
+
+		return result;
+	}
 }

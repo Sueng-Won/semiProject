@@ -67,13 +67,12 @@ public class WriteRecruitmentServlet extends HttpServlet {
 		// 4.전송 값을 변수에 저장
 		//객체 2 -> 게시판에 추가할 객체, attachment 추가할 객체(list)
 		
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 		
 		String name = mRequest.getParameter("name");
 		String phone = mRequest.getParameter("phone");
 		String email = mRequest.getParameter("email");
 		String zipcode = mRequest.getParameter("zipcode");
-		System.out.println(mRequest.getParameter("latitude"));
 		double latitude = Double.parseDouble(mRequest.getParameter("latitude"));
 		double longitude = Double.parseDouble(mRequest.getParameter("longitude"));
 		String address = mRequest.getParameter("address");
@@ -139,7 +138,7 @@ public class WriteRecruitmentServlet extends HttpServlet {
 		rec.setCareer(career);
 		
 		//System.out.println(recImg);
-		System.out.println(rec);
+		//System.out.println(rec);
 		
 		
 		

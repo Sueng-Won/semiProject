@@ -8,7 +8,7 @@
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script>
 	function suggestBtn() {
-		//해당업체에 구인글이 있는지 검색
+		location.href="searchSameJobseeker.do?resumeId="+<%=member.getResume_id()%>;
 	}
 </script>
 <style>

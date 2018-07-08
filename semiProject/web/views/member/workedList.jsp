@@ -194,7 +194,7 @@
 										}
 											} else if (myConList.get(i).getState() == 1) {
 									%>
-									진행중 입니다~^3^
+									계약이 성사되었습니다.
 									<%
 										} else {
 									%>

@@ -20,7 +20,8 @@ public class MyResumeDao {
 		ArrayList<MyResumeVo> userType = null;
 		
 		try {
-			query = "SELECT MILTARY_SERVICE, BUSINESS_TYPE, WORKABLE_DAYS, GENDER, PRI_RESUME, RESUME_ID, INTRODUCE_TITLE, IS_POST, MEMBER_TYPE FROM RESUME R JOIN MEMBER M ON (R.M_ID = M.M_ID) WHERE M.M_ID=? AND MEMBER_TYPE='JS' AND R.DELFLAG=0";
+			query = "SELECT MILTARY_SERVICE, BUSINESS_TYPE, WORKABLE_DAYS, GENDER, PRI_RESUME, RESUME_ID, ADDRESS, INTRODUCE_TITLE, IS_POST, NAME, MEMBER_TYPE FROM RESUME R JOIN MEMBER M ON (R.M_ID = M.M_ID) WHERE M.M_ID=? AND MEMBER_TYPE='JS' AND R.DELFLAG=0";
+			System.out.println(query);
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -40,6 +41,9 @@ public class MyResumeDao {
 				temp.setBusiness_type(rs.getString("business_type"));
 				temp.setWorkable_days(rs.getDate("workable_days"));
 				temp.setGender(rs.getString("gender").charAt(0));
+				temp.setAddress(rs.getString("address"));
+				temp.setName(rs.getString("name"));
+				
 				userType.add(temp);
 			}
 		} catch (SQLException e) {
@@ -235,6 +239,7 @@ public class MyResumeDao {
 				member.setIntroduce(rs.getString("introduce"));
 				member.setIntroduce_title(rs.getString("introduce_title"));
 				member.setWorkTime(rs.getString("work_time"));
+				member.setId(userId);
 				
 			}
 			
@@ -430,6 +435,50 @@ public class MyResumeDao {
 		}
 		
 		return result;
+	}
+
+	public MyResumeVo selectResume(Connection con, int resumeId) {
+		MyResumeVo member = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = null;
+		
+		try {
+			query ="SELECT WORK_TIME, INTRODUCE_TITLE, INTRODUCE, WORKABLE_DAYS, BUSINESS_TYPE, CAREER, MILTARY_SERVICE, DISABILITY, ACHIEVEMENT, NAME, PHONE, EMAIL, M.M_ID, ADDRESS, PROFILE_IMAGE_SRC FROM RESUME R  JOIN MEMBER M ON(R.M_ID=M.M_ID) WHERE R.RESUME_ID=?";
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setInt(1, resumeId);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				member = new MyResumeVo();
+				member.setName(rs.getString("name"));
+				member.setPhone(rs.getString("phone"));
+				member.setEmail(rs.getString("email"));
+				member.setAddress(rs.getString("address"));
+				member.setProfile_image_src(rs.getString("profile_image_src"));
+				member.setResume_id(resumeId);
+				member.setAchievement(rs.getString("achievement"));
+				member.setMiltary_service(rs.getInt("miltary_service"));
+				member.setCareer(rs.getInt("career"));
+				member.setBusiness_type(rs.getString("business_type"));
+				member.setWorkable_days(rs.getDate("workable_days")); //데이트 ->스트링
+				//  WORKABLE_DAYS
+				member.setIntroduce(rs.getString("introduce"));
+				member.setIntroduce_title(rs.getString("introduce_title"));
+				member.setWorkTime(rs.getString("work_time"));
+				member.setId(rs.getString("M_ID"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rs);
+		}
+		
+		return member;
 	}
 	
 }

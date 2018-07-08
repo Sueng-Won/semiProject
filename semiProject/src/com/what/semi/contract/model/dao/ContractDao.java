@@ -312,4 +312,29 @@ public class ContractDao {
 		return result;
 	}
 
+	public int selectContractCurrentPage(Connection con, String js_id, int contId) {
+		int result = -1;
+
+		Statement stmt = null;
+		ResultSet rs = null;
+		String query = "";
+		try {
+			stmt = con.createStatement();
+			query = "SELECT COUNT(*) AS LISTCOUNT " + "FROM CONTRACT " 
+					+ "WHERE JS_ID='" + js_id+ "' AND C_NO>="+contId
+					+ " ORDER BY C_NO";
+			rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				result = rs.getInt("listCount");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(stmt);
+		}
+
+		return result;
+	}
+
 }

@@ -33,13 +33,10 @@ public class UpdateRecFormServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String recId = request.getParameter("recId");
 		
-		System.out.println(recId);
-		
 		RecruitmentVo rec = new RecruitmentService().selectRecruitment(recId);
 		
 		String url = "";
 		if(null != rec){
-			System.out.println(rec.toString());
 			url = "views/recruitment/recModifyForm.jsp";
 			request.setAttribute("rec", rec);
 		}else{

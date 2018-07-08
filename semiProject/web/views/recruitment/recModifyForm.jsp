@@ -11,8 +11,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 <script type="text/javascript"
 	src="/sp/vendor/bootstrap/datepicker/bootstrap-datepicker.kr.js"></script>
 <script type="text/javascript">
@@ -142,6 +141,23 @@
 		$("#pay").keyup(function() {
 			payCal();
 		});
+		
+		if(<%=rec.getMilitary_service()%>==0){
+			$("#mBtn").text("무관");
+			$("#mValue").val("x");
+		}else{
+			$("#mBtn").text("군필");
+			$("#mValue").val("y");
+		}
+		if("<%=rec.getGender()%>"=="N"){
+			$("#gBtn").text("무관");
+		}else if("<%=rec.getGender()%>"=="M"){
+			$("#gBtn").text("남");
+		}else{
+			$("#gBtn").text("여");
+		}
+		$("#acBtn").text("<%=rec.getAchievement()%>");
+		
 	});
 </script>
 
@@ -276,8 +292,7 @@
 									<span id="mBtn" class="caret">병역사항</span>
 								</button>
 
-								<input type="hidden" name="mValue" id="mValue"
-									value="<%=rec.getMilitary_service()%>">
+								<input type="hidden" name="mValue" id="mValue">
 								<!-- 병역여부에 대한 값을 저장할 hidden input -->
 
 								<ul class="dropdown-menu bg-dark" role="menu">
