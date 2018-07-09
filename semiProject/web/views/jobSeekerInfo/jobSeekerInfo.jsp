@@ -360,9 +360,14 @@
 		
 		 $(".dateList").on("click",function(){
 			 $dateList = $(".dateList");
-			 
+
 			 $dateList.removeClass("selectedList");
-			 $(this).addClass("selectedList");
+			 
+			 if($(this).hasClass("selectedList")){
+				 $(this).removeClass("selectedList");
+			 }else{
+				 $(this).addClass("selectedList");
+			 }
 			 console.log($(this).val());
 			 $("#searchDate").val($(this).val());
 			 drawList();
