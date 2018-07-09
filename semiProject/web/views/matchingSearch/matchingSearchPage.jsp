@@ -61,6 +61,7 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
 						  </ul>
 					</div>
 				</div>
+				<input type="hidden" name="currentPage" id="currentPage"/>
 			</form>
 			<%}else{ %>
 			<div align="center" class="bg-dark text-white">작성된 이력서가 없습니다.</div>
@@ -119,7 +120,8 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
     <!-- /.container -->
 <script type="text/javascript">
 	function movePage(pageNum) {
-		location.href = "/sp/matchingSearch.do?currentPage="+pageNum;
+		$("#currentPage").val(pageNum);
+		$("#matchingSearchForm").submit();
 	}
 	
 	function resumeSelect(obj) {
