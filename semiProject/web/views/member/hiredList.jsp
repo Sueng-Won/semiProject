@@ -111,10 +111,9 @@
 							if (myConList.get(i).getContract_date() == null) {
 						%>-<%
 							} else {
-						%><%=myConList.get(i).getContract_date()%>
-						<%
-							}
-						%>
+						%><%=myConList.get(i).getContract_date()%> <%
+ 	}
+ %>
 					</td>
 					<%
 						for (int j = 0; j < conResumeList.size(); j++) {
@@ -135,8 +134,10 @@
 							}
 								} else if (myConList.get(i).getState() == 1) {
 						%>진행중<%
-							} else {
+							} else if (myConList.get(i).getState() == 2) {
 						%>완료<%
+							} else {
+						%>거절 <%
 							}
 						%>
 					</td>
@@ -155,7 +156,7 @@
 								<div style="height: 50px;">
 									<div style="float: left;">
 										<button style="margin-top: 10px;"
-											onclick="contractResumeDetail(<%=myConList.get(i).getResume_id() %>,'<%=myConList.get(i).getJs_id()%>');">해당
+											onclick="contractResumeDetail(<%=myConList.get(i).getResume_id()%>,'<%=myConList.get(i).getJs_id()%>');">해당
 											이력서 보기</button>
 									</div>
 									<div style="float: right;">
@@ -197,11 +198,15 @@
 									%>
 									계약이 성사되었습니다.
 									<%
-										} else {
+										} else if (myConList.get(i).getState() == 2) {
 									%>
 									<button
 										onclick="addBlacklist('<%=myConList.get(i).getJs_id()%>');"
 										class="btn btn-default bg-dark text-white">신고하기</button>
+									<%
+										} else {
+									%>
+									구직자가 수락하지 않았습니다.
 									<%
 										}
 									%>
