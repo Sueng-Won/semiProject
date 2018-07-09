@@ -53,12 +53,9 @@ int result = (int)request.getAttribute("result");
 		});
 	}
 
-	<%-- $(function() {
-		if(<%=result%>!=0){
-			alert("근무시간이 기록되었습니다.");
-			self.close();
-		}
-	}); --%>
+	$(function() {
+		window.open("/views/common/timeStamp.jsp","_blank", "width=600, height=700");
+	});
 </script>
 <style type="text/css">
 .space {
