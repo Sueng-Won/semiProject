@@ -11,7 +11,155 @@
 	src="/sp/vendor/bootstrap/datepicker/bootstrap-datepicker.kr.js"></script>
 <script type="text/javascript">
 	function writeRecruitment() {
+		var okFlag = false;
+		
+		if($("#name").val() == ""){
+	        alert("업체명을 입력해주세요.");
+	        $("#name").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#phone").val() == ""){
+	        alert("업체연락처를 입력해주세요.");
+	        $("#phone").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#email").val() == ""){
+	        alert("업체이메일를 입력해주세요.");
+	        $("#email").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#address").val() == ""){
+	        alert("주소 검색 버튼을 눌러 주소를 입력해주세요.");
+	        $("#address").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#addressDetail").val() == ""){
+	        alert("상세주소를 입력해주세요.");
+	        $("#addressDetail").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#business_type").val() == ""){
+	        alert("업종을 입력해주세요.");
+	        $("#business_type").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#career").val() == ""){
+	        alert("경력을 입력해주세요.");
+	        $("#career").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#workdate").val() == ""){
+	        alert("근무일을 입력해주세요.");
+	        $("#workdate").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#starttime").val() == ""){
+	        alert("시작근무시간을 입력해주세요.");
+	        $("#starttime").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#endtime").val() == ""){
+	        alert("종료근무시간을 입력해주세요.");
+	        $("#endtime").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#pay").val() == ""){
+	        alert("급여를 입력해주세요.");
+	        $("#pay").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#mValue").val() == ""){
+	        alert("희망병역을 입력해주세요.");
+	        $("#mValue").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#gValue").val() == ""){
+	        alert("희망성별을 입력해주세요.");
+	        $("#gValue").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#achievementValue ").val() == ""){
+	        alert("희망학력을 입력해주세요.");
+	        $("#achievementValue ").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#title").val() == ""){
+	        alert("게시글 제목을 입력해주세요.");
+	        $("#title").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#introduce").val() == ""){
+	        alert("업체소개를 입력해주세요.");
+	        $("#introduce").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if(okFlag){
 		$("#writeRecruitment").submit();
+		}
 	}
 
 	var searchAddr;
@@ -123,7 +271,7 @@
 				pay=pay+1;
 			}
 			if(start!=""&&end!=""){
-			$("#calculatePay").text("*최저시급 : 약"+pay+"0원");
+			$("#calculatePay").text("*최저임급 : 약"+pay+"0원");
 			}
 		});
 	});
@@ -154,19 +302,19 @@
 
 								<!-- 업체명 -->
 								<div class="input-group" style="min-height: 33%">
-									<input type="text" class="form-control mb-1" name="name"
+									<input type="text" class="form-control mb-1" name="name" id="name"
 										placeholder="업체명" />
 								</div>
 
 								<!-- 업체 전화번호 -->
 								<div class="input-group" style="min-height: 33%">
-									<input type="text" class="form-control mb-1" name="phone"
+									<input type="text" class="form-control mb-1" name="phone" id="phone"
 										placeholder="업체 연락처" />
 								</div>
 
 								<!-- 업체 이메일 -->
 								<div class="input-group" style="min-height: 33%">
-									<input type="email" class="form-control mb-1" name="email"
+									<input type="email" class="form-control mb-1" name="email" id="email"
 										placeholder="email" />
 								</div>
 							</div>
@@ -200,7 +348,7 @@
 						<div class="row">
 							<div class="col-3">
 								<select multiple class="custom-select-lg mt-1 ml-3 btn-dark"
-									style="min-height: 150px" name="business_type">
+									style="min-height: 150px" name="business_type" id="business_type">
 									<option disabled="disabled" class="text-white-50">[업종]</option>
 									<option>사무직</option>
 									<option>서비스</option>
@@ -211,7 +359,7 @@
 								</select>
 							</div>
 							<div class="col-3">
-								<select name="career" multiple
+								<select name="career" id="career" multiple
 									class="custom-select-lg mt-1 ml-3 btn-dark"
 									style="min-height: 150px">
 									<option disabled="disabled" class="text-white-50">[경력]</option>
@@ -237,7 +385,7 @@
 									<label>급여</label> <input type="text" class="btn-dark" id="pay"
 										name="pay" />원
 								</div>
-								<div class="text-white-50 ml-1" id="calculatePay" align="center">*최저시급
+								<div class="text-white-50 ml-1" id="calculatePay" align="center">*최저임급
 									: 7,530원</div>
 							</div>
 						</div>
@@ -252,7 +400,7 @@
 									<span id="mBtn" class="caret">병역사항</span>
 								</button>
 
-								<input type="hidden" name="mValue" id="mValue" value="x">
+								<input type="hidden" name="mValue" id="mValue">
 								<!-- 병역여부에 대한 값을 저장할 hidden input -->
 
 								<ul class="dropdown-menu bg-dark" role="menu">
@@ -273,7 +421,7 @@
 									<span class="caret" id="gBtn">성별</span>
 								</button>
 
-								<input type="hidden" name="gValue" id="gValue" value="N" />
+								<input type="hidden" name="gValue" id="gValue" />
 								<!-- 성별에 대한 값을 저장할 hidden input -->
 
 								<ul class="dropdown-menu bg-dark" role="menu">
@@ -316,13 +464,13 @@
 
 						<!-- 글제목 -->
 						<div class="input-group" style="min-height: 33%">
-							<input type="text" class="form-control mb-1" name="title"
+							<input type="text" class="form-control mb-1" name="title" id="title"
 								placeholder="구인글 제목" />
 						</div>
 						<div>
 
 							<textarea class="col-12" rows="5" placeholder="업체 소개 및 희망 인력"
-								name="introduce"></textarea>
+								name="introduce" id="introduce"></textarea>
 						</div>
 
 						<div id="fileArea">

@@ -63,7 +63,7 @@ div {
 			<div class="row" style="margin:30px 0 0 40px;;">
 					<div class="row page-header" style="width:700px;">
 						<h1>
-							나의 이력서<br> <small><%=member.getIntroduce_title()%></small>
+							이력서<br> <small><%=member.getIntroduce_title()%></small>
 						</h1>
 					</div>
 				<div class="row" style="width:700px;">

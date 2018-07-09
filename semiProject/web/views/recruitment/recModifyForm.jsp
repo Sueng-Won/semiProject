@@ -16,12 +16,161 @@
 	src="/sp/vendor/bootstrap/datepicker/bootstrap-datepicker.kr.js"></script>
 <script type="text/javascript">
 	function writeRecruitment(flag) {
+var okFlag = false;
+		
+		if($("#name").val() == ""){
+	        alert("업체명을 입력해주세요.");
+	        $("#name").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#phone").val() == ""){
+	        alert("업체연락처를 입력해주세요.");
+	        $("#phone").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#email").val() == ""){
+	        alert("업체이메일를 입력해주세요.");
+	        $("#email").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#address").val() == ""){
+	        alert("주소 검색 버튼을 눌러 주소를 입력해주세요.");
+	        $("#address").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#addressDetail").val() == ""){
+	        alert("상세주소를 입력해주세요.");
+	        $("#addressDetail").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#business_type").val() == ""){
+	        alert("업종을 입력해주세요.");
+	        $("#business_type").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#career").val() == ""){
+	        alert("경력을 입력해주세요.");
+	        $("#career").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#workdate").val() == ""){
+	        alert("근무일을 입력해주세요.");
+	        $("#workdate").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#starttime").val() == ""){
+	        alert("시작근무시간을 입력해주세요.");
+	        $("#starttime").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#endtime").val() == ""){
+	        alert("종료근무시간을 입력해주세요.");
+	        $("#endtime").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#pay").val() == ""){
+	        alert("급여를 입력해주세요.");
+	        $("#pay").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#mValue").val() == ""){
+	        alert("희망병역을 입력해주세요.");
+	        $("#mValue").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#gValue").val() == ""){
+	        alert("희망성별을 입력해주세요.");
+	        $("#gValue").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#achievementValue ").val() == ""){
+	        alert("희망학력을 입력해주세요.");
+	        $("#achievementValue ").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#title").val() == ""){
+	        alert("게시글 제목을 입력해주세요.");
+	        $("#title").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if($("#introduce").val() == ""){
+	        alert("업체소개를 입력해주세요.");
+	        $("#introduce").focus();
+	        okFlag = false;
+	        return false;
+	    }else{
+			okFlag = true;
+		}
+		
+		if(okFlag){
+		
 		if(flag){
 			$("#writeRecruitment").attr("action", "/sp/writeRecruitment.do");
 		}else{
 			$("#writeRecruitment").attr("action", "/sp/updateRecruitment.do");
 		}
 		$("#writeRecruitment").submit();
+		}
 	}
 
 	function payCal(){
@@ -263,19 +412,22 @@
 							<div class="col-6">
 								<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
 									<label>근무일</label> <input type="text" id="workdate"
-										class="btn-dark" name="workdate" value=<%=df.format(rec.getWork_day())%> />
+										class="btn-dark" name="workdate"
+										value=<%=df.format(rec.getWork_day())%> />
 								</div>
 								<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
 									<label>시작시간</label> <input type="time" class="btn-dark"
-										id="starttime" name="starttime" value="<%=rec.getStart_work_time()%>"/>
+										id="starttime" name="starttime"
+										value="<%=rec.getStart_work_time()%>" />
 								</div>
 								<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
 									<label>종료시간</label> <input type="time" class="btn-dark"
-										id="endtime" name="endtime" value="<%=rec.getEnd_work_time()%>"/>
+										id="endtime" name="endtime"
+										value="<%=rec.getEnd_work_time()%>" />
 								</div>
 								<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
 									<label>급여</label> <input type="text" class="btn-dark" id="pay"
-										name="pay" value="<%=rec.getPay() %>"/>원
+										name="pay" value="<%=rec.getPay()%>" />원
 								</div>
 								<div class="text-white-50 ml-1" id="calculatePay" align="center">*최저시급
 									: 7,530원</div>
@@ -373,10 +525,14 @@
 						</div>
 
 						<div>
-						<%if(rec.getIs_post()==1){ %>
+							<%
+								if (rec.getIs_post() == 1) {
+							%>
 							<button class="btn btn-light text-dark mt-4 mb-2"
 								onclick="writeRecruitment(false);">수정하기</button>
-								<%} %>
+							<%
+								}
+							%>
 							<button class="btn btn-light text-dark mt-4 mb-2"
 								onclick="writeRecruitment(true);">구인 등록</button>
 						</div>
