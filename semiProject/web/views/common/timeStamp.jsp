@@ -30,7 +30,25 @@ int result = (int)request.getAttribute("result");
 <script src="/sp/vendor/jquery/jquery.min.js"></script>
 <script>
 	function writeTime() {
-		location.href = "/sp/timeStamp.do?contId=" + <%=cont.getC_no()%>;
+		$.ajax({
+			url : "/sp/timeStamp.do",
+			type : "get",
+			data : {
+				contId : <%=cont.getC_no()%>
+			},
+			success : function(data) {
+				console.log(data);
+				var bool = confirm('근무시간이 기록되었습니다. 확인하시겠습니까?');
+				if(bool){
+				location.href="myWorkedList.do?contId=" + data.contId + "&currentPage=" + data.currentPage;
+				}else{
+					self.close();
+				}
+			},
+			error : function(e) {
+				console.log("error", e);
+			}
+		});
 	}
 
 	<%-- $(function() {
@@ -56,17 +74,23 @@ int result = (int)request.getAttribute("result");
 			<%if(cont.getStart_work_time()==null){ %>
 			<%=cont.getJs_id() %>님,
 			<<%=rec.getRecruitment_name() %>>에서
-			<%=sf.format(nowTime) %>로 근무를 시작하시겠습니까?<br><br>
+			<%=sf.format(nowTime) %>로 근무를 시작하시겠습니까?<br>
+			<br>
 			<button type="button" class="btn btn-default bg-dark text-white"
 				onclick="writeTime();">근무시작하기</button>
-			<%}else{ %> <%=cont.getJs_id() %>님, <<%=rec.getRecruitment_name() %>> 에서
-				<%=sf.format(nowTime)%> 로 근무를
-				마치시겠습니까?<br><br>
+			<%}else{ %> <%=cont.getJs_id() %>님, <<%=rec.getRecruitment_name() %>>
+			에서 <%=sf.format(nowTime)%> 로 근무를 마치시겠습니까?<br>
+			<br>
 			<button type="button" class="btn btn-default bg-dark text-white"
 				onclick="writeTime();">근무끝내기</button>
-				<%}%>
+			<%
+				}
+			%>
+			
 		</div>
-		<%} %>
+		<%
+			}
+		%>
 		<div class="space"></div>
 	</div>
 	<%@include file="footer.jsp"%>
