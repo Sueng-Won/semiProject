@@ -144,7 +144,7 @@ String keyword = condition.getUserName();
 	            catch (e) {
 	            }
 	        }, 10);
-	    }; 
+	    };
 	    
 		function newResumePage(r_no){
 	        var win = window.open("/sp/manageResFormView.do?r_no="+r_no,"_blank","width=1000, height=900, left=auto,top=auto");

@@ -240,10 +240,10 @@ tr {
 				<div align="center">
 					<%if(rec.getDelflag() != 1){ %>
 					<button id="deleteBtn"
-						class="btn btn-default bg-dark text-white mr-2">게시물 삭제</button>
+						class="btn btn-dark text-white mr-2">게시물 삭제</button>
 					<%}else{ %>
 					<button id="resetBtn"
-						class="btn btn-default bg-dark text-white mr-2">게시물 복구</button>
+						class="btn btn-info text-white mr-2">게시물 복구</button>
 					<%} %>
 					<button id="returnBtn"
 						class="btn btn-default bg-dark text-white">돌아가기</button>
