@@ -230,6 +230,11 @@
 		var id = $("#iid").val();
 		var tBtn = $("#tBtn").val();
 		var gender = $('input[name="gender"]:checked').val();
+		if(id == ""){
+	        alert("아이디를 입력해주세요.");
+	        $("#iid").focus();
+	        return false;
+	    }
 		location.href="/sp/checkId.do?id="+id+"&tBtn="+tBtn+"&gender="+gender;
 	}
 	
