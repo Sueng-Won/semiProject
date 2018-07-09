@@ -109,7 +109,15 @@
 	        okFlag = false;
 	        return false;
 	    }else{
+	    	alert($("#calculatePay").val());
+	    	if($("#pay").val()<$("#calculatePay").val()){
+	    		alert("근무시간과 최저임금을 확인해 주세요.");
+		        $("#pay").focus();
+		        okFlag = false;
+		        return false;
+	    	}else{
 			okFlag = true;
+	    	}
 		}
 		
 		if($("#mValue").val() == ""){
@@ -158,7 +166,7 @@
 		}
 		
 		if(okFlag){
-			$("#writeRecruitment").submit();
+			/* $("#writeRecruitment").submit(); */
 		}
 	}
 
@@ -271,7 +279,8 @@
 				pay=pay+1;
 			}
 			if(start!=""&&end!=""){
-			$("#calculatePay").text("*최저임 : 약"+pay+"0원");
+			$("#calculatePay").text("*최저임급 : 약"+pay+"0원");
+			$("#calculatePay").val(pay*10);
 			}
 		});
 	});
@@ -291,8 +300,8 @@
 					<br> <br>
 					<h3 align="center" class="text-white-50">구인 게시물</h3>
 					<br>
-					<form id="writeRecruitment" method="post"
-						action="/sp/writeRecruitment.do" enctype="multipart/form-data">
+					<!-- <form id="writeRecruitment" method="post"
+						action="/sp/writeRecruitment.do" enctype="multipart/form-data"> -->
 						<div class="row">
 							<div class="col-3 mb-1" id="titleImage">
 								<img id="titleImg" alt="" style="max-width: 130px;"
@@ -302,20 +311,20 @@
 
 								<!-- 업체명 -->
 								<div class="input-group" style="min-height: 33%">
-									<input type="text" class="form-control mb-1" name="name" id="name"
-										placeholder="업체명" />
+									<input type="text" class="form-control mb-1" name="name"
+										id="name" placeholder="업체명" />
 								</div>
 
 								<!-- 업체 전화번호 -->
 								<div class="input-group" style="min-height: 33%">
-									<input type="text" class="form-control mb-1" name="phone" id="phone"
-										placeholder="업체 연락처" />
+									<input type="text" class="form-control mb-1" name="phone"
+										id="phone" placeholder="업체 연락처" />
 								</div>
 
 								<!-- 업체 이메일 -->
 								<div class="input-group" style="min-height: 33%">
-									<input type="email" class="form-control mb-1" name="email" id="email"
-										placeholder="email" />
+									<input type="email" class="form-control mb-1" name="email"
+										id="email" placeholder="email" />
 								</div>
 							</div>
 						</div>
@@ -348,7 +357,8 @@
 						<div class="row">
 							<div class="col-3">
 								<select multiple class="custom-select-lg mt-1 ml-3 btn-dark"
-									style="min-height: 150px" name="business_type" id="business_type">
+									style="min-height: 150px" name="business_type"
+									id="business_type">
 									<option disabled="disabled" class="text-white-50">[업종]</option>
 									<option>사무직</option>
 									<option>서비스</option>
@@ -385,7 +395,7 @@
 									<label>급여</label> <input type="text" class="btn-dark" id="pay"
 										name="pay" />원
 								</div>
-								<div class="text-white-50 ml-1" id="calculatePay" align="center">*최저임
+								<div class="text-white-50 ml-1" id="calculatePay" value="7530" align="center">*최저임급
 									: 7,530원</div>
 							</div>
 						</div>
@@ -464,8 +474,8 @@
 
 						<!-- 글제목 -->
 						<div class="input-group" style="min-height: 33%">
-							<input type="text" class="form-control mb-1" name="title" id="title"
-								placeholder="구인글 제목" />
+							<input type="text" class="form-control mb-1" name="title"
+								id="title" placeholder="구인글 제목" />
 						</div>
 						<div>
 
@@ -483,7 +493,7 @@
 								onclick="writeRecruitment();">구인 등록</button>
 						</div>
 
-					</form>
+					<!-- </form> -->
 
 				</div>
 				<!-- /.col-lg-6 -->
