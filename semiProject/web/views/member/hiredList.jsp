@@ -72,6 +72,12 @@
 	width: 350px;
 }
 </style>
+
+<script>
+	function addBlacklist(i){
+		window.open("/sp/searchIdByRecId.do?recId="+i,"_blank", "width=600, height=700");
+	}
+</script>
 <div class="container" style="min-height: 800px">
 	<!-- 내용을 담아놓을 컨테이너 -->
 
@@ -200,7 +206,7 @@
 										} else {
 									%>
 									<button
-										onclick="addBlacklist('<%=myConList.get(i).getJs_id()%>');"
+										onclick="addBlacklist('<%=myConList.get(i).getRecruitment_id()%>');"
 										class="btn btn-default bg-dark text-white">신고하기</button>
 									<%
 										}

@@ -174,20 +174,7 @@ public class RecruitmentService {
 		
 		return result;
 	}
-
-	public String searchIdByRecId(String recId) {
-		Connection con = JDBCTemplate.getConnection();
-		
-		String memId = new RecruitmentDao().searchIdByRecId(con,recId);
-		if(memId != null) {
-			JDBCTemplate.commit(con);
-		}else {
-			JDBCTemplate.rollback(con);
-		}
-		
-		return memId;
-	}
-
+	
 	public ArrayList<RecruitmentVo> loadSameBusiness(String m_id) {
 		Connection con = JDBCTemplate.getConnection();
 
@@ -197,6 +184,5 @@ public class RecruitmentService {
 
 		return list;
 	}
-
 
 }
