@@ -30,7 +30,7 @@ public class IndexListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		RecruitmentService rs = new RecruitmentService();
-		//int is_post_result = rs.updateRecIsPost();
+		int is_post_result = rs.updateRecIsPost();
 		int state_result = new ContractService().updateExpriedContractState();
 
 		PageInfo pi = PageTemplate.indexPaging(request, rs);
