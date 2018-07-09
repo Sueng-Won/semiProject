@@ -129,7 +129,6 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
 	}
 	
 	function recDetail(i){
-		alert(i);
 		location.href="/sp/recruitmentDetail.do?recId="+i+"&currentPage="+<%=currentPage%>;
 	}
 </script>
