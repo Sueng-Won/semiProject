@@ -476,15 +476,15 @@ tr {
 	       <label for="PimsAgree">개인정보수집 및 이용안내에 동의합니다.</label>
 	    </p>
    </div>
+   
    	<div class="row">
    		<div class="col-4"></div>
 	    <p class="btn col-4">
 	       <input id="btn_submit" class="bBtn bg-dark" value="보내기" onclick="starList();"/>
 	       <a href="javascript:self.close();" class="cBtn">취소</a>
 	    </p>
-	    
-	   	<div class="col-4"></div>
   	</div>
+  	
   </div>
 </form>
 
