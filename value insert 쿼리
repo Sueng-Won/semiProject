@@ -54,4 +54,10 @@ INSERT INTO RECRUITMENT VALUES (SEQ_RECRUITMENT.NEXTVAL,null,'버거킹 메가�
 같은 또래와 같이 일하고 싶은 분들 대환영 입니다^^~
 ','test5',1,0);
 
+INSERT INTO RECRUITMENT VALUES (SEQ_RECRUITMENT.NEXTVAL,null,'뚜레쥬르 불광동nc백화점','021233456','yul2514@naver.com',
+'서울 은평구 대조동 240','nc백화점 지하2층 뚜레쥬르','03397',
+37.60972265901434,126.92900236563413,'유통/판매',0,TO_DATE('2018-07-12','RRRR-MM-DD'),TO_DATE('11-30','HH24-MI'),TO_DATE('15-30','HH24-MI'),
+60240,'F',0,'고졸','스탭구함','유사업무 경험 21세 이상 매장관리
+','test1',1,0);
+
 COMMIT;
