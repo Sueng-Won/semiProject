@@ -33,7 +33,7 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
 
 <%@include file="/views/common/header.jsp" %>
 <style>
-	h4{
+	a, h4{
 		cursor: pointer;
 	}
 </style>
@@ -61,6 +61,7 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
 						  </ul>
 					</div>
 				</div>
+				<input type="hidden" name="currentPage" id="currentPage"/>
 			</form>
 			<%}else{ %>
 			<div align="center" class="bg-dark text-white">작성된 이력서가 없습니다.</div>
@@ -71,7 +72,10 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
             <%for(RecruitmentVo rv : list) {%><!-- for문을 통해 해당 게시물들의 개수에 맞게 생성 -->
 	            <div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4" style="max-height: 400px">
 	              <div class="card h-100">
-	                <img class="card-img-top" src="<%=null == rv.getRecruitment_image_src()?"/sp/images/building.jpeg":"/sp/images/recruitmentImg/"+rv.getRecruitment_image_src() %>" alt="">
+	                <a onclick="recDetail(<%=rv.getRecruitment_id()%>);">
+                   <img src="<%if (rv.getRecruitment_image_src() == null) {%>/sp/images/building.jpeg<%} else {%>/sp/images/recruitmentImg/<%=rv.getRecruitment_image_src()%><%}%>"
+							width="180px" height="180px">
+                   </a>
 	                <div class="card-body">
 	                  <h4 class="card-title btn-link" onclick="recDetail('<%=rv.getRecruitment_id()%>');">
 	                    <%=rv.getRecruitment_title() %><!-- 게시물 이름 -->
@@ -99,13 +103,13 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
 					<button onclick="movePage(<%=currentPage==1?1:currentPage-1%>);" type="button" class="btn btn-default bg-dark text-white">◀</button>
 					<%for(int i = startPage; i <= endPage; i++){ %>
 						<%if(currentPage != i){ %>
-						<button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
+						<button onclick="movePage(<%=i %>);" type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
 						<%}else{ %>
 						<button type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
 						
 						<%} %>
 					<%} %>
-					<button onclick="movePage(<%=currentPage==maxPage?maxPage:maxPage+1%>);" type="button" class="btn btn-default bg-dark text-white">▶</button>
+					<button onclick="movePage(<%=currentPage==maxPage?maxPage:currentPage+1%>);" type="button" class="btn btn-default bg-dark text-white">▶</button>
 			  </div>
 			</div>
 		<!--=========================================================================================-->
@@ -116,7 +120,8 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
     <!-- /.container -->
 <script type="text/javascript">
 	function movePage(pageNum) {
-		location.href = "/sp/matchingSearch.do?currentPage="+pageNum;
+		$("#currentPage").val(pageNum);
+		$("#matchingSearchForm").submit();
 	}
 	
 	function resumeSelect(obj) {

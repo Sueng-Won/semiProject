@@ -39,6 +39,7 @@ public class MatchingSearchServlet extends HttpServlet {
 		int resumeId = 0;
 		String resumeTitle = "";
 		
+		
 		ArrayList<String> resumeNames = null;				//회원의 이력서title명을 저장할 List 선언
 		ArrayList<MyResumeVo> resume = null;				//해당 회원의 이력서를 조회해올 List 선언
 		
