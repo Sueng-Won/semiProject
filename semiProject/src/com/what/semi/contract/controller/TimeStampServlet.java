@@ -1,14 +1,14 @@
 package com.what.semi.contract.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
 
 import com.what.semi.contract.model.service.ContractService;
 import com.what.semi.contract.model.vo.ContractVo;
@@ -53,15 +53,14 @@ public class TimeStampServlet extends HttpServlet {
 			currentPage = (count / 12) + 1;
 		}
 
-		RequestDispatcher view = null;
-		String url = "";
+
+		JSONObject json = new JSONObject();
 		if (cont != null) {
-			/*
-			 * url = "/views/common/timeStamp.jsp"; request.setAttribute("cont",
-			 * cont); request.setAttribute("rec", null);
-			 * request.setAttribute("result", result);
-			 */
-			response.setContentType("text/html;charset=utf-8"); // 어떤 타입으로
+			json.put("contId", contId);
+			json.put("currentPage", currentPage);
+			response.setContentType("application/json");
+			response.getWriter().print(json.toJSONString());
+			/*response.setContentType("text/html;charset=utf-8"); // 어떤 타입으로
 																// 출력할것인지 명시하였다.
 
 			PrintWriter out = response.getWriter(); // getWriter() 출력스트림.
@@ -74,7 +73,7 @@ public class TimeStampServlet extends HttpServlet {
 			str += "}else{";
 			str += "close();}";
 			str += "</script>";
-			out.print(str);
+			out.print(str);*/
 
 		} else {
 			System.out.println("타임스탬프오류");
