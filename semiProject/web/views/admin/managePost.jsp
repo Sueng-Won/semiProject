@@ -147,7 +147,7 @@ String keyword = condition.getUserName();
 	    };
 	    
 		function newResumePage(r_no){
-	        var win = window.open("/sp/manageResFormView.do?r_no="+r_no,"_blank","width=1000, height=900, left=auto,top=auto");
+	        var win = window.open("/sp/manageResumeFormView.do?r_no="+r_no,"_blank","width=800, height=900, left=auto,top=auto");
 	        var interval = window.setInterval(function() {
 	        	try {
 	                if (win.closed) {
@@ -252,7 +252,7 @@ String keyword = condition.getUserName();
 			     		<div class="col-3">구직자</div>
 			     		<div class="col-3 btn-link" onclick="newResumePage(<%=mv.getResume_id()%>);"><%=mv.getIntroduce_title() %></div>
 			     		<div class="btn-group col-lg-3 col-12" role="group" aria-label="...">
-			     			<%if(mv.getDelflag() != 0){ %>
+			     			<%if(mv.getDelflag() != 1){ %>
 						  <button onclick="deleteResume('<%=mv.getResume_id()%>');" class="btn btn-dark btn-sm">게시물 삭제</button>
 						  	<%}else{ %>
 						  <button onclick="resetResume('<%=mv.getResume_id()%>');" class="btn btn-info btn-sm">게시물 복구</button>

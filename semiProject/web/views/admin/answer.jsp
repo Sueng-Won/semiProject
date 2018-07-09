@@ -361,7 +361,18 @@ span {
     <script src="/sp/vendor/jquery/jquery.min.js"></script>
     <script type="text/javascript">
    	   
-
+    $(function(){
+    	$("#btn_submit").click(function(){
+			$.ajax(
+			{
+				url : "/sp/answerQna.do",
+				type : "post",
+				complete : function(){
+					close();
+				}
+			});
+		});
+    }); 
     </script>
 </head>
 <body>
@@ -414,9 +425,9 @@ span {
 	       <input type="hidden" name="q_no" value="<%=q_no %>"/>
 	       <input id="btn_submit" class="bBtn bg-dark" value="보내기" type="submit"/>
 	       <a href="javascript:self.close();" class="cBtn">취소</a>
-	    </p>
-	   	<div class="col-4"></div>
+	    </p>	
   	</div>
+  	
   </div>
 </form>
 

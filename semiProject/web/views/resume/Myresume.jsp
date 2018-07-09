@@ -201,7 +201,7 @@ div {
 			<div class="modal-header">
 				<!-- 닫기(x) 버튼 -->
 				<!-- header title -->
-				<h4 class="modal-title">이력서 선택</h4>
+				<h4 class="modal-title">구인글 선택</h4>
 				<button type="button" class="close" data-dismiss="modal">×</button>
 			</div>
 			<!-- body -->

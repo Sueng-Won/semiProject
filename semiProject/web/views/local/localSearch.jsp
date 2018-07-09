@@ -189,10 +189,7 @@
    }
    
    .nowMap .helpLayer .local li a {
-    padding: 0 3px;
-    color: #494949;
-    text-decoration: none;
-    font-size: 12px;
+    
    }
    
    
@@ -335,6 +332,596 @@
     height: 20px;
     padding: 3px;
    }
+   
+   .nowMap .helpLayer .local li a.seoulO{
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .local li a.seoulC{
+    padding: 0 3px;
+    color: #5e77fb;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .local li a{
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+    .previewMap {
+    position: relative;
+    width: 180px;
+    height: 120px;
+    padding: 15px 15px 10px 15px;
+    z-index: 102;
+	}
+	
+	.previewMap .cName {
+    width: 180px;
+    height: 17px;
+    font: 11px dotum, "돋움", sans-serif;
+    color: #3366ff;
+    letter-spacing: -0.08em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: -1em;
+    -webkit-margin-start: 0x;
+    -webkit-margin-end: 0px;
+	}
+	
+	.previewMap .cTit {
+    width: 180px;
+    height: 22px;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #ff574c;
+    letter-spacing: -0.06em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+	}
+	
+	.previewMap dl {
+    overflow: hidden;
+    width: 180px;
+    text-align: left;
+    margin-bottom: 4px;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+	}
+	
+	.previewMap dl dt {
+    float: left;
+    width: 60px;
+    height: 20px;
+    padding: 3px 0 0 8px;
+    border: 1px solid #e5e5e5;
+    font: 11px dotum, "돋움", sans-serif;
+    color: #adadad;
+    background: #f6f6f6;
+    
+	}
+	
+	.previewMap dl dd {
+    overflow: hidden;
+    float: left;
+    position: relative;
+    top: -5px;
+    width: 105px;
+    height: 15px;
+    min-height: 21px;
+    padding: 3px 0 0 4px;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #333;
+    line-height: 25px;
+	}
+	
+	.previewMap .dView {
+    text-align: center;
+    }
+    
+    .previewMap .dView a {
+    display: block;
+    width: 180px;
+    height: 25px;
+    background: #346dd9;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #fff;
+    cursor: hand;
+	}
+
+	.previewMap .dView a span {
+    display: inline-block;
+    margin: 6px 0 0 0;
+    padding: 0 15px 0 0;
+    
+	}
+   
+   .nowMap .helpLayer .local li a.seoulO{
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .local li a.seoulC{
+    padding: 0 3px;
+    color: #5e77fb;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .local li a{
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+    .previewMap {
+    position: relative;
+    width: 180px;
+    height: 120px;
+    padding: 15px 15px 10px 15px;
+    z-index: 102;
+   }
+   
+   .previewMap .cName {
+    width: 180px;
+    height: 17px;
+    font: 11px dotum, "돋움", sans-serif;
+    color: #3366ff;
+    letter-spacing: -0.08em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: -1em;
+    -webkit-margin-start: 0x;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap .cTit {
+    width: 180px;
+    height: 22px;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #ff574c;
+    letter-spacing: -0.06em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap dl {
+    overflow: hidden;
+    width: 180px;
+    text-align: left;
+    margin-bottom: 4px;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap dl dt {
+    float: left;
+    width: 60px;
+    height: 20px;
+    padding: 3px 0 0 8px;
+    border: 1px solid #e5e5e5;
+    font: 11px dotum, "돋움", sans-serif;
+    color: #adadad;
+    background: #f6f6f6;
+    
+   }
+   
+   .previewMap dl dd {
+    overflow: hidden;
+    float: left;
+    position: relative;
+    top: -5px;
+    width: 105px;
+    height: 15px;
+    min-height: 21px;
+    padding: 3px 0 0 4px;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #333;
+    line-height: 25px;
+   }
+   
+   .previewMap .dView {
+    text-align: center;
+    }
+    
+    .previewMap .dView a {
+    display: block;
+    width: 180px;
+    height: 25px;
+    background: #346dd9;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #fff;
+    cursor: hand;
+   }
+
+   .previewMap .dView a span {
+    display: inline-block;
+    margin: 6px 0 0 0;
+    padding: 0 15px 0 0;
+    
+   }
+   
+   .nowMap .helpLayer .local li a.seoulO{
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .local li a.seoulC{
+    padding: 0 3px;
+    color: #5e77fb;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .local li a{
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+    .previewMap {
+    position: relative;
+    width: 180px;
+    height: 120px;
+    padding: 15px 15px 10px 15px;
+    z-index: 102;
+   }
+   
+   .previewMap .cName {
+    width: 180px;
+    height: 17px;
+    font: 11px dotum, "돋움", sans-serif;
+    color: #3366ff;
+    letter-spacing: -0.08em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: -1em;
+    -webkit-margin-start: 0x;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap .cTit {
+    width: 180px;
+    height: 22px;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #ff574c;
+    letter-spacing: -0.06em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap dl {
+    overflow: hidden;
+    width: 180px;
+    text-align: left;
+    margin-bottom: 4px;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap dl dt {
+    float: left;
+    width: 60px;
+    height: 20px;
+    padding: 3px 0 0 8px;
+    border: 1px solid #e5e5e5;
+    font: 11px dotum, "돋움", sans-serif;
+    color: #adadad;
+    background: #f6f6f6;
+    
+   }
+   
+   .previewMap dl dd {
+    overflow: hidden;
+    float: left;
+    position: relative;
+    top: -5px;
+    width: 105px;
+    height: 15px;
+    min-height: 21px;
+    padding: 3px 0 0 4px;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #333;
+    line-height: 25px;
+   }
+   
+   .previewMap .dView {
+    text-align: center;
+    }
+    
+    .previewMap .dView a {
+    display: block;
+    width: 180px;
+    height: 25px;
+    background: #346dd9;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #fff;
+    cursor: hand;
+   }
+
+   .previewMap .dView a span {
+    display: inline-block;
+    margin: 6px 0 0 0;
+    padding: 0 15px 0 0;
+    
+   }
+   
+   .nowMap .helpLayer .local li a.seoulO{
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .local li a.seoulC{
+    padding: 0 3px;
+    color: #5e77fb;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .local li a{
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+    .previewMap {
+    position: relative;
+    width: 180px;
+    height: 120px;
+    padding: 15px 15px 10px 15px;
+    z-index: 102;
+   }
+   
+   .previewMap .cName {
+    width: 180px;
+    height: 17px;
+    font: 11px dotum, "돋움", sans-serif;
+    color: #3366ff;
+    letter-spacing: -0.08em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: -1em;
+    -webkit-margin-start: 0x;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap .cTit {
+    width: 180px;
+    height: 22px;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #ff574c;
+    letter-spacing: -0.06em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap dl {
+    overflow: hidden;
+    width: 180px;
+    text-align: left;
+    margin-bottom: 4px;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap dl dt {
+    float: left;
+    width: 60px;
+    height: 20px;
+    padding: 3px 0 0 8px;
+    border: 1px solid #e5e5e5;
+    font: 11px dotum, "돋움", sans-serif;
+    color: #adadad;
+    background: #f6f6f6;
+    
+   }
+   
+   .previewMap dl dd {
+    overflow: hidden;
+    float: left;
+    position: relative;
+    top: -5px;
+    width: 105px;
+    height: 15px;
+    min-height: 21px;
+    padding: 3px 0 0 4px;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #333;
+    line-height: 25px;
+   }
+   
+   .previewMap .dView {
+    text-align: center;
+    }
+    
+    .previewMap .dView a {
+    display: block;
+    width: 180px;
+    height: 25px;
+    background: #346dd9;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #fff;
+    cursor: hand;
+   }
+
+   .previewMap .dView a span {
+    display: inline-block;
+    margin: 6px 0 0 0;
+    padding: 0 15px 0 0;
+    
+   }
+   
+   .nowMap .helpLayer .local li a.seoulO{
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .local li a.seoulC{
+    padding: 0 3px;
+    color: #5e77fb;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .local li a{
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+    .previewMap {
+    position: relative;
+    width: 180px;
+    height: 120px;
+    padding: 15px 15px 10px 15px;
+    z-index: 102;
+   }
+   
+   .previewMap .cName {
+    width: 180px;
+    height: 17px;
+    font: 11px dotum, "돋움", sans-serif;
+    color: #3366ff;
+    letter-spacing: -0.08em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: -1em;
+    -webkit-margin-start: 0x;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap .cTit {
+    width: 180px;
+    height: 22px;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #ff574c;
+    letter-spacing: -0.06em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap dl {
+    overflow: hidden;
+    width: 180px;
+    text-align: left;
+    margin-bottom: 4px;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap dl dt {
+    float: left;
+    width: 60px;
+    height: 20px;
+    padding: 3px 0 0 8px;
+    border: 1px solid #e5e5e5;
+    font: 11px dotum, "돋움", sans-serif;
+    color: #adadad;
+    background: #f6f6f6;
+    
+   }
+   
+   .previewMap dl dd {
+    overflow: hidden;
+    float: left;
+    position: relative;
+    top: -5px;
+    width: 105px;
+    height: 15px;
+    min-height: 21px;
+    padding: 3px 0 0 4px;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #333;
+    line-height: 25px;
+   }
+   
+   .previewMap .dView {
+    text-align: center;
+    }
+    
+    .previewMap .dView a {
+    display: block;
+    width: 180px;
+    height: 25px;
+    background: #346dd9;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #fff;
+    cursor: hand;
+   }
+
+   .previewMap .dView a span {
+    display: inline-block;
+    margin: 6px 0 0 0;
+    padding: 0 15px 0 0;
+    
+   }
 </style>
     <!-- 화면 상단 아이콘 이미지 -->
    <link rel="shortcut icon" href="/sp/images/icon.png">
@@ -363,22 +950,22 @@
                   <p class="title">* 지역을 선택하시면 <strong>중심지역(시청·구청·주민센터)</strong>으로 지도가 이동합니다.</p>
                <ul class="local">
                   <li id="dev_map_sicode_I000" ><a class="seoulO btn" id="lis" onclick="map_area_move_view2('')">서울</a></li>
-                  <li id="dev_map_sicode_B000"><a href="">경기</a></li>
-                  <li id="dev_map_sicode_K000"><a href="">인천</a></li>
-                  <li id="dev_map_sicode_A000"><a href="">강원</a></li>
-                  <li id="dev_map_sicode_G000"><a href="">대전</a></li>
-                  <li id="dev_map_sicode_1000"><a href="">세종</a></li>
-                  <li id="dev_map_sicode_O000"><a href="">충남</a></li>
-                  <li id="dev_map_sicode_P000"><a href="">충북</a></li>
-                  <li id="dev_map_sicode_H000"><a href="">부산</a></li>
-                  <li id="dev_map_sicode_J000"><a href="">울산</a></li>
-                  <li id="dev_map_sicode_C000"><a href="">경남</a></li>
-                  <li id="dev_map_sicode_D000"><a href="">경북</a></li>
-                  <li id="dev_map_sicode_F000"><a href="">대구</a></li>
-                  <li id="dev_map_sicode_E000"><a href="">광주</a></li>
-                  <li id="dev_map_sicode_L000"><a href="">전남</a></li>
-                  <li id="dev_map_sicode_M000"><a href="">전북</a></li>
-                  <li id="dev_map_sicode_N000"><a href="">제주</a></li>
+                  <li id="dev_map_sicode_B000"><a href="" >경기</a></li>
+                  <li id="dev_map_sicode_K000"><a href="" >인천</a></li>
+                  <li id="dev_map_sicode_A000"><a href="" >강원</a></li>
+                  <li id="dev_map_sicode_G000"><a href="" >대전</a></li>
+                  <li id="dev_map_sicode_1000"><a href="" >세종</a></li>
+                  <li id="dev_map_sicode_O000"><a href="" >충남</a></li>
+                  <li id="dev_map_sicode_P000"><a href="" >충북</a></li>
+                  <li id="dev_map_sicode_H000"><a href="" >부산</a></li>
+                  <li id="dev_map_sicode_J000"><a href="" >울산</a></li>
+                  <li id="dev_map_sicode_C000"><a href="" >경남</a></li>
+                  <li id="dev_map_sicode_D000"><a href="" >경북</a></li>
+                  <li id="dev_map_sicode_F000"><a href="" >대구</a></li>
+                  <li id="dev_map_sicode_E000"><a href="" >광주</a></li>
+                  <li id="dev_map_sicode_L000"><a href="" >전남</a></li>
+                  <li id="dev_map_sicode_M000"><a href="" >전북</a></li>
+                  <li id="dev_map_sicode_N000"><a href="" >제주</a></li>
                </ul>
                   <div id="dev_map_areagu_box" class="area hide">
                      <h3 class="skip">서울</h3>
@@ -431,6 +1018,25 @@
             </p>
          </div>
          
+	        <!-- <div style="cursor: default; position: absolute; background: rgb(255, 255, 255); border: 1px solid rgb(118, 129, 168); z-index: 2; display: block; width: 210px; height: 146px; left: 214px; top: 57px;">
+	         	<div style="position: absolute; background: url(&quot;http://t1.daumcdn.net/localimg/localimages/07/mapjsapi/2x/triangle.png&quot;) 0% 0% / 11px 9px no-repeat; width: 11px; height: 9px; left: 99px; top: 146px;"></div>
+			         <div class="" style="position: absolute; left: 0px; top: 0px;">
+				         <div id="dev_map_preview" class="previewMap" style="positon:absolute;">		
+				         <p class="cName">스타벅스 강남구청정문점</p>		
+				         <p class="cTit">스타벅스 강남구청정문점과 함께할 파트너를 모집합니다</p>		
+				         <dl>			
+				         	<dt>급여</dt>			
+				         	<dd>시 7,600원</dd>			
+				         	<dt>근무시간</dt>			
+				         	<dd>시간협의</dd>		
+				         </dl>		
+				         <p class="dView"><a href="#" ><span>상세보기</span></a></p>
+				         </div>
+			       </div>
+	         </div>  -->
+	         
+	         
+	         
          </div>
       </div>
           
@@ -511,34 +1117,51 @@
    map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT); 
    
    // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-    var mapTypeControl = new daum.maps.MapTypeControl(); 
+   var mapTypeControl = new daum.maps.MapTypeControl(); 
     
    // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
    var zoomControl = new daum.maps.ZoomControl();
    map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
    
+   
    // 마커를 표시할 위치와 title 객체 배열입니다 
-      var positions = [
+   var positions = [
       <%int count=0;%>
       <%for(RecruitmentVo rv : list){%>
          <%if(count==0){%>   
-         {content: '<div onclick=""><%=rv.getRecruitment_name()%></div>', 
+         {content: '<div style="cursor: default; position: absolute; background: rgb(255, 255, 255); border: 1px solid rgb(118, 129, 168); z-index: 2; display: block; width: 210px; height: 146px; left: -30px; top: -120px;"><div style="position: absolute; background: url(&quot;http://t1.daumcdn.net/localimg/localimages/07/mapjsapi/2x/triangle.png&quot;) 0% 0% / 11px 9px no-repeat; width: 11px; height: 9px; left: 99px; top: 146px;"></div>'
+         		+'<div class="" style="position: absolute; left: 0px; top: 0px;">'
+         		+'<div id="dev_map_preview" class="previewMap" style="positon:absolute;">'
+         		+'<p class="cName"><%=rv.getRecruitment_name()%></p>		'
+         		+'<p class="cTit"><%=rv.getRecruitment_title()%></p>		'
+         		+'<dl>			<dt>급여</dt>			<dd>일 <%=rv.getPay()%>원</dd>'
+         		+'			    <dt>근무날짜</dt>			<dd><%=rv.getWork_day()%></dd>'
+         		+'</dl>'
+         		+'<p class="dView"><a href="#"><span>상세모집요강</span></a></p></div></div></div>', 
          latlng: new daum.maps.LatLng(<%=rv.getR_latitude()%>, <%=rv.getR_longitude()%>) }
          <%}else{%>
-         ,{content: '<div onclick=""><%=rv.getRecruitment_name()%></div>', 
+         ,{content: '<div style="cursor: default; position: absolute; background: rgb(255, 255, 255); border: 1px solid rgb(118, 129, 168); z-index: 2; display: block; width: 210px; height: 146px; left: -30px; top: -120px;"><div style="position: absolute; background: url(&quot;http://t1.daumcdn.net/localimg/localimages/07/mapjsapi/2x/triangle.png&quot;) 0% 0% / 11px 9px no-repeat; width: 11px; height: 9px; left: 99px; top: 146px;"></div>'
+      		+'<div class="" style="position: absolute; left: 0px; top: 0px;">'
+     		+'<div id="dev_map_preview" class="previewMap" style="positon:absolute;">'
+     		+'<p class="cName"><%=rv.getRecruitment_name()%></p>		'
+     		+'<p class="cTit"><%=rv.getRecruitment_title()%></p>		'
+     		+'<dl>			<dt>급여</dt>			<dd>일 <%=rv.getPay()%>원</dd>'
+     		+'			    <dt>근무날짜</dt>			<dd><%=rv.getWork_day()%></dd>'
+     		+'</dl>'
+     		+'<p class="dView"><a href="#"><span>상세모집요강</span></a></p></div></div></div>', 
          latlng: new daum.maps.LatLng(<%=rv.getR_latitude()%>, <%=rv.getR_longitude()%>) }
-         
          <%}%>
          <%count++;%>
       <%}%>
+      
       ];
       console.log('배열생성');
    
    // 마커 이미지의 이미지 주소입니다
    var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-       
+   
    for (var i = 0; i < positions.length; i ++) {
-       
+	   
        // 마커 이미지의 이미지 크기 입니다
        var imageSize = new daum.maps.Size(24, 35); 
        
@@ -554,27 +1177,40 @@
        
        // 마커에 표시할 인포윈도우를 생성합니다 
        var infowindow = new daum.maps.InfoWindow({
-           content: positions[i].content // 인포윈도우에 표시할 내용
+          content: positions[i].content // 인포윈도우에 표시할 내용
+          
        });
        
-       daum.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-       daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+       var bool = true;
+       daum.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
+       
    }
    
    // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
    function makeOverListener(map, marker, infowindow) {
        return function() {
+    	   if(bool == true){
            infowindow.open(map, marker);
+    	   bool = false;
+    	   }else{
+    		   infowindow.close(map, marker);
+    		   bool = true;
+    	   }
        };
-   }
+   } 
    
-   // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
-   function makeOutListener(infowindow) {
-       return function() {
-           infowindow.close();
-       };
-   }
-   
+   /* $(function(){
+	  $("#map").on("click", function(){
+		  if(bool == true){
+	           	infowindow.open(map, marker);
+	    		bool = false;
+	    	   }else{
+	    		   infowindow.close(map, marker);
+	    		   bool = false;
+	    	   }
+	  });
+   }); */
+	
    function localList() {
           // 지도의 현재 중심좌표를 얻어옵니다 
           var center = map.getCenter(); 
@@ -598,6 +1234,8 @@
                 +"&centerLongitude="+center.getLng()
                 +"&mapLevel="+map.getLevel();
    }
+   
+  
    
    //지역 직접선택 열고 닫기
    function map_area_move_view(view_stat) {

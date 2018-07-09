@@ -433,7 +433,7 @@ public class ManagePostDao {
 	public int deleteReume(Connection con, int r_no) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "UPDATE RESUME SET DELFLAG = 0 WHERE RESUME_ID = ?";
+		String query = "UPDATE RESUME SET DELFLAG = 1 WHERE RESUME_ID = ?";
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -452,7 +452,7 @@ public class ManagePostDao {
 	public int resetResume(Connection con, int r_no) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "UPDATE RESUME SET DELFLAG = 1 WHERE RESUME_ID = ?";
+		String query = "UPDATE RESUME SET DELFLAG = 0 WHERE RESUME_ID = ?";
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -464,6 +464,63 @@ public class ManagePostDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
+	}
+
+	public ManageResumeVo selectedResume(Connection con, int r_no) {
+		ManageResumeVo mres = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "";
+		try {
+			query = "SELECT RESUME_ID, PROFILE_IMAGE_SRC, ACHIEVEMENT, DISABILITY, MILTARY_SERVICE, CAREER, "
+					+ "BUSINESS_TYPE, WORKABLE_DAYS, IS_POST, INTRODUCE, INTRODUCE_TITLE, PRI_RESUME, "
+					+ "WORK_TIME, DELFLAG, M.M_ID, NAME, BIRTH, PHONE, EMAIL, ADDRESS, ADDRESS_DETAIL, "
+					+ "MEMBER_TYPE, GENDER "
+					+ "FROM RESUME R JOIN MEMBER M ON (M.M_ID = R.M_ID) "
+					+ "WHERE RESUME_ID = ? ";
+			
+			
+			
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, r_no);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				mres = new ManageResumeVo();
+				mres.setId(rs.getString("m_id"));
+				mres.setResume_id(rs.getInt("resume_id"));
+				mres.setIntroduce_title(rs.getString("introduce_title"));
+				mres.setIs_post(rs.getInt("is_post"));
+				mres.setMember_type(rs.getString("member_type"));
+				mres.setPri_resume(rs.getString("pri_resume").charAt(0));
+				mres.setProfile_image_src(rs.getString("profile_image_src"));
+				mres.setAchievement(rs.getString("achievement"));
+				mres.setDisability(rs.getInt("disability"));
+				mres.setMiltary_service(rs.getInt("miltary_service"));
+				mres.setCareer(rs.getInt("career"));
+				mres.setBusiness_type("business_type");
+				mres.setWorkable_days(rs.getDate("workable_days"));
+				mres.setName(rs.getString("name"));
+				mres.setBirth(rs.getString("birth"));
+				mres.setPhone(rs.getString("phone"));
+				mres.setEmail(rs.getString("email"));
+				mres.setAddress(rs.getString("address"));
+				mres.setAddressDetail(rs.getString("address_detail"));
+				mres.setIntroduce(rs.getString("introduce"));
+				mres.setWorkTime(rs.getString("work_time"));
+				mres.setGender(rs.getString("gender").charAt(0));
+				mres.setDelflag(rs.getInt("DELFLAG"));
+			}
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+
+		return mres;
 	}
 	
 }

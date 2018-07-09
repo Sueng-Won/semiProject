@@ -106,4 +106,13 @@ public class ManagePostService {
 		
 		return result;
 	}
+
+	public ManageResumeVo selectedResume(int r_no) {
+		Connection con = JDBCTemplate.getConnection();
+		
+		ManageResumeVo mrv = new ManagePostDao().selectedResume(con, r_no);
+		
+		JDBCTemplate.close(con);
+		return mrv;
+	}
 }

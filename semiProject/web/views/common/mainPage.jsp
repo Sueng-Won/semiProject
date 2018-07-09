@@ -22,6 +22,9 @@ function recDetail(i){
 .card_he {
 	height: 400px;
 }
+h4{
+		cursor: pointer;
+	}
 </style>
 <%@include file="header.jsp"%>
 <!-- Page Content -->
@@ -82,10 +85,9 @@ function recDetail(i){
 						<img src="<%if (list.get(i).getRecruitment_image_src() == null) {%>/sp/images/building.jpeg<%} else {%>/sp/images/recruitmentImg/<%=list.get(i).getRecruitment_image_src()%><%}%>"
 							width="180px" height="180px">
 						<div class="card-body">
-							<h4 class="card-title">
-								<div><%=list.get(i).getRecruitment_title()%></div>
-								<!-- 게시물 이름 -->
-							</h4>
+							<h4 class="card-title btn-link" onclick="recDetail('<%=list.get(i).getRecruitment_id()%>');">
+	                    	<%=list.get(i).getRecruitment_title() %><!-- 게시물 이름 -->
+	                  		</h4>
 							<h6><%=list.get(i).getRecruitment_name()%></h6>
 							<h5>
 								시급 :

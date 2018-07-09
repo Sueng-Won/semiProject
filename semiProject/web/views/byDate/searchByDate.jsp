@@ -31,6 +31,9 @@ function recDetail(i){
 .content{
 margin-top:50px;
 }
+h4{
+		cursor: pointer;
+	}
 </style>
 <body>
 	<!-- Page Content -->
@@ -66,8 +69,8 @@ margin-top:50px;
 	                <img src="<%if (list.get(i).getRecruitment_image_src() == null) {%>/sp/images/building.jpeg<%} else {%>/sp/images/recruitmentImg/<%=list.get(i).getRecruitment_image_src()%><%}%>"
 							width="180px" height="180px">
 	                <div class="card-body">
-	                  <h4 class="card-title">
-	                    <div><%=list.get(i).getRecruitment_title() %></div><!-- 게시물 이름 -->
+	                  <h4 class="card-title btn-link" onclick="recDetail('<%=list.get(i).getRecruitment_id()%>');">
+	                    <%=list.get(i).getRecruitment_title() %><!-- 게시물 이름 -->
 	                  </h4>
 	                  <h6><%=list.get(i).getRecruitment_name() %></h6>
 	                  <h5>시급 : <%=list.get(i).getPay()%></h5>
