@@ -121,7 +121,7 @@ h4{
 					<%
 						if (currentPage != i) {
 					%>
-					<button onclick="movePage();" type="button"
+					<button onclick="movePage(<%=i%>);" type="button"
 						class="btn btn-default bg-dark text-white"><%=i %></button>
 					<%
 						} else {

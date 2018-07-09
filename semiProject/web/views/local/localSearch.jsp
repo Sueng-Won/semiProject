@@ -1086,7 +1086,7 @@
                <button onclick="movePage(<%=currentPage==1?1:currentPage-1%>);" type="button" class="btn btn-default bg-dark text-white">◀</button>
                <%for(int i = startPage; i <= endPage; i++){ %>
                   <%if(currentPage != i){ %>
-                  <button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
+                  <button onclick="movePage(<%=i %>);" type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
                   <%}else{ %>
                   <button type="button" class="btn btn-default bg-dark text-white disabled"><%=i %></button>
                   
