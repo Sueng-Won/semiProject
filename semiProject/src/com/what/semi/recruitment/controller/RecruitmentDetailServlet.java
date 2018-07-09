@@ -53,7 +53,6 @@ public class RecruitmentDetailServlet extends HttpServlet {
 		ArrayList<MyResumeVo> myResumes = new MyResumeService().selectMyInfo(js_id);
 		ArrayList<ContractVo> myAppliedConList = new ContractService().selectmyAppliedConList(recId, js_id);
 
-		ArrayList<Integer> removeResume = new ArrayList<Integer>();
 		for (int i = 0; i < myResumes.size(); i++) {
 			for (int j = 0; j < myAppliedConList.size(); j++) {
 				if (myResumes.get(i).getResume_id() == myAppliedConList.get(j).getResume_id()) {

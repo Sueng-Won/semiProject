@@ -21,16 +21,16 @@ import com.what.semi.resume.model.service.MyResumeService;
 import com.what.semi.resume.model.vo.MyResumeVo;
 
 /**
- * Servlet implementation class ApplyServlet
+ * Servlet implementation class SuggestServlet
  */
-@WebServlet("/apply.do")
-public class ApplyServlet extends HttpServlet {
+@WebServlet("/suggest.do")
+public class SuggestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ApplyServlet() {
+	public SuggestServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -41,44 +41,37 @@ public class ApplyServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int resumeId = Integer.parseInt(request.getParameter("resume_id"));
+		int resumeId = Integer.parseInt(request.getParameter("resumeId"));
 		String recId = request.getParameter("recId");
 		String boId = request.getParameter("bo_id");
-		String jsId = request.getParameter("userId");
-		HttpSession session =request.getSession();
+		String jsId = request.getParameter("js_id");
+		HttpSession session = request.getSession();
 		String demander = (String) session.getAttribute("member_type");
 
-		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 
-		int result = new ContractService().insertContract(recId, boId, jsId, resumeId,demander);
+		int result = new ContractService().insertContract(recId, boId, jsId, resumeId, demander);
 		RecruitmentVo rec = new RecruitmentService().selectRecruitment(recId);
-		MemberVo writer = new MemberService().getMemberInfo(rec.getM_id());
 		MyResumeVo resume = new MyResumeService().selectMyResume(jsId, resumeId);
 
-		ArrayList<MyResumeVo> myResumes = new MyResumeService().selectMyInfo(jsId);
-		
-		for(int i=0;i<myResumes.size();i++){
-			if(myResumes.get(i).getResume_id()==resumeId){
-				myResumes.remove(resume);
+		ArrayList<RecruitmentVo> recList = new RecruitmentService().loadSameBusiness(boId);
+
+		for (int i = 0; i < recList.size(); i++) {
+			if (recList.get(i).getRecruitment_id().equals(recId)) {
+				recList.remove(rec);
 			}
 		}
-		
-		String title="<"+rec.getRecruitment_title()+">의 지원 이력서가 등록되었습니다.";
-		String resumeUrl="seeMyResume.do?resume_id="+resumeId+"&userId="+jsId;
-		new GmailSend().sendResume(rec.getRecruitment_email(),title,resumeUrl);
-		
-		
-		
+
+		String title = "<" + resume.getIntroduce_title() + ">의 구인 제안이 들어왔습니다.";
+		String recUrl = "recruitmentDetail.do?recId=" + recId + "&currentPage=" + 1;
+		new GmailSend().sendResume(resume.getEmail(), title, recUrl);
+
 		RequestDispatcher view = null;
 		String url = "";
 		if (result != 0) {
-			url = "/views/recruitment/recruitmentDetail.jsp";
-			request.setAttribute("rec", rec);
-			request.setAttribute("currentPage", currentPage);
-			request.setAttribute("writer", writer);
-			request.setAttribute("myResumes", myResumes);
-			request.setAttribute("contRe", 1);
-
+			url = "/views/resume/Myresume.jsp";
+			request.setAttribute("member", resume);
+			request.setAttribute("recList", recList);
+			request.setAttribute("contRe", 0);
 		} else {
 			System.out.println("계약구인상세페이지오류");
 		}

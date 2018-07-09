@@ -6,7 +6,7 @@
 <%
 	ArrayList<RecruitmentVo> list = (ArrayList<RecruitmentVo>) request.getAttribute("list");
 
-	/* java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("MM / dd"); */
+	 java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("MM / dd"); 
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	int listCount = pi.getTotalCount();
 	int currentPage = pi.getCurrentPage();
@@ -96,7 +96,7 @@
 						<th><div class="table-td">게시여부</div></th>
 						<th><div class="table-td">근무형태</div></th>
 						<th><div class="td-title">기업명/글제목</div></th>
-						<th><div class="table-td-location">지역</div></th>
+						<th><div class="table-td">근무일</div></th>
 						<th><div class="table-td">급여</div></th>
 						<td style="width:20px;">
 						</td>
@@ -118,10 +118,9 @@
 								}
 							%>
 						</td>
-						<%-- <td class="table-td"><%=df.format(list.get(i).getWork_day()) %></td> --%>
 						<td class="table-td" onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);"><%=list.get(i).getBusiness_type()%></td>
 						<td class="td-title" onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);"><b><%=list.get(i).getRecruitment_name()%></b><br><%=list.get(i).getRecruitment_title()%></td>
-						<td class="table-td-location" onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);"><%=location%></td>
+						<td class="table-td" onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);"><%=df.format(list.get(i).getWork_day()) %></td> 
 						<td class="table-td" onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);"><%=list.get(i).getPay()%>원
 						</td>
 						<td>

@@ -158,7 +158,7 @@ public class ContractDao {
 		return cont;
 	}
 
-	public ArrayList<ContractVo> selectMyContractList(Connection con, String recId, String js_id) {
+	public ArrayList<ContractVo> selectMyAppliedList(Connection con, String recId, String js_id) {
 		ArrayList<ContractVo> list = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -310,6 +310,71 @@ public class ContractDao {
 		}
 		
 		return result;
+	}
+
+	public int selectContractCurrentPage(Connection con, String js_id, int contId) {
+		int result = -1;
+
+		Statement stmt = null;
+		ResultSet rs = null;
+		String query = "";
+		try {
+			stmt = con.createStatement();
+			query = "SELECT COUNT(*) AS LISTCOUNT " + "FROM CONTRACT " 
+					+ "WHERE JS_ID='" + js_id+ "' AND C_NO>="+contId
+					+ " ORDER BY C_NO";
+			rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				result = rs.getInt("listCount");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(stmt);
+		}
+
+		return result;
+	}
+
+	public ArrayList<ContractVo> selectmySuggestedConList(Connection con, int resumeId, String boId) {
+		ArrayList<ContractVo> list = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		String query = "";
+		try {
+			stmt = con.createStatement();
+			query = "SELECT * "
+					+"FROM CONTRACT "
+					+"WHERE RESUME_ID="+resumeId+" AND BO_ID='"+boId+"'";
+			//System.out.println(query);
+			rs = stmt.executeQuery(query);
+			list = new ArrayList<ContractVo>();
+			ContractVo cont = null;
+			while (rs.next()) {
+				cont = new ContractVo();
+				cont.setC_no(rs.getInt("c_no"));
+				cont.setState(rs.getInt("state"));
+				cont.setContract_date(rs.getDate("c_date"));
+				cont.setStart_work_time(rs.getString("start_work_time"));
+				cont.setEnd_work_time(rs.getString("end_work_time"));
+				cont.setRecruitment_id(rs.getString("recruitment_id"));
+				cont.setBo_id(rs.getString("bo_id"));
+				cont.setJs_id(rs.getString("js_id"));
+				cont.setResume_id(rs.getInt("resume_id"));
+				cont.setDemander(rs.getString("demander"));
+
+				list.add(cont);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(stmt);
+		}
+
+		return list;
 	}
 
 }

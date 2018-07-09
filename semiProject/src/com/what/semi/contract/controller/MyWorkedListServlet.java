@@ -41,6 +41,16 @@ public class MyWorkedListServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
+		
+		RequestDispatcher view = null;
+		String url = "";
+		if(id==null){
+			url="/views/common/linkedLogin.jsp";
+			String path=request.getRequestURI()+"?"+request.getQueryString();
+			request.setAttribute("path", path);
+			view = request.getRequestDispatcher(url);
+			view.forward(request, response);
+		}
 
 		int contId = -1;
 		if (request.getParameter("contId") != null) {
@@ -71,8 +81,7 @@ public class MyWorkedListServlet extends HttpServlet {
 			}
 		}
 
-		RequestDispatcher view = null;
-		String url = "";
+		
 		if (myConList != null) {
 			url = "/views/member/workedList.jsp";
 			request.setAttribute("myConList", myConList);
@@ -83,7 +92,7 @@ public class MyWorkedListServlet extends HttpServlet {
 			System.out.println("근로내역오류");
 		}
 		view = request.getRequestDispatcher(url);
-		view.forward(request, response);
+		view.include(request, response);
 
 	}
 
