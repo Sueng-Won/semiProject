@@ -37,3 +37,5 @@ INSERT INTO MEMBER
 VALUES('test6','MGNPwt0o5BKmhHcYdf2AV0f7O9l2Cghe+1VKCkIzIjpNmPbaIzYXnKM9EXDm4nsYvkWIl4w1EVpDrvbdwibICA==',
   '허구직자','1990-01-01','01000000000','(테스트 하려는 사람의 이메일)','서울 광진구 강변북로 36 (자양동, 뚝섬유람선 선착장)',
   '수심 20m','05647','BO',37.53028541315393,127.06154109125094,'M',0);
+
+COMMIT;
