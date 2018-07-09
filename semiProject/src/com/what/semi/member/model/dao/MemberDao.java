@@ -103,22 +103,11 @@ public class MemberDao {
 			pstmt.setString(2, pw);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				if(rs.getString("M_ID")!=null) {
-					result = 1;
-				}
-				else {
-					result = 0;
-				}
+				result = 1;
 			}
-			conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				System.out.println("롤백 할 수 없습니다.");
-				e1.printStackTrace();
-			}
+			
 		} finally {
 			JDBCTemplate.close(rs);
 		}
