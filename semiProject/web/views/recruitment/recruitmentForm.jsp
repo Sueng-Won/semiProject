@@ -158,7 +158,7 @@
 		}
 		
 		if(okFlag){
-		$("#writeRecruitment").submit();
+			$("#writeRecruitment").submit();
 		}
 	}
 
