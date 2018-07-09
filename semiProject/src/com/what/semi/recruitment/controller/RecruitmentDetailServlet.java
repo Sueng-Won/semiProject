@@ -52,12 +52,19 @@ public class RecruitmentDetailServlet extends HttpServlet {
 
 		ArrayList<MyResumeVo> myResumes = new MyResumeService().selectMyInfo(js_id);
 		ArrayList<ContractVo> myAppliedConList = new ContractService().selectmyAppliedConList(recId, js_id);
-
+		ArrayList<MyResumeVo> result = new ArrayList<MyResumeVo>();
+		boolean flag = true;
 		for (int i = 0; i < myResumes.size(); i++) {
 			for (int j = 0; j < myAppliedConList.size(); j++) {
 				if (myResumes.get(i).getResume_id() == myAppliedConList.get(j).getResume_id()) {
-					myResumes.remove(myResumes.get(i));
+					flag = false;
+					break;
 				}
+			}
+			if(flag){
+				result.add(myResumes.get(i));
+			}else{
+				flag = true;
 			}
 		}
 		
