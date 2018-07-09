@@ -19,6 +19,16 @@
    
    double centerLatitude = (Double) request.getAttribute("centerLatitude");
    double centerLongitude = (Double) request.getAttribute("centerLongitude");
+   
+   int resumeId = -1;
+   String resumeTitle = null;
+   
+   if(null != request.getAttribute("resumeId")){
+	   resumeId = (Integer)request.getAttribute("resumeId");
+	   }
+	   if(null != request.getAttribute("resumeTitle")){
+	   resumeTitle = (String)request.getAttribute("resumeTitle");
+	   }   
 %>
 
 <%@include file="/views/common/header.jsp" %>
@@ -450,6 +460,10 @@
     padding: 0 15px 0 0;
     
 	}
+	
+	h4{
+	cursor: pointer;
+	}
 </style>
     <!-- 화면 상단 아이콘 이미지 -->
    <link rel="shortcut icon" href="/sp/images/icon.png">
@@ -581,41 +595,45 @@
         <!-- 지도API예제연습-->
          
            <div class="row" style="min-height: 200px">
-         <%for(RecruitmentVo rv : list) {%>
-               <div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4">
-                 <div class="card h-100">
-                   <a href=""><img class="card-img-top" src="http://placehold.it/300x300" alt=""></a>
-                   <div class="card-body">
-                     <h4 class="card-title">
-                       <a href=""><%=rv.getRecruitment_name() %></a><!-- 게시물 이름 -->
-                     </h4>
-                     <h5>시급 : <%=rv.getPay()%></h5>
-                     <p class="card-text"><%=rv.getRecruitment_title() %></p>
-                   </div>
-                   <div class="card-footer">
-                     <small class="text-muted"><%=rv.getAddress() %></small>
-                   </div>
-                 </div>
-               </div>
-         <%} %>
+         <%if(null != request.getAttribute("list")){ %>
+            <%for(RecruitmentVo rv : list) {%><!-- for문을 통해 해당 게시물들의 개수에 맞게 생성 -->
+	            <div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4" style="max-height: 400px">
+	              <div class="card h-100">
+	                <img class="card-img-top" src="<%=null == rv.getRecruitment_image_src()?"/sp/images/building.jpeg":"/sp/images/recruitmentImg/"+rv.getRecruitment_image_src() %>" alt="">
+	                <div class="card-body">
+	                  <h4 class="card-title btn-link" onclick="recDetail(<%=rv.getRecruitment_id()%>)">
+	                    <%=rv.getRecruitment_title() %><!-- 게시물 이름 -->
+	                  </h4>
+	                  <h6><%=rv.getRecruitment_name() %></h6>
+	                  <h5>시급 : <%=rv.getPay()%></h5>
+	                  <p class="card-text"><%=rv.getWork_day() %></p>
+	                </div>
+	                <div class="card-footer">
+	                  <small class="text-muted"><%=rv.getAddress() %></small>
+	                </div>
+	              </div>
+	            </div>
+	            
+			<%} %>
+			<%} %>
           </div>
 
           <!-- /.row -->
         <!--====================================   페이지선택버튼    ==================================  -->
            <div class="btn-toolbar mb-1" role="toolbar">
-           <div class="btn-group" role="group">
-               <button onclick="movePage(<%=currentPage==1?1:currentPage-1%>);" type="button" class="btn btn-default bg-dark text-white">◀</button>
-               <%for(int i = startPage; i <= endPage; i++){ %>
-                  <%if(currentPage != i){ %>
-                  <button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
-                  <%}else{ %>
-                  <button type="button" class="btn btn-default bg-dark text-white disabled"><%=i %></button>
-                  
-                  <%} %>
-               <%} %>
-               <button onclick="movePage(<%=currentPage==maxPage?maxPage:maxPage+1%>);" type="button" class="btn btn-default bg-dark text-white">▶</button>
-           </div>
-         </div>
+			  <div class="btn-group" role="group">
+					<button onclick="movePage(<%=currentPage==1?1:currentPage-1%>);" type="button" class="btn btn-default bg-dark text-white">◀</button>
+					<%for(int i = startPage; i <= endPage; i++){ %>
+						<%if(currentPage != i){ %>
+						<button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
+						<%}else{ %>
+						<button type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
+						
+						<%} %>
+					<%} %>
+					<button onclick="movePage(<%=currentPage==maxPage?maxPage:currentPage+1%>);" type="button" class="btn btn-default bg-dark text-white">▶</button>
+			  </div>
+			</div>
       <!--=========================================================================================-->
         </div>
         <!-- /.col-lg-9 -->
@@ -823,6 +841,13 @@
       map.setCenter(moveLatLon);
    } 
    
+   function movePage(pageNum) {
+		location.href = "/sp/matchingSearch.do?currentPage="+pageNum;
+	}
+   
+   function recDetail(i){
+		location.href="/sp/recruitmentDetail.do?recId="+i+"&currentPage="+<%=currentPage%>;
+	}
    </script>
     <!-- /.container -->
 <%@include file="/views/common/footer.jsp"%>

@@ -105,7 +105,7 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
 						
 						<%} %>
 					<%} %>
-					<button onclick="movePage(<%=currentPage==maxPage?maxPage:maxPage+1%>);" type="button" class="btn btn-default bg-dark text-white">▶</button>
+					<button onclick="movePage(<%=currentPage==maxPage?maxPage:currentPage+1%>);" type="button" class="btn btn-default bg-dark text-white">▶</button>
 			  </div>
 			</div>
 		<!--=========================================================================================-->

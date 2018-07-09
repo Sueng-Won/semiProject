@@ -175,6 +175,7 @@ public class RecruitmentDao {
 			RecruitmentVo temp = null;
 			while (rs.next()) {
 				temp = new RecruitmentVo();
+				temp.setRecruitment_id(rs.getString("recruitment_id"));
 				temp.setRecruitment_name(rs.getString("recruitment_name"));
 				temp.setRecruitment_title(rs.getString("recruitment_title"));
 				temp.setAddress(rs.getString("address"));
