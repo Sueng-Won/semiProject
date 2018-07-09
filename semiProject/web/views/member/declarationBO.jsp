@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% int q_no = (int)request.getAttribute("q_no");
-	String answer = (String)request.getAttribute("answer");
-	String content = (String)request.getAttribute("content");
-	
+<% 
+	String declarationId = request.getParameter("memId");
+	boolean declarationFlag = Boolean.parseBoolean(request.getParameter("declarationFlag"));
 %>
 <!DOCTYPE html >
-<!-- 브랜치 생성 -->
 <html>
 <head>
 <meta charset="UTF-8">
@@ -284,6 +282,7 @@ tr {
     font: 14px "맑은고딕", "Malgun Gothic",Dotum, "돋움", sans-serif;
     color: #494949;
     background: #fdfdfd;
+   
 }
 
 .top2 ul li {
@@ -299,7 +298,6 @@ tr {
     font: 14px 맑은고딕, "Malgun Gothic", Dotum, 돋움, sans-serif;
     resize: none;
 }
-
 .privacyWp {
     margin-top: 20px;
     font-size: 12px;
@@ -342,16 +340,10 @@ tr {
     -webkit-margin-start: -50px;
     -webkit-margin-end: 0px;
 } 
-
-span {
-    font-weight: bold;
-    font-size: 15px;
-    color: #ff6633;
-}
 </style>
 
 
-<title>문의 게시판</title>
+<title>신고</title>
    <link href="/sp/css/shop-homepage.css" rel="stylesheet">
    <link href="/sp/vendor/bootstrap/css/bootstrap.min.css"rel="stylesheet">
     <link href="/sp/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -361,64 +353,85 @@ span {
     <script src="/sp/vendor/jquery/jquery.min.js"></script>
     <script type="text/javascript">
    	   
+    	function declarationSubmit(){
+    		 var target = $("#slt").val();
+    		 var num = 0;
+    		 
+             if($("#slt").val() == "사유 선택"){
+            	 alert("신고 사유를 선택하셔야 합니다.");
+             }else{
+            	 num = 1;
+             }
+             if(num==1){
+            	 $("#decFrm").submit();
+             }
+             
+    	}
 
     </script>
 </head>
 <body>
    
-
-<form id="qnaFrm" name="form" class="fixed-top" method="post" action="/sp/answerQna.do"  style="padding: 20px 28px 20px 28px; overflow-y:scroll; height:700px;">
+<%if(!declarationFlag){ %>
+<form id="decFrm" name="form" class="fixed-top" method="get" action="/sp/addBlackList.do" style="padding: 20px 28px 20px 28px; overflow-y:scroll; height:700px;">
    <div class="allwp">
-   <div>답변 페이지
+   <div>신고 페이지
       <div class="progress" style="height: 1.5px; ">
            <div class="progress-bar"></div>
       </div>
    </div>
 
-    <div class="top" style="-webkit-margin-before: -1em;">
+   <div class="top" style="-webkit-margin-before: -1em;">
          <ul>
-             <li class="m1"><a>답변 하기</a></li>
+             <li class="m1"><a>신나는 신고하기</a></li>
          </ul>
     </div>
     
     <div class="top2" style="-webkit-margin-before: -1.5em;">
-          
+          <ul>
+              <li>안녕! 해결사가 왔어!</li>
+              <li>신고는 항상 즐거운 겁니다</li>
+          </ul>
     </div>
    
    <table class="tableA" style="-webkit-margin-before: -1.5em;">
       <tbody>
-      	 <tr>
-            <td colspan="3">
-                 <dl>
-                 	<dt style="-webkit-margin-before: 1em;"><span class="mr-2">Q.</span><%= content%></dt>
-                 </dl>
-            </td>
-         </tr>
-      
+      	<tr>
+      		<td>
+      			<label>신고대상 : <%=declarationId %></label>
+      			<input type="hidden" value=<%=declarationId %> id="memId" name="memId"/>
+      		</td>
+      	</tr>
          <tr>
-            <th class="loc">
-               <label>답변하기</label>
+            <th>
+               <label>
+                  <span class="star">*</span> 신고유형
+               </label>
             </th>
             <td>
-               <div class="txWp">
-               <textarea name="answer" id="answer" maxlength="3000"></textarea>
-               </div>
+               <select name="slt" id="slt" class="slt sltL" title="대분류 선택" style="width:180px;">
+               <option value="사유 선택">사유 선택</option>
+               <option value="지각">지각</option>
+               <option value="결석">결석</option>
+               </select>
             </td>
          </tr>
       </tbody>   
    </table>
    
+   
    	<div class="row">
    		<div class="col-4"></div>
 	    <p class="btn col-4">
-	       <input type="hidden" name="q_no" value="<%=q_no %>"/>
-	       <input id="btn_submit" class="bBtn bg-dark" value="보내기" type="submit"/>
+	       <input id="btn_submit" class="bBtn bg-dark" value="신고하기" onclick="declarationSubmit();"/>
 	       <a href="javascript:self.close();" class="cBtn">취소</a>
 	    </p>
 	   	<div class="col-4"></div>
   	</div>
   </div>
 </form>
-
+<%}else{ %>
+신고가 접수되었습니다.
+<%} %>
 </body>
 </html>

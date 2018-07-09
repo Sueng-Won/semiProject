@@ -1,12 +1,14 @@
 package com.what.semi.contract.model.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.what.semi.common.template.JDBCTemplate;
+import com.what.semi.common.template.RandomStringGenerator;
 import com.what.semi.contract.model.vo.ContractVo;
 import com.what.semi.recruitment.model.vo.RecruitmentVo;
 
@@ -375,6 +377,52 @@ public class ContractDao {
 		}
 
 		return list;
+	}
+
+	public String searchMemId(Connection con, String recId, String declarationId, String memberType) {
+		String memId=null;
+		
+		PreparedStatement pstmt = null;	//SQL문을 나타내는 객체
+		ResultSet rs = null;
+		String query = "";
+		
+		try {
+			if(memberType.equals("JS")) {
+				query = "SELECT BO_ID FROM CONTRACT WHERE RECRUITMENT_ID = ? AND JS_ID = ?";
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, recId);
+				pstmt.setString(2, declarationId);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					if(rs.getString("BO_ID")!=null) {
+						memId = rs.getString("BO_ID");
+					}
+					else {
+						System.out.println("악덕 업주 아이디 찾기 실패");
+					}
+				}
+			}else {
+				query = "SELECT JS_ID FROM CONTRACT WHERE RECRUITMENT_ID = ? AND BO_ID = ?";
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, recId);
+				pstmt.setString(2, declarationId);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					if(rs.getString("JS_ID")!=null) {
+						memId = rs.getString("JS_ID");
+					}
+					else {
+						System.out.println("악덕 구직자 아이디 찾기 실패");
+					}
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return memId;
 	}
 
 }

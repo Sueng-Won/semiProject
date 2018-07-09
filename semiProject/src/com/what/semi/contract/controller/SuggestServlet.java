@@ -54,12 +54,14 @@ public class SuggestServlet extends HttpServlet {
 		MyResumeVo resume = new MyResumeService().selectMyResume(jsId, resumeId);
 
 		ArrayList<RecruitmentVo> recList = new RecruitmentService().loadSameBusiness(boId);
-
+		
 		for (int i = 0; i < recList.size(); i++) {
 			if (recList.get(i).getRecruitment_id().equals(recId)) {
-				recList.remove(rec);
+				recList.remove(recList.get(i));
 			}
 		}
+		
+		
 
 		String title = "<" + resume.getIntroduce_title() + ">의 구인 제안이 들어왔습니다.";
 		String recUrl = "recruitmentDetail.do?recId=" + recId + "&currentPage=" + 1;

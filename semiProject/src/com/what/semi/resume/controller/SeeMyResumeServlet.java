@@ -40,13 +40,19 @@ public class SeeMyResumeServlet extends HttpServlet {
 		
 		ArrayList<RecruitmentVo> recList = new RecruitmentService().loadSameBusiness(id);
 		ArrayList<ContractVo> mySuggestedConList = new ContractService().selectmySuggestedConList(resume_id, id);
-		
+		ArrayList<RecruitmentVo> result = new ArrayList<RecruitmentVo>();
+		boolean flag = true;
 		for (int i = 0; i < recList.size(); i++) {
 			for (int j = 0; j < mySuggestedConList.size(); j++) {
 				if (recList.get(i).getRecruitment_id().equals(mySuggestedConList.get(j).getRecruitment_id())) {
-					recList.remove(recList.get(i));
-					i--;
+					flag = false;
+					break;
 				}
+			}
+			if(flag){
+				result.add(recList.get(i));
+			}else{
+				flag = true;
 			}
 		}
 		

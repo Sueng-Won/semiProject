@@ -288,12 +288,14 @@ dl {
     
     function movePage(pageNum){
        location.href = "/sp/adminQnaList.do?currentPage=" + pageNum;
+       
+       
     }
     
     //Q&A 게시판
-    /* function answer(q_no){
+    function answer(q_no){
           window.open("/sp/answerQna.do?q_no="+q_no,"_blank","width=600, height=700, left=auto,top=auto");
-    };  */
+    }; 
     
     //셀렉트 값 입력한 값으로 고정
     /* $(document).ready(function () {
@@ -304,19 +306,6 @@ dl {
          $("#is_checked").val(is_checked);
     }); */ 
     
-    function answer(q_no){
-        var win = window.open("/sp/answerQna.do?q_no="+q_no,"_blank","width=600, height=700, left=auto,top=auto");
-        var interval = window.setInterval(function() {
-           try {
-                if (win.closed) {
-                    window.clearInterval(interval);
-                    $("#answerForm").submit();
-                }
-            }
-            catch (e) {
-            }
-        }, 10);
-    }; 
     
 </script>
    
@@ -327,7 +316,7 @@ dl {
       <div class="row">
       <%@include file="adminNav.jsp" %>
          
-      <form id="answerForm" class="col-lg-9 my-4" method="post" action="/sp/adminQnaList.do" style="padding: 20px;" name="test">
+      <form class="col-lg-9 my-4" method="post" action="/sp/adminQnaList.do" style="padding: 20px;" name="test">
          <div class="allwp">
             <div>회원 문의내역
                <div class="progress" style="height: 1.5px; ">
@@ -446,20 +435,19 @@ dl {
             </div>
             
            <!-- 페이징 처리 -->
-           <div class="btn-toolbar mb-1" role="toolbar">
-              <div class="btn-group" role="group">
-                  <button onclick="movePage(<%=currentPage==1?1:currentPage-1%>);" type="button" class="btn btn-default bg-dark text-white">◀</button>
-                  <%for(int i = startPage; i <= endPage; i++){ %>
-                     <%if(currentPage != i){ %>
-                     <button onclick="movePage(<%=i %>);" type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
-                     <%}else{ %>
-                     <button type="button" class="btn btn-default bg-dark text-white disabled"><%=i %></button>
-                     <%} %>
+             <div class="btn-toolbar mb-1" role="toolbar">
+           <div class="btn-group" role="group">
+               <button onclick="movePage(<%=currentPage==1?1:currentPage-1%>);" type="button" class="btn btn-default bg-dark text-white">◀</button>
+               <%for(int i = startPage; i <= endPage; i++){ %>
+                  <%if(currentPage != i){ %>
+                  <button onclick="movePage(<%=i %>);" type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
+                  <%}else{ %>
+                  <button type="button" class="btn btn-default bg-dark text-white disabled"><%=i %></button>
                   <%} %>
-                  <button onclick="movePage(<%=currentPage==maxPage?maxPage:currentPage+1%>);" type="button" class="btn btn-default bg-dark text-white">▶</button>
-              </div>
-           </div> 
-           
+               <%} %>
+               <button onclick="movePage(<%=currentPage==maxPage?maxPage:currentPage+1%>);" type="button" class="btn btn-default bg-dark text-white">▶</button>
+           </div>
+       </div> 
          </div>
       </form>
    </div>
