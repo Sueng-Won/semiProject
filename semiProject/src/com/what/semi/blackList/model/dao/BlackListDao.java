@@ -211,7 +211,7 @@ public class BlackListDao {
 		
 		try {
 			query = "INSERT INTO BLACKLIST "
-					+ "VALUES(SEQ_BLACKLIST_ID.NEXTVAL,"
+					+ "VALUES(SYSDATE,"
 					+ "1,?,?)";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, reason);

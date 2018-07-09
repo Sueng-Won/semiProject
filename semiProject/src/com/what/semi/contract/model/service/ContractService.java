@@ -168,4 +168,13 @@ public class ContractService {
 
 		return list;
 	}
+
+	public String searchMemId(String recId, String declarationId, String memberType) {
+		Connection con = JDBCTemplate.getConnection();
+
+		String memId = new ContractDao().searchMemId(con,recId,declarationId,memberType);
+		JDBCTemplate.close(con);
+
+		return memId;
+	}
 }
