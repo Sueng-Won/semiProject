@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% int q_no = (int)request.getAttribute("q_no");
-	String answer = (String)request.getAttribute("answer");
-	String content = (String)request.getAttribute("content");
-	
+   String answer = (String)request.getAttribute("answer");
+   String content = (String)request.getAttribute("content");
+   
 %>
 <!DOCTYPE html >
 <!-- 브랜치 생성 -->
@@ -21,7 +21,7 @@
     border-bottom: 1px solid #363d54;
     list-style: none;
     padding: 0;
-    margin: 0;	
+    margin: 0;   
     display: block;
     -webkit-margin-before: 1.5em;
     -webkit-margin-after: 1em;
@@ -69,7 +69,7 @@
 }
 
 .star{
-	color : orangered;
+   color : orangered;
 }
 
 .tableA {
@@ -106,7 +106,7 @@ tr {
 }
 
 .slt{
-	height: 32px;
+   height: 32px;
     padding: 0 0 0 10px;
     border: 1px solid #dbdee1;
     font: 14px "맑은고딕", "Malgun Gothic",Dotum, "돋움", sans-serif;
@@ -162,7 +162,7 @@ p {
 }
 
 .chk{
-	width: 13px;
+   width: 13px;
     height: 13px;
     margin: 0 6px 0 0;
     vertical-align: middle;
@@ -334,8 +334,8 @@ tr {
 }
 
 .btn{
-	padding: 40px 0 62px 0;
-	margin: 0;
+   padding: 40px 0 62px 0;
+   margin: 0;
     display: block;
     -webkit-margin-before: 0em;
     -webkit-margin-after: 0em;
@@ -356,12 +356,23 @@ span {
    <link href="/sp/vendor/bootstrap/css/bootstrap.min.css"rel="stylesheet">
     <link href="/sp/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
     <!-- 화면 상단 아이콘 이미지 -->
-	<link rel="shortcut icon" href="/sp/images/icon.png">
+   <link rel="shortcut icon" href="/sp/images/icon.png">
     <!-- <link href="/sp/css/qnaNew.css" rel="stylesheet"> -->
     <script src="/sp/vendor/jquery/jquery.min.js"></script>
     <script type="text/javascript">
-   	   
-
+         
+    $(function(){
+       $("#btn_submit").click(function(){
+         $.ajax(
+         {
+            url : "/sp/answerQna.do",
+            type : "post",
+            complete : function(){
+               close();
+            }
+         });
+      });
+    }); 
     </script>
 </head>
 <body>
@@ -387,10 +398,10 @@ span {
    
    <table class="tableA" style="-webkit-margin-before: -1.5em;">
       <tbody>
-      	 <tr>
+          <tr>
             <td colspan="3">
                  <dl>
-                 	<dt style="-webkit-margin-before: 1em;"><span class="mr-2">Q.</span><%= content%></dt>
+                    <dt style="-webkit-margin-before: 1em;"><span class="mr-2">Q.</span><%= content%></dt>
                  </dl>
             </td>
          </tr>
@@ -408,15 +419,15 @@ span {
       </tbody>   
    </table>
    
-   	<div class="row">
-   		<div class="col-4"></div>
-	    <p class="btn col-4">
-	       <input type="hidden" name="q_no" value="<%=q_no %>"/>
-	       <input id="btn_submit" class="bBtn bg-dark" value="보내기" type="submit"/>
-	       <a href="javascript:self.close();" class="cBtn">취소</a>
-	    </p>
-	   	<div class="col-4"></div>
-  	</div>
+      <div class="row">
+         <div class="col-4"></div>
+       <p class="btn col-4">
+          <input type="hidden" name="q_no" value="<%=q_no %>"/>
+          <input id="btn_submit" class="bBtn bg-dark" value="보내기" type="submit"/>
+          <a href="javascript:self.close();" class="cBtn">취소</a>
+       </p>   
+     </div>
+     
   </div>
 </form>
 
