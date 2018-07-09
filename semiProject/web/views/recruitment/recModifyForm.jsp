@@ -109,12 +109,20 @@ var okFlag = false;
 		}
 		
 		if($("#pay").val() == ""){
-	        alert("급여를 입력해주세요.");
-	        $("#pay").focus();
-	        okFlag = false;
-	        return false;
-	    }else{
-			okFlag = true;
+			 alert("급여를 입력해주세요.");
+		        $("#pay").focus();
+		        okFlag = false;
+		        return false;
+		    }else{
+		    	alert($("#calculatePay").val());
+		    	if($("#pay").val()<$("#calculatePay").val()){
+		    		alert("근무시간과 최저임금을 확인해 주세요.");
+			        $("#pay").focus();
+			        okFlag = false;
+			        return false;
+		    	}else{
+				okFlag = true;
+		    	}
 		}
 		
 		if($("#mValue").val() == ""){
@@ -195,6 +203,7 @@ var okFlag = false;
 		}
 		if(start!=""&&end!=""){
 		$("#calculatePay").text("*최저시급 : 약"+pay+"0원");
+		$("#calculatePay").val(pay*10);
 		}
 	}
 	
@@ -429,7 +438,7 @@ var okFlag = false;
 									<label>급여</label> <input type="text" class="btn-dark" id="pay"
 										name="pay" value="<%=rec.getPay()%>" />원
 								</div>
-								<div class="text-white-50 ml-1" id="calculatePay" align="center">*최저시급
+								<div class="text-white-50 ml-1" id="calculatePay" value="7530" align="center">*최저시급
 									: 7,530원</div>
 							</div>
 						</div>
