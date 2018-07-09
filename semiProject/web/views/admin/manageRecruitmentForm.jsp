@@ -23,7 +23,7 @@
 	$(function() {
 		$("#deleteBtn").on("click", function() {
 			$.ajax({
-				url : "/sp/adminDeleteRec.do",
+				url : "/sp/adminDeleteResume.do",
 				type : "get",
 				data : {r_no : <%=rec.getRecruitment_id()%>},
 				success : function(data) {
@@ -40,7 +40,7 @@
 		
 		$("#resetBtn").on("click", function() {
 			$.ajax({
-				url : "/sp/adminResetRec.do",
+				url : "/sp/adminResetResume.do",
 				type : "get",
 				data : {r_no : <%=rec.getRecruitment_id()%>},
 				success : function(data) {
