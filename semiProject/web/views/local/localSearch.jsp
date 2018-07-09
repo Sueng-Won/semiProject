@@ -922,6 +922,10 @@
     padding: 0 15px 0 0;
     
    }
+   
+   a, h4{
+   		cursor: pointer;
+   }
 </style>
     <!-- 화면 상단 아이콘 이미지 -->
    <link rel="shortcut icon" href="/sp/images/icon.png">
@@ -1056,10 +1060,13 @@
          <%for(RecruitmentVo rv : list) {%>
                <div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4">
                  <div class="card h-100">
-                   <a href=""><img class="card-img-top" src="http://placehold.it/300x300" alt=""></a>
+                   <a onclick="recDetail(<%=rv.getRecruitment_id()%>);">
+                   <img src="<%if (rv.getRecruitment_image_src() == null) {%>/sp/images/building.jpeg<%} else {%>/sp/images/recruitmentImg/<%=rv.getRecruitment_image_src()%><%}%>"
+							width="180px" height="180px">
+                   </a>
                    <div class="card-body">
-                     <h4 class="card-title">
-                       <a href=""><%=rv.getRecruitment_name() %></a><!-- 게시물 이름 -->
+                     <h4 class="card-title btn-link" onclick="recDetail(<%=rv.getRecruitment_id()%>);">
+                       <%=rv.getRecruitment_name() %>
                      </h4>
                      <h5>시급 : <%=rv.getPay()%></h5>
                      <p class="card-text"><%=rv.getRecruitment_title() %></p>
@@ -1079,13 +1086,13 @@
                <button onclick="movePage(<%=currentPage==1?1:currentPage-1%>);" type="button" class="btn btn-default bg-dark text-white">◀</button>
                <%for(int i = startPage; i <= endPage; i++){ %>
                   <%if(currentPage != i){ %>
-                  <button onclick="movePage();" type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
+                  <button onclick="movePage(<%=i %>);" type="button" class="btn btn-default bg-dark text-white"><%=i %></button>
                   <%}else{ %>
                   <button type="button" class="btn btn-default bg-dark text-white disabled"><%=i %></button>
                   
                   <%} %>
                <%} %>
-               <button onclick="movePage(<%=currentPage==maxPage?maxPage:maxPage+1%>);" type="button" class="btn btn-default bg-dark text-white">▶</button>
+               <button onclick="movePage(<%=currentPage==maxPage?maxPage:currentPage+1%>);" type="button" class="btn btn-default bg-dark text-white">▶</button>
            </div>
          </div>
       <!--=========================================================================================-->
@@ -1097,7 +1104,12 @@
     </div>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=154d504288d7ddddd16f6867efe451af&libraries=services,clusterer,drawing"></script>
    <script type="text/javascript">
-            
+   function movePage(pageNum) {
+		location.href = "/sp/matchingSearch.do?currentPage="+pageNum;
+	}
+   function recDetail(i){
+		location.href="/sp/recruitmentDetail.do?recId="+i+"&currentPage="+<%=currentPage%>;
+	}
    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
    mapOption = { 
       
@@ -1137,7 +1149,7 @@
          		+'<dl>			<dt>급여</dt>			<dd>일 <%=rv.getPay()%>원</dd>'
          		+'			    <dt>근무날짜</dt>			<dd><%=rv.getWork_day()%></dd>'
          		+'</dl>'
-         		+'<p class="dView"><a href="#"><span>상세모집요강</span></a></p></div></div></div>', 
+         		+'<p class="dView"><a onclick="recDetail(<%=rv.getRecruitment_id()%>);"><span>상세모집요강</span></a></p></div></div></div>', 
          latlng: new daum.maps.LatLng(<%=rv.getR_latitude()%>, <%=rv.getR_longitude()%>) }
          <%}else{%>
          ,{content: '<div style="cursor: default; position: absolute; background: rgb(255, 255, 255); border: 1px solid rgb(118, 129, 168); z-index: 2; display: block; width: 210px; height: 146px; left: -30px; top: -120px;"><div style="position: absolute; background: url(&quot;http://t1.daumcdn.net/localimg/localimages/07/mapjsapi/2x/triangle.png&quot;) 0% 0% / 11px 9px no-repeat; width: 11px; height: 9px; left: 99px; top: 146px;"></div>'
@@ -1148,7 +1160,7 @@
      		+'<dl>			<dt>급여</dt>			<dd>일 <%=rv.getPay()%>원</dd>'
      		+'			    <dt>근무날짜</dt>			<dd><%=rv.getWork_day()%></dd>'
      		+'</dl>'
-     		+'<p class="dView"><a href="#"><span>상세모집요강</span></a></p></div></div></div>', 
+     		+'<p class="dView"><a onclick="recDetail(<%=rv.getRecruitment_id()%>);"><span>상세모집요강</span></a></p></div></div></div>', 
          latlng: new daum.maps.LatLng(<%=rv.getR_latitude()%>, <%=rv.getR_longitude()%>) }
          <%}%>
          <%count++;%>

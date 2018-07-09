@@ -20,6 +20,11 @@ public class MemberService {
 		Connection conn = JDBCTemplate.getConnection();
 		
 		int result = new MemberDao().signIn(conn,member);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return result;
 	}
@@ -60,6 +65,11 @@ public class MemberService {
 		Connection conn = JDBCTemplate.getConnection();
 		
 		int result = new MemberDao().updateMember(conn,m);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return result;
 	}
