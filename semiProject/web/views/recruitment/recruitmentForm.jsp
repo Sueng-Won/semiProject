@@ -279,7 +279,7 @@
 				pay=pay+1;
 			}
 			if(start!=""&&end!=""){
-			$("#calculatePay").text("*최저임급 : 약"+pay+"0원");
+			$("#calculatePay").text("*최저임금 : 약"+pay+"0원");
 			$("#calculatePay").val(pay*10);
 			}
 		});
@@ -300,8 +300,8 @@
 					<br> <br>
 					<h3 align="center" class="text-white-50">구인 게시물</h3>
 					<br>
-					<!-- <form id="writeRecruitment" method="post"
-						action="/sp/writeRecruitment.do" enctype="multipart/form-data"> -->
+					<form id="writeRecruitment" method="post"
+						action="/sp/writeRecruitment.do" enctype="multipart/form-data">
 						<div class="row">
 							<div class="col-3 mb-1" id="titleImage">
 								<img id="titleImg" alt="" style="max-width: 130px;"
@@ -395,7 +395,7 @@
 									<label>급여</label> <input type="text" class="btn-dark" id="pay"
 										name="pay" />원
 								</div>
-								<div class="text-white-50 ml-1" id="calculatePay" value="7530" align="center">*최저임급
+								<div class="text-white-50 ml-1" id="calculatePay" value="7530" align="center">*최저임금
 									: 7,530원</div>
 							</div>
 						</div>
@@ -493,7 +493,7 @@
 								onclick="writeRecruitment();">구인 등록</button>
 						</div>
 
-					<!-- </form> -->
+					</form>
 
 				</div>
 				<!-- /.col-lg-6 -->
