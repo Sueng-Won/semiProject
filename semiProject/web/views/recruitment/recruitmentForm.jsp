@@ -271,7 +271,7 @@
 				pay=pay+1;
 			}
 			if(start!=""&&end!=""){
-			$("#calculatePay").text("*최저임급 : 약"+pay+"0원");
+			$("#calculatePay").text("*최저임 : 약"+pay+"0원");
 			}
 		});
 	});
@@ -385,7 +385,7 @@
 									<label>급여</label> <input type="text" class="btn-dark" id="pay"
 										name="pay" />원
 								</div>
-								<div class="text-white-50 ml-1" id="calculatePay" align="center">*최저임급
+								<div class="text-white-50 ml-1" id="calculatePay" align="center">*최저임
 									: 7,530원</div>
 							</div>
 						</div>
