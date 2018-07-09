@@ -33,7 +33,7 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
 
 <%@include file="/views/common/header.jsp" %>
 <style>
-	h4{
+	a, h4{
 		cursor: pointer;
 	}
 </style>
@@ -71,7 +71,10 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
             <%for(RecruitmentVo rv : list) {%><!-- for문을 통해 해당 게시물들의 개수에 맞게 생성 -->
 	            <div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4" style="max-height: 400px">
 	              <div class="card h-100">
-	                <img class="card-img-top" src="<%=null == rv.getRecruitment_image_src()?"/sp/images/building.jpeg":"/sp/images/recruitmentImg/"+rv.getRecruitment_image_src() %>" alt="">
+	                <a onclick="recDetail(<%=rv.getRecruitment_id()%>);">
+                   <img src="<%if (rv.getRecruitment_image_src() == null) {%>/sp/images/building.jpeg<%} else {%>/sp/images/recruitmentImg/<%=rv.getRecruitment_image_src()%><%}%>"
+							width="180px" height="180px">
+                   </a>
 	                <div class="card-body">
 	                  <h4 class="card-title btn-link" onclick="recDetail('<%=rv.getRecruitment_id()%>');">
 	                    <%=rv.getRecruitment_title() %><!-- 게시물 이름 -->
@@ -105,7 +108,7 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
 						
 						<%} %>
 					<%} %>
-					<button onclick="movePage(<%=currentPage==maxPage?maxPage:maxPage+1%>);" type="button" class="btn btn-default bg-dark text-white">▶</button>
+					<button onclick="movePage(<%=currentPage==maxPage?maxPage:currentPage+1%>);" type="button" class="btn btn-default bg-dark text-white">▶</button>
 			  </div>
 			</div>
 		<!--=========================================================================================-->
