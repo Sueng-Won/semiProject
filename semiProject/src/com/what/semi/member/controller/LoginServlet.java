@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		String pw = Sha512.getSha512(request.getParameter("pw"));
 		String query = request.getParameter("query");
-		System.out.println(query);
+		
 		MemberVo mv = new MemberService().getMemberInfo(id);
 
 		int result = 0;
