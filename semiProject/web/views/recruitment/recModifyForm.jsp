@@ -194,7 +194,7 @@ var okFlag = false;
 			pay=pay+1;
 		}
 		if(start!=""&&end!=""){
-		$("#calculatePay").text("*최저시급 : 약"+pay+"0원");
+		$("#calculatePay").text("*최저임금 : 약"+pay+"0원");
 		}
 	}
 	
@@ -429,7 +429,7 @@ var okFlag = false;
 									<label>급여</label> <input type="text" class="btn-dark" id="pay"
 										name="pay" value="<%=rec.getPay()%>" />원
 								</div>
-								<div class="text-white-50 ml-1" id="calculatePay" align="center">*최저시급
+								<div class="text-white-50 ml-1" id="calculatePay" align="center">*최저임금
 									: 7,530원</div>
 							</div>
 						</div>
