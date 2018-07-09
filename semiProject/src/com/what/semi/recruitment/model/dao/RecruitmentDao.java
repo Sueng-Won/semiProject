@@ -672,36 +672,6 @@ public class RecruitmentDao {
 		return result;
 	}
 
-	public String searchIdByRecId(Connection con, String recId) {
-		String memId = null;
-
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String query = "";
-
-		try {
-			query = "SELECT M_ID FROM RECRUITMENT WHERE RECRUITMENT_ID = ?";
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, recId);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				if (rs.getString("M_ID") != null) {
-					memId = rs.getString("M_ID");
-				} else {
-					memId = null;
-				}
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(pstmt);
-		}
-
-		return memId;
-
-	}
-
 	public ArrayList<RecruitmentVo> loadSameBusiness(Connection con, String m_id) {
 		ArrayList<RecruitmentVo> list = null;
 		Statement stmt = null;
@@ -764,5 +734,5 @@ public class RecruitmentDao {
 
 		return list;
 	}
-
+	
 }

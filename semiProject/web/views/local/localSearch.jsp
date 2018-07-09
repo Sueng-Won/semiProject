@@ -450,6 +450,478 @@
     padding: 0 15px 0 0;
     
 	}
+   
+   .nowMap .helpLayer .local li a.seoulO{
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .local li a.seoulC{
+    padding: 0 3px;
+    color: #5e77fb;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .local li a{
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+    .previewMap {
+    position: relative;
+    width: 180px;
+    height: 120px;
+    padding: 15px 15px 10px 15px;
+    z-index: 102;
+   }
+   
+   .previewMap .cName {
+    width: 180px;
+    height: 17px;
+    font: 11px dotum, "돋움", sans-serif;
+    color: #3366ff;
+    letter-spacing: -0.08em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: -1em;
+    -webkit-margin-start: 0x;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap .cTit {
+    width: 180px;
+    height: 22px;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #ff574c;
+    letter-spacing: -0.06em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap dl {
+    overflow: hidden;
+    width: 180px;
+    text-align: left;
+    margin-bottom: 4px;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap dl dt {
+    float: left;
+    width: 60px;
+    height: 20px;
+    padding: 3px 0 0 8px;
+    border: 1px solid #e5e5e5;
+    font: 11px dotum, "돋움", sans-serif;
+    color: #adadad;
+    background: #f6f6f6;
+    
+   }
+   
+   .previewMap dl dd {
+    overflow: hidden;
+    float: left;
+    position: relative;
+    top: -5px;
+    width: 105px;
+    height: 15px;
+    min-height: 21px;
+    padding: 3px 0 0 4px;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #333;
+    line-height: 25px;
+   }
+   
+   .previewMap .dView {
+    text-align: center;
+    }
+    
+    .previewMap .dView a {
+    display: block;
+    width: 180px;
+    height: 25px;
+    background: #346dd9;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #fff;
+    cursor: hand;
+   }
+
+   .previewMap .dView a span {
+    display: inline-block;
+    margin: 6px 0 0 0;
+    padding: 0 15px 0 0;
+    
+   }
+   
+   .nowMap .helpLayer .local li a.seoulO{
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .local li a.seoulC{
+    padding: 0 3px;
+    color: #5e77fb;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .local li a{
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+    .previewMap {
+    position: relative;
+    width: 180px;
+    height: 120px;
+    padding: 15px 15px 10px 15px;
+    z-index: 102;
+   }
+   
+   .previewMap .cName {
+    width: 180px;
+    height: 17px;
+    font: 11px dotum, "돋움", sans-serif;
+    color: #3366ff;
+    letter-spacing: -0.08em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: -1em;
+    -webkit-margin-start: 0x;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap .cTit {
+    width: 180px;
+    height: 22px;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #ff574c;
+    letter-spacing: -0.06em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap dl {
+    overflow: hidden;
+    width: 180px;
+    text-align: left;
+    margin-bottom: 4px;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap dl dt {
+    float: left;
+    width: 60px;
+    height: 20px;
+    padding: 3px 0 0 8px;
+    border: 1px solid #e5e5e5;
+    font: 11px dotum, "돋움", sans-serif;
+    color: #adadad;
+    background: #f6f6f6;
+    
+   }
+   
+   .previewMap dl dd {
+    overflow: hidden;
+    float: left;
+    position: relative;
+    top: -5px;
+    width: 105px;
+    height: 15px;
+    min-height: 21px;
+    padding: 3px 0 0 4px;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #333;
+    line-height: 25px;
+   }
+   
+   .previewMap .dView {
+    text-align: center;
+    }
+    
+    .previewMap .dView a {
+    display: block;
+    width: 180px;
+    height: 25px;
+    background: #346dd9;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #fff;
+    cursor: hand;
+   }
+
+   .previewMap .dView a span {
+    display: inline-block;
+    margin: 6px 0 0 0;
+    padding: 0 15px 0 0;
+    
+   }
+   
+   .nowMap .helpLayer .local li a.seoulO{
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .local li a.seoulC{
+    padding: 0 3px;
+    color: #5e77fb;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .local li a{
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+    .previewMap {
+    position: relative;
+    width: 180px;
+    height: 120px;
+    padding: 15px 15px 10px 15px;
+    z-index: 102;
+   }
+   
+   .previewMap .cName {
+    width: 180px;
+    height: 17px;
+    font: 11px dotum, "돋움", sans-serif;
+    color: #3366ff;
+    letter-spacing: -0.08em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: -1em;
+    -webkit-margin-start: 0x;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap .cTit {
+    width: 180px;
+    height: 22px;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #ff574c;
+    letter-spacing: -0.06em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap dl {
+    overflow: hidden;
+    width: 180px;
+    text-align: left;
+    margin-bottom: 4px;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap dl dt {
+    float: left;
+    width: 60px;
+    height: 20px;
+    padding: 3px 0 0 8px;
+    border: 1px solid #e5e5e5;
+    font: 11px dotum, "돋움", sans-serif;
+    color: #adadad;
+    background: #f6f6f6;
+    
+   }
+   
+   .previewMap dl dd {
+    overflow: hidden;
+    float: left;
+    position: relative;
+    top: -5px;
+    width: 105px;
+    height: 15px;
+    min-height: 21px;
+    padding: 3px 0 0 4px;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #333;
+    line-height: 25px;
+   }
+   
+   .previewMap .dView {
+    text-align: center;
+    }
+    
+    .previewMap .dView a {
+    display: block;
+    width: 180px;
+    height: 25px;
+    background: #346dd9;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #fff;
+    cursor: hand;
+   }
+
+   .previewMap .dView a span {
+    display: inline-block;
+    margin: 6px 0 0 0;
+    padding: 0 15px 0 0;
+    
+   }
+   
+   .nowMap .helpLayer .local li a.seoulO{
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .local li a.seoulC{
+    padding: 0 3px;
+    color: #5e77fb;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+   .nowMap .helpLayer .local li a{
+    padding: 0 3px;
+    color: #494949;
+    text-decoration: none;
+    font-size: 12px;
+   }
+   
+    .previewMap {
+    position: relative;
+    width: 180px;
+    height: 120px;
+    padding: 15px 15px 10px 15px;
+    z-index: 102;
+   }
+   
+   .previewMap .cName {
+    width: 180px;
+    height: 17px;
+    font: 11px dotum, "돋움", sans-serif;
+    color: #3366ff;
+    letter-spacing: -0.08em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: -1em;
+    -webkit-margin-start: 0x;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap .cTit {
+    width: 180px;
+    height: 22px;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #ff574c;
+    letter-spacing: -0.06em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap dl {
+    overflow: hidden;
+    width: 180px;
+    text-align: left;
+    margin-bottom: 4px;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+   }
+   
+   .previewMap dl dt {
+    float: left;
+    width: 60px;
+    height: 20px;
+    padding: 3px 0 0 8px;
+    border: 1px solid #e5e5e5;
+    font: 11px dotum, "돋움", sans-serif;
+    color: #adadad;
+    background: #f6f6f6;
+    
+   }
+   
+   .previewMap dl dd {
+    overflow: hidden;
+    float: left;
+    position: relative;
+    top: -5px;
+    width: 105px;
+    height: 15px;
+    min-height: 21px;
+    padding: 3px 0 0 4px;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #333;
+    line-height: 25px;
+   }
+   
+   .previewMap .dView {
+    text-align: center;
+    }
+    
+    .previewMap .dView a {
+    display: block;
+    width: 180px;
+    height: 25px;
+    background: #346dd9;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #fff;
+    cursor: hand;
+   }
+
+   .previewMap .dView a span {
+    display: inline-block;
+    margin: 6px 0 0 0;
+    padding: 0 15px 0 0;
+    
+   }
 </style>
     <!-- 화면 상단 아이콘 이미지 -->
    <link rel="shortcut icon" href="/sp/images/icon.png">
