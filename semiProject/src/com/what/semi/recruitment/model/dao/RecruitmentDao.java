@@ -175,6 +175,7 @@ public class RecruitmentDao {
 			RecruitmentVo temp = null;
 			while (rs.next()) {
 				temp = new RecruitmentVo();
+				temp.setRecruitment_id(rs.getString("recruitment_id"));
 				temp.setRecruitment_name(rs.getString("recruitment_name"));
 				temp.setRecruitment_title(rs.getString("recruitment_title"));
 				temp.setAddress(rs.getString("address"));
@@ -449,7 +450,7 @@ public class RecruitmentDao {
 					+ "RECRUITMENT_TITLE,ACHIEVEMENT,CAREER ,m.name,m.phone" + " FROM RECRUITMENT r "
 					+ "join MEMBER m on (m.m_id=r.m_id)" + " where recruitment_id='" + recId + "'";
 			// query = "SELECT * FROM RECRUITMENT";
-			// System.out.println(query);
+			System.out.println(query);
 
 			rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -565,6 +566,7 @@ public class RecruitmentDao {
 			RecruitmentVo temp = null;
 			while (rs.next()) {
 				temp = new RecruitmentVo();
+				temp.setRecruitment_id(rs.getString("recruitment_id"));
 				temp.setRecruitment_name(rs.getString("recruitment_name"));
 				temp.setRecruitment_title(rs.getString("recruitment_title"));
 				temp.setAddress(rs.getString("address"));
