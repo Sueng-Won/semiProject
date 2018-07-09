@@ -58,7 +58,7 @@
 			okFlag = true;
 		}
 		
-		if($("#business_type").val() == ""){
+		if($("#business_type").val() == null){
 	        alert("업종을 입력해주세요.");
 	        $("#business_type").focus();
 	        okFlag = false;
@@ -67,7 +67,7 @@
 			okFlag = true;
 		}
 		
-		if($("#career").val() == ""){
+		if($("#career").val() == null){
 	        alert("경력을 입력해주세요.");
 	        $("#career").focus();
 	        okFlag = false;
@@ -109,7 +109,6 @@
 	        okFlag = false;
 	        return false;
 	    }else{
-	    	alert($("#calculatePay").val());
 	    	if($("#pay").val()<$("#calculatePay").val()){
 	    		alert("근무시간과 최저임금을 확인해 주세요.");
 		        $("#pay").focus();
@@ -166,7 +165,7 @@
 		}
 		
 		if(okFlag){
-			/* $("#writeRecruitment").submit(); */
+			$("#writeRecruitment").submit();
 		}
 	}
 

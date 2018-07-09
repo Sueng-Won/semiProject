@@ -16,7 +16,7 @@
 	src="/sp/vendor/bootstrap/datepicker/bootstrap-datepicker.kr.js"></script>
 <script type="text/javascript">
 	function writeRecruitment(flag) {
-var okFlag = false;
+		var okFlag = false;
 		
 		if($("#name").val() == ""){
 	        alert("업체명을 입력해주세요.");
@@ -63,7 +63,7 @@ var okFlag = false;
 			okFlag = true;
 		}
 		
-		if($("#business_type").val() == ""){
+		if($("#business_type").val() == null){
 	        alert("업종을 입력해주세요.");
 	        $("#business_type").focus();
 	        okFlag = false;
@@ -72,7 +72,7 @@ var okFlag = false;
 			okFlag = true;
 		}
 		
-		if($("#career").val() == ""){
+		if($("#career").val() == null){
 	        alert("경력을 입력해주세요.");
 	        $("#career").focus();
 	        okFlag = false;
@@ -114,7 +114,7 @@ var okFlag = false;
 		        okFlag = false;
 		        return false;
 		    }else{
-		    	alert($("#calculatePay").val());
+		    	alert($("#pay").val()<$("#calculatePay").val());
 		    	if($("#pay").val()<$("#calculatePay").val()){
 		    		alert("근무시간과 최저임금을 확인해 주세요.");
 			        $("#pay").focus();
@@ -169,15 +169,15 @@ var okFlag = false;
 	    }else{
 			okFlag = true;
 		}
+		return false;
 		
 		if(okFlag){
-		
 		if(flag){
 			$("#writeRecruitment").attr("action", "/sp/writeRecruitment.do");
 		}else{
 			$("#writeRecruitment").attr("action", "/sp/updateRecruitment.do");
 		}
-		$("#writeRecruitment").submit();
+			$("#writeRecruitment").submit();
 		}
 	}
 
