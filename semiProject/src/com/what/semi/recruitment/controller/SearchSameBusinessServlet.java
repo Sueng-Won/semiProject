@@ -1,6 +1,7 @@
 package com.what.semi.recruitment.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,16 +14,16 @@ import com.what.semi.recruitment.model.service.RecruitmentService;
 import com.what.semi.recruitment.model.vo.RecruitmentVo;
 
 /**
- * Servlet implementation class UpdateRecFormServlet
+ * Servlet implementation class SearchSameBusinessServlet
  */
-@WebServlet("/updateRecForm.do")
-public class UpdateRecFormServlet extends HttpServlet {
+@WebServlet("/searchSameBusiness.do")
+public class SearchSameBusinessServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateRecFormServlet() {
+    public SearchSameBusinessServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,14 +36,16 @@ public class UpdateRecFormServlet extends HttpServlet {
 		
 		RecruitmentVo rec = new RecruitmentService().selectRecruitment(recId);
 		
+		ArrayList<RecruitmentVo> list = new RecruitmentService().loadSameBusiness(rec.getM_id());
+		
 		String url = "";
-		if(null != rec){
-			url = "views/recruitment/recModifyForm.jsp";
-			request.setAttribute("rec", rec);
-		}else{
-			/*url = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "게시글 상세조회에 실패하였습니다.");*/
-			System.out.println("구인글수정페이지오류");
+		if(null != list) {
+				url = "/views/recruitment/SameRecruitmentList.jsp";
+				request.setAttribute("list", list);
+		}else {
+			System.out.println("오류");
+			url = "index.jsp";
+			request.setAttribute("msg", "오류");
 		}
 		RequestDispatcher view = request.getRequestDispatcher(url);
 		view.forward(request, response);

@@ -72,7 +72,7 @@ public class ContractService {
 	public ArrayList<ContractVo> selectmyAppliedConList(String recId, String js_id) {
 		Connection con = JDBCTemplate.getConnection();
 
-		ArrayList<ContractVo> list = new ContractDao().selectMyContractList(con,recId, js_id);
+		ArrayList<ContractVo> list = new ContractDao().selectMyAppliedList(con,recId, js_id);
 
 		JDBCTemplate.close(con);
 
@@ -147,5 +147,25 @@ public class ContractService {
 		JDBCTemplate.close(con);
 
 		return result;
+	}
+
+	public int contractCurrentPage(String js_id, int contId) {
+		Connection con = JDBCTemplate.getConnection();
+
+		int result = new ContractDao().selectContractCurrentPage(con,js_id, contId);
+
+		JDBCTemplate.close(con);
+
+		return result;
+	}
+
+	public ArrayList<ContractVo> selectmySuggestedConList(int resumeId, String BoId) {
+		Connection con = JDBCTemplate.getConnection();
+
+		ArrayList<ContractVo> list = new ContractDao().selectmySuggestedConList(con,resumeId, BoId);
+
+		JDBCTemplate.close(con);
+
+		return list;
 	}
 }
