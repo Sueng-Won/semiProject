@@ -55,14 +55,14 @@ public class RecruitmentService {
 		return list;
 	}
 
-	public String getDefaultResume(String id) {
+/*	public String getDefaultResume(String id) {
 		Connection con = JDBCTemplate.getConnection();
 
 		String resume = new RecruitmentDao().getDefaultResume(con, id);
 
 		JDBCTemplate.close(con);
 		return resume;
-	}
+	}*/
 
 	public int byDateListTotalCount(String dateStr) {
 		Connection con = JDBCTemplate.getConnection();
@@ -147,5 +147,56 @@ public class RecruitmentService {
 		return result;
 	}
 
-	
+	public int updateRecIsPost() {
+		Connection con = JDBCTemplate.getConnection();
+
+		int result = new RecruitmentDao().updateRecIsPost(con);
+		if (result != 0) {
+			JDBCTemplate.commit(con);
+		} else {
+			JDBCTemplate.rollback(con);
+		}
+		JDBCTemplate.close(con);
+		
+		return result;
+	}
+
+	public int deleteRec(String recId) {
+		Connection con = JDBCTemplate.getConnection();
+		
+		int result = new RecruitmentDao().deleteRec(con,recId);
+		if(result != 0) {
+			JDBCTemplate.commit(con);
+		}else {
+			JDBCTemplate.rollback(con);
+		}
+		JDBCTemplate.close(con);
+		
+		return result;
+	}
+
+	public String searchIdByRecId(String recId) {
+		Connection con = JDBCTemplate.getConnection();
+		
+		String memId = new RecruitmentDao().searchIdByRecId(con,recId);
+		if(memId != null) {
+			JDBCTemplate.commit(con);
+		}else {
+			JDBCTemplate.rollback(con);
+		}
+		
+		return memId;
+	}
+
+	public ArrayList<RecruitmentVo> loadSameBusiness(String m_id) {
+		Connection con = JDBCTemplate.getConnection();
+
+		ArrayList<RecruitmentVo> list = new RecruitmentDao().loadSameBusiness(con, m_id);
+
+		JDBCTemplate.close(con);
+
+		return list;
+	}
+
+
 }

@@ -40,7 +40,6 @@ public class ByDateListServlet extends HttpServlet {
 		RecruitmentService rs = new RecruitmentService();
 
 		PageInfo pi = PageTemplate.byDatePaging(request, rs, dateStr);
-		System.out.println(pi.toString());
 
 		ArrayList<RecruitmentVo> list = rs.selectByDateList(dateStr, pi.getCurrentPage(), pi.getLimit());
 		

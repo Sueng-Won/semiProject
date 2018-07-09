@@ -144,7 +144,7 @@ String keyword = condition.getUserName();
 	            catch (e) {
 	            }
 	        }, 10);
-	    }; 
+	    };
 	    
 		function newResumePage(r_no){
 	        var win = window.open("/sp/manageResFormView.do?r_no="+r_no,"_blank","width=1000, height=900, left=auto,top=auto");
@@ -209,13 +209,13 @@ String keyword = condition.getUserName();
 						<button class="btn btn-default btn-sm">삭제여부</button>
 						<div class="btn-group" role="group">
 						    <button type="button" id="delflagBtn" class="btn btn-sm btn-dark dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-						    <%=1 == delflag?"삭제 게시물":(0 == delflag?"미삭제 게시물":"전체 게시물") %>
+						    <%=0 == delflag?"삭제 게시물":(1 == delflag?"미삭제 게시물":"전체 게시물") %>
 							    <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu bg-dark" role="menu">
 								<li><button type="button" onclick="delflagChange(this);" class="btn btn-dark btn-sm btn-block">전체 게시물</button></li>
-								<li><button type="button" onclick="delflagChange(this);" class="btn btn-dark btn-sm btn-block" value="0">미삭제 게시물</button></li>
-								<li><button type="button" onclick="delflagChange(this);" class="btn btn-dark btn-sm btn-block" value="1">삭제 게시물</button></li>
+								<li><button type="button" onclick="delflagChange(this);" class="btn btn-dark btn-sm btn-block" value="1">미삭제 게시물</button></li>
+								<li><button type="button" onclick="delflagChange(this);" class="btn btn-dark btn-sm btn-block" value="0">삭제 게시물</button></li>
 							</ul>
 						</div>
 					</div>
@@ -270,7 +270,7 @@ String keyword = condition.getUserName();
 			     		<div class="col-3 btn-link" onclick="newRecruitmentPage(<%=mv.getRecruitment_id()%>);"><%=mv.getRecruitment_title() %></div>
 			     		
 			     		<div class="btn-group col-lg-3 col-12" role="group" aria-label="...">
-			     			<%if(mv.getDelflag() != 0){ %>
+			     			<%if(mv.getDelflag() != 1){ %>
 						  <button onclick="deleteRecruitment('<%=mv.getRecruitment_id()%>');" class="btn btn-dark btn-sm">게시물 삭제</button>
 						  	<%}else{ %>
 						  <button onclick="resetRecruitment('<%=mv.getRecruitment_id()%>');" class="btn btn-info btn-sm">게시물 복구</button>

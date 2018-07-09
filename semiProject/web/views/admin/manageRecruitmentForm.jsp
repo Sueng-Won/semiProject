@@ -59,6 +59,8 @@
 			close();
 		});
 	});
+	
+	
 </script>
 <style>
 .line {
@@ -230,16 +232,18 @@ tr {
 				<div id="ta"><%=rec.getIntroduce()%></div>
 			</div>
 			<div class="space"></div>
-			<div class="line">지도</div>
+			<div class="line">
+				<div id="map" style="width:670px;height:400px;"></div>
+			</div>
 			<div class="space"></div>
 			<div class="line">
 				<div align="center">
-					<%if(rec.getDelflag() != 0){ %>
+					<%if(rec.getDelflag() != 1){ %>
 					<button id="deleteBtn"
-						class="btn btn-default bg-dark text-white mr-2">게시물 삭제</button>
+						class="btn btn-dark text-white mr-2">게시물 삭제</button>
 					<%}else{ %>
 					<button id="resetBtn"
-						class="btn btn-default bg-dark text-white mr-2">게시물 복구</button>
+						class="btn btn-info text-white mr-2">게시물 복구</button>
 					<%} %>
 					<button id="returnBtn"
 						class="btn btn-default bg-dark text-white">돌아가기</button>
@@ -247,5 +251,25 @@ tr {
 			</div>
 		</div>
 	</div>
+<script type="text/javascript">
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = { 
+   
+   center: new daum.maps.LatLng(<%=rec.getR_latitude()%>, <%=rec.getR_longitude()%>), // 지도의 중심좌표
+   level: 3, // 지도의 확대 레벨
+   marker : {
+	   position : latlng,
+	   text : '<%=rec.getRecruitment_name()%>'
+   }
+};
+
+// 지도를 생성합니다
+   var map = new daum.maps.StaticMap(mapContainer, mapOption); 
+
+   var latlng = new daum.maps.LatLng(<%=rec.getR_latitude()%>, <%=rec.getR_longitude()%>);
+      
+
+       
+</script>
 </body>
 </html>

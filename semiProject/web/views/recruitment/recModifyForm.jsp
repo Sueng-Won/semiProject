@@ -3,20 +3,52 @@
 <%@page import="com.what.semi.recruitment.model.vo.RecruitmentVo"%>
 <%
 	RecruitmentVo rec = (RecruitmentVo) request.getAttribute("rec");
-	System.out.print(rec.toString());
+	java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("yyyy/MM/dd");
 %>
 <%@include file="/views/common/header.jsp"%>
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
 
+<script type="text/javascript"
+	src="/sp/vendor/bootstrap/datepicker/bootstrap-datepicker.kr.js"></script>
 <script type="text/javascript">
-	function writeRecruitment() {
+	function writeRecruitment(flag) {
+		if(flag){
+			$("#writeRecruitment").attr("action", "/sp/writeRecruitment.do");
+		}else{
+			$("#writeRecruitment").attr("action", "/sp/updateRecruitment.do");
+		}
 		$("#writeRecruitment").submit();
 	}
 
-	function updateRecruitment() {
-		$("#updateRecruitment").submit();
+	function payCal(){
+		var date = $("#workdate").val();
+		var start = $("#starttime").val();
+		var starthour = start.split(":")[0];
+		var startmin = start.split(":")[1];
+		if(startmin>0){
+			startmin=60-startmin;
+			}
+		var end = $("#endtime").val();
+		var endhour = end.split(":")[0];
+		var endmin = end.split(":")[1];
+		var min = endmin+startmin;
+		var hour = endhour-starthour-1;
+		if(min==0){
+			hour=hour+1;
+		}
+		var pay = ((7530*hour)+((7530/60)*min))/10;
+		if((((7530*hour)+(7530/60)*min)%10)>0){
+			pay=pay+1;
+		}
+		if(start!=""&&end!=""){
+		$("#calculatePay").text("*최저시급 : 약"+pay+"0원");
+		}
 	}
-
+	
 	var searchAddr;
 	function openAddressPopup() {
 		var themeObj = {
@@ -96,6 +128,37 @@
 					}
 				}).open();
 	}
+	$(function() {
+		payCal();
+		
+		$('#workdate').datepicker({
+			format : "yyyy/mm/dd",
+			language : "kr",
+			autoclose : true,
+			startDate : "today"
+		});
+
+		$("#pay").keyup(function() {
+			payCal();
+		});
+		
+		if(<%=rec.getMilitary_service()%>==0){
+			$("#mBtn").text("무관");
+			$("#mValue").val("x");
+		}else{
+			$("#mBtn").text("군필");
+			$("#mValue").val("y");
+		}
+		if("<%=rec.getGender()%>"=="N"){
+			$("#gBtn").text("무관");
+		}else if("<%=rec.getGender()%>"=="M"){
+			$("#gBtn").text("남");
+		}else{
+			$("#gBtn").text("여");
+		}
+		$("#acBtn").text("<%=rec.getAchievement()%>");
+		
+	});
 </script>
 
 <!-- Page Content -->
@@ -114,210 +177,210 @@
 					<br>
 					<form id="writeRecruitment" method="post"
 						action="/sp/writeRecruitment.do" enctype="multipart/form-data">
-						<form id="updateRecruitment" method="post"
-							action="/sp/updateRecruitment.do" enctype="multipart/form-data">
-							<div class="row">
-								<div class="col-3 mb-1" id="titleImage">
-									<img
-										src="<%if (rec.getRecruitment_image_src() == null) {%>/sp/images/building.jpeg<%} else {%>/sp/images/recruitmentImg/<%=rec.getRecruitment_image_src()%><%}%>"
-										width="128px" height="128px">
+						<!-- 						<form id="updateRecruitment" method="post" -->
+						<!-- 							action="/sp/updateRecruitment.do" enctype="multipart/form-data"> -->
+						<div class="row">
+							<div class="col-3 mb-1" id="titleImage">
+								<img id="titleImg"
+									src="<%if (rec.getRecruitment_image_src() == null) {%>/sp/images/building.jpeg<%} else {%>/sp/images/recruitmentImg/<%=rec.getRecruitment_image_src()%><%}%>"
+									width="128px" height="128px">
+							</div>
+							<div class="col-9">
+								<input type="hidden" name="recId"
+									value="<%=rec.getRecruitment_id()%>">
+
+								<!-- 업체명 -->
+								<div class="input-group" style="min-height: 33%">
+									<input type="text" class="form-control mb-1" name="name"
+										value="<%=rec.getRecruitment_name()%>" />
 								</div>
-								<div class="col-9">
-								<input type="hidden" name="recId" value="<%=rec.getRecruitment_id()%>">
 
-									<!-- 업체명 -->
-									<div class="input-group" style="min-height: 33%">
-										<input type="text" class="form-control mb-1" name="name"
-											value="<%=rec.getRecruitment_name()%>" />
-									</div>
+								<!-- 업체 전화번호 -->
+								<div class="input-group" style="min-height: 33%">
+									<input type="text" class="form-control mb-1" name="phone"
+										value="<%=rec.getRecruitment_phone()%>" />
+								</div>
 
-									<!-- 업체 전화번호 -->
-									<div class="input-group" style="min-height: 33%">
-										<input type="text" class="form-control mb-1" name="phone"
-											value="<%=rec.getRecruitment_phone()%>" />
-									</div>
-
-									<!-- 업체 이메일 -->
-									<div class="input-group" style="min-height: 33%">
-										<input type="email" class="form-control mb-1" name="email"
-											value="<%=rec.getRecruitment_email()%>" />
-									</div>
+								<!-- 업체 이메일 -->
+								<div class="input-group" style="min-height: 33%">
+									<input type="email" class="form-control mb-1" name="email"
+										value="<%=rec.getRecruitment_email()%>" />
 								</div>
 							</div>
+						</div>
 
-							<!-- 업체 주소 -->
-							<div class="input-group">
-								<!-- 주소검색을 통해 입력받은 우편번호 저장 input -->
-								<input type="hidden" name="zipcode" id="zipcode"
-									value="<%=rec.getZipcode()%>" />
+						<!-- 업체 주소 -->
+						<div class="input-group">
+							<!-- 주소검색을 통해 입력받은 우편번호 저장 input -->
+							<input type="hidden" name="zipcode" id="zipcode"
+								value="<%=rec.getZipcode()%>" />
 
-								<!-- 주소를 통한 좌표값 저장 input -->
-								<input type="hidden" name="latitude" id="latitude"
-									value="<%=rec.getR_latitude()%>" /> <input type="hidden"
-									name="longitude" id="longitude"
-									value="<%=rec.getR_longitude()%>" />
+							<!-- 주소를 통한 좌표값 저장 input -->
+							<input type="hidden" name="latitude" id="latitude"
+								value="<%=rec.getR_latitude()%>" /> <input type="hidden"
+								name="longitude" id="longitude"
+								value="<%=rec.getR_longitude()%>" />
 
-								<!-- 주소 -->
-								<input type="text" class="form-control mb-1 mr-1" name="address"
-									id="address" value="<%=rec.getAddress()%>" readonly /> <span
-									class="input-group-btn">
-									<button class="btn btn-light text-dark" type="button"
-										onclick="openAddressPopup();">주소 검색</button>
-								</span>
+							<!-- 주소 -->
+							<input type="text" class="form-control mb-1 mr-1" name="address"
+								id="address" value="<%=rec.getAddress()%>" readonly /> <span
+								class="input-group-btn">
+								<button class="btn btn-light text-dark" type="button"
+									onclick="openAddressPopup();">주소 검색</button>
+							</span>
 
+						</div>
+
+						<div class="input-group">
+							<!-- 상세주소 입력 -->
+							<input type="text" class="form-control mb-1" name="addressDetail"
+								id="addressDetail" value="<%=rec.getAddress_detail()%>" />
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-3">
+								<select multiple class="custom-select-lg mt-1 ml-3 btn-dark"
+									style="min-height: 150px" name="business_type">
+									<option disabled="disabled" class="text-white-50">[업종]</option>
+									<option>사무직</option>
+									<option>서비스</option>
+									<option>유통/판매</option>
+									<option>외식/음료</option>
+									<option>고객상담</option>
+									<option>생산/건설</option>
+								</select>
+							</div>
+							<div class="col-3">
+								<select name="career" multiple
+									class="custom-select-lg mt-1 ml-3 btn-dark"
+									style="min-height: 150px">
+									<option disabled="disabled" class="text-white-50">[경력]</option>
+									<option value="1">있음</option>
+									<option value="0">무관</option>
+								</select>
 							</div>
 
-							<div class="input-group">
-								<!-- 상세주소 입력 -->
-								<input type="text" class="form-control mb-1"
-									name="addressDetail" id="addressDetail"
-									value="<%=rec.getAddress_detail()%>" />
+							<div class="col-6">
+								<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
+									<label>근무일</label> <input type="text" id="workdate"
+										class="btn-dark" name="workdate" value=<%=df.format(rec.getWork_day())%> />
+								</div>
+								<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
+									<label>시작시간</label> <input type="time" class="btn-dark"
+										id="starttime" name="starttime" value="<%=rec.getStart_work_time()%>"/>
+								</div>
+								<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
+									<label>종료시간</label> <input type="time" class="btn-dark"
+										id="endtime" name="endtime" value="<%=rec.getEnd_work_time()%>"/>
+								</div>
+								<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
+									<label>급여</label> <input type="text" class="btn-dark" id="pay"
+										name="pay" value="<%=rec.getPay() %>"/>원
+								</div>
+								<div class="text-white-50 ml-1" id="calculatePay" align="center">*최저시급
+									: 7,530원</div>
 							</div>
-							<br>
-							<div class="row">
-								<div class="col-3">
-									<select multiple class="custom-select-lg mt-1 ml-3 btn-dark"
-										style="min-height: 150px" name="business_type">
-										<option disabled="disabled" class="text-white-50">[업종]</option>
-										<option>사무직</option>
-										<option>서비스</option>
-										<option>유통/판매</option>
-										<option>외식/음료</option>
-										<option>고객상담</option>
-										<option>생산/건설</option>
-									</select>
-								</div>
-								<div class="col-2">
-									<select name="career" multiple
-										class="custom-select-lg mt-1 ml-3 btn-dark"
-										style="min-height: 150px">
-										<option disabled="disabled" class="text-white-50">[경력]</option>
-										<option value="1">있음</option>
-										<option value="0">없음</option>
-									</select>
-								</div>
+						</div>
+						<br>
 
-								<div class="col-7">
-									<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
-										<label>근무일</label> <input type="date" class="btn-dark"
-											name="workdate" />
-									</div>
-									<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
-										<label>시작시간</label> <input type="time" class="btn-dark"
-											name="starttime" />
-									</div>
-									<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
-										<label>종료시간</label> <input type="time" class="btn-dark"
-											name="endtime" />
-									</div>
-									<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
-										<label>급여</label> <input type="text" class="btn-dark"
-											name="pay" value="<%=rec.getPay()%>" />원
-									</div>
-								</div>
+						<h4 class="text-white-50 ml-1">우대 사항</h4>
+						<div class="row">
+							<div class="btn-group mt-1 ml-1">
+								<button type="button" style="min-width: 140px"
+									class="btn btn-lg btn-dark dropdown-toggle"
+									data-toggle="dropdown" aria-expanded="false">
+									<span id="mBtn" class="caret">병역사항</span>
+								</button>
+
+								<input type="hidden" name="mValue" id="mValue">
+								<!-- 병역여부에 대한 값을 저장할 hidden input -->
+
+								<ul class="dropdown-menu bg-dark" role="menu">
+									<li><button type="button" onclick="mSelect(this);"
+											name="miltary" class="btn btn-dark btn-sm btn-block"
+											value="y">군필</button></li>
+									<li><button type="button" onclick="mSelect(this);"
+											name="miltary" class="btn btn-dark btn-sm btn-block"
+											value="x">무관</button></li>
+									<li class="divider"></li>
+								</ul>
 							</div>
-							<br>
 
-							<h4 class="text-white-50 ml-1">우대 사항</h4>
-							<div class="row">
-								<div class="btn-group mt-1 ml-1">
-									<button type="button" style="min-width: 140px"
-										class="btn btn-lg btn-dark dropdown-toggle"
-										data-toggle="dropdown" aria-expanded="false">
-										<span id="mBtn" class="caret">병역사항</span>
-									</button>
+							<div class="btn-group mt-1 ml-1">
+								<button type="button" style="min-width: 100px"
+									class="btn btn-lg btn-dark dropdown-toggle"
+									data-toggle="dropdown" aria-expanded="false">
+									<span class="caret" id="gBtn">성별</span>
+								</button>
 
-									<input type="hidden" name="mValue" id="mValue"
-										value="<%=rec.getMilitary_service()%>">
-									<!-- 병역여부에 대한 값을 저장할 hidden input -->
+								<input type="hidden" name="gValue" id="gValue"
+									value="<%=rec.getGender()%>" />
+								<!-- 성별에 대한 값을 저장할 hidden input -->
 
-									<ul class="dropdown-menu bg-dark" role="menu">
-										<li><button type="button" onclick="mSelect(this);"
-												name="miltary" class="btn btn-dark btn-sm btn-block"
-												value="y">군필</button></li>
-										<li><button type="button" onclick="mSelect(this);"
-												name="miltary" class="btn btn-dark btn-sm btn-block"
-												value="x">무관</button></li>
-										<li class="divider"></li>
-									</ul>
-								</div>
+								<ul class="dropdown-menu bg-dark" role="menu">
+									<li><button type="button" onclick="gSelect(this);"
+											name="gender" class="btn btn-dark btn-sm btn-block" value="M">남</button></li>
+									<li><button type="button" onclick="gSelect(this);"
+											name="gender" class="btn btn-dark btn-sm btn-block" value="F">여</button></li>
+									<li><button type="button" onclick="gSelect(this);"
+											name="gender" class="btn btn-dark btn-sm btn-block" value="N">무관</button></li>
+									<li class="divider"></li>
+								</ul>
+							</div>
 
-								<div class="btn-group mt-1 ml-1">
-									<button type="button" style="min-width: 100px"
-										class="btn btn-lg btn-dark dropdown-toggle"
-										data-toggle="dropdown" aria-expanded="false">
-										<span class="caret" id="gBtn">성별</span>
-									</button>
+							<div class="btn-group mt-1 ml-3">
+								<button type="button" style="min-width: 130px"
+									class="btn btn-lg btn-dark dropdown-toggle"
+									data-toggle="dropdown" aria-expanded="false">
+									<span class="caret" id="acBtn">학력</span>
+								</button>
 
-									<input type="hidden" name="gValue" id="gValue"
-										value="<%=rec.getGender()%>" />
-									<!-- 성별에 대한 값을 저장할 hidden input -->
+								<input type="hidden" name="achievement" id="achievementValue"
+									value="<%=rec.getAchievement()%>" />
 
-									<ul class="dropdown-menu bg-dark" role="menu">
-										<li><button type="button" onclick="gSelect(this);"
-												name="gender" class="btn btn-dark btn-sm btn-block"
-												value="M">남</button></li>
-										<li><button type="button" onclick="gSelect(this);"
-												name="gender" class="btn btn-dark btn-sm btn-block"
-												value="F">여</button></li>
-										<li><button type="button" onclick="gSelect(this);"
-												name="gender" class="btn btn-dark btn-sm btn-block"
-												value="N">무관</button></li>
-										<li class="divider"></li>
-									</ul>
-								</div>
-
-								<div class="btn-group mt-1 ml-3">
-									<button type="button" style="min-width: 130px"
-										class="btn btn-lg btn-dark dropdown-toggle"
-										data-toggle="dropdown" aria-expanded="false">
-										<span class="caret" id="acBtn">학력</span>
-									</button>
-
-									<input type="hidden" name="achievement" id="achievementValue"
-										value="<%=rec.getAchievement()%>" />
-
-									<ul class="dropdown-menu bg-dark" role="menu">
+								<ul class="dropdown-menu bg-dark" role="menu">
 									<li><button type="button" onclick="acSelect(this);"
-												class="btn btn-dark btn-sm btn-block" value="무관">무관</button></li>
-										<li><button type="button" onclick="acSelect(this);"
-												class="btn btn-dark btn-sm btn-block" value="초졸">초졸</button></li>
-										<li><button type="button" onclick="acSelect(this);"
-												class="btn btn-dark btn-sm btn-block" value="중졸">중졸</button></li>
-										<li><button type="button" onclick="acSelect(this);"
-												class="btn btn-dark btn-sm btn-block" value="고졸">고졸</button></li>
-										<li><button type="button" onclick="acSelect(this);"
-												class="btn btn-dark btn-sm btn-block" value="대졸">대졸</button></li>
-										<li class="divider"></li>
-									</ul>
+											class="btn btn-dark btn-sm btn-block" value="무관">무관</button></li>
+									<li><button type="button" onclick="acSelect(this);"
+											class="btn btn-dark btn-sm btn-block" value="초졸">초졸</button></li>
+									<li><button type="button" onclick="acSelect(this);"
+											class="btn btn-dark btn-sm btn-block" value="중졸">중졸</button></li>
+									<li><button type="button" onclick="acSelect(this);"
+											class="btn btn-dark btn-sm btn-block" value="고졸">고졸</button></li>
+									<li><button type="button" onclick="acSelect(this);"
+											class="btn btn-dark btn-sm btn-block" value="대졸">대졸</button></li>
+									<li class="divider"></li>
+								</ul>
 
-								</div>
 							</div>
-							<br>
+						</div>
+						<br>
 
-							<!-- 글제목 -->
-							<div class="input-group" style="min-height: 33%">
-								<input type="text" class="form-control mb-1" name="title"
-									value="<%=rec.getRecruitment_title()%>" />
-							</div>
-							<div>
+						<!-- 글제목 -->
+						<div class="input-group" style="min-height: 33%">
+							<input type="text" class="form-control mb-1" name="title"
+								value="<%=rec.getRecruitment_title()%>" />
+						</div>
+						<div>
 
-								<textarea class="col-12" rows="5" name="introduce"><%=rec.getIntroduce()%></textarea>
-							</div>
+							<textarea class="col-12" rows="5" name="introduce"><%=rec.getIntroduce()%></textarea>
+						</div>
 
-							<div id="fileArea">
-								<input type="file" id="recImg" name="recImg"
-									onchange="printImage(this);" />
-							</div>
+						<div id="fileArea">
+							<input type="file" id="recImg" name="recImg"
+								onchange="printImage(this);"
+								value="<%=rec.getRecruitment_image_src()%>" />
+						</div>
 
-							<div>
-								<button class="btn btn-light text-dark mt-4 mb-2"
-									onclick="updateRecruitment();">수정하기</button>
-								<button class="btn btn-light text-dark mt-4 mb-2"
-									onclick="writeRecruitment();">구인 등록</button>
-							</div>
+						<div>
+						<%if(rec.getIs_post()==1){ %>
+							<button class="btn btn-light text-dark mt-4 mb-2"
+								onclick="writeRecruitment(false);">수정하기</button>
+								<%} %>
+							<button class="btn btn-light text-dark mt-4 mb-2"
+								onclick="writeRecruitment(true);">구인 등록</button>
+						</div>
 
-						</form>
 					</form>
 
 				</div>
@@ -350,6 +413,10 @@
 		var value = $(obj).val();
 		$("#mBtn").text(text);
 		$("#mValue").val(value);
+		if(value=='y'){
+			$("#gBtn").text("남");
+			$("#gValue").val("M");
+		}
 	}
 	$(function() {
 		$("#fileArea").hide();
@@ -360,7 +427,6 @@
 	function printImage(obj) {
 		var reader = new FileReader();
 		reader.onload = function(e) {
-			//console.log(e.target.result);
 			$("#titleImg").attr("src", e.target.result);
 		}
 		reader.readAsDataURL(obj.files[0]);

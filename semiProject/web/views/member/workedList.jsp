@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.what.semi.common.template.PageInfo"%>
+<%@page import="com.what.semi.contract.model.vo.ContractVo"%>
 <%@page import="com.what.semi.recruitment.model.vo.RecruitmentVo"%>
 <%@page import="java.util.ArrayList"%>
 <%
-	ArrayList<RecruitmentVo> list = (ArrayList<RecruitmentVo>) request.getAttribute("list");
+	ArrayList<ContractVo> myConList = (ArrayList<ContractVo>) request.getAttribute("myConList");
+	ArrayList<RecruitmentVo> conRecList = (ArrayList<RecruitmentVo>) request.getAttribute("conRecList");
+	int contId = (int) request.getAttribute("contId");
 
-	/* java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("MM / dd"); */
+	java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("MM / dd");
+
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	int listCount = pi.getTotalCount();
 	int currentPage = pi.getCurrentPage();
@@ -19,22 +23,27 @@
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 
 <script type="text/javascript">
-	function writeRec(){
-		location.href = "/sp/views/recruitment/recruitmentForm.jsp";
-	}
-	
-	function recruitmentDetail(i){
-		location.href="/sp/recruitmentDetail.do?recId="+i+"&currentPage="+<%=currentPage%>;
-	}
-		
-	function modifyRec(i){
-		location.href = "/sp/updateRecForm.do?recId="+i;
-	}
-	
-	function deleteRec(i){
-		location.href = "/sp/deleteRecruitment.do?recId="+i;
+	function contractRecDetail(i) {
+		location.href = "/sp/contractRecDetail.do?recId=" + i;
 	}
 
+	function accept(i) {
+		location.href = "/sp/acceptRecruitment.do?contId="+i+"&currentPage="+<%=currentPage%>;
+	}
+
+	function reject(i) {
+		location.href = "/sp/rejectRecruitment.do?contId=" + i+"&currentPage="+<%=currentPage%>;
+	}
+	
+	function addBlacklist(i){
+		window.open("/sp/searchIdByRecId.do?recId="+i,"_blank", "width=600, height=700");
+	}
+	
+	$(function(){
+		<%if (contId != -1) {%>
+			$("#conDetails<%=contId%>").addClass('show');
+		<%}%>
+	});
 </script>
 <style>
 .btn-link {
@@ -74,7 +83,7 @@
 
 		<%@include file="/views/common/nav.jsp"%>
 		<div class="col-lg-9" style='padding-top: 50px; padding-left: 30px;'>
-			<h3>구인게시글 관리</h3>
+			<h3>근로내역 관리</h3>
 			<!-- Page Content -->
 			<!-- <div class="media mt-4 border rounded bg-light">
 		     
@@ -90,55 +99,132 @@
 			
 			</div> -->
 
-			<table class="list-table">
-				<tbody>
-					<tr>
-						<th><div class="table-td">게시여부</div></th>
-						<th><div class="table-td">근무형태</div></th>
-						<th><div class="td-title">기업명/글제목</div></th>
-						<th><div class="table-td-location">지역</div></th>
-						<th><div class="table-td">급여</div></th>
-						<td style="width:20px;">
-						</td>
-						<td style="width:20px;">
-						</td>
-					</tr>
+			<table class="list-table" id="myConTable">
+				<tr>
+					<th><div class='table-td'>계약일</div></th>
+					<th><div class='td-title'>기업명</div></th>
+					<th><div class='table-td'>계약상태</div></th>
+					<td style='width: 20px;'></td>
+				</tr>
+				<%
+					for (int i = 0; i < myConList.size(); i++) {
+				%>
+				<tr>
+					<td class="table-td">
+						<%
+							if (myConList.get(i).getContract_date() == null) {
+						%>-<%
+							} else {
+						%><%=myConList.get(i).getContract_date()%> <%
+ 	}
+ %>
+					</td>
 					<%
-						for (int i = 0; i < list.size(); i++) {
-							String[] locationArr = list.get(i).getAddress().split(" ");
-							String location = locationArr[0] + " " + locationArr[1];
+						for (int j = 0; j < conRecList.size(); j++) {
+								if (myConList.get(i).getRecruitment_id().equals(conRecList.get(j).getRecruitment_id())) {
 					%>
-					<tr>
-						<td class="table-td" onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);">
-							<%
-								if (list.get(i).getIs_post() == 0) {
-							%>기간만료<%
-								} else {
-							%>게시중<%
-								}
-							%>
-						</td>
-						<%-- <td class="table-td"><%=df.format(list.get(i).getWork_day()) %></td> --%>
-						<td class="table-td" onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);"><%=list.get(i).getBusiness_type()%></td>
-						<td class="td-title" onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);"><b><%=list.get(i).getRecruitment_name()%></b><br><%=list.get(i).getRecruitment_title()%></td>
-						<td class="table-td-location" onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);"><%=location%></td>
-						<th class="table-td" onclick="recruitmentDetail(<%=list.get(i).getRecruitment_id()%>);"><%=list.get(i).getPay()%>원
-						</td>
-						<td>
-							<button type="button" class="btn btn-default btn-xs btn-info"
-								onclick="modifyRec(<%=list.get(i).getRecruitment_id()%>);">상세보기</button>
-						</td>
-					</tr>
+					<td class="td-title"><b><%=conRecList.get(j).getRecruitment_name()%></b></td>
 					<%
 						}
+							}
 					%>
-				</tbody>
+					<td class="table-td">
+						<%
+							if (myConList.get(i).getState() == 0) {
+									if (member_type.equals(myConList.get(i).getDemander())) {
+						%>대기<%
+							} else {
+						%>요청중<%
+							}
+								} else if (myConList.get(i).getState() == 1) {
+						%>진행중<%
+							} else {
+						%>완료<%
+							}
+						%>
+					</td>
+					<td>
+						<button type="button" class="btn btn-default btn-xs btn-info"
+							data-toggle="collapse"
+							data-target="#conDetails<%=myConList.get(i).getC_no()%>">상세보기</button>
+
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<div id="conDetails<%=myConList.get(i).getC_no()%>"
+							class="collapse">
+							<div style="margin: 0 50px 0 50px;">
+								<div style="height: 50px;">
+									<div style="float: left;">
+										<button style="margin-top: 10px;"
+											onclick="contractRecDetail(<%=myConList.get(i).getRecruitment_id()%>);">해당
+											구인게시글 보기</button>
+									</div>
+									<div style="float: right;">
+										<div>
+											근무 시작 시간 :
+											<%
+											if (myConList.get(i).getStart_work_time() != null) {
+										%><%=myConList.get(i).getStart_work_time()%>
+											<%
+												}
+											%>
+										</div>
+										<div>
+											근무 종료 시간 :
+											<%
+											if (myConList.get(i).getEnd_work_time() != null) {
+										%><%=myConList.get(i).getEnd_work_time()%>
+											<%
+												}
+											%>
+										</div>
+									</div>
+								</div>
+								<div align="right">
+									<%
+										if (myConList.get(i).getState() == 0) {
+												if (member_type.equals(myConList.get(i).getDemander())) {
+									%>
+									요청중 입니다. 승인을 기다려주세요.<%
+										} else {
+									%>
+									<button onclick="accept(<%=myConList.get(i).getC_no()%>);"
+										class="btn btn-default bg-dark text-white">수락</button>
+									<button onclick="reject(<%=myConList.get(i).getC_no()%>);"
+										class="btn btn-default bg-dark text-white">거절</button>
+									<%
+										}
+											} else if (myConList.get(i).getState() == 1) {
+									%>
+									계약이 성사되었습니다.
+									<%
+										} else {
+									%>
+									<button
+										onclick="addBlacklist(<%=myConList.get(i).getRecruitment_id()%>);"
+										class="btn btn-default bg-dark text-white">신고하기</button>
+									<%
+										}
+									%>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<%
+					}
+				%>
 			</table>
+
+
 
 			<!--====================================	페이지선택버튼	 ==================================  -->
 			<div class="btn-toolbar mb-1" role="toolbar">
 				<div class="btn-group" role="group">
-					<button onclick="movePage(<%=currentPage == 1 ? 1 : currentPage - 1%>);"
+					<button
+						onclick="movePage(<%=currentPage == 1 ? 1 : currentPage - 1%>);"
 						type="button" class="btn btn-default bg-dark text-white"><</button>
 					<%
 						for (int i = startPage; i <= endPage; i++) {
@@ -146,7 +232,7 @@
 					<%
 						if (currentPage != i) {
 					%>
-					<button onclick="movePage();" type="button"
+					<button onclick="movePage(<%=i%>);" type="button"
 						class="btn btn-default bg-dark text-white"><%=i%></button>
 					<%
 						} else {
@@ -165,10 +251,6 @@
 				</div>
 
 			</div>
-			<div align="right">
-				<button onclick="writeRec();"
-					class="btn btn-default bg-dark text-white">구인글 작성하기</button>
-			</div>
 			<!--=========================================================================================-->
 
 		</div>
@@ -176,4 +258,9 @@
 	<!-- /.row -->
 </div>
 <!-- /.container -->
+<script type="text/javascript">
+	function movePage(pageNum) {
+		location.href = "/sp/myWorkedList.do?currentPage="+pageNum;
+	}
+</script>
 <%@include file="/views/common/footer.jsp"%>

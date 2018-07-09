@@ -24,6 +24,17 @@ public class MyResumeVo {
 	private String introduce;
 	private String workTime;
 	private char gender;
+	private int age;
+	
+	
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
 	public String getWorkTime() {
 		return workTime;
 	}

@@ -37,7 +37,7 @@ public class UpdateRecruitmentServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		
@@ -62,14 +62,13 @@ public class UpdateRecruitmentServlet extends HttpServlet {
 		// 4.전송 값을 변수에 저장
 		//객체 2 -> 게시판에 추가할 객체, attachment 추가할 객체(list)
 		
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 		
 		String recId = mRequest.getParameter("recId");
 		String name = mRequest.getParameter("name");
 		String phone = mRequest.getParameter("phone");
 		String email = mRequest.getParameter("email");
 		String zipcode = mRequest.getParameter("zipcode");
-		System.out.println(mRequest.getParameter("latitude"));
 		double latitude = Double.parseDouble(mRequest.getParameter("latitude"));
 		double longitude = Double.parseDouble(mRequest.getParameter("longitude"));
 		String address = mRequest.getParameter("address");
@@ -136,7 +135,7 @@ public class UpdateRecruitmentServlet extends HttpServlet {
 		rec.setCareer(career);
 		
 		//System.out.println(recImg);
-		System.out.println(rec);
+		//System.out.println(rec);
 		
 		
 		
@@ -145,7 +144,6 @@ public class UpdateRecruitmentServlet extends HttpServlet {
 		
 		String url="";
 		if(0<result){
-			System.out.println(temp.toString());
 			response.sendRedirect("/sp/myRecruitmentList.do");
 		}else{
 			/*url="views/common/errorPage.jsp";

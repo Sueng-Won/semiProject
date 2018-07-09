@@ -17,10 +17,10 @@
 		var pw = $("#pw").val();
 		if(pw==""){
 			if(id=""){
-				alert("아이디를 입력하세요");
+				alert("아이디를 입력하세요.");
 			}
 			else{
-				alert("경호야 귀찮다고 비밀번호 안치고 그러면 안돼");
+				alert("비밀번호를 입력하세요.");
 			}
 		}
 		else{
@@ -45,6 +45,9 @@
 	
 	function logout(){
 		location.href="/sp/views/member/logout.jsp";
+	}
+	function jobSeekerInfo(){
+		location.href="/sp/jobSeekerInfo.do";
 	}
 </script>
 <div class="col-lg-3">
@@ -76,7 +79,15 @@
 		<table>
 		<tr>
 		<td>
-			<h5 class="text-center"><%=id %>님 환영합니다</h5>
+			<h5 class="text-center">
+			<%if(member_type.equals("JS")){ %>
+			[구직자]
+			<%}else if(member_type.equals("BO")){ %>
+			[업주]
+			<%}else{ %>
+			[관리자]
+			<%} %>
+			<%=id %>님 환영합니다</h5>
 			<button type="button" class="btn btn-dark btn-sm btn-block" onclick="logout();">로그아웃</button>
 		<td>
 		</tr>
@@ -95,6 +106,6 @@
 
 		<button type="button" onclick="searchByDateList();"
 			class="btn btn-lg btn-block btn-dark">일별알바</button>
-		<button type="button" class="btn btn-lg btn-block btn-dark">구직자정보</button>
+		<button type="button" class="btn btn-lg btn-block btn-dark" onclick="jobSeekerInfo();">구직자정보</button>
 	</div>
 </div>

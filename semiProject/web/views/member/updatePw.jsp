@@ -23,6 +23,28 @@
 			}else{
 				okFlag = true;
 			}
+			
+			var pw = $("#ipw").val();
+			var numPw = pw.search(/[0-9]/g);
+			var engPw = pw.search(/[a-z]/ig);
+			var spePw = pw.search(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi);
+
+			if(pw.length < 6 || pw.length > 20){
+				alert("비밀번호는 6자리 ~ 20자리 이내로 입력해주세요.");
+				okFlag = false;
+				return false;
+			}else{
+				okFlag = true;
+			}
+
+			if(pw.search(/₩s/) != -1){
+				alert("비밀번호는 공백없이 입력해주세요.");
+				okFlag = false;
+				return false;
+			}else{
+				okFlag = true;
+			}
+			
 			if(okFlag){
 				$("#updatePwFrm").submit();
 			}
@@ -40,7 +62,7 @@
 			  				<%if(!activeFlag){ %>
 								<form action="/sp/updatePw.do" method="post" id="updatePwFrm">
 									<div class="input-group">
-				      					<input type="password" class="form-control mb-1" name="pw1" id="ipw" placeholder="새로운 비밀번호"/>
+				      					<input type="password" class="form-control mb-1" name="pw1" id="ipw" placeholder="새로운 비밀번호(6~20자리 영문,숫자,기호)"/>
 				    				</div>
 				    
 				    				<div class="input-group">

@@ -111,7 +111,7 @@ margin-top:50px;
 	<!-- /.container -->
 	<script type="text/javascript">
 		function movePage(pageNum) {
-			location.href = "/sp/indexList.do?currentPage=" + pageNum;
+			location.href = "/sp/searchByDateList.do?currentPage=" + pageNum;
 		}
 		
 		function searchByDate(){

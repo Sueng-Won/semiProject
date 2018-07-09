@@ -335,7 +335,7 @@ public class ManagePostDao {
 	public int deleteRecruitment(Connection con, int r_no) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "UPDATE RECRUITMENT SET DELFLAG = 0 WHERE RECRUITMENT_ID = ?";
+		String query = "UPDATE RECRUITMENT SET DELFLAG = 1 WHERE RECRUITMENT_ID = ?";
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -414,7 +414,7 @@ public class ManagePostDao {
 	public int resetRecruitment(Connection con, int r_no) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "UPDATE RECRUITMENT SET DELFLAG = 1 WHERE RECRUITMENT_ID = ?";
+		String query = "UPDATE RECRUITMENT SET DELFLAG = 0 WHERE RECRUITMENT_ID = ?";
 		
 		try {
 			pstmt = con.prepareStatement(query);

@@ -353,6 +353,103 @@
     text-decoration: none;
     font-size: 12px;
    }
+   
+    .previewMap {
+    position: relative;
+    width: 180px;
+    height: 120px;
+    padding: 15px 15px 10px 15px;
+    z-index: 102;
+	}
+	
+	.previewMap .cName {
+    width: 180px;
+    height: 17px;
+    font: 11px dotum, "돋움", sans-serif;
+    color: #3366ff;
+    letter-spacing: -0.08em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: -1em;
+    -webkit-margin-start: 0x;
+    -webkit-margin-end: 0px;
+	}
+	
+	.previewMap .cTit {
+    width: 180px;
+    height: 22px;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #ff574c;
+    letter-spacing: -0.06em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+	}
+	
+	.previewMap dl {
+    overflow: hidden;
+    width: 180px;
+    text-align: left;
+    margin-bottom: 4px;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+	}
+	
+	.previewMap dl dt {
+    float: left;
+    width: 60px;
+    height: 20px;
+    padding: 3px 0 0 8px;
+    border: 1px solid #e5e5e5;
+    font: 11px dotum, "돋움", sans-serif;
+    color: #adadad;
+    background: #f6f6f6;
+    
+	}
+	
+	.previewMap dl dd {
+    overflow: hidden;
+    float: left;
+    position: relative;
+    top: -5px;
+    width: 105px;
+    height: 15px;
+    min-height: 21px;
+    padding: 3px 0 0 4px;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #333;
+    line-height: 25px;
+	}
+	
+	.previewMap .dView {
+    text-align: center;
+    }
+    
+    .previewMap .dView a {
+    display: block;
+    width: 180px;
+    height: 25px;
+    background: #346dd9;
+    font: 12px gulim, "굴림", sans-serif;
+    color: #fff;
+    cursor: hand;
+	}
+
+	.previewMap .dView a span {
+    display: inline-block;
+    margin: 6px 0 0 0;
+    padding: 0 15px 0 0;
+    
+	}
 </style>
     <!-- 화면 상단 아이콘 이미지 -->
    <link rel="shortcut icon" href="/sp/images/icon.png">
@@ -449,6 +546,25 @@
             </p>
          </div>
          
+	        <!-- <div style="cursor: default; position: absolute; background: rgb(255, 255, 255); border: 1px solid rgb(118, 129, 168); z-index: 2; display: block; width: 210px; height: 146px; left: 214px; top: 57px;">
+	         	<div style="position: absolute; background: url(&quot;http://t1.daumcdn.net/localimg/localimages/07/mapjsapi/2x/triangle.png&quot;) 0% 0% / 11px 9px no-repeat; width: 11px; height: 9px; left: 99px; top: 146px;"></div>
+			         <div class="" style="position: absolute; left: 0px; top: 0px;">
+				         <div id="dev_map_preview" class="previewMap" style="positon:absolute;">		
+				         <p class="cName">스타벅스 강남구청정문점</p>		
+				         <p class="cTit">스타벅스 강남구청정문점과 함께할 파트너를 모집합니다</p>		
+				         <dl>			
+				         	<dt>급여</dt>			
+				         	<dd>시 7,600원</dd>			
+				         	<dt>근무시간</dt>			
+				         	<dd>시간협의</dd>		
+				         </dl>		
+				         <p class="dView"><a href="#" ><span>상세보기</span></a></p>
+				         </div>
+			       </div>
+	         </div>  -->
+	         
+	         
+	         
          </div>
       </div>
           
@@ -529,34 +645,65 @@
    map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT); 
    
    // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-    var mapTypeControl = new daum.maps.MapTypeControl(); 
+   var mapTypeControl = new daum.maps.MapTypeControl(); 
     
    // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
    var zoomControl = new daum.maps.ZoomControl();
    map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
    
    // 마커를 표시할 위치와 title 객체 배열입니다 
-      var positions = [
+   var positions = [
       <%int count=0;%>
       <%for(RecruitmentVo rv : list){%>
          <%if(count==0){%>   
-         {content: '<div onclick=""><%=rv.getRecruitment_name()%></div>', 
+         {content: '<div style="cursor: default; position: absolute; background: rgb(255, 255, 255); border: 1px solid rgb(118, 129, 168); z-index: 2; display: block; width: 210px; height: 146px; left: -30px; top: -120px;"><div style="position: absolute; background: url(&quot;http://t1.daumcdn.net/localimg/localimages/07/mapjsapi/2x/triangle.png&quot;) 0% 0% / 11px 9px no-repeat; width: 11px; height: 9px; left: 99px; top: 146px;"></div>'
+         		+'<div class="" style="position: absolute; left: 0px; top: 0px;">'
+         		+'<div id="dev_map_preview" class="previewMap" style="positon:absolute;">'
+         		+'<p class="cName"><%=rv.getRecruitment_name()%></p>		'
+         		+'<p class="cTit"><%=rv.getRecruitment_title()%></p>		'
+         		+'<dl>			<dt>급여</dt>			<dd>일 <%=rv.getPay()%>원</dd>'
+         		+'			    <dt>근무시간</dt>			<dd><%=rv.getStart_work_time()%> ~ <%=rv.getEnd_work_time()%></dd>'
+         		+'</dl>'
+         		+'<p class="dView"><a href="#"><span>상세모집요강</span></a></p></div></div></div>', 
          latlng: new daum.maps.LatLng(<%=rv.getR_latitude()%>, <%=rv.getR_longitude()%>) }
          <%}else{%>
-         ,{content: '<div onclick=""><%=rv.getRecruitment_name()%></div>', 
+         ,{content: '<div style="cursor: default; position: absolute; background: rgb(255, 255, 255); border: 1px solid rgb(118, 129, 168); z-index: 2; display: block; width: 210px; height: 146px; left: -30px; top: -120px;"><div style="position: absolute; background: url(&quot;http://t1.daumcdn.net/localimg/localimages/07/mapjsapi/2x/triangle.png&quot;) 0% 0% / 11px 9px no-repeat; width: 11px; height: 9px; left: 99px; top: 146px;"></div>'
+      		+'<div class="" style="position: absolute; left: 0px; top: 0px;">'
+     		+'<div id="dev_map_preview" class="previewMap" style="positon:absolute;">'
+     		+'<p class="cName"><%=rv.getRecruitment_name()%></p>		'
+     		+'<p class="cTit"><%=rv.getRecruitment_title()%></p>		'
+     		+'<dl>			<dt>급여</dt>			<dd>일 <%=rv.getPay()%>원</dd>'
+     		+'			    <dt>근무시간</dt>			<dd><%=rv.getStart_work_time()%> ~ <%=rv.getEnd_work_time()%></dd>'
+     		+'</dl>'
+     		+'<p class="dView"><a href="#"><span>상세모집요강</span></a></p></div></div></div>', 
          latlng: new daum.maps.LatLng(<%=rv.getR_latitude()%>, <%=rv.getR_longitude()%>) }
-         
          <%}%>
          <%count++;%>
       <%}%>
+      
+	      /* {
+		        title: '강남구',
+		        latlng: new daum.maps.LatLng(37.51731, 127.0475)
+		  },  
+		  {
+		        title: '강남구2',
+		        latlng: new daum.maps.LatLng(37.52, 127.0475)
+		  },  
+	      {
+		        title: '중랑구',
+		        latlng: new daum.maps.LatLng(37.60633,127.0926)
+		  }   */
       ];
       console.log('배열생성');
    
    // 마커 이미지의 이미지 주소입니다
    var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
        
+   // 인포윈도우 값
+   // var iwContent = '<div style="cursor: default; position: absolute; background: rgb(255, 255, 255); border: 1px solid rgb(118, 129, 168); z-index: 2; display: block; width: 210px; height: 146px; left: -30px; top: -120px;"><div style="position: absolute; background: url(&quot;http://t1.daumcdn.net/localimg/localimages/07/mapjsapi/2x/triangle.png&quot;) 0% 0% / 11px 9px no-repeat; width: 11px; height: 9px; left: 99px; top: 146px;"></div><div class="" style="position: absolute; left: 0px; top: 0px;"><div id="dev_map_preview" class="previewMap" style="positon:absolute;">		<p class="cName">스타벅스 강남구청정문점</p>		<p class="cTit">스타벅스 강남구청정문점과 함께할 파트너를 모집합니다</p>		<dl>			<dt>급여</dt>			<dd>시 7,600원</dd>			<dt>근무시간</dt>			<dd>시간협의</dd>		</dl>		<p class="dView"><a href="#"><span>상세모집요강</span></a></p></div></div></div>';   
+   
    for (var i = 0; i < positions.length; i ++) {
-       
+	   
        // 마커 이미지의 이미지 크기 입니다
        var imageSize = new daum.maps.Size(24, 35); 
        
@@ -572,7 +719,9 @@
        
        // 마커에 표시할 인포윈도우를 생성합니다 
        var infowindow = new daum.maps.InfoWindow({
-           content: positions[i].content // 인포윈도우에 표시할 내용
+          content: positions[i].content // 인포윈도우에 표시할 내용
+          //content : iwContent
+          
        });
        
        daum.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
@@ -584,7 +733,8 @@
        return function() {
            infowindow.open(map, marker);
        };
-   }
+   } 
+  
    
    // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
    function makeOutListener(infowindow) {
