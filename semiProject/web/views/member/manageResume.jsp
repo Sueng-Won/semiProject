@@ -118,8 +118,12 @@
 					</div>
 				<div class="col-lg-6 pri_resumeArea">
 				 <h1>현재상태 </h1>
+				 <%if(!(userTypeFlag)){ %>
+				 <p>등록된 이력서가 없습니다..</p>
+				 <%}else{ %>
 				 <p><%=is_post==1?"공개중":"비공개" %></p>
 				 <button class="btn btn-success" onclick="modifyIs_post();"> 수정하기</button>
+				 <%} %>
 				</div>
 			</div>
 			<div class="row tableArea">
