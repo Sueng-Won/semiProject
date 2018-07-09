@@ -72,7 +72,7 @@ public class TimeStampServlet extends HttpServlet {
 			str += "if(bool){";
 			str += "location.href=\"myWorkedList.do?contId=" + contId + "&currentPage=" + currentPage + "\";";
 			str += "}else{";
-			str += "self.close();}";
+			str += "close();}";
 			str += "</script>";
 			out.print(str);
 

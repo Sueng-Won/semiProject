@@ -175,6 +175,7 @@ public class RecruitmentDao {
 			RecruitmentVo temp = null;
 			while (rs.next()) {
 				temp = new RecruitmentVo();
+				temp.setRecruitment_id(rs.getString("recruitment_id"));
 				temp.setRecruitment_name(rs.getString("recruitment_name"));
 				temp.setRecruitment_title(rs.getString("recruitment_title"));
 				temp.setAddress(rs.getString("address"));
@@ -449,7 +450,7 @@ public class RecruitmentDao {
 					+ "RECRUITMENT_TITLE,ACHIEVEMENT,CAREER ,m.name,m.phone" + " FROM RECRUITMENT r "
 					+ "join MEMBER m on (m.m_id=r.m_id)" + " where recruitment_id='" + recId + "'";
 			// query = "SELECT * FROM RECRUITMENT";
-			// System.out.println(query);
+			System.out.println(query);
 
 			rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -565,6 +566,7 @@ public class RecruitmentDao {
 			RecruitmentVo temp = null;
 			while (rs.next()) {
 				temp = new RecruitmentVo();
+				temp.setRecruitment_id(rs.getString("recruitment_id"));
 				temp.setRecruitment_name(rs.getString("recruitment_name"));
 				temp.setRecruitment_title(rs.getString("recruitment_title"));
 				temp.setAddress(rs.getString("address"));
@@ -640,7 +642,7 @@ public class RecruitmentDao {
 
 		try {
 			stmt = con.createStatement();
-			query = "UPDATE RECRUITMENT SET IS_POST=0 WHERE WORK_DAY<SYSDATE";
+			query = "UPDATE RECRUITMENT SET IS_POST=0 WHERE WORK_DAY<SYSDATE AND TO_CHAR(START_WORK_TIME, 'HH24:MI:SS')<TO_CHAR(SYSDATE, 'HH24:MI:SS') AND IS_POST=1";
 			result = stmt.executeUpdate(query);
 
 		} catch (SQLException e) {
@@ -668,36 +670,6 @@ public class RecruitmentDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
-	}
-
-	public String searchIdByRecId(Connection con, String recId) {
-		String memId = null;
-
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String query = "";
-
-		try {
-			query = "SELECT M_ID FROM RECRUITMENT WHERE RECRUITMENT_ID = ?";
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, recId);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				if (rs.getString("M_ID") != null) {
-					memId = rs.getString("M_ID");
-				} else {
-					memId = null;
-				}
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(pstmt);
-		}
-
-		return memId;
-
 	}
 
 	public ArrayList<RecruitmentVo> loadSameBusiness(Connection con, String m_id) {
@@ -762,5 +734,5 @@ public class RecruitmentDao {
 
 		return list;
 	}
-
+	
 }

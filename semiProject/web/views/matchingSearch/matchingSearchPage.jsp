@@ -73,7 +73,7 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
 	              <div class="card h-100">
 	                <img class="card-img-top" src="<%=null == rv.getRecruitment_image_src()?"/sp/images/building.jpeg":"/sp/images/recruitmentImg/"+rv.getRecruitment_image_src() %>" alt="">
 	                <div class="card-body">
-	                  <h4 class="card-title btn-link" onclick="recDetail(<%=rv.getRecruitment_id()%>)">
+	                  <h4 class="card-title btn-link" onclick="recDetail('<%=rv.getRecruitment_id()%>');">
 	                    <%=rv.getRecruitment_title() %><!-- 게시물 이름 -->
 	                  </h4>
 	                  <h6><%=rv.getRecruitment_name() %></h6>
