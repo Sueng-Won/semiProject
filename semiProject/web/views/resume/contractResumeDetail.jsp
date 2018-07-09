@@ -67,12 +67,12 @@ div {
 						</h1>
 					</div>
 				<div class="row" style="width:700px;">
-					<div class="col-xs-3 col-md-3 col-xs-offset-1">
+					<div class="col-xs-3 col-md-4 col-xs-offset-1">
 						<a class="thumbnail"><img id="profileImg"
 							src="/sp/profile_photo/<%if (member.getProfile_image_src() == null) {%>default_photo.jpeg<%} else {%><%=member.getProfile_image_src()%><%}%>">
 						</a>
 					</div>
-					<div class="col-xs-7 col-md-9 col-xs-offset-1">
+					<div class="col-xs-7 col-md-8 col-xs-offset-1">
 						<h4>
 							<strong><%=member.getName()%></strong>
 						</h4>

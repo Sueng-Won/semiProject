@@ -138,8 +138,10 @@
 							}
 								} else if (myConList.get(i).getState() == 1) {
 						%>진행중<%
-							} else {
+							} else if (myConList.get(i).getState() == 2) {
 						%>완료<%
+							} else {
+						%> 거절 <%
 							}
 						%>
 					</td>
@@ -200,11 +202,15 @@
 									%>
 									계약이 성사되었습니다.
 									<%
-										} else {
+										} else if (myConList.get(i).getState() == 2) {
 									%>
 									<button
 										onclick="addBlacklist(<%=myConList.get(i).getRecruitment_id()%>);"
 										class="btn btn-default bg-dark text-white">신고하기</button>
+									<%
+										} else {
+									%>
+									업주가 수락하지 않았습니다.
 									<%
 										}
 									%>

@@ -31,7 +31,7 @@ ALTER TABLE BLACKLIST
 CREATE TABLE CONTRACT (
        C_NO                 NUMBER NOT NULL,
        STATE                NUMBER NULL
-                                   CHECK (STATE BETWEEN 0 AND 2),
+                                   CHECK (STATE BETWEEN 0 AND 3),
        C_DATE               DATE NULL,
        START_WORK_TIME      DATE NULL,
        END_WORK_TIME        DATE NULL,

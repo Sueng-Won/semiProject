@@ -37,7 +37,7 @@ public class RejectResumeServlet extends HttpServlet {
 		
 		ContractService cs = new ContractService();
 		
-		int result = cs.updateContractState(contId,2);
+		int result = cs.updateContractState(contId,3);
 		
 		
 		if (result!=0) {

@@ -9,6 +9,9 @@
 	int currentPage = (int) request.getAttribute("currentPage");
 	MemberVo writer = (MemberVo) request.getAttribute("writer");
 	String Mtype = (String) session.getAttribute("member_type");
+	if(Mtype==null){
+		Mtype="";
+	}
 	ArrayList<MyResumeVo> resumes = (ArrayList<MyResumeVo>) request.getAttribute("myResumes");
 	int is_post = 0;
 	boolean userTypeFlag = false;
@@ -16,14 +19,15 @@
 		is_post = resumes.get(0).getIs_post();
 		userTypeFlag = true;
 	}
-	
+
 	int contRe = (int) request.getAttribute("contRe");
 	/* rec.setRecruitment_image_src(null); */
 %>
 <%@include file="/views/common/header.jsp"%>
 
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=154d504288d7ddddd16f6867efe451af&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=154d504288d7ddddd16f6867efe451af&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript">
 	function applyBtn() {
 		if (<%=Mtype.equals("JS")%>) {
@@ -34,7 +38,7 @@
 			}
 		}else{
 			alert("구직자가 아니면 지원할 수 없습니다.");
-		}
+		} 
 	}
 
 	function apply() {
@@ -222,12 +226,11 @@ tr {
 								<%
 									if (writer.getName().length() >= 3) {
 								%>
-								<td><%=writer.getName().charAt(0)%>
-									<%
-										for (int i = 0; i < writer.getName().length() - 3; i++) {
-									%>*<%
-										}
-									%><%=writer.getName().charAt(writer.getName().length() - 1)%></td>
+								<td><%=writer.getName().charAt(0)%> <%
+ 	for (int i = 0; i < writer.getName().length() - 3; i++) {
+ %>*<%
+ 	}
+ %><%=writer.getName().charAt(writer.getName().length() - 1)%></td>
 								<%
 									} else {
 								%>
@@ -257,12 +260,12 @@ tr {
 				</div>
 				<div class="space"></div>
 				<div class="line">
-					<div id="map" style="width:670px;height:400px;"></div>
+					<div id="map" style="width: 670px; height: 400px;"></div>
 				</div>
 				<div class="space"></div>
 				<div class="line">
 					<%
-						if (!(writer.getId().equals(id))) {
+						if (!(writer.getId().equals(id)) && id != null) {
 					%>
 					<div align="center">
 						<button onclick="applyBtn();"
@@ -302,7 +305,7 @@ tr {
 					<input type="hidden" name="userId" value="<%=id%>" /> <input
 						type="hidden" name="bo_id" value="<%=writer.getId()%>" /> <input
 						type="hidden" name="recId" value="<%=rec.getRecruitment_id()%>" />
-						<input type="hidden" name="currentPage" value="<%=currentPage%>" />
+					<input type="hidden" name="currentPage" value="<%=currentPage%>" />
 					<div class="radio">
 						<%
 							for (int i = 0; i < resumes.size(); i++) {
@@ -348,30 +351,37 @@ mapOption = {
    var map = new daum.maps.Map(mapContainer, mapOption); 
 
    var content = '<div><%=rec.getRecruitment_name()%></div>';
-   var latlng = new daum.maps.LatLng(<%=rec.getR_latitude()%>, <%=rec.getR_longitude()%>);
-      
-var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+	var latlng = new daum.maps.LatLng(
+<%=rec.getR_latitude()%>
+	,
+<%=rec.getR_longitude()%>
+	);
 
-       
-       // 마커 이미지의 이미지 크기 입니다
-       var imageSize = new daum.maps.Size(24, 35); 
-       
-       // 마커 이미지를 생성합니다    
-       var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize); 
-      
-       // 마커를 생성합니다
-       var marker = new daum.maps.Marker({
-           map: map, // 마커를 표시할 지도
-           position: latlng, // 마커를 표시할 위치
-           image : markerImage // 마커 이미지 
-       });
-       
-       // 마커에 표시할 인포윈도우를 생성합니다 
-       var infowindow = new daum.maps.InfoWindow({
-           content: content // 인포윈도우에 표시할 내용
-       });
-       
-       daum.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-       daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+	var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+	// 마커 이미지의 이미지 크기 입니다
+	var imageSize = new daum.maps.Size(24, 35);
+
+	// 마커 이미지를 생성합니다    
+	var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize);
+
+	// 마커를 생성합니다
+	var marker = new daum.maps.Marker({
+		map : map, // 마커를 표시할 지도
+		position : latlng, // 마커를 표시할 위치
+		image : markerImage
+	// 마커 이미지 
+	});
+
+	// 마커에 표시할 인포윈도우를 생성합니다 
+	var infowindow = new daum.maps.InfoWindow({
+		content : content
+	// 인포윈도우에 표시할 내용
+	});
+
+	daum.maps.event.addListener(marker, 'mouseover', makeOverListener(map,
+			marker, infowindow));
+	daum.maps.event
+			.addListener(marker, 'mouseout', makeOutListener(infowindow));
 </script>
 <%@include file="/views/common/footer.jsp"%>

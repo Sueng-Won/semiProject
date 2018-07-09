@@ -59,9 +59,7 @@ div {
 </style>
 <script>
 	function applyBtn() {
-		if (
-<%=member_type.equals("BO")%>
-	) {
+		if (<%=member_type.equals("BO")%>) {
 			if (<%=recList.size()%>>0) {
 				$('div.modal').modal();
 			} else {

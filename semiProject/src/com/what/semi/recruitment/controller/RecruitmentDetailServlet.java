@@ -50,33 +50,32 @@ public class RecruitmentDetailServlet extends HttpServlet {
 		RecruitmentVo rec = new RecruitmentService().selectRecruitment(recId);
 		MemberVo writer = new MemberService().getMemberInfo(rec.getM_id());
 
-		ArrayList<MyResumeVo> myResumes = new MyResumeService().selectMyInfo(js_id);
-		ArrayList<ContractVo> myAppliedConList = new ContractService().selectmyAppliedConList(recId, js_id);
-		ArrayList<MyResumeVo> result = new ArrayList<MyResumeVo>();
-		boolean flag = true;
-		for (int i = 0; i < myResumes.size(); i++) {
-			for (int j = 0; j < myAppliedConList.size(); j++) {
-				if (myResumes.get(i).getResume_id() == myAppliedConList.get(j).getResume_id()) {
-					flag = false;
-					break;
+		ArrayList<MyResumeVo> myResumes = new ArrayList<MyResumeVo>();
+		if (js_id != null) {
+			myResumes = new MyResumeService().selectMyInfo(js_id);
+			ArrayList<ContractVo> myAppliedConList = new ContractService().selectmyAppliedConList(recId, js_id);
+			ArrayList<MyResumeVo> result = new ArrayList<MyResumeVo>();
+			boolean flag = true;
+			for (int i = 0; i < myResumes.size(); i++) {
+				for (int j = 0; j < myAppliedConList.size(); j++) {
+					if (myResumes.get(i).getResume_id() == myAppliedConList.get(j).getResume_id()) {
+						flag = false;
+						break;
+					}
 				}
-			}
-			if(flag){
-				result.add(myResumes.get(i));
-			}else{
-				flag = true;
+				if (flag) {
+					result.add(myResumes.get(i));
+				} else {
+					flag = true;
+				}
 			}
 		}
-		
-		/*for (int i = 0; i < myResumes.size(); i++) {
-			for (int j = 0; j < removeResume.size(); j++) {
-				if (myResumes.get(i).getResume_id() == removeResume.get(j)) {
-					System.out.println("지울거"+removeResume.get(j));
-					myResumes.remove(removeResume.get(j));
-				}
-			}
-		}*/
-		
+		/*
+		 * for (int i = 0; i < myResumes.size(); i++) { for (int j = 0; j <
+		 * removeResume.size(); j++) { if (myResumes.get(i).getResume_id() ==
+		 * removeResume.get(j)) { System.out.println("지울거"+removeResume.get(j));
+		 * myResumes.remove(removeResume.get(j)); } } }
+		 */
 
 		String url = "";
 		if (null != rec) {
