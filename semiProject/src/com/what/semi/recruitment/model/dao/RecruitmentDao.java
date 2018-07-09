@@ -642,7 +642,7 @@ public class RecruitmentDao {
 
 		try {
 			stmt = con.createStatement();
-			query = "UPDATE RECRUITMENT SET IS_POST=0 WHERE WORK_DAY<SYSDATE";
+			query = "UPDATE RECRUITMENT SET IS_POST=0 WHERE WORK_DAY<SYSDATE AND TO_CHAR(START_WORK_TIME, 'HH24:MI:SS')<TO_CHAR(SYSDATE, 'HH24:MI:SS') AND IS_POST=1";
 			result = stmt.executeUpdate(query);
 
 		} catch (SQLException e) {
