@@ -57,7 +57,7 @@ div {
 			<div class="col-lg-9 mx-auto">
 				<div class="row mt-3">
 					<div class="col-lg-4"></div>
-					<div class="col-lg-4 bg-dark">
+					<div class="col-lg-4">
 						<form id="loginFrm" action="/sp/login.do" method="POST">
 							<table>
 								<tr>
@@ -91,5 +91,6 @@ div {
 		</div>
 		<!-- /.row -->
 	</div>
+	<%@include file="footer.jsp"%>
 </body>
 </html>
