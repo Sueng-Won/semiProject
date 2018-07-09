@@ -42,7 +42,9 @@ int result = (int)request.getAttribute("result");
 				if(bool){
 				location.href="myWorkedList.do?contId=" + data.contId + "&currentPage=" + data.currentPage;
 				}else{
-					self.close();
+					window.open('', '_self', '');
+					  window.close();
+					  return false;
 				}
 			},
 			error : function(e) {

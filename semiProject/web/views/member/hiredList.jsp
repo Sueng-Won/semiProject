@@ -161,7 +161,7 @@
 							<div style="margin: 0 50px 0 50px;">
 								<div style="height: 50px;">
 									<div style="float: left;">
-										<button style="margin-top: 10px;"
+										<button class="btn btn-info" style="margin-top: 10px;"
 											onclick="contractResumeDetail(<%=myConList.get(i).getResume_id()%>,'<%=myConList.get(i).getJs_id()%>');">해당
 											이력서 보기</button>
 									</div>

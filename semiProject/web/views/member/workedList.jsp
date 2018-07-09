@@ -159,7 +159,7 @@
 							<div style="margin: 0 50px 0 50px;">
 								<div style="height: 50px;">
 									<div style="float: left;">
-										<button style="margin-top: 10px;"
+										<button class="btn btn-info" style="margin-top: 10px;"
 											onclick="contractRecDetail(<%=myConList.get(i).getRecruitment_id()%>);">해당
 											구인게시글 보기</button>
 									</div>
