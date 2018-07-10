@@ -33,8 +33,10 @@ public class ContractResumeDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int resumeId = Integer.parseInt(request.getParameter("resumeId"));
-		String jsId = request.getParameter("jsId");
+		int resumeId = Integer.parseInt(request.getParameter("resume_id"));
+		String jsId = request.getParameter("userId");
+		int state = Integer.parseInt(request.getParameter("state"));
+		int contId =Integer.parseInt(request.getParameter("contId"));
 
 		MyResumeVo resume = new MyResumeService().selectMyResume(jsId, resumeId);
 
@@ -43,7 +45,8 @@ public class ContractResumeDetailServlet extends HttpServlet {
 		if (resume != null) {
 			url = "/views/resume/contractResumeDetail.jsp";
 			request.setAttribute("member", resume);
-
+			request.setAttribute("state", state);
+			request.setAttribute("contId", contId);
 		} else {
 			System.out.println("계약이력서상세페이지오류");
 		}
