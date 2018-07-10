@@ -56,12 +56,11 @@ public class SeeMyResumeServlet extends HttpServlet {
 			}
 		}
 		
-		
 			String url = "";
 		if(null!=member){
 			url="views/resume/Myresume.jsp";
 			request.setAttribute("member", member);
-			request.setAttribute("recList", recList);
+			request.setAttribute("recList", result);
 			request.setAttribute("contRe", 0);
 		}else{
 			url="/sp";
