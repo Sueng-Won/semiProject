@@ -88,7 +88,7 @@ h4{
 	                  		</h4>
 							<h6><%=list.get(i).getRecruitment_name()%></h6>
 							<h5>
-								시급 :
+								급여 :
 								<%=list.get(i).getPay()%></h5>
 							<p class="card-text"><%=list.get(i).getWork_day()%></p>
 						</div>

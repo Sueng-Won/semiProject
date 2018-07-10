@@ -197,9 +197,8 @@ tr {
 								<%
 									if (rec.getName().length() >= 3) {
 								%>
-								<td><%=rec.getName().charAt(0)%>
-									<%
-										for (int i = 0; i < rec.getName().length() - 3; i++) {
+								<td><%=rec.getName().charAt(0)%><%
+										for (int i = 0; i < rec.getName().length() - 2; i++) {
 									%>*<%
 										}
 									%><%=rec.getName().charAt(rec.getName().length() - 1)%></td>

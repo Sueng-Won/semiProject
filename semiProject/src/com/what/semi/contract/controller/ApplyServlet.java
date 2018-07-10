@@ -61,7 +61,7 @@ public class ApplyServlet extends HttpServlet {
 		
 		for(int i=0;i<myResumes.size();i++){
 			if(myResumes.get(i).getResume_id()==resumeId){
-				myResumes.remove(resume);
+				myResumes.remove(myResumes.get(i));
 			}
 		}
 		

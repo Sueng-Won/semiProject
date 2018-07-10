@@ -168,6 +168,38 @@
 			$("#writeRecruitment").submit();
 		}
 	}
+	
+	function payCal(){
+		var start = $("#starttime").val();
+		var starthour = start.split(":")[0];
+		var startmin = start.split(":")[1];
+		if(startmin>0){
+			startmin=60-startmin;
+			}
+		var end = $("#endtime").val();
+		var endhour = end.split(":")[0];
+		var endmin = end.split(":")[1];
+		var min = parseInt(endmin)+parseInt(startmin);
+		if(min==60){
+			min=0;
+		}
+		var hour = parseInt(endhour)-parseInt(starthour)-1;
+		if(parseInt(endhour)<parseInt(starthour)){
+			hour+=24;
+		}
+		if(min==0){
+			hour=hour+1;
+		}
+		var pay = ((7530*hour)+((7530/60)*min))/10;
+		if((((7530*hour)+(7530/60)*min)%10)>0){
+			pay=pay+1;
+		}
+		if(start!=""&&end!=""){
+
+		$("#calculatePay").text("*최저임급 : 약"+pay+"0원");
+		$("#calculatePay").val(pay*10);
+		}
+	}
 
 	var searchAddr;
 	function openAddressPopup() {
@@ -258,29 +290,13 @@
 		});
 
 		$("#pay").keyup(function() {
-			var date = $("#workdate").val();
-			var start = $("#starttime").val();
-			var starthour = start.split(":")[0];
-			var startmin = start.split(":")[1];
-			if(startmin>0){
-				startmin=60-startmin;
-				}
-			var end = $("#endtime").val();
-			var endhour = end.split(":")[0];
-			var endmin = end.split(":")[1];
-			var min = endmin+startmin;
-			var hour = endhour-starthour-1;
-			if(min==0){
-				hour=hour+1;
-			}
-			var pay = ((7530*hour)+((7530/60)*min))/10;
-			if((((7530*hour)+(7530/60)*min)%10)>0){
-				pay=pay+1;
-			}
-			if(start!=""&&end!=""){
-			$("#calculatePay").text("*최저임급 : 약"+pay+"0원");
-			$("#calculatePay").val(pay*10);
-			}
+			payCal();
+		});
+		$("#starttime").change(function(){
+			payCal();
+		});
+		$("#endtime").change(function(){
+			payCal();
 		});
 	});
 </script>

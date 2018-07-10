@@ -134,7 +134,7 @@
 									if (member_type.equals(myConList.get(i).getDemander())) {
 						%>대기<%
 							} else {
-						%>요청중<%
+						%>요청<%
 							}
 								} else if (myConList.get(i).getState() == 1) {
 						%>진행중<%
@@ -200,7 +200,7 @@
 										}
 											} else if (myConList.get(i).getState() == 1) {
 									%>
-									계약이 성사되었습니다.
+									계약 진행중입니다.
 									<%
 										} else if (myConList.get(i).getState() == 2) {
 									%>
@@ -209,10 +209,16 @@
 										class="btn btn-default bg-dark text-white">신고하기</button>
 									<%
 										} else {
+												if (myConList.get(i).getDemander().equals(member_type)) {
 									%>
 									업주가 수락하지 않았습니다.
 									<%
+										} else {
+									%>
+									거절한 계약입니다.
+									<%
 										}
+											}
 									%>
 								</div>
 							</div>

@@ -120,10 +120,8 @@ var okFlag = false;
 			        okFlag = false;
 			        return false;
 		    	}else{
-		    		alert(1);
 				okFlag = true;
 		    	}
-		    	alert(2);
 		}
 		
 		if($("#mValue").val() == ""){
@@ -183,7 +181,6 @@ var okFlag = false;
 	}
 
 	function payCal(){
-		var date = $("#workdate").val();
 		var start = $("#starttime").val();
 		var starthour = start.split(":")[0];
 		var startmin = start.split(":")[1];
@@ -193,8 +190,14 @@ var okFlag = false;
 		var end = $("#endtime").val();
 		var endhour = end.split(":")[0];
 		var endmin = end.split(":")[1];
-		var min = endmin+startmin;
-		var hour = endhour-starthour-1;
+		var min = parseInt(endmin)+parseInt(startmin);
+		if(min==60){
+			min=0;
+		}
+		var hour = parseInt(endhour)-parseInt(starthour)-1;
+		if(parseInt(endhour)<parseInt(starthour)){
+			hour+=24;
+		}
 		if(min==0){
 			hour=hour+1;
 		}
@@ -204,7 +207,7 @@ var okFlag = false;
 		}
 		if(start!=""&&end!=""){
 
-		$("#calculatePay").text("*최저시급 : 약"+pay+"0원");
+		$("#calculatePay").text("*최저임급 : 약"+pay+"0원");
 		$("#calculatePay").val(pay*10);
 		}
 	}
@@ -299,6 +302,13 @@ var okFlag = false;
 		});
 
 		$("#pay").keyup(function() {
+			payCal();
+		});
+		
+		$("#starttime").change(function(){
+			payCal();
+		});
+		$("#endtime").change(function(){
 			payCal();
 		});
 		

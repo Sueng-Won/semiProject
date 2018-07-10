@@ -275,8 +275,6 @@ public class GmailSend {
 
 			mp.setSubType("related");
 
-			filename = "http://localhost:8081/sp/images/QRcodes/"+filename;
-
 			MimeBodyPart mbp1 = new MimeBodyPart();
 
 			String html =
@@ -291,7 +289,7 @@ public class GmailSend {
 							"<p>근무 시작과 종료시 해당 QRcode를 근무자에게 찍게하여 근무시간을 기록할 수 있게 해주세요.<br>"
 							+ "정확한 근무시간 기록으로 근로기준법 준수를 지향합니다.</p>"+
 							
-							"<IMG SRC='" + filename + "' width=150px height=150px><br>" +
+							"<IMG SRC='http://localhost:8081/sp/images/QRcodes/" + filename + "' width=150px height=150px><br>" +
 
 							"</body>" +
 

@@ -1059,7 +1059,7 @@
            <div class="row" style="min-height: 200px">
          <%for(RecruitmentVo rv : list) {%>
                <div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4">
-                 <div class="card h-100">
+                 <div class="card card_he">
                    <a onclick="recDetail(<%=rv.getRecruitment_id()%>);">
                    <img src="<%if (rv.getRecruitment_image_src() == null) {%>/sp/images/building.jpeg<%} else {%>/sp/images/recruitmentImg/<%=rv.getRecruitment_image_src()%><%}%>"
 							width="180px" height="180px">
@@ -1068,7 +1068,7 @@
                      <h4 class="card-title btn-link" onclick="recDetail(<%=rv.getRecruitment_id()%>);">
                        <%=rv.getRecruitment_name() %>
                      </h4>
-                     <h5>시급 : <%=rv.getPay()%></h5>
+                     <h5>급여 : <%=rv.getPay()%></h5>
                      <p class="card-text"><%=rv.getRecruitment_title() %></p>
                    </div>
                    <div class="card-footer">

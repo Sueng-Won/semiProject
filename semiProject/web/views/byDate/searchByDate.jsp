@@ -73,7 +73,7 @@ h4{
 	                    <%=list.get(i).getRecruitment_title() %><!-- 게시물 이름 -->
 	                  </h4>
 	                  <h6><%=list.get(i).getRecruitment_name() %></h6>
-	                  <h5>시급 : <%=list.get(i).getPay()%></h5>
+	                  <h5>급여 : <%=list.get(i).getPay()%></h5>
 	                  <p class="card-text"><%=list.get(i).getWork_day() %></p>
 	                </div>
 	                <div class="card-footer">

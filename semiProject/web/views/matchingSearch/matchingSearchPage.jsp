@@ -71,7 +71,7 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
           <%if(null != request.getAttribute("list")){ %>
             <%for(RecruitmentVo rv : list) {%><!-- for문을 통해 해당 게시물들의 개수에 맞게 생성 -->
 	            <div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4" style="max-height: 400px">
-	              <div class="card h-100">
+	              <div class="card card_he">
 	                <a onclick="recDetail(<%=rv.getRecruitment_id()%>);">
                    <img src="<%if (rv.getRecruitment_image_src() == null) {%>/sp/images/building.jpeg<%} else {%>/sp/images/recruitmentImg/<%=rv.getRecruitment_image_src()%><%}%>"
 							width="180px" height="180px">
@@ -81,7 +81,7 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
 	                    <%=rv.getRecruitment_title() %><!-- 게시물 이름 -->
 	                  </h4>
 	                  <h6><%=rv.getRecruitment_name() %></h6>
-	                  <h5>시급 : <%=rv.getPay()%></h5>
+	                  <h5>급여 : <%=rv.getPay()%></h5>
 	                  <p class="card-text"><%=rv.getWork_day() %></p>
 	                </div>
 	                <div class="card-footer">
