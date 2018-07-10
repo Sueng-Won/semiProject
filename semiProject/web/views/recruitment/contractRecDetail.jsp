@@ -6,6 +6,8 @@
 <%@page import="java.util.ArrayList"%>
 <%
 	RecruitmentVo rec = (RecruitmentVo) request.getAttribute("rec");
+	int state = (int) request.getAttribute("state");
+	int contId = (int) request.getAttribute("contId");
 
 	/* rec.setRecruitment_image_src(null); */
 %>
@@ -28,6 +30,10 @@
 	
 	function applyBtn() {
 		location.href="/sp/searchSameBusiness.do?recId="+<%=rec.getRecruitment_id()%>;
+	}
+	
+	function acceptBtn() {
+		location.href="/sp/myWorkedList.do?contId="+<%=contId%>;
 	}
 </script>
 <style>
@@ -191,11 +197,12 @@ tr {
 								<%
 									if (rec.getName().length() >= 3) {
 								%>
-								<td><%=rec.getName().charAt(0)%><%
- 	for (int i = 0; i < rec.getName().length() - 3; i++) {
- %>*<%
- 	}
- %><%=rec.getName().charAt(rec.getName().length() - 1)%></td>
+								<td><%=rec.getName().charAt(0)%>
+									<%
+										for (int i = 0; i < rec.getName().length() - 3; i++) {
+									%>*<%
+										}
+									%><%=rec.getName().charAt(rec.getName().length() - 1)%></td>
 								<%
 									} else {
 								%>
@@ -222,8 +229,19 @@ tr {
 				<div class="space"></div>
 				<div class="line">
 					<div align="center">
+						<%
+							if (state == 0) {
+						%>
+						<button onclick="acceptBtn();"
+							class="btn btn-default bg-dark text-white">해당 업체 수락하러가기</button>
+						<%
+							} else {
+						%>
 						<button onclick="applyBtn();"
 							class="btn btn-default bg-dark text-white">해당 업체에 지원하기</button>
+						<%
+							}
+						%>
 					</div>
 
 				</div>
@@ -249,11 +267,7 @@ mapOption = {
    var map = new daum.maps.Map(mapContainer, mapOption); 
 
    var content = '<div><%=rec.getRecruitment_name()%></div>';
-	var latlng = new daum.maps.LatLng(
-<%=rec.getR_latitude()%>
-	,
-<%=rec.getR_longitude()%>
-	);
+	var latlng = new daum.maps.LatLng(<%=rec.getR_latitude()%>,<%=rec.getR_longitude()%>);
 
 	var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 
