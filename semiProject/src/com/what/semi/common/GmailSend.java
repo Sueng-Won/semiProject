@@ -190,7 +190,7 @@ public class GmailSend {
 
  
             String urltitle="";
-            if(type==0){
+            if(type==1){
             	urltitle="이력서보러가기";
             }else{
             	urltitle="구인글보러가기";
