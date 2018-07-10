@@ -16,7 +16,7 @@
 	src="/sp/vendor/bootstrap/datepicker/bootstrap-datepicker.kr.js"></script>
 <script type="text/javascript">
 	function writeRecruitment(flag) {
-		var okFlag = false;
+var okFlag = false;
 		
 		if($("#name").val() == ""){
 	        alert("업체명을 입력해주세요.");
@@ -63,7 +63,7 @@
 			okFlag = true;
 		}
 		
-		if($("#business_type").val() == null){
+		if($("#business_type").val() == ""){
 	        alert("업종을 입력해주세요.");
 	        $("#business_type").focus();
 	        okFlag = false;
@@ -72,7 +72,7 @@
 			okFlag = true;
 		}
 		
-		if($("#career").val() == null){
+		if($("#career").val() == ""){
 	        alert("경력을 입력해주세요.");
 	        $("#career").focus();
 	        okFlag = false;
@@ -114,15 +114,16 @@
 		        okFlag = false;
 		        return false;
 		    }else{
-		    	alert($("#pay").val()<$("#calculatePay").val());
-		    	if($("#pay").val()<$("#calculatePay").val()){
+		    	if(parseInt($("#pay").val())<parseInt($("#calculatePay").val())){
 		    		alert("근무시간과 최저임금을 확인해 주세요.");
 			        $("#pay").focus();
 			        okFlag = false;
 			        return false;
 		    	}else{
+		    		alert(1);
 				okFlag = true;
 		    	}
+		    	alert(2);
 		}
 		
 		if($("#mValue").val() == ""){
@@ -169,15 +170,15 @@
 	    }else{
 			okFlag = true;
 		}
-		return false;
 		
 		if(okFlag){
+		
 		if(flag){
 			$("#writeRecruitment").attr("action", "/sp/writeRecruitment.do");
 		}else{
 			$("#writeRecruitment").attr("action", "/sp/updateRecruitment.do");
 		}
-			$("#writeRecruitment").submit();
+		$("#writeRecruitment").submit();
 		}
 	}
 
@@ -203,7 +204,7 @@
 		}
 		if(start!=""&&end!=""){
 
-		$("#calculatePay").text("*최저임금 : 약"+pay+"0원");
+		$("#calculatePay").text("*최저시급 : 약"+pay+"0원");
 		$("#calculatePay").val(pay*10);
 		}
 	}
@@ -440,7 +441,7 @@
 										name="pay" value="<%=rec.getPay()%>" />원
 								</div>
 
-								<div class="text-white-50 ml-1" id="calculatePay" value="7530" align="center">*최저임금
+								<div class="text-white-50 ml-1" id="calculatePay" value="7530" align="center">*최저시급
 									: 7,530원</div>
 							</div>
 						</div>
@@ -539,13 +540,13 @@
 							<%
 								if (rec.getIs_post() == 1) {
 							%>
-							<button class="btn btn-light text-dark mt-4 mb-2"
-								onclick="writeRecruitment(false);">수정하기</button>
+							<input type="button" class="btn btn-light text-dark mt-4 mb-2"
+								onclick="writeRecruitment(false);" value="수정하기">
 							<%
 								}
 							%>
-							<button class="btn btn-light text-dark mt-4 mb-2"
-								onclick="writeRecruitment(true);">구인 등록</button>
+							<input type="button" class="btn btn-light text-dark mt-4 mb-2"
+								onclick="writeRecruitment(true);" value="구인등록">
 						</div>
 
 					</form>
