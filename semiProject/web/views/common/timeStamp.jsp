@@ -51,7 +51,7 @@ int result = (int)request.getAttribute("result");
 				console.log("error", e);
 			}
 		}); --%>
-		location.href="myWorkedList.do?contId=" + <%=cont.getC_no()%>;
+		location.href="/sp/timeStamp.do?contId=" + <%=cont.getC_no()%>;
 	}
 
 	<%-- $(function() {

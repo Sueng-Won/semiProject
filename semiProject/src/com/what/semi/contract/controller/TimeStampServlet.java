@@ -70,9 +70,10 @@ public class TimeStampServlet extends HttpServlet {
 			str = "<script language='javascript'>";
 			str += "var bool = confirm('" + msg + "');"; // 얼럿창 띄우기
 			str += "if(bool){";
-			str += "location.href=\"myWorkedList.do?contId=" + contId + "&currentPage=" + currentPage + "\";";
+			str += "location.href=\"/sp/myWorkedList.do?contId=" + contId + "&currentPage=" + currentPage + "\";";
 			str += "}else{";
-			str += "close();}";
+			str += "location.href=\"/sp/indexList.do\";";
+			str	+= "}";
 			str += "</script>";
 			out.print(str);
 
