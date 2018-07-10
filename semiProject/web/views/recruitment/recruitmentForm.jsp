@@ -166,7 +166,7 @@
 		}
 		
 		if(okFlag){
-			/* $("#writeRecruitment").submit(); */
+			$("#writeRecruitment").submit();
 		}
 	}
 
@@ -300,8 +300,8 @@
 					<br> <br>
 					<h3 align="center" class="text-white-50">구인 게시물</h3>
 					<br>
-					<!-- <form id="writeRecruitment" method="post"
-						action="/sp/writeRecruitment.do" enctype="multipart/form-data"> -->
+					 <form id="writeRecruitment" method="post" onsubmit="return writeRecruitment();"
+						action="/sp/writeRecruitment.do" enctype="multipart/form-data">
 						<div class="row">
 							<div class="col-3 mb-1" id="titleImage">
 								<img id="titleImg" alt="" style="max-width: 130px;"
@@ -489,11 +489,10 @@
 						</div>
 
 						<div>
-							<button class="btn btn-light text-dark mt-4 mb-2"
-								onclick="writeRecruitment();">구인 등록</button>
+							<button class="btn btn-light text-dark mt-4 mb-2">구인 등록</button>
 						</div>
 
-					<!-- </form> -->
+					 </form>
 
 				</div>
 				<!-- /.col-lg-6 -->

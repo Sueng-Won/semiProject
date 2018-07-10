@@ -24,7 +24,7 @@
 
 <script type="text/javascript">
 	function contractRecDetail(i) {
-		location.href = "/sp/contractRecDetail.do?recId=" + i;
+		location.href = "/sp/contractRecDetail.do?recId=" + i+"&state=1";
 	}
 
 	function accept(i) {

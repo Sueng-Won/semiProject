@@ -64,7 +64,7 @@ public class SuggestServlet extends HttpServlet {
 		
 
 		String title = "<" + resume.getIntroduce_title() + ">의 구인 제안이 들어왔습니다.";
-		String recUrl = "recruitmentDetail.do?recId=" + recId + "&currentPage=" + 1;
+		String recUrl = "contractRecDetail.do?recId=" + recId + "&state=" + 0;
 		new GmailSend().sendResume(resume.getEmail(), title, recUrl);
 
 		RequestDispatcher view = null;

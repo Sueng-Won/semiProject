@@ -334,7 +334,7 @@ var okFlag = false;
 					<br> <br>
 					<h3 align="center" class="text-white-50">구인 게시물</h3>
 					<br>
-					<form id="writeRecruitment" method="post"
+					<form id="writeRecruitment" method="post" onsubmit="writeRecruitment();"
 						action="/sp/writeRecruitment.do" enctype="multipart/form-data">
 						<!-- 						<form id="updateRecruitment" method="post" -->
 						<!-- 							action="/sp/updateRecruitment.do" enctype="multipart/form-data"> -->
