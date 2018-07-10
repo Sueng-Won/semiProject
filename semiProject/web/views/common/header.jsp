@@ -45,6 +45,11 @@
 	          window.open("/sp/views/qna/qnaNew.jsp","_blank","width=600, height=700, left=auto,top=auto");
 	       };
 	</script>
+	<style>
+.card_he {
+	height: 500px;
+}
+</style>
   </head>
 
   <body>
