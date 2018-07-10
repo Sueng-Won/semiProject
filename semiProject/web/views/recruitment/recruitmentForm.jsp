@@ -58,7 +58,7 @@
 			okFlag = true;
 		}
 		
-		if($("#business_type").val() == null){
+		if($("#business_type").val() == ""){
 	        alert("업종을 입력해주세요.");
 	        $("#business_type").focus();
 	        okFlag = false;
@@ -67,7 +67,7 @@
 			okFlag = true;
 		}
 		
-		if($("#career").val() == null){
+		if($("#career").val() == ""){
 	        alert("경력을 입력해주세요.");
 	        $("#career").focus();
 	        okFlag = false;
@@ -109,7 +109,7 @@
 	        okFlag = false;
 	        return false;
 	    }else{
-	    	if($("#pay").val()<$("#calculatePay").val()){
+	    	if(parseInt($("#pay").val())<parseInt($("#calculatePay").val())){
 	    		alert("근무시간과 최저임금을 확인해 주세요.");
 		        $("#pay").focus();
 		        okFlag = false;
@@ -278,7 +278,7 @@
 				pay=pay+1;
 			}
 			if(start!=""&&end!=""){
-			$("#calculatePay").text("*최저임금 : 약"+pay+"0원");
+			$("#calculatePay").text("*최저임급 : 약"+pay+"0원");
 			$("#calculatePay").val(pay*10);
 			}
 		});
@@ -299,7 +299,7 @@
 					<br> <br>
 					<h3 align="center" class="text-white-50">구인 게시물</h3>
 					<br>
-					<form id="writeRecruitment" method="post"
+					 <form id="writeRecruitment" method="post"
 						action="/sp/writeRecruitment.do" enctype="multipart/form-data">
 						<div class="row">
 							<div class="col-3 mb-1" id="titleImage">
@@ -394,7 +394,7 @@
 									<label>급여</label> <input type="text" class="btn-dark" id="pay"
 										name="pay" />원
 								</div>
-								<div class="text-white-50 ml-1" id="calculatePay" value="7530" align="center">*최저임금
+								<div class="text-white-50 ml-1" id="calculatePay" value="7530" align="center">*최저임급
 									: 7,530원</div>
 							</div>
 						</div>
@@ -488,11 +488,10 @@
 						</div>
 
 						<div>
-							<button class="btn btn-light text-dark mt-4 mb-2"
-								onclick="writeRecruitment();">구인 등록</button>
+							<input type="button" class="btn btn-light text-dark mt-4 mb-2" value="구인등록">
 						</div>
 
-					</form>
+					 </form>
 
 				</div>
 				<!-- /.col-lg-6 -->
