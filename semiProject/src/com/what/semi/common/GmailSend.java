@@ -149,7 +149,7 @@ public class GmailSend {
 		}
 	}
 
-	public void sendResume(String user, String text,String url){//수신자,제목,내용
+	public void sendResume(String user, String text,String url,int type){//수신자,제목,내용
         Properties p = System.getProperties();
         p.put("mail.smtp.starttls.enable", "true");    
         p.put("mail.smtp.host", "smtp.gmail.com");      // smtp 서버 호스트
@@ -189,7 +189,12 @@ public class GmailSend {
 
 
  
-
+            String urltitle="";
+            if(type==0){
+            	urltitle="이력서보러가기";
+            }else{
+            	urltitle="구인글보러가기";
+            }
             MimeBodyPart mbp1= new MimeBodyPart();
 
             String html = "<html>" +
@@ -201,7 +206,7 @@ public class GmailSend {
 							
 							"<p>오늘뭐해?를 이용해주셔서 감사합니다.</p>"+
 							
-							"<a href='http://localhost:8081/sp/"+url+"'>이력서 보러가기</a>"
+							"<a href='http://localhost:8081/sp/"+url+"'>"+urltitle+"</a>"
 							
 							+"</body>" +
 
