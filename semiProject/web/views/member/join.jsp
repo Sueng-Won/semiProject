@@ -20,7 +20,6 @@
 
 
 <script type="text/javascript">
-
 	var id = "<%=idv%>";
 	var gettedTBtn = "<%=tBtn%>";
 	var convertedTBtn;
@@ -50,20 +49,16 @@
      	   theme: themeObj,
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
                 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var fullAddr = ''; // 최종 주소 변수
                 var extraAddr = ''; // 조합형 주소 변수
-
                 // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
                 if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
                     fullAddr = data.roadAddress;
-
                 } else { // 사용자가 지번 주소를 선택했을 경우(J)
                     fullAddr = data.jibunAddress;
                 }
-
                 // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
                 if(data.userSelectedType === 'R'){
                     //법정동명이 있을 경우 추가한다.
@@ -81,7 +76,6 @@
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 $("#zipcode").val(data.zonecode);//5자리 새우편번호 사용
                 $("#address").val(fullAddr);
-
                 // 커서를 상세주소 필드로 이동한다.
                 $("#addressDetail").focus();
                 searchAddr = fullAddr;
@@ -97,10 +91,8 @@
 		            console.log('검색 종료', searchAddr); 
 		         // 주소-좌표 변환 객체를 생성합니다
 		        	var geocoder = new daum.maps.services.Geocoder();
-
 		        	// 주소로 좌표를 검색합니다
 		        	geocoder.addressSearch(searchAddr, function(result, status) {
-
 		        	    // 정상적으로 검색이 완료됐으면 
 		        	     if (status === daum.maps.services.Status.OK) {
 		        	    	 $("#latitude").val(result[0].y);
@@ -122,7 +114,7 @@
 	
 	function signIn(){
 		var okFlag = false;
-		
+		//아이디 유효성 검사
 		if($("#iid").val() == ""){
 	        alert("아이디를 입력해주세요.");
 	        $("#iid").focus();
@@ -139,7 +131,39 @@
 		}else{
 			okFlag = true;
 		}
-		
+		var id = $("#iid").val();	
+		var numId = id.search(/[0-9]/g);	
+		var engId = id.search(/[a-z]/ig);	
+		var speId = id.search(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi);	
+					
+		if(id.length < 6 || id.length > 15){	
+			alert("아이디는 6자리 ~ 15자리 이내로 입력해주세요.");	
+			$("#iid").focus();	
+			okFlag = false;	
+			return false;	
+		}else{	
+			okFlag = true;	
+		}	
+					
+		if(speId >= 0){	
+			alert("아이디는 특수문자를 사용할 수 없습니다.");	
+			$("#iid").focus();	
+			return false;	
+		}else{	
+			okFlag - true;	
+		}	
+					
+		if(numId < 0 || engId < 0){	
+			alert("아이디는 영문,숫자를 혼합하여 입력해주세요.");	
+			$("#iid").focus();	
+			okFlag = false;	
+			return false;	
+		}else{	
+			okFlag = true;	
+		}	
+					
+		//비밀번호 유효성 검사	
+				
 		if($("#ipw").val()==""||$("#ipw2").val()==""){
 			alert("비밀번호를 입력해주세요.");
 			$("#ipw").focus();
@@ -151,6 +175,39 @@
 		
 		if($("#ipw").val() != $("#ipw2").val()){
 			alert("기존 비밀번호와 일치하지 않습니다.");
+			$("#ipw2").focus();	
+			okFlag = false;	
+			return false;	
+		}else{	
+			okFlag = true;	
+		}	
+				
+		var pw = $("#ipw").val();	
+		var numPw = pw.search(/[0-9]/g);	
+		var engPw = pw.search(/[a-z]/ig);	
+		var spePw = pw.search(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi);	
+			
+		if(pw.length < 8 || pw.length > 20){	
+			alert("비밀번호는 8자리 ~ 20자리 이내로 입력해주세요.");	
+			$("#ipw").focus();	
+			okFlag = false;	
+			return false;	
+		}else{	
+			okFlag = true;	
+		}	
+			
+		if(pw.search(/₩s/) != -1){	
+			alert("비밀번호는 공백없이 입력해주세요.");	
+			$("#ipw").focus();	
+			okFlag = false;	
+			return false;	
+		}else{	
+			okFlag = true;	
+		} 	
+			 	
+		if(numPw < 0 || engPw < 0 || spePw < 0 ){	
+			alert("비밀번호는 영문,숫자,특수문자를 혼합하여 입력해주세요.");	
+			$("#ipw").focus();
 			okFlag = false;
 			return false;
 		}else{
@@ -159,34 +216,84 @@
 		
 		if($("#name").val()==""){
 			alert("이름을 입력해주세요.");
+			$("#name").focus();
 			okFlag = false;
 			return false;
 		}else{
 			okFlag = true;
+		}
+		
+		if($("#name").val().length < 2){	
+			alert("이름은 2자리 이상 입력해주세요.");	
+			$("#name").focus();	
+			okFlag = false;	
+			return false;	
+		}else{	
+			okFlag = true;	
 		}
 		
 		if($("#email").val()==""){
 			alert("이메일을 입력해주세요.");
+			$("#email").focus();
 			okFlag = false;
 			return false;
 		}else{
 			okFlag = true;
+		}
+		
+		var email = $("#email").val();	
+		var speEmail = email.search(/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i);	
+			
+		if(speEmail<0){	
+			alert("잘못된 이메일 형식입니다.");	
+			$("#email").focus();	
+			okFlag = false;	
+			return false;	
+		}else{	
+			okFlag = true;	
 		}
 		
 		if($("#birth").val()==""){
 			alert("생일을 입력해주세요.");
+			$("#birth").focus();
 			okFlag = false;
 			return false;
 		}else{
 			okFlag = true;
 		}
 		
+		var birth = $("#birth").val();	
+		var year = Number(birth.substr(0,4));	
+		var today = new Date(); // 날자 변수 선언	
+		var yearNow = today.getFullYear();	
+		var adultYear = yearNow-20;	
+		-	 	
+		-	 	
+		if (year < 1900 || year > adultYear){	
+		     alert("년도를 확인하세요. "+adultYear+"년생 이전 출생자만 등록 가능합니다.");	
+		     $("#birth").focus();	
+		     return false;	
+		}
+		
 		if($("#phone").val()==""){
 			alert("휴대폰번호를 입력해주세요.");
+			$("#phone").focus();
 			okFlag = false;
 			return false;
 		}else{
 			okFlag = true;
+		}
+		
+		var phone = $("#phone").val();	
+		var spePhone = phone.search(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi);	
+			
+		if(spePhone>=0){	
+			alert("휴대폰번호에 특수문자는 사용할 수 없습니다.");	
+			$("#phone").focus();	
+			okFlag = false;	
+			return false;	
+		}else{	
+			okFlag = true;	
 		}
 		
 		if($("#address").val()==""){
@@ -199,6 +306,7 @@
 		
 		if($("#addressDetail").val()==""){
 			alert("상세주소를 입력해주세요.");
+			$("#addressDetail").focus();
 			okFlag = false;
 			return false;
 		}else{
@@ -230,11 +338,32 @@
 		var id = $("#iid").val();
 		var tBtn = $("#tBtn").val();
 		var gender = $('input[name="gender"]:checked').val();
-		if(id == ""){
-	        alert("아이디를 입력해주세요.");
-	        $("#iid").focus();
-	        return false;
-	    }
+		
+		var numId = id.search(/[0-9]/g);	
+		var engId = id.search(/[a-z]/ig);	
+		var speId = id.search(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi);	
+			
+		if(id.length < 6 || id.length > 15){	
+			alert("아이디는 6자리 ~ 15자리 이내로 입력해주세요.");	
+			$("#iid").focus();	
+			okFlag = false;	
+			return false;	
+		}	
+			
+		if(speId >= 0){	
+			alert("아이디는 특수문자를 사용할 수 없습니다.");	
+			$("#iid").focus();	
+			okFlag = false;	
+			return false;	
+		}	
+			
+		if(numId < 0 || engId < 0){	
+			alert("아이디는 영문,숫자를 혼합하여 입력해주세요.");	
+			$("#iid").focus();	
+			okFlag = false;	
+			return false;	
+		}
+		
 		location.href="/sp/checkId.do?id="+id+"&tBtn="+tBtn+"&gender="+gender;
 	}
 	
@@ -305,7 +434,7 @@
 			    <div class="input-group">
 			    
 			    	<!-- 사용자 아이디 -->
-			      <input type="text" class="form-control mb-1" name="id" id="iid" placeholder="아이디"/>
+			      <input type="text" class="form-control mb-1" name="id" id="iid" placeholder="아이디(6~15자리 영문,숫자)"/>
 			      <span class="input-group-btn">
 			        <button class="btn btn-light text-dark ml-1" type="button" onclick="checkId();">중복 확인</button>
 			      </span>
@@ -314,7 +443,7 @@
 			    <div class="input-group">
 			    
 			    	<!-- 사용자 비밀번호 -->
-			      <input type="password" class="form-control mb-1" name="pw" id="ipw" placeholder="비밀번호"/>
+			      <input type="password" class="form-control mb-1" name="pw" id="ipw" placeholder="비밀번호(6~20자리 영문,숫자,기호)"/>
 			      
 			      
 			    </div>
@@ -330,7 +459,7 @@
 			    <div class="input-group">
 			    
 			    	<!-- 사용자 이름 -->
-			      <input type="text" class="form-control mb-1" id="name" name="name" placeholder="이름"/>
+			      <input type="text" class="form-control mb-1" id="name" name="name" placeholder="이름(2글자 이상)"/>
 			      
 			    </div>
 			    
