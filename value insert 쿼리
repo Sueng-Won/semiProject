@@ -270,4 +270,28 @@ INSERT INTO QNA VALUES
 INSERT INTO QNA VALUES 
 (QNA_SEQ.NEXTVAL,'오류/의견 문의드립니다',null,'오류/의견',TO_DATE('18/07/10'),0,'test3
 
+--------------------------------------------------------------------------------------------------------------------블랙리스트
+
+INSERT INTO BLACKLIST VALUES(SYSDATE, 1, '통장,신분증,비밀번호를 요구하는 경우', 'test1');
+INSERT INTO BLACKLIST VALUES(SYSDATE, 2, '유흥업소 및 불건전 업소', 'test1');
+INSERT INTO BLACKLIST VALUES(SYSDATE, 1, '다단계 및 피라미드성 통신삼품 판매 업체', 'test1');
+INSERT INTO BLACKLIST VALUES(SYSDATE, 3, '허위 사기성 내용', 'test3');
+INSERT INTO BLACKLIST VALUES(SYSDATE, 4, '임금체불, 채용사기 경험 업체', 'test3');
+INSERT INTO BLACKLIST VALUES(SYSDATE, 1, '잘못 기재된 연락처', 'test3');
+INSERT INTO BLACKLIST VALUES(SYSDATE, 2, '최저임금 미만의 급여', 'test5');
+INSERT INTO BLACKLIST VALUES(SYSDATE, 1, '통장,신분증,비밀번호를 요구하는 경우', 'test5');
+INSERT INTO BLACKLIST VALUES(SYSDATE, 3, '유흥업소 및 불건전 업소', 'test5');
+INSERT INTO BLACKLIST VALUES(SYSDATE, 1, '지각', 'test21');
+INSERT INTO BLACKLIST VALUES(SYSDATE, 2, '결석', 'test21');
+INSERT INTO BLACKLIST VALUES(SYSDATE, 1, '나쁜놈임', 'test21');
+INSERT INTO BLACKLIST VALUES(SYSDATE, 2, '지각', 'test22');
+INSERT INTO BLACKLIST VALUES(SYSDATE, 1, '나쁜놈임', 'test23');
+INSERT INTO BLACKLIST VALUES(SYSDATE, 1, '결석', 'test24');
+INSERT INTO BLACKLIST VALUES(SYSDATE, 1, '나쁜놈임', 'test24');
+INSERT INTO BLACKLIST VALUES(SYSDATE, 1, '나쁜놈임', 'test25');
+INSERT INTO BLACKLIST VALUES(SYSDATE, 1, '결석', 'test25');
+INSERT INTO BLACKLIST VALUES(SYSDATE, 1, '지각', 'test25');
+INSERT INTO BLACKLIST VALUES(SYSDATE, 1, '나쁜놈임', 'test27');
+INSERT INTO BLACKLIST VALUES(SYSDATE, 1, '나쁜놈임', 'test29');
+
 COMMIT;
