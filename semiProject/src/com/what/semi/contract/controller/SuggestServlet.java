@@ -13,8 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.what.semi.common.GmailSend;
 import com.what.semi.contract.model.service.ContractService;
-import com.what.semi.member.model.service.MemberService;
-import com.what.semi.member.model.vo.MemberVo;
+import com.what.semi.contract.model.vo.ContractVo;
 import com.what.semi.recruitment.model.service.RecruitmentService;
 import com.what.semi.recruitment.model.vo.RecruitmentVo;
 import com.what.semi.resume.model.service.MyResumeService;
@@ -50,6 +49,7 @@ public class SuggestServlet extends HttpServlet {
 
 
 		int result = new ContractService().insertContract(recId, boId, jsId, resumeId, demander);
+		ContractVo cont = new ContractService().selectThisCon(recId, boId, jsId, resumeId);
 		RecruitmentVo rec = new RecruitmentService().selectRecruitment(recId);
 		MyResumeVo resume = new MyResumeService().selectMyResume(jsId, resumeId);
 
@@ -64,7 +64,7 @@ public class SuggestServlet extends HttpServlet {
 		
 
 		String title = "<" + resume.getIntroduce_title() + ">의 구인 제안이 들어왔습니다.";
-		String recUrl = "recruitmentDetail.do?recId=" + recId + "&currentPage=" + 1;
+		String recUrl = "contractRecDetail.do?recId=" + recId + "&state=0&contId="+cont.getC_no();
 		new GmailSend().sendResume(resume.getEmail(), title, recUrl);
 
 		RequestDispatcher view = null;
