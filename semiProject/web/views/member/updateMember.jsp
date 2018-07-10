@@ -13,7 +13,8 @@
 		color: white;
 	}
 </style>
-
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+    <script src="/sp/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript">
 	var searchAddr;
 	
@@ -234,18 +235,18 @@
 			    <div class="input-group">
 			    
 			    	<!-- 사용자 이름 -->
-			      <input type="text" class="form-control mb-1" name="name" placeholder="이름" value="<%=member.getName()%>"/>
+			      <input type="text" class="form-control mb-1" name="name" id="name" placeholder="이름" value="<%=member.getName()%>"/>
 			      
 			    </div>
 			    
 			    <div class="input-group">
 			    	<!-- 사용자 이메일 -->
-			      <input type="email" class="form-control mb-1" name="email" placeholder="email" value="<%=member.getEmail()%>"/>
+			      <input type="email" class="form-control mb-1" name="email" id="email" placeholder="email" value="<%=member.getEmail()%>"/>
 			    </div>
 			    
 			    <div class="input-group">
 			    	<!-- 사용자 전화번호 -->
-			    	<input type="text" class="form-control mb-1" name="phone" placeholder="휴대폰번호(-를 빼고 입력하세요)" value="<%=member.getPhone()%>"/>
+			    	<input type="text" class="form-control mb-1" name="phone" id="phone" placeholder="휴대폰번호(-를 빼고 입력하세요)" value="<%=member.getPhone()%>"/>
 			    </div>
 			    
 			    <div class="input-group">

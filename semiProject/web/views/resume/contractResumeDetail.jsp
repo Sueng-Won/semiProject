@@ -144,7 +144,7 @@ div {
 			</div>
 			<div align="center">
 				<button onclick="suggestBtn();"
-					class="btn btn-default bg-dark text-white">해당 이력서에 제안하기</button>
+					class="btn btn-default bg-dark text-white">해당 구직자에 제안하기</button>
 			</div>
 			<div class="col-xs-12 auth">
 				<h2 align="center">위 입력사항은 사실과 다름이 없습니다</h2>

@@ -206,7 +206,7 @@ div {
 			</div>
 			<!-- body -->
 			<div class="modal-body">
-				<form id="postNum" method="get" action="/sp/apply.do">
+				<form id="postNum" method="get" action="/sp/suggest.do">
 					<input type="hidden" name="js_id" value="<%=member.getId()%>" /> <input
 						type="hidden" name="bo_id" value="<%=id%>" /> <input
 						type="hidden" name="resumeId" value="<%=member.getResume_id()%>" />

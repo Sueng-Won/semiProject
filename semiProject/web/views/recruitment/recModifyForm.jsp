@@ -16,7 +16,7 @@
 	src="/sp/vendor/bootstrap/datepicker/bootstrap-datepicker.kr.js"></script>
 <script type="text/javascript">
 	function writeRecruitment(flag) {
-var okFlag = false;
+		var okFlag = false;
 		
 		if($("#name").val() == ""){
 	        alert("업체명을 입력해주세요.");
@@ -63,7 +63,7 @@ var okFlag = false;
 			okFlag = true;
 		}
 		
-		if($("#business_type").val() == ""){
+		if($("#business_type").val() == null){
 	        alert("업종을 입력해주세요.");
 	        $("#business_type").focus();
 	        okFlag = false;
@@ -72,7 +72,7 @@ var okFlag = false;
 			okFlag = true;
 		}
 		
-		if($("#career").val() == ""){
+		if($("#career").val() == null){
 	        alert("경력을 입력해주세요.");
 	        $("#career").focus();
 	        okFlag = false;
@@ -109,12 +109,20 @@ var okFlag = false;
 		}
 		
 		if($("#pay").val() == ""){
-	        alert("급여를 입력해주세요.");
-	        $("#pay").focus();
-	        okFlag = false;
-	        return false;
-	    }else{
-			okFlag = true;
+			 alert("급여를 입력해주세요.");
+		        $("#pay").focus();
+		        okFlag = false;
+		        return false;
+		    }else{
+		    	alert($("#pay").val()<$("#calculatePay").val());
+		    	if($("#pay").val()<$("#calculatePay").val()){
+		    		alert("근무시간과 최저임금을 확인해 주세요.");
+			        $("#pay").focus();
+			        okFlag = false;
+			        return false;
+		    	}else{
+				okFlag = true;
+		    	}
 		}
 		
 		if($("#mValue").val() == ""){
@@ -161,15 +169,15 @@ var okFlag = false;
 	    }else{
 			okFlag = true;
 		}
+		return false;
 		
 		if(okFlag){
-		
 		if(flag){
 			$("#writeRecruitment").attr("action", "/sp/writeRecruitment.do");
 		}else{
 			$("#writeRecruitment").attr("action", "/sp/updateRecruitment.do");
 		}
-		$("#writeRecruitment").submit();
+			$("#writeRecruitment").submit();
 		}
 	}
 
@@ -194,7 +202,9 @@ var okFlag = false;
 			pay=pay+1;
 		}
 		if(start!=""&&end!=""){
-		$("#calculatePay").text("*최저시급 : 약"+pay+"0원");
+
+		$("#calculatePay").text("*최저임금 : 약"+pay+"0원");
+		$("#calculatePay").val(pay*10);
 		}
 	}
 	
@@ -429,7 +439,8 @@ var okFlag = false;
 									<label>급여</label> <input type="text" class="btn-dark" id="pay"
 										name="pay" value="<%=rec.getPay()%>" />원
 								</div>
-								<div class="text-white-50 ml-1" id="calculatePay" align="center">*최저시급
+
+								<div class="text-white-50 ml-1" id="calculatePay" value="7530" align="center">*최저임금
 									: 7,530원</div>
 							</div>
 						</div>

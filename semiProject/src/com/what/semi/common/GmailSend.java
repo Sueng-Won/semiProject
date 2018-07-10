@@ -174,7 +174,7 @@ public class GmailSend {
             msg.setFrom(from);
               
             // 수신자 설정
-            InternetAddress to = new InternetAddress("yul2514@naver.com");
+            InternetAddress to = new InternetAddress(user);
             msg.setRecipient(Message.RecipientType.TO, to);
              
             // 제목 설정
@@ -258,7 +258,7 @@ public class GmailSend {
 			msg.setFrom(from);
 
 			// 수신자 설정
-			InternetAddress to = new InternetAddress("yul2514@naver.com");
+			InternetAddress to = new InternetAddress(user);
 			msg.setRecipient(Message.RecipientType.TO, to);
 
 			// 제목 설정
