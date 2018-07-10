@@ -227,8 +227,7 @@ tr {
 								<%
 									if (writer.getName().length() >= 3) {
 								%>
-								<td><%=writer.getName().charAt(0)%>
-								<%
+								<td><%=writer.getName().charAt(0)%><%
  	for (int i = 0; i < writer.getName().length() - 2; i++) {
  %>*<%
  	}
