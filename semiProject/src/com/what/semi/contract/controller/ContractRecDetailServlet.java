@@ -18,29 +18,34 @@ import com.what.semi.recruitment.model.vo.RecruitmentVo;
 @WebServlet("/contractRecDetail.do")
 public class ContractRecDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ContractRecDetailServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ContractRecDetailServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String recId = request.getParameter("recId");
-		
+		int state = Integer.parseInt(request.getParameter("state"));
+		int contId =Integer.parseInt(request.getParameter("contId"));
+
 		RecruitmentVo rec = new RecruitmentService().selectRecruitment(recId);
-		
+
 		RequestDispatcher view = null;
 		String url = "";
 		if (rec != null) {
 			url = "/views/recruitment/contractRecDetail.jsp";
 			request.setAttribute("rec", rec);
-
+			request.setAttribute("state", state);
+			request.setAttribute("contId", contId);
 		} else {
 			System.out.println("계약구인상세페이지오류");
 		}
