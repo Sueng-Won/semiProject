@@ -34,7 +34,7 @@ public class ContractResumeDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int resumeId = Integer.parseInt(request.getParameter("resume_id"));
-		String jsId = request.getParameter("userId");
+		String jsId = request.getParameter("jsId");
 		int state = Integer.parseInt(request.getParameter("state"));
 		int contId =Integer.parseInt(request.getParameter("contId"));
 

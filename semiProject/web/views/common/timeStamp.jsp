@@ -30,7 +30,7 @@ int result = (int)request.getAttribute("result");
 <script src="/sp/vendor/jquery/jquery.min.js"></script>
 <script>
 	function writeTime() {
-		$.ajax({
+		<%-- $.ajax({
 			url : "/sp/timeStamp.do",
 			type : "get",
 			data : {
@@ -50,7 +50,8 @@ int result = (int)request.getAttribute("result");
 			error : function(e) {
 				console.log("error", e);
 			}
-		});
+		}); --%>
+		location.href="myWorkedList.do?contId=" + <%=cont.getC_no()%>;
 	}
 
 	<%-- $(function() {

@@ -19,9 +19,7 @@ function recDetail(i){
 }
 </script>
 <style>
-.card_he {
-	height: 400px;
-}
+
 h4{
 		cursor: pointer;
 	}

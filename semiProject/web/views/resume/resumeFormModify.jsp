@@ -10,11 +10,55 @@
 	}
 </style>
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
 
+<script type="text/javascript"
+	src="/sp/vendor/bootstrap/datepicker/bootstrap-datepicker.kr.js"></script>
 <script type="text/javascript">
+$(function() {
+	$('#workdate').datepicker({
+		format : "yyyy/mm/dd",
+		language : "kr",
+		autoclose : true,
+		startDate : "today"
+	});
+});
 	function modifyResume() {
-		$("#modifyResume").submit();
+		
+		if($("#achievementValue").val()==null || $("#achievementValue").val()=="" ){
+			alert("학력은 필수 입력 사항입니다");
+			return false;
+			
+		}else if($("#dValue").val()==null || $("#dValue").val()=="" ){
+			alert("장애여부를 확인해 주세요");
+			return false;
+			
+		}else if($("#mValue").val()==null || $("#mValue").val()==""){
+			alert("병역 여부를 확인해 주세요");
+			return false;
+			
+		}else if($("#business_type option:selected").val()==null || $("#business_type option:selected").val()== ""){
+			alert("희망 근무 분야를 선택하세요");
+			return false;
+			
+		}else if($("#career option:selected").val()==null || $("#career option:selected").val()==""){
+			alert("경력사항은 필수 입력사항 입니다.");
+			return false;
+			
+		}else if($("#workdate").val()==null || $("#workdate").val()==""){
+			alert("희망 근무일을 선택해주세요.");
+			return false;
+			
+		}else if($("#workTime").val()==null || $("#workTime").val()==""){
+			alert("희망 근무시간대를 선택해주세요.");
+			return false;
+		}
+		return true;
 	}
+
 </script>
     <!-- Page Content -->
     <div class="container"  style="min-height: 1000px">
@@ -114,8 +158,8 @@
 			    <h4 class="text-white-50">근무 희망 사항</h4>
 			    
 			    <div class="row">
-			    	<div class="col-3">
-				    	<select name = "business_type" multiple class="custom-select-lg mt-1 ml-3 btn-dark" style="min-height: 150px">
+			    	<div class="col-md-3">
+				    	<select name = "business_type" multiple class="custom-select-lg mt-1 ml-3 btn-dark" style="min-height: 150px" id = "business_type">
 						  <option disabled="disabled" class="text-white-50">[업종]</option>
 						  <option value = "사무직">사무직</option>
 						  <option value = "서비스">서비스</option>
@@ -126,22 +170,21 @@
 						</select>
 			    	</div>
 			    	
-			    	<div class="col-2">
-				    	<select name="career" multiple class="custom-select-lg mt-1 ml-3 btn-dark" style="min-height: 150px">
+			    	<div class="col-md-2 ">
+				    	<select name="career" multiple class="custom-select-lg mt-1 ml-3 btn-dark" style="min-height: 150px" id="career">
 						  <option disabled="disabled" class="text-white-50">[경력]</option>
 						  <option value = "1">있음</option>
 						  <option value = "0">없음</option>
 						</select>
 			    	</div>
 			    	
-				    <div class="col-7">
+				    <div class="col-md-6">
 				    	<div class="mt-1 ml-3" style="max-height: 33%">
 					    	<h5 class="text-white">근무가능일</h5>
 				    	</div>
-				    	<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%">
-				    		<label>근무 가능 일</label>
-							<input type="date" class="btn-dark" name="dateD"/>
-				    	</div>
+				    	<div class="mt-1 btn btn-md btn-dark" style="max-height: 33%"">
+									<input type="text" id="workdate" class="btn-default" name="workdate" placeholder="희망 날짜"/>
+								</div>
 				    </div>
 			    </div>
 			    
@@ -151,19 +194,16 @@
 			    <div class="btn-group-toggle ml-3" id="workTimeCkb">
 			    	<div class="text-white">희망 근무시간대</div>
 			    	<label class="checkbox-inline btn-dark btn-md mr-3">
-					  <input type="checkbox" name="workTime[]" class="inlineCheckbox" value="오전" onclick="checkBoxSelector(this, 0);"> 오전
+					  <input type="radio" name="workTime" class="inlineCheckbox" value="오전" onclick="checkBoxSelector(this, 0);"> 오전
 					</label>
 					<label class="checkbox-inline btn-dark btn-md mr-3">
-					  <input type="checkbox" name="workTime[]" class="inlineCheckbox" value="오후" onclick="checkBoxSelector(this, 1);"> 오후
+					  <input type="radio" name="workTime" class="inlineCheckbox" value="오후" onclick="checkBoxSelector(this, 1);"> 오후
 					</label>
 					<label class="checkbox-inline btn-dark btn-md mr-3">
-					  <input type="checkbox" name="workTime[]" class="inlineCheckbox" value="저녁" onclick="checkBoxSelector(this, 2);"> 저녁
+					  <input type="radio" name="workTime" class="inlineCheckbox" value="저녁" onclick="checkBoxSelector(this, 2);"> 저녁
 					</label>
 					<label class="checkbox-inline btn-dark btn-md mr-3">
-					  <input type="checkbox" name="workTime[]" class="inlineCheckbox" value="야간" onclick="checkBoxSelector(this, 3);"> 야간
-					</label>
-					<label class="checkbox-inline btn-dark btn-md mr-3">
-					  <input type="checkbox" name="workTime[]" class="inlineCheckbox" value="상관없음" onclick="checkBoxSelector(this, 4);"> 상관없음
+					  <input type="radio" name="workTime" class="inlineCheckbox" value="상관없음" checked onclick="checkBoxSelector(this, 4);"> 상관없음
 					</label>
 			    </div>
 			    
@@ -177,7 +217,8 @@
 			    
 			    <div>
 			    	<input type="hidden" name="resume_id" value=<%=member.getResume_id()%>>
-			    	<input type="submit" class="btn btn-light text-dark mt-4 mb-2" onclick="modifyResume();"/>
+			    	<input type="submit" class="btn btn-light text-dark mt-4 mb-2" onclick="return modifyResume();"/>
+		    	
 			    </div>
 			    
 			  </form>
@@ -228,7 +269,7 @@
 		}
 	
 	function checkBoxSelector(obj, index){
-		var $chkBoxArr = $(".inlineCheckbox");
+		/* var $chkBoxArr = $(".inlineCheckbox");
 		
 		var send_array = Array();
 		var send_cnt = 0;
@@ -249,9 +290,8 @@
 		        send_array[send_cnt] = $chkBoxArr[i].value;
 		        send_cnt++;
 		    }
-		}
-		var resultStr = send_array.join(",");
-		
+		}*/
+		var resultStr = $(obj).val();
 		$("#workTime").val(resultStr);
 		console.log(resultStr);
 

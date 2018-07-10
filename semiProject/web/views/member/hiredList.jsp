@@ -24,7 +24,7 @@
 
 <script type="text/javascript">
 	function contractResumeDetail(i,j) {
-		location.href = "/sp/contractResumeDetail.do?resumeId=" + i+"&jsId="+j+"&state=1&contId="+<%=contId%>;
+		location.href = "/sp/contractResumeDetail.do?resume_id=" + i+"&jsId="+j+"&state=1&contId="+<%=contId%>;
 	}
 
 	function accept(i) {

@@ -70,10 +70,10 @@ public class WriteResumeServlet extends HttpServlet {
 				
 				
 				
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 				java.sql.Date dateD = null;
 				try {
-					dateD = new java.sql.Date(((java.util.Date)sdf.parse(mRequest.getParameter("dateD"))).getTime());
+					dateD = new java.sql.Date(((java.util.Date)sdf.parse(mRequest.getParameter("workdate"))).getTime());
 					
 					
 				} catch (ParseException e) {

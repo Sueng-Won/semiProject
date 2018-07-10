@@ -73,10 +73,10 @@ public class ModifyResumeServlet extends HttpServlet {
 		int resume_id = Integer.parseInt(mRequest.getParameter("resume_id"));
 		
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		java.sql.Date dateD = null;
 		try {
-			dateD = new java.sql.Date(((java.util.Date)sdf.parse(mRequest.getParameter("dateD"))).getTime());
+			dateD = new java.sql.Date(((java.util.Date)sdf.parse(mRequest.getParameter("workdate"))).getTime());
 			
 			
 		} catch (ParseException e) {
@@ -100,6 +100,7 @@ public class ModifyResumeServlet extends HttpServlet {
 		resume.setMiltary_service(mValue);
 		resume.setCareer(career);
 		resume.setWorkable_days(dateD);
+		System.out.println(resume.getWorkable_days());
 		resume.setWorkTime(workTime);
 		resume.setBusiness_type(business_type);
 		resume.setProfile_image_src(fileName);

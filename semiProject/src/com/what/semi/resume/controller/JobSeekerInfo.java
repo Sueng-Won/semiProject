@@ -34,7 +34,7 @@ public class JobSeekerInfo extends HttpServlet {
 				int endPage;		//마지막 페이지 변수
 				int limit;				//한페이지에 출력할 글에 갯수
 				
-				limit = 3;
+				limit = 4;
 				limitPage = 5;
 				
 				if(request.getParameter("currentPage") != null){

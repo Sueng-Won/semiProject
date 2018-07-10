@@ -10,10 +10,53 @@
 	}
 </style>
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
 
+<script type="text/javascript"
+	src="/sp/vendor/bootstrap/datepicker/bootstrap-datepicker.kr.js"></script>
 <script type="text/javascript">
+$(function() {
+	$('#workdate').datepicker({
+		format : "yyyy/mm/dd",
+		language : "kr",
+		autoclose : true,
+		startDate : "today"
+	});
+});
 	function writeResume() {
-		$("#writeResume").submit();
+		if($("#achievementValue").val()==null || $("#achievementValue").val()=="" ){
+			alert("학력은 필수 입력 사항입니다");
+			return false;
+			
+		}else if($("#dValue").val()==null || $("#dValue").val()=="" ){
+			alert("장애여부를 확인해 주세요");
+			return false;
+			
+		}else if($("#mValue").val()==null || $("#mValue").val()==""){
+			alert("병역 여부를 확인해 주세요");
+			return false;
+			
+		}else if($("#business_type option:selected").val()==null || $("#business_type option:selected").val()== ""){
+			alert("희망 근무 분야를 선택하세요");
+			return false;
+			
+		}else if($("#career option:selected").val()==null || $("#career option:selected").val()==""){
+			alert("경력사항은 필수 입력사항 입니다.");
+			return false;
+			
+		}else if($("#dateD").val()==null || $("#dateD").val()==""){
+			alert("희망 근무일을 선택해주세요.");
+			return false;
+			
+		}else if($("#workTime").val()==null || $("#workTime").val()==""){
+			alert("희망 근무시간대를 선택해주세요.");
+			return false;
+		}
+		return true;
+	}
 	}
 </script>
     <!-- Page Content -->
@@ -114,8 +157,8 @@
 						  <option disabled="disabled" class="text-white-50">[업종]</option>
 						  <option value = "사무직">사무직</option>
 						  <option value = "서비스">서비스</option>
-						  <option value = "유통">유통/판매</option>
-						  <option value = "음료">외식/음료</option>
+						  <option value = "유통/판매">유통/판매</option>
+						  <option value = "외식/음료">외식/음료</option>
 						  <option value = "고객상담">고객상담</option>
 						  <option value = "생산/건설">생산/건설</option>
 						</select>
@@ -147,19 +190,16 @@
 			    <div class="btn-group-toggle ml-3" id="workTimeCkb">
 			    	<div class="text-white">희망 근무시간대</div>
 			    	<label class="checkbox-inline btn-dark btn-md mr-3">
-					  <input type="checkbox" name="workTime[]" class="inlineCheckbox" value="오전" onclick="checkBoxSelector(this, 0);"> 오전
+					  <input type="radio" name="workTime" class="inlineCheckbox" value="오전" onclick="checkBoxSelector(this, 0);"> 오전
 					</label>
 					<label class="checkbox-inline btn-dark btn-md mr-3">
-					  <input type="checkbox" name="workTime[]" class="inlineCheckbox" value="오후" onclick="checkBoxSelector(this, 1);"> 오후
+					  <input type="radio" name="workTime" class="inlineCheckbox" value="오후" onclick="checkBoxSelector(this, 1);"> 오후
 					</label>
 					<label class="checkbox-inline btn-dark btn-md mr-3">
-					  <input type="checkbox" name="workTime[]" class="inlineCheckbox" value="저녁" onclick="checkBoxSelector(this, 2);"> 저녁
+					  <input type="radio" name="workTime" class="inlineCheckbox" value="저녁" onclick="checkBoxSelector(this, 2);"> 저녁
 					</label>
 					<label class="checkbox-inline btn-dark btn-md mr-3">
-					  <input type="checkbox" name="workTime[]" class="inlineCheckbox" value="야간" onclick="checkBoxSelector(this, 3);"> 야간
-					</label>
-					<label class="checkbox-inline btn-dark btn-md mr-3">
-					  <input type="checkbox" name="workTime[]" class="inlineCheckbox" value="상관없음" onclick="checkBoxSelector(this, 4);"> 상관없음
+					  <input type="radio" name="workTime" class="inlineCheckbox" value="상관없음" onclick="checkBoxSelector(this, 4);"> 상관없음
 					</label>
 			    </div>
 			    
@@ -223,7 +263,7 @@
 		}
 	
 	function checkBoxSelector(obj, index){
-		var $chkBoxArr = $(".inlineCheckbox");
+		/* var $chkBoxArr = $(".inlineCheckbox");
 		
 		var send_array = Array();
 		var send_cnt = 0;
@@ -246,7 +286,8 @@
 		    }
 		}
 		var resultStr = send_array.join(",");
-		
+		 */
+		var resultStr = $(obj).val();
 		$("#workTime").val(resultStr);
 		console.log(resultStr);
 

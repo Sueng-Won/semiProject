@@ -7,6 +7,10 @@
 <%
 	MyResumeVo member = (MyResumeVo) request.getAttribute("member");
 	ArrayList<RecruitmentVo> recList = (ArrayList<RecruitmentVo>) request.getAttribute("recList");
+	String Mtype = (String) session.getAttribute("member_type");
+	if(Mtype==null){
+		Mtype="";
+	}
 	
 	int contRe = (int) request.getAttribute("contRe");
 %>
@@ -59,7 +63,7 @@ div {
 </style>
 <script>
 	function applyBtn() {
-		if (<%=member_type.equals("BO")%>) {
+		if (<%=Mtype.equals("BO")%>) {
 			if (<%=recList.size()%>>0) {
 				$('div.modal').modal();
 			} else {

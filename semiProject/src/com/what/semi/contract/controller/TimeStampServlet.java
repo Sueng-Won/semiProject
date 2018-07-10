@@ -1,6 +1,7 @@
 package com.what.semi.contract.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,11 +57,11 @@ public class TimeStampServlet extends HttpServlet {
 
 		JSONObject json = new JSONObject();
 		if (cont != null) {
-			json.put("contId", contId);
+			/*json.put("contId", contId);
 			json.put("currentPage", currentPage);
 			response.setContentType("application/json");
-			response.getWriter().print(json.toJSONString());
-			/*response.setContentType("text/html;charset=utf-8"); // 어떤 타입으로
+			response.getWriter().print(json.toJSONString());*/
+			response.setContentType("text/html;charset=utf-8"); // 어떤 타입으로
 																// 출력할것인지 명시하였다.
 
 			PrintWriter out = response.getWriter(); // getWriter() 출력스트림.
@@ -73,7 +74,7 @@ public class TimeStampServlet extends HttpServlet {
 			str += "}else{";
 			str += "close();}";
 			str += "</script>";
-			out.print(str);*/
+			out.print(str);
 
 		} else {
 			System.out.println("타임스탬프오류");
