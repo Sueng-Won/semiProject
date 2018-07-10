@@ -35,6 +35,7 @@ public class ContractRecDetailServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String recId = request.getParameter("recId");
 		int state = Integer.parseInt(request.getParameter("state"));
+		int contId =Integer.parseInt(request.getParameter("contId"));
 
 		RecruitmentVo rec = new RecruitmentService().selectRecruitment(recId);
 
@@ -44,7 +45,7 @@ public class ContractRecDetailServlet extends HttpServlet {
 			url = "/views/recruitment/contractRecDetail.jsp";
 			request.setAttribute("rec", rec);
 			request.setAttribute("state", state);
-
+			request.setAttribute("contId", contId);
 		} else {
 			System.out.println("계약구인상세페이지오류");
 		}

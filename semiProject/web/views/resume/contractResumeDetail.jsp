@@ -3,12 +3,18 @@
 	pageEncoding="UTF-8"%>
 <%
 	MyResumeVo member = (MyResumeVo) request.getAttribute("member");
+	int state = (int) request.getAttribute("state");
+	int contId = (int) request.getAttribute("contId");
 %>
 <%@include file="/views/common/header.jsp"%>
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script>
 	function suggestBtn() {
-		location.href="searchSameJobseeker.do?resumeId="+<%=member.getResume_id()%>;
+		location.href = "searchSameJobseeker.do?resumeId="+<%=member.getResume_id()%>;
+	}
+	
+	function acceptBtn() {
+		location.href="/sp/myHiredList.do?contId="+<%=contId%>;
 	}
 </script>
 <style>
@@ -60,13 +66,13 @@ div {
 	<div class="row">
 		<%@include file="/views/common/nav.jsp"%>
 		<div class="col-lg-9 mt-lg-auto">
-			<div class="row" style="margin:30px 0 0 40px;;">
-					<div class="row page-header" style="width:700px;">
-						<h1>
-							이력서<br> <small><%=member.getIntroduce_title()%></small>
-						</h1>
-					</div>
-				<div class="row" style="width:700px;">
+			<div class="row" style="margin: 30px 0 0 40px;">
+				<div class="row page-header" style="width: 700px;">
+					<h1>
+						이력서<br> <small><%=member.getIntroduce_title()%></small>
+					</h1>
+				</div>
+				<div class="row" style="width: 700px;">
 					<div class="col-xs-3 col-md-4 col-xs-offset-1">
 						<a class="thumbnail"><img id="profileImg"
 							src="/sp/profile_photo/<%if (member.getProfile_image_src() == null) {%>default_photo.jpeg<%} else {%><%=member.getProfile_image_src()%><%}%>">
@@ -143,8 +149,13 @@ div {
 				</div>
 			</div>
 			<div align="center">
+			<%if(state==0){ %>
+			<button onclick="acceptBtn();"
+					class="btn btn-default bg-dark text-white">해당 구직자에 제안하기</button>
+			<%}else{ %>
 				<button onclick="suggestBtn();"
 					class="btn btn-default bg-dark text-white">해당 구직자에 제안하기</button>
+			<%} %>
 			</div>
 			<div class="col-xs-12 auth">
 				<h2 align="center">위 입력사항은 사실과 다름이 없습니다</h2>

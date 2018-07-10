@@ -7,6 +7,7 @@
 <%
 	RecruitmentVo rec = (RecruitmentVo) request.getAttribute("rec");
 	int state = (int) request.getAttribute("state");
+	int contId = (int) request.getAttribute("contId");
 
 	/* rec.setRecruitment_image_src(null); */
 %>
@@ -32,7 +33,7 @@
 	}
 	
 	function acceptBtn() {
-		location.href="/sp/searchSameBusiness.do?recId="+<%=rec.getRecruitment_id()%>;
+		location.href="/sp/myWorkedList.do?contId="+<%=contId%>;
 	}
 </script>
 <style>
