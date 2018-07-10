@@ -488,7 +488,7 @@
 						</div>
 
 						<div>
-							<input type="button" class="btn btn-light text-dark mt-4 mb-2" value="구인등록">
+							<input type="button" class="btn btn-light text-dark mt-4 mb-2" onclick="writeRecruitment();" value="구인등록">
 						</div>
 
 					 </form>

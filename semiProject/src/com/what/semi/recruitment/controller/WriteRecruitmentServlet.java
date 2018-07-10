@@ -131,6 +131,7 @@ public class WriteRecruitmentServlet extends HttpServlet {
 		rec.setMilitary_service(m);
 		rec.setGender(gValue);
 		rec.setRecruitment_title(title);
+		introduce=introduce.replace("\n", "<br>");
 		rec.setIntroduce(introduce);
 		rec.setRecruitment_image_src(recImg);
 		rec.setM_id(id);
