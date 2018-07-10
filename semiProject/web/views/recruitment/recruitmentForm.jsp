@@ -323,7 +323,7 @@
 								<!-- 업체 이메일 -->
 								<div class="input-group" style="min-height: 33%">
 									<input type="email" class="form-control mb-1" name="email"
-										id="email" placeholder="email" />
+										id="email" placeholder="이력서와 QR코드 받을 " />
 								</div>
 							</div>
 						</div>
