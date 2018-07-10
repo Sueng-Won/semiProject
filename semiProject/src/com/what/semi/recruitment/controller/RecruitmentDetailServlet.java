@@ -51,10 +51,10 @@ public class RecruitmentDetailServlet extends HttpServlet {
 		MemberVo writer = new MemberService().getMemberInfo(rec.getM_id());
 
 		ArrayList<MyResumeVo> myResumes = new ArrayList<MyResumeVo>();
+		ArrayList<MyResumeVo> result = new ArrayList<MyResumeVo>();
 		if (js_id != null) {
 			myResumes = new MyResumeService().selectMyInfo(js_id);
 			ArrayList<ContractVo> myAppliedConList = new ContractService().selectmyAppliedConList(recId, js_id);
-			ArrayList<MyResumeVo> result = new ArrayList<MyResumeVo>();
 			boolean flag = true;
 			for (int i = 0; i < myResumes.size(); i++) {
 				for (int j = 0; j < myAppliedConList.size(); j++) {
@@ -83,7 +83,7 @@ public class RecruitmentDetailServlet extends HttpServlet {
 			request.setAttribute("rec", rec);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("writer", writer);
-			request.setAttribute("myResumes", myResumes);
+			request.setAttribute("myResumes", result);
 			request.setAttribute("contRe", 0);
 		} else {
 			/*
