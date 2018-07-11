@@ -4,6 +4,7 @@
 	String declarationId = request.getParameter("memId");
 	boolean declarationFlag = Boolean.parseBoolean(request.getParameter("declarationFlag"));
 %>
+<!-- test -->
 <!DOCTYPE html >
 <html>
 <head>
