@@ -34,7 +34,7 @@ public class RecruitmentDao {
 					+ " PAY,r.GENDER, MILITARY_SERVICE, INTRODUCE,m. M_ID, IS_POST,DELFLAG, RECRUITMENT_NAME, RECRUITMENT_PHONE,"
 					+ "RECRUITMENT_EMAIL,RECRUITMENT_TITLE,ACHIEVEMENT,CAREER,M.NAME,M.PHONE "
 					+ "FROM RECRUITMENT R JOIN MEMBER M ON (M.M_ID = R.M_ID) "
-					+ "WHERE IS_POST != 0 AND DELFLAG = 0 ORDER BY WORK_DAY DESC) P) WHERE RNUM BETWEEN " + startRow
+					+ "WHERE IS_POST != 0 AND DELFLAG = 0 ORDER BY WORK_DAY) P) WHERE RNUM BETWEEN " + startRow
 					+ " AND " + endRow;
 			// System.out.println(query);
 			rs = stmt.executeQuery(query);
@@ -160,7 +160,7 @@ public class RecruitmentDao {
 					+ "R.M_ID, IS_POST,DELFLAG, M.NAME, RECRUITMENT_NAME, RECRUITMENT_TITLE  " + "FROM RECRUITMENT R  "
 					+ "JOIN MEMBER M ON (M.M_ID = R.M_ID)  " + "WHERE (IS_POST != 0  " + "AND DELFLAG =0 "
 					+ "AND (R_LATITUDE > ? AND R_LATITUDE < ?)  " + "AND (R_LONGITUDE > ? AND R_LONGITUDE < ?)) "
-					+ "ORDER BY WORK_DAY DESC) P)  " + "WHERE RNUM BETWEEN ? AND ?";
+					+ "ORDER BY WORK_DAY) P)  " + "WHERE RNUM BETWEEN ? AND ?";
 			stmt = con.prepareStatement(query);
 			stmt.setDouble(1, lpi.getMinLatitude());
 			stmt.setDouble(2, lpi.getMaxLatitude());
@@ -221,7 +221,7 @@ public class RecruitmentDao {
 					+ "RECRUITMENT_EMAIL,RECRUITMENT_TITLE,ACHIEVEMENT,CAREER,M.NAME,M.PHONE " + "FROM RECRUITMENT R "
 					+ "JOIN MEMBER M ON (M.M_ID = R.M_ID) "
 					+ "WHERE IS_POST != 0 AND DELFLAG =0 AND TO_CHAR(WORK_DAY,'MM/DD/RRRR') IN (" + dateStr + ")"
-					+ "ORDER BY WORK_DAY DESC) P) " + "WHERE RNUM BETWEEN " + startRow + " AND " + endRow;
+					+ "ORDER BY WORK_DAY) P) " + "WHERE RNUM BETWEEN " + startRow + " AND " + endRow;
 			// query = "SELECT * FROM RECRUITMENT";
 			// System.out.println(query);
 
@@ -507,8 +507,8 @@ public class RecruitmentDao {
 
 		try {
 			query = "SELECT COUNT(*) AS LISTCOUNT " + "FROM RECRUITMENT " + "WHERE (IS_POST != 0 " + "AND DELFLAG = 0"
-					+ "AND BUSINESS_TYPE = ? " + "AND WORK_DAY = ? " + "AND GENDER = ? " + "AND MILITARY_SERVICE = ?)"
-					+ "ORDER BY WORK_DAY";
+		               + "AND (BUSINESS_TYPE = ? " + "OR (SYSDATE < WORK_DAY AND WORK_DAY <= ? )" + "OR GENDER IN (?,'N') " + "OR MILITARY_SERVICE = ?))"
+		               + "ORDER BY WORK_DAY";
 
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, businessType);
@@ -543,16 +543,16 @@ public class RecruitmentDao {
 		int endRow = startRow + limit - 1;
 		try {
 			query = "SELECT RECRUITMENT_ID, RECRUITMENT_IMAGE_SRC, " + "BUSINESS_TYPE, ADDRESS, ADDRESS_DETAIL, "
-					+ "ZIPCODE, WORK_DAY, R_LATITUDE, R_LONGITUDE, " + "START_WORK_TIME, END_WORK_TIME, PAY, "
-					+ "GENDER, MILITARY_SERVICE, INTRODUCE, "
-					+ "M_ID, IS_POST,DELFLAG, NAME, RECRUITMENT_NAME, RECRUITMENT_TITLE "
-					+ "FROM (SELECT ROWNUM RNUM, P.* " + "FROM (SELECT RECRUITMENT_ID, RECRUITMENT_IMAGE_SRC, "
-					+ "BUSINESS_TYPE, R.ADDRESS, R.ADDRESS_DETAIL, " + "R.ZIPCODE, WORK_DAY, R_LATITUDE, R_LONGITUDE, "
-					+ "START_WORK_TIME, END_WORK_TIME, PAY, " + "R.GENDER, MILITARY_SERVICE, INTRODUCE, "
-					+ "R.M_ID, IS_POST,DELFLAG, M.NAME, RECRUITMENT_NAME, RECRUITMENT_TITLE " + "FROM RECRUITMENT R "
-					+ "JOIN MEMBER M ON (M.M_ID = R.M_ID) " + "WHERE (IS_POST != 0 " + "AND DELFLAG = 0 "
-					+ "AND BUSINESS_TYPE = ? " + "AND WORK_DAY = ? " + "AND R.GENDER = ? "
-					+ "AND MILITARY_SERVICE = ? )" + "ORDER BY WORK_DAY DESC) P) " + "WHERE RNUM BETWEEN ? AND ?";
+		               + "ZIPCODE, WORK_DAY, R_LATITUDE, R_LONGITUDE, " + "START_WORK_TIME, END_WORK_TIME, PAY, "
+		               + "GENDER, MILITARY_SERVICE, INTRODUCE, "
+		               + "M_ID, IS_POST,DELFLAG, NAME, RECRUITMENT_NAME, RECRUITMENT_TITLE "
+		               + "FROM (SELECT ROWNUM RNUM, P.* " + "FROM (SELECT RECRUITMENT_ID, RECRUITMENT_IMAGE_SRC, "
+		               + "BUSINESS_TYPE, R.ADDRESS, R.ADDRESS_DETAIL, " + "R.ZIPCODE, WORK_DAY, R_LATITUDE, R_LONGITUDE, "
+		               + "START_WORK_TIME, END_WORK_TIME, PAY, " + "R.GENDER, MILITARY_SERVICE, INTRODUCE, "
+		               + "R.M_ID, IS_POST,DELFLAG, M.NAME, RECRUITMENT_NAME, RECRUITMENT_TITLE " + "FROM RECRUITMENT R "
+		               + "JOIN MEMBER M ON (M.M_ID = R.M_ID) " + "WHERE (IS_POST != 0 " + "AND DELFLAG = 0 "
+		               + "AND (BUSINESS_TYPE = ? " + "OR (SYSDATE < WORK_DAY AND WORK_DAY <= ? )" + "OR R.GENDER IN (?,'N') "
+		               + "OR MILITARY_SERVICE = ? ))" + "ORDER BY WORK_DAY) P) " + "WHERE RNUM BETWEEN ? AND ?";
 			// System.out.println(query);
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, businessType);

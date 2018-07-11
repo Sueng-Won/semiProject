@@ -67,34 +67,38 @@ resumeTitle = (String)request.getAttribute("resumeTitle");
 			<div align="center" class="bg-dark text-white">작성된 이력서가 없습니다.</div>
 			<%} %>
 			<!--======================================	구인게시물	======================================== -->
-          <div class="row mt-4" style="min-height: 700px">
-          <%if(null != request.getAttribute("list")){ %>
-            <%for(RecruitmentVo rv : list) {%><!-- for문을 통해 해당 게시물들의 개수에 맞게 생성 -->
-	            <div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4" style="max-height: 400px">
-	              <div class="card card_he">
-	                <a onclick="recDetail(<%=rv.getRecruitment_id()%>);">
-                   <img src="<%if (rv.getRecruitment_image_src() == null) {%>/sp/images/building.jpeg<%} else {%>/sp/images/recruitmentImg/<%=rv.getRecruitment_image_src()%><%}%>"
+          <div class="row">
+
+				<%
+					for (int i = 0; i < list.size(); i++) {
+				%><!-- for문을 통해 해당 게시물들의 개수에 맞게 생성 -->
+				<div class="col-lg-3 col-md-3 col-sm-4 col-6 mb-4">
+					<div class="card card_he"
+						onclick="recDetail(<%=list.get(i).getRecruitment_id()%>);">
+						<img src="<%if (list.get(i).getRecruitment_image_src() == null) {%>/sp/images/building.jpeg<%} else {%>/sp/images/recruitmentImg/<%=list.get(i).getRecruitment_image_src()%><%}%>"
 							width="180px" height="180px">
-                   </a>
-	                <div class="card-body">
-	                  <h4 class="card-title btn-link" onclick="recDetail('<%=rv.getRecruitment_id()%>');">
-	                    <%=rv.getRecruitment_title() %><!-- 게시물 이름 -->
-	                  </h4>
-	                  <h6><%=rv.getRecruitment_name() %></h6>
-	                  <h5>급여 : <%=rv.getPay()%></h5>
-	                  <p class="card-text"><%=rv.getWork_day() %></p>
-	                </div>
-	                <div class="card-footer">
-	                  <small class="text-muted"><%=rv.getAddress() %></small>
-	                </div>
-	              </div>
-	            </div>
-	            
-			<%} %>
-			<%} %>
-          <!-- /.row -->
-          
-        </div>
+						<div class="card-body">
+							<h4 class="card-title btn-link" onclick="recDetail('<%=list.get(i).getRecruitment_id()%>');">
+	                    	<%=list.get(i).getRecruitment_title() %><!-- 게시물 이름 -->
+	                  		</h4>
+							<h6><%=list.get(i).getRecruitment_name()%></h6>
+							<h5>
+								급여 :
+								<%=list.get(i).getPay()%></h5>
+							<p class="card-text"><%=list.get(i).getWork_day()%></p>
+						</div>
+						<div class="card-footer">
+							<small class="text-muted"><%=list.get(i).getAddress()%></small>
+						</div>
+					</div>
+				</div>
+
+				<%
+					}
+				%>
+				<!-- /.row -->
+
+			</div>
         <!-- /.col-lg-9 -->
         
         <!--====================================	페이지선택버튼	 ==================================  -->

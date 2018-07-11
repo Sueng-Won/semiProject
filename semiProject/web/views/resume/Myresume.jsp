@@ -95,16 +95,16 @@ div {
 			<div class="row" style="margin: 30px 0 0 40px;">
 				<div class="row page-header" style="width: 700px;">
 					<h1>
-						나의 이력서<br> <small><%=member.getIntroduce_title()%></small>
+						나의 이력서<hr> <small><%=member.getIntroduce_title()%></small><hr>
 					</h1>
 				</div>
 				<div class="row" style="width: 700px;">
-					<div class="col-xs-3 col-md-4 col-xs-offset-1">
+					<div class="col-md-4">
 						<a class="thumbnail"><img id="profileImg"
 							src="/sp/profile_photo/<%if (member.getProfile_image_src() == null) {%>default_photo.jpeg<%} else {%><%=member.getProfile_image_src()%><%}%>">
 						</a>
 					</div>
-					<div class="col-xs-7 col-md-8 col-xs-offset-1">
+					<div class="col-md-8">
 						<h4>
 							<strong><%=member.getName()%></strong>
 						</h4>
@@ -121,62 +121,57 @@ div {
 				</div>
 			</div>
 			<hr>
+			<h3>희망 근무 조건</h3><br>
 			<div class="row wrap">
-				<h3>희망 근무 조건</h3>
-				<div class="innerWrap">
-					<div style="float: left;">
+					<div class="col-md-4">
 						<p class="tit">
-							<img src="/sp/images/resume/store.png" />근무지
+							<img src="/sp/images/resume/shop.png" />&nbsp;&nbsp;&nbsp;근무지
 						</p>
 						<strong><%=member.getAddress()%></strong>
 					</div>
 
-					<div style="float: left; margin-left: 100px;">
+					<div class="col-md-4">
 						<p class="tit">
-							<img src="/sp/images/resume/business_type.png" />업종
+							<img src="/sp/images/resume/id-card.png" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;업종
 						</p>
 						<strong><%=member.getBusiness_type()%></strong> <strong>경력
-							:<%=member.getCareer() == 1 ? "있음" : "없음"%></strong>
+							:&nbsp;<%=member.getCareer() == 1 ? "있음" : "없음"%></strong>
 					</div>
-
-					<div style="float: right;">
+					
+					<div class="col-md-4">
+							<p class="tit">
+								<img src="/sp/images/resume/medal.png" />&nbsp;&nbsp;&nbsp;학력
+							</p>
+							<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=member.getAchievement()%></strong>
+					</div>
+			</div>
+			<br><hr>
+		<h3>학력, 우대사항</h3><br>
+			<div class="row wrap">
+					<div class="col-md-4 col-md-offset-3">
 						<p class="tit">
-							<img src="/sp/images/resume/clock.png" />희망시간
+							<img src="/sp/images/resume/work_time.png" />&nbsp;&nbsp;&nbsp;희망시간
 						</p>
-						<strong><%=member.getWorkable_days()%></strong> <strong><%=member.getWorkTime()%></strong>
+						<strong><%=member.getWorkable_days()%></strong>
+						 <strong><%=member.getWorkTime()%></strong>
+					</div>
+					<div class="col-md-4">
+							<p class="tit">
+								<img src="/sp/images/resume/dis.png" />&nbsp;장애여부
+							</p>
+							<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=member.getDisability() == 1 ? "장애" : "정상"%></strong>
 					</div>
 				</div>
-			</div>
+					<br><hr>
+				<h3>자기 소개서</h3><br>
 			<div class="row wrap">
-				<h3>학력, 우대사항</h3>
-				<div class="innerWrap">
-					<div class="contentsWrap col-xs-6">
-						<div>
-							<p class="tit">
-								<img src="/sp/images/resume/achievement.png" />학력
-							</p>
-							<strong><%=member.getAchievement()%></strong>
-						</div>
-					</div>
-					<div class="contentsWrap col-xs-6">
-						<div>
-							<p class="tit">
-								<img src="/sp/images/resume/disability.png" />장애여부
-							</p>
-							<strong><%=member.getDisability() == 1 ? "장애" : "정상"%></strong>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row wrap">
-				<h3>자기 소개서</h3>
-				<div class="innerWrap">
 					<textarea class="form-control" rows="5" readonly><%=member.getIntroduce()%></textarea>
-				</div>
 			</div>
-			<div class="col-xs-12 auth">
+			<div class="row wrap">
+			<div class="col-md-12 auth">
 				<h2 align="center">위 입력사항은 사실과 다름이 없습니다</h2>
-				<p align="center">작성자: XXX</p>
+				<p align="center">작성자: <%=member.getName() %></p>
+			</div>
 			</div>
 			<div class="line">
 				<%
@@ -194,7 +189,6 @@ div {
 						class="btn btn-default bg-dark text-white">목록으로</button>
 				</div>
 			</div>
-		</div>
 	</div>
 </div>
 <!-- 팝업 모달영역 -->

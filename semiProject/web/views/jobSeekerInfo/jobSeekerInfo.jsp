@@ -100,7 +100,8 @@
 			type :"get", 
 			data : {searchJob : $("#searchJob").val(),
 					 searchLocal : $("#searchLocal").val(),
-					 searchworkTime : $("#workTime").val()},
+					 searchworkTime : $("#workTime").val(),
+					 searchDate : $("#searchDate").val()},
 					 
 			success : function(data){
 				var pageArea = $(".pageArea");
@@ -147,8 +148,10 @@
 						if(key=="jsList" && keyWordJobArr.length>0){
 								
 								for(var i in user){
-									var $div = $("<div class='col-lg-6' id='jobSeekerInfo'>");
-									var $div2 = $("<div class='info1 row'>");
+									var $div = $("<div class='col-lg-6' id='jobSeekerInfo' onclick='moveToResume(this);'>");
+									var $div2 = $("<div class='info1 row' >");
+									var $hiddenInput1 = $("<input type='hidden' id='resume_id'value="+user[i].resume_id+">");
+									var $hiddenInput2 = $("<input type='hidden' id='user_id' value="+user[i].id+">");
 									var $div3 = $("<div class='col-lg-4'>");
 									var $div4 = $("<div class='col-lg-8 textLine'>");
 									var $p1= $("<p>");
@@ -156,7 +159,7 @@
 									var $p3= $("<p>");
 									var $p4= $("<p>");
 									var $p5=$("<p>");
-									var $p6=$("<p>");
+									var $p6 =$("<p>");
 									var $img = $("<img width=100px; height=100px>");
 									if(user[i].gender=='F'){
 										$img.attr("src","images/resume/woman.png");
@@ -185,15 +188,18 @@
 									$div2.append($div3);
 									$div2.append($div4);
 									
-									$div.append($div2);
+									$div.append($hiddenInput1);
+									$div.append($hiddenInput2);
 									$div.append($div2);
 									$finalResult.append($div);
 								}
 					}else{
 							
 							for(var i=0; i<user.length; i++){
-								var $div = $("<div class='col-lg-6' id='jobSeekerInfo'>");
-								var $div2 = $("<div class='info1 row'>");
+								var $div = $("<div class='col-lg-6' id='jobSeekerInfo' onclick='moveToResume(this);'>");
+								var $div2 = $("<div class='info1 row' >");
+								var $hiddenInput1 = $("<input type='hidden' id='resume_id'value="+user[i].resume_id+">");
+								var $hiddenInput2 = $("<input type='hidden' id='user_id' value="+user[i].id+">");
 								var $div3 = $("<div class='col-lg-4'>");
 								var $div4 = $("<div class='col-lg-8 textLine'>");
 								var $p1= $("<p>");
@@ -201,7 +207,7 @@
 								var $p3= $("<p>");
 								var $p4= $("<p>");
 								var $p5=$("<p>");
-								var $p6=$("<p>");
+								var $p6 =$("<p>");
 								var $img = $("<img width=100px; height=100px>");
 								if(user[i].gender=='F'){
 									$img.attr("src","images/resume/woman.png");
@@ -230,7 +236,8 @@
 								$div2.append($div3);
 								$div2.append($div4);
 								
-								$div.append($div2);
+								$div.append($hiddenInput1);
+								$div.append($hiddenInput2);
 								$div.append($div2);
 								$finalResult.append($div);
 						}
@@ -376,12 +383,38 @@
 		
 		 $(".dateList").on("click",function(){
 			 $dateList = $(".dateList");
+			 var $resultList = $(".resultList");
+			 var keyWord = $(this).text();
+			 var $currentDatelList = $(this);
 			 
 			 $dateList.removeClass("selectedList");
-			 $(this).addClass("selectedList");
-			 
-				 
+			 $currentDatelList.addClass("selectedList");
 			 $("#searchDate").val($(this).val());
+			 
+			 $dateList.each(function(){
+				 if(!($(this).hasClass("selectedList"))){
+					 for(var i =0; i<$resultList; i++){
+						 if($resultList.innerText.slice(0,-1)==$(this).text()){
+							 $resultList[i].remove();
+						 }
+					 }
+				 }else{
+					 var $div = $("<div class='resultList' ></div>");
+						var $button = $("<button type='button'  onclick='removeOption(this,"+ $(this).attr("id") + ");'>");
+						var $span = $("<span aria-hidden='true'>x</span>");
+						var $searchResult = $(".searchResult");
+
+						//keyWordJobArr.push(keyWord);
+
+						$div.text(keyWord);
+						$button.append($span);
+						$div.append($button);
+						$searchResult.append($div);
+				 }
+				
+			 });
+			 
+						 
 			 drawList();
 		 });
 	});
@@ -462,8 +495,11 @@
 							if(key=="jsList" && keyWordJobArr.length>0){
 								console.log(user);
 								for(var i in user){
-									var $div = $("<div class='col-lg-6' id='jobSeekerInfo'>");
-									var $div2 = $("<div class='info1 row'>");
+									console.log(user[i].id);
+									var $div = $("<div class='col-lg-6' id='jobSeekerInfo' onclick='moveToResume(this);'>");
+									var $div2 = $("<div class='info1 row' >");
+									var $hiddenInput1 = $("<input type='hidden' id='resume_id'value="+user[i].resume_id+">");
+									var $hiddenInput2 = $("<input type='hidden' id='user_id' value="+user[i].id+">");
 									var $div3 = $("<div class='col-lg-4'>");
 									var $div4 = $("<div class='col-lg-8 textLine'>");
 									var $p1= $("<p>");
@@ -500,15 +536,18 @@
 									$div2.append($div3);
 									$div2.append($div4);
 									
-									$div.append($div2);
+									$div.append($hiddenInput1);
+									$div.append($hiddenInput2);
 									$div.append($div2);
 									$finalResult.append($div);
 								}
 					}else{
 							
 							for(var i=0; i<user.length; i++){
-								var $div = $("<div class='col-lg-6' id='jobSeekerInfo'>");
-								var $div2 = $("<div class='info1 row'>");
+								var $div = $("<div class='col-lg-6' id='jobSeekerInfo' onclick='moveToResume(this);'>");
+								var $div2 = $("<div class='info1 row' >");
+								var $hiddenInput1 = $("<input type='hidden' id='resume_id' value="+user[i].resume_id+">");
+								var $hiddenInput2 = $("<input type='hidden' id='user_id' value="+user[i].id+">");
 								var $div3 = $("<div class='col-lg-4'>");
 								var $div4 = $("<div class='col-lg-8 textLine'>");
 								var $p1= $("<p>");
@@ -545,7 +584,8 @@
 								$div2.append($div3);
 								$div2.append($div4);
 								
-								$div.append($div2);
+								$div.append($hiddenInput1);
+								$div.append($hiddenInput2);
 								$div.append($div2);
 								$finalResult.append($div);
 						}
@@ -596,8 +636,21 @@
 	function moveUserResume(resume_id, userId){
 		location.href = "/sp/seeMyResume.do?resume_id="+resume_id+"&userId="+userId;
 	
-	
 	}
+	function moveToResume(obj){
+			 
+		 var resume_id = $(obj).children("#resume_id").val();
+		 var user_id = $(obj).children("#user_id").val();
+		 
+		 console.log(resume_id, user_id);
+	location.href = "/sp/seeMyResume.do?resume_id="+resume_id+"&userId="+user_id; 
+		
+	}
+	/* function moveUserResume(obj){
+		$(function(){
+			
+		});
+	} */
 </script>
 
 <div class="container" style="min-height: 800px">
@@ -624,7 +677,7 @@
 							<li class="localList" value="30">대전</li>
 							<li class="localList" value="31">울산</li>
 							<li class="localList" value="36">세종시</li>
-							<li class="localList" value="41">경기도</li>
+							<li class="localList" value="41">경기</li>
 							<li class="localList" value="42">강원도</li>
 							<li class="localList" value="43">충북</li>
 							<li class="localList" value="44">충남</li>
@@ -727,7 +780,6 @@
 						<p><%=js.getBusiness_type()%>, 경력
 							<%=js.getCareer() == 'Y' ? "있음" : "없음"%></p>
 						<p><%=js.getAddress()%></p>
-						<p><%=js.getWorkTime() %></p>
 					</div>
 				</div>
 			</div>

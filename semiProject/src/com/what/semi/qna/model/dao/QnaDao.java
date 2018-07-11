@@ -52,7 +52,7 @@ public class QnaDao {
 				"FROM(SELECT Q_NO, CONTENT, ANSWER, CATEGORY, IS_CHECKED , REPORTING_DATE, M_ID " + 
 				"FROM QNA " + 
 				"WHERE M_ID = ? " + 
-				"ORDER BY REPORTING_DATE) P) " + 
+				"ORDER BY IS_CHECKED) P) " + 
 				"WHERE RNUM BETWEEN ? AND ? ";	
 		try {
 			pstmt = con.prepareStatement(query);

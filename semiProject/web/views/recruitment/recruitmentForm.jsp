@@ -192,11 +192,11 @@
 		}
 		var pay = ((7530*hour)+((7530/60)*min))/10;
 		if((((7530*hour)+(7530/60)*min)%10)>0){
-			pay=pay+1;
+			pay=parseInt(pay)+1;
 		}
 		if(start!=""&&end!=""){
 
-		$("#calculatePay").text("*최저임급 : 약"+pay+"0원");
+		$("#calculatePay").text("*최저임금 : 약"+pay+"0원");
 		$("#calculatePay").val(pay*10);
 		}
 	}
@@ -410,7 +410,7 @@
 									<label>급여</label> <input type="text" class="btn-dark" id="pay"
 										name="pay" />원
 								</div>
-								<div class="text-white-50 ml-1" id="calculatePay" value="7530" align="center">*최저임급
+								<div class="text-white-50 ml-1" id="calculatePay" value="7530" align="center">*최저시급
 									: 7,530원</div>
 							</div>
 						</div>

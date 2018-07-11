@@ -203,11 +203,11 @@ var okFlag = false;
 		}
 		var pay = ((7530*hour)+((7530/60)*min))/10;
 		if((((7530*hour)+(7530/60)*min)%10)>0){
-			pay=pay+1;
+			pay=parseInt(pay)+1;
 		}
 		if(start!=""&&end!=""){
 
-		$("#calculatePay").text("*최저임급 : 약"+pay+"0원");
+		$("#calculatePay").text("*최저임금 : 약"+pay+"0원");
 		$("#calculatePay").val(pay*10);
 		}
 	}

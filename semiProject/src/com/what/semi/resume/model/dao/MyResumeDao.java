@@ -392,7 +392,7 @@ public class MyResumeDao {
 		ResultSet rs = null;
 		
 		
-		query = "SELECT  NAME ,RESUME_ID"
+		query = "SELECT  NAME ,RESUME_ID, M_ID"
 		+", BIRTH, AGE"
 		+", RTRIM(SUBSTR(ADDRESS, 1, INSTR(ADDRESS, ' ', 1, 3))) AS TRIMADR"
 		+", GENDER"
@@ -418,7 +418,7 @@ public class MyResumeDao {
                     +" , WORK_TIME"
                     +" , INTRODUCE_TITLE" 
                     +" , RESUME_ID"
-                    + " ,DISABILITY"
+                    + " ,DISABILITY, R.M_ID"
                     +"  FROM (SELECT RESUME_ID"
                     +" , M_ID"
                     +" , INTRODUCE_TITLE"
@@ -426,7 +426,7 @@ public class MyResumeDao {
                     +" , CAREER"
                     +" , WORK_TIME"
                     +" , WORKABLE_DAYS "
-                    + " ,DISABILITY"
+                    + " ,DISABILITY "
             +" FROM RESUME "
             +" WHERE DELFLAG != 1";
     		
@@ -507,6 +507,7 @@ public class MyResumeDao {
 				temp.setAge(rs.getInt("age"));
 				temp.setResume_id(rs.getInt("resume_id"));
 				temp.setDisability(rs.getInt("disability"));
+				temp.setId(rs.getString("m_id"));
 				result.add(temp);
 			}
 			

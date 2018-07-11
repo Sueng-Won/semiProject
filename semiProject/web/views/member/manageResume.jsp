@@ -118,8 +118,12 @@
 					</div>
 				<div class="col-lg-6 pri_resumeArea">
 				 <h1>현재상태 </h1>
+				 <%if(!(userTypeFlag)){ %>
+				 <h5>등록된 이력서가 없습니다.</h5>
+				 <%}else{ %>
 				 <p><%=is_post==1?"공개중":"비공개" %></p>
 				 <button class="btn btn-success" onclick="modifyIs_post();"> 수정하기</button>
+				<%} %>
 				</div>
 			</div>
 			<div class="row tableArea">
@@ -181,7 +185,7 @@
 				<input type="hidden" name="userId" value="<%=id%>"/>
 				<div class="radio">
 				<%for (int i = 0; i < userType.size(); i++) {%>
-				<%if(userType.get(i).getPri_resume()=='Y' || userType.size()!=2){ %>
+				<%if(i==0){ %>
 					<label for="post<%=i%>"><%=userType.get(i).getIntroduce_title()%>
 						<input id="post<%=i %>" type="radio" value="<%=userType.get(i).getResume_id()%>" name="resume_id" checked/>
 					</label><br>
