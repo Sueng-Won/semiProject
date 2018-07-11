@@ -95,10 +95,10 @@ VALUES('test30','9LzCYbghFefGG9EQtYH/NS1g10FR7cn1JctSurVzbscVVUry8BnGA4UH4G685IG
 -------------------------------------------------RESUME---------------------------------------------------------------
 
 INSERT INTO RESUME
-VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100355322565.jpg', '대졸',1,0,1,'사무직',TO_DATE('2018-07-20','RRRR-MM-DD'),0,'test21', '관악구청장의 노하우로 열심히 하겠습니다','시켜만 주십쇼','N','야간',0);
+VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100355322565.jpg', '대졸',1,0,1,'사무직',TO_DATE('2018-07-20','RRRR-MM-DD'),0,'test21', '관악구청장의 노하우로 열심히 하겠습니다','시켜만 주십쇼','N','오전',0);
 
 INSERT INTO RESUME
-VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100355322565.jpg', '대졸',1,0,1,'서비스',TO_DATE('2018-07-20','RRRR-MM-DD'),0,'test21','관악구청장의 노하우로 열심히 하겠습니다','진상킬러입니다','N','야간',0);
+VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100355322565.jpg', '대졸',1,0,1,'서비스',TO_DATE('2018-07-20','RRRR-MM-DD'),0,'test21','관악구청장의 노하우로 열심히 하겠습니다','진상킬러입니다','N','오후',0);
 
 INSERT INTO RESUME
 VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100356552429.jpg', '고졸',0,1,0,'유통',TO_DATE('2018-07-30','RRRR-MM-DD'),0,'test22','"어려서부터 우리 집은 가난했었고
@@ -112,23 +112,23 @@ VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100356552429.jpg', '고졸',0,1,0,'유통',T
 자장면 하나에 너무나 행복했었어
 하지만 어머님은 왠지 드시지 않았어
 어머님은 짜장면이 싫다고 하셨어
-어머님은 짜장면이 싫다고 하셨어"','영등포구청장의 저력을 보여드리겠습니다','N','야간',0);
+어머님은 짜장면이 싫다고 하셨어"','영등포구청장의 저력을 보여드리겠습니다','N','상관없음',0);
 
 INSERT INTO RESUME
 VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100356552429.jpg', '고졸',0,1,0,'음료',TO_DATE('2018-08-20','RRRR-MM-DD'),0,'test22','"그렇게 살아 가고 그렇게 후회하고 눈물도 흘리고
 그렇게 살아가고 너무나 아프고 하지만 다시 웃고"','알바경력은 없지만 열심히 해보겠습니다.','N','오전',0);
 
 INSERT INTO RESUME
-VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100358024611.jpg', '초졸',0,1,1,'고객상담',TO_DATE('2018-08-20','RRRR-MM-DD'),0,'test23','뽑아주세요','저는 잡초입니다','N','오후,저녁',0);
+VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100358024611.jpg', '초졸',0,1,1,'고객상담',TO_DATE('2018-08-20','RRRR-MM-DD'),0,'test23','뽑아주세요','저는 잡초입니다','N','저녁',0);
 
 INSERT INTO RESUME
-VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100358024611.jpg', '초졸',0,1,1,'생산/건설',TO_DATE('2018-08-21','RRRR-MM-DD'),0,'test23','뻥이에요','월드타워 제가 지었습니다','N','오전,저녁',0);
+VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100358024611.jpg', '초졸',0,1,1,'생산/건설',TO_DATE('2018-08-21','RRRR-MM-DD'),0,'test23','뻥이에요','월드타워 제가 지었습니다','N','저녁',0);
 
 INSERT INTO RESUME
 VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100358434675.jpg', '중졸',1,0,1,'음료',TO_DATE('2018-07-30','RRRR-MM-DD'),0,'test24','바티스타 아닙니다','바리스타를 공부하고있습니다','N','오후',0);
 
 INSERT INTO RESUME
-VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100358434675.jpg', '중졸',1,0,1,'생산/건설',TO_DATE('2018-07-27','RRRR-MM-DD'),0,'test24','다 지어버리겠다','제꿈은 건설왕입니다','N','야간',0);
+VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100358434675.jpg', '중졸',1,0,1,'생산/건설',TO_DATE('2018-07-27','RRRR-MM-DD'),0,'test24','다 지어버리겠다','제꿈은 건설왕입니다','N','오전',0);
 
 INSERT INTO RESUME
 VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100359242256.jpg', '대졸',1,0,1,'서비스',TO_DATE('2018-07-20','RRRR-MM-DD'),0,'test25','중학교 1학년 때 도시락 까먹을 때
@@ -142,17 +142,17 @@ VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100359242256.jpg', '대졸',1,0,1,'서비스
 불려 오셨어 아니 또 끌려 오셨어
 다시는 이런 일이 없을 거라며 비셨어
 그 녀석 어머니께 고개를 숙여 비셨어
-우리 어머니가 비셨어','잘 모르지만 열심히 하겠습니다.','Y','야간',0);
+우리 어머니가 비셨어','잘 모르지만 열심히 하겠습니다.','Y','저녁',0);
 
 INSERT INTO RESUME
 VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100359242256.jpg', '대졸',1,0,1,'고객상담',TO_DATE('2018-07-26','RRRR-MM-DD'),0,'test25','그렇게 살아 가고 그렇게 후회하고 눈물도 흘리고
-그렇게 살아가고 너무나 아프고 하지만 다시웃고','고객사랑을 실천하겠습니다.','N','야간',0);
+그렇게 살아가고 너무나 아프고 하지만 다시웃고','고객사랑을 실천하겠습니다.','N','오후',0);
 
 INSERT INTO RESUME
-VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100400467196.jpg', '고졸',0,1,1,'서비스',TO_DATE('2018-07-27','RRRR-MM-DD'),0,'test26','주문 잘받아요','서빙 잘합니다.','N','오후',0);
+VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100400467196.jpg', '고졸',0,1,1,'서비스',TO_DATE('2018-07-27','RRRR-MM-DD'),0,'test26','주문 잘받아요','서빙 잘합니다.','N','저녁',0);
 
 INSERT INTO RESUME
-VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100400467196.jpg', '고졸',0,1,1,'음료',TO_DATE('2018-07-27','RRRR-MM-DD'),0,'test26','다잘해요','음료 잘뽑아요','Y','오후',0);
+VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100400467196.jpg', '고졸',0,1,1,'음료',TO_DATE('2018-07-27','RRRR-MM-DD'),0,'test26','다잘해요','음료 잘뽑아요','Y','상관없음',0);
 
 INSERT INTO RESUME
 VALUES(RESUME_ID_SEQ.NEXTVAL,'201807100401577850.jpg', '초졸',1,1,0,'고객상담',TO_DATE('2018-07-30','RRRR-MM-DD'),0,'test27','아시죠? 뽑아주세요','리라초등학교 출신입니다','Y','저녁',0);
@@ -189,7 +189,7 @@ INSERT INTO RESUME
 VALUES(RESUME_ID_SEQ.NEXTVAL,DEFAULT, '대졸',1,0,0,'서비스',TO_DATE('2018-07-23','RRRR-MM-DD'),0,'test30','버려지고 찢겨 남루하여도','난 난 꿈이 있었죠','Y','저녁',0);
 
 INSERT INTO RESUME
-VALUES(RESUME_ID_SEQ.NEXTVAL,DEFAULT, '대졸',1,0,0,'고객상담',TO_DATE('2018-07-25','RRRR-MM-DD'),0,'test30','간직했던 꿈','내 가슴 깊숙히 보물과 같이','N','저녁',0);
+VALUES(RESUME_ID_SEQ.NEXTVAL,DEFAULT, '대졸',1,0,0,'고객상담',TO_DATE('2018-07-25','RRRR-MM-DD'),0,'test30','간직했던 꿈','내 가슴 깊숙히 보물과 같이','N','오후',0);
 
 
 -----------------------------------------------------------------------------------------------------------------RECRUITMENT 강남구
